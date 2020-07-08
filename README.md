@@ -3,8 +3,8 @@
 ### 2. Nguyễn Tạ Phú Cường - 1712313
 
 # Đề tài: 
-## Trang web quản lý học sinh cấp 3
+- Trang web quản lý học sinh cấp 3
 
 # Công nghệ:
-### Web server: NodeJs + ExpressJs
-### Database server: SQL server Express
+- Web server: NodeJs + ExpressJs
+- Database server: SQL server Express
