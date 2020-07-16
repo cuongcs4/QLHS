@@ -1,0 +1,106 @@
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>TÊN HỌC SINH</th>
+                        <th>MÔN HỌC</th>
+                        <th>HỌC KÌ</th>
+                        <th>NĂM HỌC</th>
+                        <th>15 PHÚT</th>
+                        <th>1 TIẾT</th>
+                        <th>THI CUỐI KÌ</th>
+                        <th>TRUNG BÌNH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nguyễn Văn A</td>
+                        <td>Toán</td>
+                        <td>1</td>
+                        <td>2019-2020</td>
+                        <td>10</td>
+                        <td>9.5</td>
+                        <td>9.5</td>
+                        <td>9.6</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Tạo đơn phúc khảo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectName">Môn học</label>
+                    <select id="defaultForm-subjectName" class="form-control validate">
+                        <option value="">Toán</option>
+                        <option value="">Ngữ Văn</option>
+                        <option value="">Tiếng Anh</option>
+                    </select>
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-pointType">Cột điểm</label>
+                    <select id="defaultForm-pointType" class="form-control validate">
+                        <option value="">15 phút</option>
+                        <option value="">1 tiết</option>
+                        <option value="">Thi cuối kì</option>
+                    </select>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-note">Ghi chú</label>
+                    <input type="text" id="defaultForm-note" class="form-control validate">
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Phúc khảo</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>MÔN HỌC</th>
+                        <th>HỌC KÌ</th>
+                        <th>NĂM HỌC</th>
+                        <th>CỘT ĐIỂM</th>
+                        <th>GHI CHÚ</th>
+                        <th>TRẠNG THÁI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Toán</td>
+                        <td>1</td>
+                        <td>2019-2020</td>
+                        <td>1 tiết</td>
+                        <td>Em dò bài với bạn thấy đúng gần hết</td>
+                        <td>GV đã phúc khảo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm" aria-hidden="true">Tạo đơn
+                phúc khảo</button>
+            <hr>
+    </div>
+</div>

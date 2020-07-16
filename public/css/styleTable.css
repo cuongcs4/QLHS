@@ -1,0 +1,6 @@
+.md-form label {
+    width: 120px;
+}
+.md-form .form-control {
+    width: 60% !important;
+}
