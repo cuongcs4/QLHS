@@ -1,3 +1,12 @@
+<div class="row">
+    <div class="semester ml-2 mb-2">
+        <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
+    </div>
+    <div class="semester ml-2 mb-2">
+        <p style="text-align:center; vertical-align:middle; line-height:2rem; color: black">Học kì: 2</p>
+    </div>
+</div>
+
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -8,7 +17,7 @@
                         <th>MÃ GVCN</th>
                         <th>TÊN GVCN</th>
                         <th>PHÒNG HỌC</th>
-                        <th>NGÀY LẬP</th>
+                        <th>NGÀY LẬP</th>   
                         <th></th>
                     </tr>
                 </thead>
@@ -19,7 +28,7 @@
                         <td>Edinburgh</td>
                         <td>61</td>
                         <td>2011/04/25</td>
-                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalLoginForm"
+                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditClass"
                                 aria-hidden="true"></i></td>
                     </tr>
 
@@ -28,7 +37,47 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="text-center">
+  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalAddClass">Thêm lớp học</a>
+</div>
+<div class="modal fade" id="modalEditClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Điều chỉnh thông tin lớp học</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-classID">Mã lớp</label>
+                    <input type="text" id="defaultForm-classID" class="form-control validate">
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã GVCN</label>
+                    <input type="text" id="defaultForm-teacherID" class="form-control validate">                
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Mã phòng</label>
+                    <input type="text" id="defaultForm-roomID" class="form-control validate">                
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Ngày bắt đầu</label>
+                    <input type="text" id="defaultForm-startDate" class="form-control validate">                
+                </div>
+                
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalAddClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -7,9 +7,11 @@ var hbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session')
 
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index.js');
+var staffRouter = require('./routes/staff.js');
+var adminRouter = require('./routes/admin.js');
+var studentRouter = require('./routes/student.js');
+var teacherRouter = require('./routes/teacher.js');
 const { SSL_OP_LEGACY_SERVER_CONNECT } = require('constants');
 
 var app = express();
@@ -27,7 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: SSL_OP_LEGACY_SERVER_CONNECT, resave: false}));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/staff', staffRouter);
+app.use('/student', studentRouter);
+app.use('/admin', adminRouter);
+app.use('/teacher', teacherRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

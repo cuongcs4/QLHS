@@ -1,15 +1,21 @@
+<div class="row">
+    <div class="semester ml-2 mb-2">
+        <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
+    </div>
+    <div class="semester ml-2 mb-2">
+        <p style="text-align:center; vertical-align:middle; line-height:2rem; color: black">Học kì: 2</p>
+    </div>
+</div>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>HỌC KÌ</th>
-                        <th>NĂM HỌC</th>
                         <th>MÔN HỌC</th>
                         <th>NGÀY THI</th>
                         <th>PHÒNG THI</th>
-                        <th>TIẾT BẮT ĐẦU</th>
+                        <th>THỜI GIAN BẮT ĐẦU</th>
                         <th>GIÁM THỊ 1</th>
                         <th>GIÁM THỊ 2</th>
                         <th></th>
@@ -17,15 +23,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>2019-2020</td>
                         <td>Toán</td>
                         <td>23/07/2020</td>
                         <td>A101</td>
                         <td>3</td>
                         <td>Nguyễn Văn A</td>
                         <td>Nguyễn Văn b</td>
-                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalLoginForm"
+                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalExamEdit"
                                 aria-hidden="true"></i></td>
                     </tr>
                 </tbody>
@@ -33,7 +37,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalExamEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -45,30 +49,27 @@
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>
-                    <input type="text" id="defaultForm-studentID" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectName">Môn học</label>
+                    <input type="text" id="defaultForm-subjectName" class="form-control validate">
                 </div>
 
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học sinh</label>
-                    <input type="text" id="defaultForm-studentName" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Tên học sinh</label>
+                    <input type="text" id="defaultForm-roomID" class="form-control validate">                
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentBirthdate">Ngày sinh</label>
-                    <input type="text" id="defaultForm-studentBirthdate" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Bắt đầu</label>
+                    <input type="text" id="defaultForm-startTime" class="form-control validate">                
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa chỉ</label>
-                    <input type="text" id="defaultForm-studentAddress" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName1">Tên giám thị 1</label>
+                    <input type="text" id="defaultForm-supervisorName1" class="form-control validate">                
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Mã lớp</label>
-                    <input type="text" id="defaultForm-studentClassID" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName2">Tên giám thị 2</label>
+                    <input type="text" id="defaultForm-supervisorName2" class="form-control validate">                
                 </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentStatus">Trạng thái</label>
-                    <input type="text" id="defaultForm-studentStatus" class="form-control validate">                
-                </div>
+
 
             </div>
             <div class="modal-footer d-flex justify-content-center">
