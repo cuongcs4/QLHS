@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -13,8 +15,6 @@ var adminRouter = require("./routes/admin.js");
 var studentRouter = require("./routes/student.js");
 var teacherRouter = require("./routes/teacher.js");
 const { SSL_OP_LEGACY_SERVER_CONNECT } = require("constants");
-
-require("dotenv").config();
 
 var app = express();
 
