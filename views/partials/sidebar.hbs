@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -35,9 +35,9 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         {{!-- <h6 class="collapse-header">Custom Components:</h6> --}}
-        <a class="collapse-item" href="/schedule">Thời khoá biểu</a>
-        <a class="collapse-item" href="">Lịch thi</a>
-        <a class="collapse-item" href="">Kết quả học tập</a>
+        <a class="collapse-item" href="/student/schedule">Thời khoá biểu</a>
+        <a class="collapse-item" href="/student/examtable">Lịch thi</a>
+        <a class="collapse-item" href="/student/resulttable">Kết quả học tập</a>
       </div>
     </div>
   </li>
@@ -50,12 +50,11 @@
     </a>
     <div id="collapseStaff" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="">Quản lí học sinh</a>
-        <a class="collapse-item" href="">Quản lí lớp học</a>
-        <a class="collapse-item" href="">Báo cáo</a>
-        <a class="collapse-item" href="">Thi học kì</a>
-        <a class="collapse-item" href="">Khảo sát</a>
-        <a class="collapse-item" href="">Điều chỉnh thông tin</a>
+        <a class="collapse-item" href="/staff/class">Quản lý lớp học</a>
+        <a class="collapse-item" href="/staff/exam">Lịch thi</a>
+        <a class="collapse-item" href="/staff/room-exam">Phòng thi</a>
+        <a class="collapse-item" href="/staff/report">Báo cáo</a>
+        <a class="collapse-item" href="/staff/survey">Khảo sát</a>
       </div>
     </div>
   </li>
@@ -68,12 +67,11 @@
     </a>
     <div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="">Lớp chủ nhiệm</a>
-        <a class="collapse-item" href="">Lớp khác</a>
-        <a class="collapse-item" href="">Lịch thi</a>
-        <a class="collapse-item" href="">Lịch giảng dạy</a>
-        <a class="collapse-item" href="">Điều chỉnh thông tin</a>
-        <a class="collapse-item" href="">Thời khoá biểu</a>
+        <a class="collapse-item" href="/teacher/mangerClass">Quản lý lớp chủ nhiệm</a>
+        <a class="collapse-item" href="/teacher/class">Quản lý lớp học</a>
+        <a class="collapse-item" href="/teacher/exam">Lịch coi thi</a>
+        <a class="collapse-item" href="/teacher/schedule">Lịch giảng dạy</a>
+        <a class="collapse-item" href="/teacher/reExamine">Đơn phúc khảo</a>
       </div>
     </div>
   </li>
@@ -86,8 +84,8 @@
     </a>
     <div id="collapsePrincipal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="">Quản lí tài khoản</a>
-        <a class="collapse-item" href="">Quản lí năm học</a>
+        <a class="collapse-item" href="/admin/employee">Quản lí nhân viên</a>
+        <a class="collapse-item" href="/admin/semester">Quản lí năm học</a>
       </div>
     </div>
   </li>
