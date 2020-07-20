@@ -1,4 +1,5 @@
 // Sơ đò lớp của User
+
 const User = class {
   constructor(
     id,
@@ -59,10 +60,6 @@ const User = class {
   setStatus(newStatus) {
     this.status = newStatus;
   }
-
-  static Find() {}
-
-  static Save() {}
 };
 
 module.exports = User;

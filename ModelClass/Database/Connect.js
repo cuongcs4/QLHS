@@ -11,8 +11,8 @@ require("dotenv").config();
 
 const host = "localhost";
 const port = 3306;
-const user = "admin";
-const password = "admin";
+const user = "adminDB";
+const password = "adminDB";
 const database = "qlhs";
 
 // Kết nối với cơ sở dữ liệu

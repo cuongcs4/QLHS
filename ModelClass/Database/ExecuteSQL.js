@@ -20,4 +20,9 @@ const ExecuteSQL = (sql) => {
   });
 };
 
+// const sqlQuery =
+//   "INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, loai) VALUES ('admin2', 'admin', 5)";
+
+// ExecuteSQL(sqlQuery);
+
 module.exports = ExecuteSQL;
