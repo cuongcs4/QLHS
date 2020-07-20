@@ -1,20 +1,28 @@
 require("dotenv").config();
 
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var hbs = require("express-handlebars");
-var expressValidator = require("express-validator");
-var expressSession = require("express-session");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const hbs = require("express-handlebars");
+const expressValidator = require("express-validator");
+const expressSession = require("express-session");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const flash = require("connect-flash");
 
-var indexRouter = require("./routes/index.js");
-var staffRouter = require("./routes/staff.js");
-var adminRouter = require("./routes/admin.js");
-var studentRouter = require("./routes/student.js");
-var teacherRouter = require("./routes/teacher.js");
+const configPassport = require("./Passport/Config");
+configPassport(passport);
+
+const indexRouter = require("./routes/index.js");
+const staffRouter = require("./routes/staff.js");
+const adminRouter = require("./routes/admin.js");
+const studentRouter = require("./routes/student.js");
+const teacherRouter = require("./routes/teacher.js");
+const authenticateRouter = require("./routes/authenticate");
 const { SSL_OP_LEGACY_SERVER_CONNECT } = require("constants");
+const { authenticate } = require("passport");
 
 var app = express();
 
@@ -43,7 +51,22 @@ app.use(
   })
 );
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
+
 app.use("/", indexRouter);
+app.use("/login", authenticateRouter);
 app.use("/staff", staffRouter);
 app.use("/student", studentRouter);
 app.use("/admin", adminRouter);
