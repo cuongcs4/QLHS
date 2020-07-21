@@ -1,5 +1,7 @@
 //Sơ đồ lớp của Room
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
 
 const Room = class {
@@ -36,12 +38,8 @@ const Room = class {
     return null;
   }
 
-  static save(room) {
-    const isExist = await checkExist(
-      "PHONGHOC",
-      "maphong",
-      subject.subjectID
-    );
+  static async Save(room) {
+    const isExist = await checkExist("PHONGHOC", "maphong", subject.subjectID);
 
     if (isExist) {
       //update
