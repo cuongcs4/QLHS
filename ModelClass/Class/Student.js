@@ -116,7 +116,7 @@ const Student = class extends User {
     const isExist = await checkExist(
       "NGUOIDUNG",
       "tenDangNhap",
-      student.username
+      student.getUserName()
     );
 
     const dobFormat = `${student.dob.getFullYear()}-${
@@ -126,18 +126,21 @@ const Student = class extends User {
     if (isExist) {
       //update
 
-      //1. update password
-      const sqlQuery1 = `UPDATE NGUOIDUNG SET matKhau="${student.getPassWord()}" WHERE tenDangNhap='${student.getID()}'`;
+      //1. update NGUOIDUNG
+      const sqlQuery1 =
+        `UPDATE NGUOIDUNG ` +
+        `SET matKhau="${student.getPassWord()}", cmnd='${student.getIdentityCard()}' ` +
+        `WHERE tenDangNhap='${student.getID()}'`;
       await ExecuteSQL(sqlQuery1);
 
-      //2. update information
+      //2. update HOCSINH
       const sqlQuery2 =
         `UPDATE HOCSINH ` +
         `SET ngaySinh="${dobFormat}", ` +
-        `hoten="${student.fullName}", ` +
-        `diachi="${student.address}", ` +
-        `trangthai=${student.status} ` +
-        `WHERE mahs="${student.id}"`;
+        `hoten="${student.getFullName()}", ` +
+        `diachi="${student.getAddress()}", ` +
+        `trangthai=${student.getStatus()} ` +
+        `WHERE mahs="${student.getID()}"`;
 
       await ExecuteSQL(sqlQuery2);
       return flagClass.DB.UPDATE;
@@ -147,15 +150,17 @@ const Student = class extends User {
 
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
-      `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, loai) ` +
-      `VALUES ('${student.username}', '${student.password}', ${flagClass.TYPE_USER.STUDENT})`;
+      `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
+      `VALUES ('${student.getUserName()}', '${student.getPassWord()}', '${student.getIdentityCard()}', ${
+        flagClass.TYPE_USER.STUDENT
+      })`;
 
     await ExecuteSQL(sqlQuery1);
 
     //2. Insert HOCSINH
     const sqlQuery2 =
       `INSERT INTO HOCSINH (mahs, ngaysinh, hoten, diachi, malop, trangthai) ` +
-      `VALUES ('${student.id}', '${dobFormat}', '${student.fullName}', '${student.address}', '${student.classID}', ${student.status})`;
+      `VALUES ('${student.getID()}', '${dobFormat}', '${student.getFullName()}', '${student.getAddress()}', '${student.getClassID()}', ${student.getStatus()})`;
 
     await ExecuteSQL(sqlQuery2);
 
