@@ -1,4 +1,5 @@
 // Sơ đò lớp của User
+
 const User = class {
   constructor(
     id,
@@ -17,7 +18,7 @@ const User = class {
     this.fullName = fullName || "Unknown";
     this.dob = dob || "Unknown";
     this.address = address || "Unknown";
-    this.status = status || -1;
+    this.status = status;
   }
 
   getUserName() {
@@ -59,10 +60,6 @@ const User = class {
   setStatus(newStatus) {
     this.status = newStatus;
   }
-
-  static Find() {}
-
-  static Save() {}
 };
 
 module.exports = User;

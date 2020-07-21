@@ -2,7 +2,7 @@
 
 const Employee = require("./Employee");
 
-const EmployeeTrainingDepartment = class extends User {
+const EmployeeTrainingDepartment = class extends Employee {
   constructor(
     id,
     username,
