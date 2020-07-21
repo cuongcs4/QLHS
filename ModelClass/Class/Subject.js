@@ -49,7 +49,7 @@ const Subject = class {
     //insert
     const sqlQuery =
       `INSERT INTO BOMON (mabm, tenbm) ` +
-      `VALUES ('${subject.getSubjectID()}', '${subject.getSubjectName()}'`;
+      `VALUES ('${subject.getSubjectID()}', N'${subject.getSubjectName()}'`;
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.NEW;

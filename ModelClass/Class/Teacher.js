@@ -4,6 +4,7 @@ const Employee = require("./Employee");
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
+const Class = require("./Class");
 
 const Teacher = class extends Employee {
   constructor(
@@ -42,9 +43,72 @@ const Teacher = class extends Employee {
     this.subjectID = newSubjectID;
   }
 
-  getClass() {}
+  async getClass({ semesterID, yearStart, yearEnd }) {
+    //Mặc định lấy những lớp học ở học kỳ hiện tại nếu có.
+    if (semesterID === null) {
+      const sqlQuery =
+        `SELECT LH.malop, LH.maphong, LH.magvcn, LH.namnhaphoc, LH.trangthai ` +
+        `FROM LOPHOC AS LH, THOIKHOABIEU AS TKB, HOCKY AS HK ` +
+        `WHERE LH.malop=TKB.malop AND HK.mahk=TKB.mahk AND HK.nambd=TKB.nambd AND HK.namkt=TKB.namkt AND TKB.magv='${this.id}' AND HK.trangthai=1 AND LH.trangthai=1`;
 
-  getScore() {}
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listClass = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const classID = result[i].malop;
+          const managerClass = result[i].magvcn;
+          const roomID = result[i].maphong;
+          const course = result[i].namnhaphoc;
+          const status = result[i].trangthai;
+
+          listClass.push(
+            new Class(classID, managerClass, roomID, course, status)
+          );
+        }
+
+        return listClass;
+      }
+
+      return null;
+    }
+
+    const sqlQuery =
+      `SELECT * ` +
+      `FROM LOPHOC AS LH INNER JOIN THOIKHOABIEU AS TKB ON LH.malop=TKB.malop ` +
+      `WHERE TKB.magv='${this.id}' AND TKB.mahk='${semesterID}' AND TKB.nambd='${yearStart}' AND TKB.namkt='${yearEnd}'`;
+
+    const result = await ExecuteSQL(sqlQuery);
+
+    if (result.length !== 0) {
+      const listClass = [];
+
+      for (let i = 0; i < result.length; i++) {
+        const classID = result[i].malop;
+        const managerClass = result[i].magvcn;
+        const roomID = result[i].maphong;
+        const course = result[i].namnhaphoc;
+        const status = result[i].trangthai;
+
+        listClass.push(
+          new Class(classID, managerClass, roomID, course, status)
+        );
+      }
+
+      return listClass;
+    }
+
+    return null;
+  }
+
+  //Lấy danh sách điểm theo lớp
+  async getScore(classID, semesterID, yearStart, yearEnd) {
+    const sqlQuery =
+      `SELECT * ` +
+      `FROM DIEM AS DI INNER JOIN HOCSINH AS HS ON DI.mahs=HS.mahs ` +
+      `WHERE DI.malop='${classID}' AND DI.mahk=${semesterID} AND DI.nambd=${yearStart} AND DI.mahk=${yearEnd}`;
+  }
 
   getReExamine() {}
 

@@ -18,7 +18,7 @@ const User = class {
     this.fullName = fullName || "Unknown";
     this.dob = dob || "Unknown";
     this.address = address || "Unknown";
-    this.status = status || -1;
+    this.status = status;
   }
 
   getUserName() {

@@ -25,19 +25,33 @@ const Score = class {
 
   getSemester() {}
 
-  getStudent() {}
+  getStudentID() {
+    return this.studentID;
+  }
 
-  getTeacher() {}
+  getTeacherID() {
+    return this.teacherID;
+  }
 
-  getSubject() {}
+  getSubjectID() {
+    return this.subjectID;
+  }
 
-  getScore1() {}
+  getScore1() {
+    return this.score1;
+  }
 
-  getScore2() {}
+  getScore2() {
+    return this.score2;
+  }
 
-  getScore3() {}
+  getScore3() {
+    return this.score3;
+  }
 
-  getScore4() {}
+  getScore4() {
+    return this.score4;
+  }
 
   static find() {}
 

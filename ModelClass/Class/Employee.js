@@ -33,10 +33,6 @@ const Employee = class extends User {
   setTypeEmployee(newTypeEmployee) {
     this.typeEmployee = newTypeEmployee;
   }
-
-  static Find() {}
-
-  static Save() {}
 };
 
 module.exports = Employee;

@@ -2,7 +2,7 @@
 
 const Employee = require("./Employee");
 
-const Admin = class extends User {
+const Admin = class extends Employee {
   constructor(
     id,
     username,
