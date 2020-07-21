@@ -42,7 +42,7 @@ const Student = class extends User {
 
         const id = studentOnDB.mahs;
         const username = studentOnDB.mahs;
-        const password = resultPassword[0].matKhau;
+        const password = studentOnDB[0].matKhau;
         const dob = new Date(studentOnDB.ngaysinh);
         const identityCard = studentOnDB.cmnd;
         const fullName = studentOnDB.hoten;
@@ -67,18 +67,22 @@ const Student = class extends User {
     }
 
     if (classID) {
-      const sqlQuery = `SELECT * FROM HOCSINH WHERE malop='${classID}'`;
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
+        `WHERE HS.malop='${classID}'`;
+
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
         const listStudents = [];
 
         for (let i = 0; i < result.length; i++) {
-          const studentOnDB = result[0];
+          const studentOnDB = result[i];
 
           const id = studentOnDB.mahs;
           const username = studentOnDB.mahs;
-          const password = resultPassword[0].matKhau;
+          const password = studentOnDB[0].matKhau;
           const dob = new Date(studentOnDB.ngaysinh);
           const identityCard = studentOnDB.cmnd;
           const fullName = studentOnDB.hoten;
