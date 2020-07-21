@@ -14,7 +14,7 @@ const Teacher = class extends User {
     status,
     phoneNumber,
     typeEmployee,
-    subject
+    subjectID
   ) {
     super(
       id,
@@ -28,7 +28,7 @@ const Teacher = class extends User {
       phoneNumber,
       typeEmployee
     );
-    this.subject = subject || null;
+    this.subjectID = subjectID || null;
   }
 
   getSubject() {}

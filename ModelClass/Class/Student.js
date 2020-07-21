@@ -30,10 +30,39 @@ const Student = class extends User {
 
   static async Find({ id, classID }) {
     if (id) {
-      const sqlQuery = `SELECT * FROM HOCSINH WHERE mahs='${id}'`;
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
+        `WHERE HS.mahs='${id}'`;
+
       const result = await ExecuteSQL(sqlQuery);
 
-      if (result.length !== 0) return result[0];
+      if (result.length !== 0) {
+        const studentOnDB = result[0];
+
+        const id = studentOnDB.mahs;
+        const username = studentOnDB.mahs;
+        const password = resultPassword[0].matKhau;
+        const dob = new Date(studentOnDB.ngaysinh);
+        const identityCard = studentOnDB.cmnd;
+        const fullName = studentOnDB.hoten;
+        const address = studentOnDB.diachi;
+        const classID = studentOnDB.malop;
+        const status = studentOnDB.status;
+
+        return new Student(
+          id,
+          username,
+          password,
+          identityCard,
+          fullName,
+          dob,
+          address,
+          status,
+          classID
+        );
+      }
+
       return null;
     }
 
@@ -41,14 +70,45 @@ const Student = class extends User {
       const sqlQuery = `SELECT * FROM HOCSINH WHERE malop='${classID}'`;
       const result = await ExecuteSQL(sqlQuery);
 
-      if (result.length !== 0) return result;
+      if (result.length !== 0) {
+        const listStudents = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const studentOnDB = result[0];
+
+          const id = studentOnDB.mahs;
+          const username = studentOnDB.mahs;
+          const password = resultPassword[0].matKhau;
+          const dob = new Date(studentOnDB.ngaysinh);
+          const identityCard = studentOnDB.cmnd;
+          const fullName = studentOnDB.hoten;
+          const address = studentOnDB.diachi;
+          const classID = studentOnDB.malop;
+          const status = studentOnDB.status;
+
+          listStudents.push(
+            new Student(
+              id,
+              username,
+              password,
+              identityCard,
+              fullName,
+              dob,
+              address,
+              status,
+              classID
+            )
+          );
+        }
+
+        return listStudents;
+      }
+
       return null;
     }
   }
 
   static async Save(student) {
-    console.log(student);
-
     const isExist = await checkExist(
       "NGUOIDUNG",
       "tenDangNhap",
@@ -63,7 +123,7 @@ const Student = class extends User {
       //update
 
       //1. update password
-      const sqlQuery1 = `UPDATE NGUOIDUNG SET matKhau="${student.password}"`;
+      const sqlQuery1 = `UPDATE NGUOIDUNG SET matKhau="${student.getPassWord()}" WHERE tenDangNhap='${student.getID()}'`;
       await ExecuteSQL(sqlQuery1);
 
       //2. update information
@@ -99,11 +159,16 @@ const Student = class extends User {
   }
 };
 
-// async function exec() {
-//   const result = await Student.Find({ id: null, classID: null });
+async function exec() {
+  const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
+  const result = await ExecuteSQL(sqlQuery);
 
-//   console.log(result);
-// }
-// exec();
+  console.log(result[0].matKhau);
+
+  //const result = await Student.Find({ id: "HS03", classID: null });
+
+  //console.log(new Date(result.ngaysinh).getFullYear());
+}
+exec();
 
 module.exports = Student;

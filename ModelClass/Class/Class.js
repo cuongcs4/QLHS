@@ -1,20 +1,36 @@
 //Sơ đồ lớp của Class
 
 const Class = class {
-  constructor(classID, managerClass, course) {
-    this.subjectID = subjectID || null;
-    this.subjectName = subjectName || null;
-    this.managerSubject = managerSubject || null;
+  constructor(classID, managerClass, roomID, course, status) {
+    this.classID = classID || null;
+    this.managerClass = managerClass || null;
+    this.roomID = roomID || null;
+    this.course = course || null;
+    this.status = status || null;
   }
 
-  getSubjectID() {}
+  getClassID() {
+    return this.classID;
+  }
 
-  getSubjectName() {}
+  getManagerClass() {
+    return this.managerClass;
+  }
+  setManagerClass(newManagerClass) {
+    this.managerClass = newManagerClass;
+  }
 
-  getManagerSubject() {}
-  setManagerSubject() {}
+  getRoom() {}
 
-  static find() {}
+  getCourse() {
+    return this.course;
+  }
+
+  getStatus() {
+    return this.status;
+  }
+
+  static find(classID) {}
 
   static save() {}
 };
