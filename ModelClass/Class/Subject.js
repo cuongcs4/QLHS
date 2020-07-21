@@ -1,5 +1,6 @@
 //Sơ đồ lớp của Subject
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
 
 const Subject = class {
@@ -31,16 +32,15 @@ const Subject = class {
     return null;
   }
 
-  static save(subject) {
-    const isExist = await checkExist(
-      "BOMON",
-      "mabm",
-      subject.subjectID
-    );
+  static async Save(subject) {
+    const isExist = await checkExist("BOMON", "mabm", subject.subjectID);
 
     if (isExist) {
       //update
-      const sqlQuery = `UPDATE BOMON SET tenbm="${subject.getSubjectName()}" WHERE mabm='${subject.getSubjectID()}'`;
+      const sqlQuery =
+        `UPDATE BOMON ` +
+        `SET tenbm="${subject.getSubjectName()}" ` +
+        `WHERE mabm='${subject.getSubjectID()}'`;
       await ExecuteSQL(sqlQuery);
 
       return flagClass.DB.UPDATE;

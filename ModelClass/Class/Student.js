@@ -163,16 +163,16 @@ const Student = class extends User {
   }
 };
 
-async function exec() {
-  const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
-  const result = await ExecuteSQL(sqlQuery);
+// async function exec() {
+//   const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
+//   const result = await ExecuteSQL(sqlQuery);
 
-  console.log(result[0].matKhau);
+//   console.log(result[0].matKhau);
 
-  //const result = await Student.Find({ id: "HS03", classID: null });
+//   //const result = await Student.Find({ id: "HS03", classID: null });
 
-  //console.log(new Date(result.ngaysinh).getFullYear());
-}
-exec();
+//   //console.log(new Date(result.ngaysinh).getFullYear());
+// }
+// exec();
 
 module.exports = Student;
