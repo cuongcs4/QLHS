@@ -21,27 +21,55 @@ const ExamPlan = class {
     this.supervisorID2 = supervisorID2 || null;
   }
 
-  getSemester() {}
+  getSemester() {
+    return this.semester;
+  }
 
-  getRoomExam() {}
-  setRoomExam() {}
+  getRoomExamID() {
+    return this.roomID;
+  }
+  setRoomExamID(newRoomExamID) {
+    this.roomID = newRoomExamID;
+  }
 
-  getSubject() {}
-  setSubject() {}
+  getSubjectID() {
+    return this.subjectID;
+  }
+  setSubjectID(newSubjectID) {
+    this.subjectID = newSubjectID;
+  }
 
-  getDayExam() {}
-  setDayExam() {}
+  getDayExam() {
+    return this.dayExam;
+  }
+  setDayExam(newDayExam) {
+    this.dayExam = newDayExam;
+  }
 
-  getStartSection() {}
-  setStartSection() {}
+  getStartSection() {
+    return this.startSection;
+  }
+  setStartSection(newStartSection) {
+    this.startSection = newStartSection;
+  }
 
-  getSupervisor1() {}
-  setSupervisor1() {}
+  getSupervisorID1() {
+    return this.supervisorID1;
+  }
+  setSupervisorID1(newSupervisorID) {
+    this.supervisorID1 = newSupervisorID;
+  }
 
-  getSupervisor2() {}
-  setSupervisor2() {}
+  getSupervisor2ID() {
+    return this.supervisorID2;
+  }
+  setSupervisor2ID(newSupervisorID) {
+    this.supervisorID2 = newSupervisorID;
+  }
 
-  static find() {}
+  static async Find() {
+    const sqlQuery = `SELECT * ` + `FROM LICHTHI ` + `WHERE `;
+  }
 
   static save() {}
 };

@@ -12,6 +12,7 @@ const HomeroomTeacher = class extends User {
     dob,
     address,
     status,
+    typeUser,
     phoneNumber,
     typeEmployee,
     subject,
@@ -26,6 +27,7 @@ const HomeroomTeacher = class extends User {
       dob,
       address,
       status,
+      typeUser,
       phoneNumber,
       typeEmployee,
       subject

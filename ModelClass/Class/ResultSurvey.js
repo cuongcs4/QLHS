@@ -14,15 +14,25 @@ const ResultSurvey = class {
 
   getSemester() {}
 
-  getStudent() {}
+  getStudentID() {
+    return this.studentID;
+  }
 
-  getTeacher() {}
+  getTeacherID() {
+    return this.teacherID;
+  }
 
-  getSubject() {}
+  getSubjectID() {
+    return this.subjectID;
+  }
 
-  getQuestionID() {}
+  getQuestionID() {
+    return this.questionID;
+  }
 
-  getAnswer() {}
+  getAnswer() {
+    return this.answer;
+  }
 
   static find() {}
 

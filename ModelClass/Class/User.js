@@ -9,7 +9,8 @@ const User = class {
     fullName,
     dob,
     address,
-    status
+    status,
+    typeUser
   ) {
     this.id = id || "UnKnown";
     this.username = username || "Unknown";
@@ -19,6 +20,7 @@ const User = class {
     this.dob = dob || "Unknown";
     this.address = address || "Unknown";
     this.status = status;
+    this.typeUser = typeUser;
   }
 
   getUserName() {
@@ -59,6 +61,10 @@ const User = class {
   }
   setStatus(newStatus) {
     this.status = newStatus;
+  }
+
+  getTypeUser() {
+    return this.typeUser;
   }
 };
 

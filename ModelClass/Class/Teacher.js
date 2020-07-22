@@ -16,6 +16,7 @@ const Teacher = class extends Employee {
     dob,
     address,
     status,
+    typeUser,
     phoneNumber,
     typeEmployee,
     subjectID
@@ -29,6 +30,7 @@ const Teacher = class extends Employee {
       dob,
       address,
       status,
+      typeUser,
       phoneNumber,
       typeEmployee
     );
@@ -116,11 +118,11 @@ const Teacher = class extends Employee {
 
   getScheduleExam() {}
 
-  static async Find(id) {
+  static async Find(userName) {
     const sqlQuery =
       `SELECT * ` +
       `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv=NG.tenDangNhap` +
-      `WHERE GV.magv='${id}'`;
+      `WHERE GV.magv='${userName}'`;
 
     const result = await ExecuteSQL(sqlQuery);
 

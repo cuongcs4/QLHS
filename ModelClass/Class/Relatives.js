@@ -8,16 +8,30 @@ const Relatives = class {
     this.phoneNumber = phoneNumber || null;
   }
 
-  getStudent() {}
+  getStudentID() {
+    return this.studentID;
+  }
 
-  getRelative() {}
-  setRelative() {}
+  getRelative() {
+    return this.relative;
+  }
+  setRelative(newRelative) {
+    this.relative = newRelative;
+  }
 
-  getFullName() {}
-  setFullName() {}
+  getFullName() {
+    return this.fullName;
+  }
+  setFullName(newFullName) {
+    this.fullName = newFullName;
+  }
 
-  getPhoneNumber() {}
-  setPhoneNumber() {}
+  getPhoneNumber() {
+    return this.phoneNumber;
+  }
+  setPhoneNumber(newPhoneNumber) {
+    this.phoneNumber = newPhoneNumber;
+  }
 
   static find() {}
 
