@@ -12,10 +12,21 @@ const Employee = class extends User {
     dob,
     address,
     status,
+    typeUser,
     phoneNumber,
     typeEmployee
   ) {
-    super(id, username, password, identityCard, fullName, dob, address, status);
+    super(
+      id,
+      username,
+      password,
+      identityCard,
+      fullName,
+      dob,
+      address,
+      status,
+      typeUser
+    );
     this.phoneNumber = phoneNumber || null;
     this.typeEmployee = typeEmployee || null;
   }

@@ -23,19 +23,35 @@ const ReExamine = class {
 
   getSemester() {}
 
-  getStudent() {}
+  getStudentID() {
+    return this.studentID;
+  }
 
-  getTeacher() {}
+  getTeacherID() {
+    return this.teacherID;
+  }
 
-  getSubject() {}
+  getSubjectID() {
+    return this.subjectID;
+  }
 
-  getContent() {}
+  getContent() {
+    return this.content;
+  }
 
-  getResponse() {}
-  setResponse() {}
+  getResponse() {
+    return this.response;
+  }
+  setResponse(newResponse) {
+    this.response = newResponse;
+  }
 
-  getStatus() {}
-  setStatus() {}
+  getStatus() {
+    return this.status;
+  }
+  setStatus(newStatus) {
+    this.status = newStatus;
+  }
 
   static find() {}
 

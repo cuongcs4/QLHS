@@ -36,6 +36,9 @@ const Class = class {
   getStatus() {
     return this.status;
   }
+  setStatus(newStatus) {
+    this.status = newStatus;
+  }
 
   static async Find(classID) {
     const sqlQuery = `SELECT * FROM LOPHOC WHERE malop='${classID}'`;
@@ -58,7 +61,10 @@ const Class = class {
 
     if (isExist) {
       //update
-      const sqlQuery = `UPDATE LOPHOC SET magvcn="${classN.getManagerClass()}", maphong="${classN.getRoomID()}", namnhaphoc=${classN.getCourse()}, trangthai=${classN.getStatus()} WHERE malop='${classN.getClassID()}'`;
+      const sqlQuery =
+        `UPDATE LOPHOC ` +
+        `SET magvcn="${classN.getManagerClass()}", maphong="${classN.getRoomID()}", namnhaphoc=${classN.getCourse()}, trangthai=${classN.getStatus()} ` +
+        `WHERE malop='${classN.getClassID()}'`;
       await ExecuteSQL(sqlQuery);
 
       return flagClass.DB.UPDATE;

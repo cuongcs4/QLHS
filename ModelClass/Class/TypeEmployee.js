@@ -6,8 +6,12 @@ const TypeEmployee = class {
     this.typeName = typeName || null;
   }
 
-  getTypeID() {}
-  getTypeName() {}
+  getTypeID() {
+    return this.typeID;
+  }
+  getTypeName() {
+    return this.typeName;
+  }
 
   static find() {}
 

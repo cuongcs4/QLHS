@@ -11,10 +11,16 @@ const Conduct = class {
 
   getSemester() {}
 
-  getStudent() {}
+  getStudentID() {
+    return this.studentID;
+  }
 
-  getGrade() {}
-  setGrade() {}
+  getGrade() {
+    return this.grade;
+  }
+  setGrade(newGrade) {
+    this.grade = newGrade;
+  }
 
   static find() {}
 

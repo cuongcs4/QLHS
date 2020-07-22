@@ -8,8 +8,12 @@ const QuestionSurvey = class {
 
   getQuestionID() {}
 
-  getContent() {}
-  setContent() {}
+  getContent() {
+    return this.content;
+  }
+  setContent(newContent) {
+    this.content = newContent;
+  }
 
   static find() {}
 

@@ -21,20 +21,40 @@ const TeachingPlan = class {
 
   getSemester() {}
 
-  getTeacher() {}
-  setTeacher() {}
+  getTeacherID() {
+    return this.teacherID;
+  }
+  setTeacherID(newTeacherID) {
+    this.teacherID = newTeacherID;
+  }
 
-  getSubject() {}
-  setSubject() {}
+  getSubjectID() {
+    return this.subjectID;
+  }
+  setSubjectID(newSubjectID) {
+    this.subjectID = newSubjectID;
+  }
 
-  getClass() {}
-  setClass() {}
+  getClassID() {
+    return this.classID;
+  }
+  setClassID(newClassID) {
+    this.classID = newClassID;
+  }
 
-  getDayInWeek() {}
-  setDayInWeek() {}
+  getDayInWeek() {
+    return this.dayInWeek;
+  }
+  setDayInWeek(newDayInWeek) {
+    this.dayInWeek = newDayInWeek;
+  }
 
-  getStartSection() {}
-  setStartSection() {}
+  getStartSection() {
+    return this.startSection;
+  }
+  setStartSection(newStartSection) {
+    this.startSection = newStartSection;
+  }
 
   static find() {}
 

@@ -15,9 +15,20 @@ const Student = class extends User {
     dob,
     address,
     status,
+    typeUser,
     classID
   ) {
-    super(id, username, password, identityCard, fullName, dob, address, status);
+    super(
+      id,
+      username,
+      password,
+      identityCard,
+      fullName,
+      dob,
+      address,
+      status,
+      typeUser
+    );
     this.classID = classID || null;
   }
 
@@ -42,7 +53,7 @@ const Student = class extends User {
 
         const id = studentOnDB.mahs;
         const username = studentOnDB.mahs;
-        const password = studentOnDB[0].matKhau;
+        const password = studentOnDB.matkhau;
         const dob = new Date(studentOnDB.ngaysinh);
         const identityCard = studentOnDB.cmnd;
         const fullName = studentOnDB.hoten;
@@ -172,11 +183,11 @@ const Student = class extends User {
 //   const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
 //   const result = await ExecuteSQL(sqlQuery);
 
-//   console.log(result[0].matKhau);
+//   console.log(result);
 
-//   //const result = await Student.Find({ id: "HS03", classID: null });
+//   const result = await Student.Find({ id: "HS03", classID: null });
 
-//   //console.log(new Date(result.ngaysinh).getFullYear());
+//   console.log(new Date(result.ngaysinh).getFullYear());
 // }
 // exec();
 
