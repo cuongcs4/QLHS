@@ -11,6 +11,10 @@ const flagClass = {
     ENABLE: 1,
     DISABLE: 0,
   },
+  STATUS: {
+    ENABLE: 1,
+    DISABLE: 0,
+  },
 };
 
 module.exports = flagClass;
