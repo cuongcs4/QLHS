@@ -40,6 +40,17 @@ const Class = class {
     this.status = newStatus;
   }
 
+  async getStudentInClass() {
+    const sqlQuery =
+      `SELECT HS.mahs AS studentID, HS.hoten AS fullName, HS.ngaysinh AS dob, HS.trangthai AS status ` +
+      `FROM LOPHOC AS LH INNER JOIN HOCSINH AS HS ON HS.malop=LH.malop ` +
+      `WHERE LH.malop='${this.classID}'`;
+
+    const result = await ExecuteSQL(sqlQuery);
+
+    return result.length === 0 ? null : result;
+  }
+
   static async Find(classID) {
     const sqlQuery = `SELECT * FROM LOPHOC WHERE malop='${classID}'`;
 
@@ -54,6 +65,8 @@ const Class = class {
 
       return new Class(classID, managerClass, roomID, course, status);
     }
+
+    return null;
   }
 
   static async Save(classN) {
@@ -79,5 +92,13 @@ const Class = class {
     return flagClass.DB.NEW;
   }
 };
+
+// const exec = async () => {
+//   const findClass = await Class.Find("LH201801");
+
+//   console.log(await findClass.getStudentInClass());
+// };
+
+// exec();
 
 module.exports = Class;

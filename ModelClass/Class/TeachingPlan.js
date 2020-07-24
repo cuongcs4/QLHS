@@ -56,7 +56,8 @@ const TeachingPlan = class {
     this.startSection = newStartSection;
   }
 
-  static find() {}
+  //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
+  static async Find() {}
 
   static save() {}
 };

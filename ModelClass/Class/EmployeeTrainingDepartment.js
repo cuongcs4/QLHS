@@ -7,6 +7,8 @@ const flagClass = require("../MiniServices/Flag");
 const Semester = require("./Semester");
 const Class = require("./Class");
 const Student = require("./Student");
+const RoomExam = require("./RoomExam");
+const ExamRoom = require("./RoomExam");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(
@@ -38,7 +40,7 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy tất cả các lớp đang hoạt động trong nhà trường.
-  async getClass() {
+  static async getClass() {
     //Câu truy vấn lấy tất cả các lớp học đang hoạt động trong trường.
     const sqlQuery =
       `SELECT LP.malop AS classID, LP.magvcn AS managerClass, GV.hoten AS managerName, LP.namnhaphoc AS course ` +
@@ -63,11 +65,11 @@ const EmployeeTrainingDepartment = class extends Employee {
           break;
 
         case 11:
-          listClass10.push(itemClass);
+          listClass11.push(itemClass);
           break;
 
         case 12:
-          listClass10.push(itemClass);
+          listClass12.push(itemClass);
           break;
       }
     }
@@ -78,26 +80,16 @@ const EmployeeTrainingDepartment = class extends Employee {
 
   //Lấy danh sách học sinh trong lớp học.
   async getStudents(classID) {
-    const sqlQuery =
-      `SELECT HS.mahs AS studentID, HS.hoten AS fullName, HS.ngaysinh AS dob, HS.trangthai AS status ` +
-      `FROM LOPHOC AS LH INNER JOIN HOCSINH AS HS ON HS.malop=LH.malop ` +
-      `WHERE LH.malop='${classID}'`;
+    const findClass = await Class.Find(classID);
 
-    const result = await ExecuteSQL(sqlQuery);
-
-    return result;
+    return findClass === null ? null : await findClass.getStudentInClass();
   }
 
   //Lấy thông tin của một học sinh.
   async getStudent(studentID) {
-    const sqlQuery =
-      `SELECT HS.mahs AS studentID, HS.hoten AS fullName, HS.ngaysinh AS dob, HS.trangthai AS status ` +
-      `FROM HOCSINH AS HS ` +
-      `WHERE HS.mahs='${studentID}'`;
+    const result = await Student.Find({ id: studentID, classID: null });
 
-    const result = await ExecuteSQL(sqlQuery);
-
-    return result[0];
+    return result;
   }
 
   //Tạo mới và lưu học sinh vào cơ sở dữ liệu
@@ -148,8 +140,8 @@ const EmployeeTrainingDepartment = class extends Employee {
     return result;
   }
 
-  //Lấy lịch thi của tất cả các khối
-  async getScheduleExam() {
+  //Lấy lịch thi của tất cả các khối theo học kỳ
+  async getScheduleExam(semesterID, yearStart, yearEnd) {
     const sqlQuery =
       `SELECT TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection, BM.tenbm AS subjectName, GV.hoten AS teacherFullName ` +
       `FROM THOIKHOABIEU AS TKB, BOMON AS BM, GIAOVIEN AS GV ` +
@@ -162,30 +154,46 @@ const EmployeeTrainingDepartment = class extends Employee {
 
   //Lấy danh sách các phòng thi
   async getExamRoom(semesterID, yearStart, yearEnd) {
-    if (semesterID === null) {
-      const latestSemester = await Semester.GetLatestSemester();
-      semesterID = latestSemester.getSemesterID();
-      yearStart = latestSemester.getYearStart();
-      yearEnd = latestSemester.getYearEnd();
-    }
-
-    const sqlQuery =
-      `SELECT * ` +
-      `FROM PHONGTHI AS PT ` +
-      `WHERE PT.mahk=${semesterID} AND PT.nambd=${yearStart} AND PT.namkt=${yearEnd}`;
+    const result = await ExamRoom.Find(semesterID, yearStart, yearEnd);
+    return result;
   }
 
   //Lấy danh sách học sinh trong phòng thi
-  getStudentExamRoom(examRoomID) {}
+  async getStudentExamRoom(examRoomID, semesterID, yearStart, yearEnd) {
+    const result = await ExamRoom.GetStudents(
+      examRoomID,
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return result;
+  }
 
   //Tạo phòng thi
-  createExamRoom() {}
+  createExamRoom(minStudent, maxStudent) {
+    //1. Lấy tất cả các học sinh
+    //2. Phân loại
+    //3.
+    //4.
+  }
 
   //Lấy điểm số của tất cả các học sinh
-  getScore() {}
+  async getScore() {
+    //1. Lấy tất cả các lớp học, phân loại
+    const sqlQueryGetClass = `SELECT * ` + `FROM LOPHOC ` + `WHERE 1`;
+
+    //2. Lấy điểm của từng lớp
+    //3. Phân loại điểm
+    //4.
+  }
 
   //Lấy hạnh kiểm của tất cả các học sinh
-  getConduct() {}
+  getConduct() {
+    //1. Lấy tất cả các lớp, phân loại
+    //2. Lấy hạnh kiểm của từng lớp
+    //3. Phân loại
+  }
 
   //Lấy kết quả khảo sát
   getResultSurvey() {}
@@ -228,5 +236,14 @@ const EmployeeTrainingDepartment = class extends Employee {
     );
   }
 };
+
+const exec = async () => {
+  //const studentID = "HS20190101";
+  const result = await EmployeeTrainingDepartment.getClass();
+
+  console.log(result);
+};
+
+exec();
 
 module.exports = EmployeeTrainingDepartment;

@@ -67,6 +67,7 @@ const ExamPlan = class {
     this.supervisorID2 = newSupervisorID;
   }
 
+  //Tìm kiếm lịch thi theo khối, học kỳ.
   static async Find() {
     const sqlQuery = `SELECT * ` + `FROM LICHTHI ` + `WHERE `;
   }
