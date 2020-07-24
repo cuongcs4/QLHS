@@ -32,6 +32,20 @@ const Semester = class {
     this.status = newStatus;
   }
 
+  static async GetLatestSemester() {
+    const sqlQuery = `SELECT * FROM HOCKY`;
+    const result = await ExecuteSQL(sqlQuery);
+
+    const latestSemester = result[result.length - 1];
+
+    return new Semester(
+      latestSemester.mahk,
+      latestSemester.nambd,
+      latestSemester.namkt,
+      latestSemester.trangthai
+    );
+  }
+
   static async Find(semesterID, yearStart, yearEnd) {
     const sqlQuery =
       `SELECT * ` +
