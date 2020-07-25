@@ -7,6 +7,9 @@ const flagClass = require("../MiniServices/Flag");
 const Class = require("./Class");
 const Semester = require("./Semester");
 const Score = require("./Score");
+const ReExamine = require("./ReExamine");
+const TeachingPlan = require("./TeachingPlan");
+const ExamPlan = require("./ExamPlan");
 
 const Teacher = class extends Employee {
   constructor(
@@ -96,11 +99,39 @@ const Teacher = class extends Employee {
     return scores;
   }
 
-  async getReExamine(semesterID, yearStart, yearEnd) {}
+  async getReExamination(semesterID, yearStart, yearEnd) {
+    const result = await ReExamine.Find(
+      { teacherID: this.teacherID, studentID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
 
-  getSchedule() {}
+    return result;
+  }
 
-  getScheduleExam() {}
+  //Lấy thời khóa biểu của giáo viên
+  async getSchedule(semesterID, yearStart, yearEnd) {
+    const result = await TeachingPlan.Find(
+      { teacherID: this.teacherID, classID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return result;
+  }
+
+  async getScheduleExam(semesterID, yearStart, yearEnd) {
+    const result = await ExamPlan.Find(
+      { classID: null, teacherID: this.teacherID },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return result;
+  }
 
   static async Find(userName) {
     const sqlQuery =

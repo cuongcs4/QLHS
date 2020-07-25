@@ -59,7 +59,7 @@ const TeachingPlan = class {
   }
 
   //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
-  static async Find() {}
+  static async Find({ studentID }) {}
 
   static save() {}
 };

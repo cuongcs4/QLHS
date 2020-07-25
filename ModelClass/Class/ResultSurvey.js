@@ -1,6 +1,7 @@
 //Sơ đồ lớp của ResultSurvey
 
 const Semester = require("./Semester");
+const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const ResultSurvey = class {
   constructor(semester, studentID, teacherID, subjectID, questionID, answer) {
@@ -34,7 +35,23 @@ const ResultSurvey = class {
     return this.answer;
   }
 
-  static find() {}
+  static async Find(semesterID, yearStart, yearEnd) {
+    if (typeof semesterID == "undefined") {
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+    }
+
+    const sqlQuery =
+      `SELECT * ` +
+      `FROM KQKHAOSAT AS KQKS ` +
+      `WHERE KQKS.mahk=${semesterID} AND KQKS.mahk=${yearStart} AND KQKS.mahk=${yearEnd}`;
+
+    const result = await ExecuteSQL(sqlQuery);
+
+    return result.length === 0 ? null : result;
+  }
 
   static save() {}
 };

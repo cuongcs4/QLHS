@@ -9,6 +9,7 @@ const Class = require("./Class");
 const Student = require("./Student");
 const RoomExam = require("./RoomExam");
 const ExamRoom = require("./RoomExam");
+const ResultSurvey = require("./ResultSurvey");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(
@@ -48,7 +49,7 @@ const EmployeeTrainingDepartment = class extends Employee {
       `WHERE LP.trangthai=1`;
 
     const result = await ExecuteSQL(sqlQuery);
-    const latestSemester = await Semester.GetLatestSemester();
+    const latestSemester = await Semester.getLatestSemester();
 
     //Phân loại lớp học
     const listClass10 = [];
@@ -196,7 +197,11 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy kết quả khảo sát
-  getResultSurvey() {}
+  async getResultSurvey(semesterID, yearStart, yearEnd) {
+    const result = await ResultSurvey.Find(semesterID, yearStart, yearEnd);
+
+    return result;
+  }
 
   //Mở đợt khảo sát
   openSurvey() {}
@@ -237,13 +242,13 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 };
 
-const exec = async () => {
-  //const studentID = "HS20190101";
-  const result = await EmployeeTrainingDepartment.getClass();
+// const exec = async () => {
+//   //const studentID = "HS20190101";
+//   const result = await EmployeeTrainingDepartment.getClass();
 
-  console.log(result);
-};
+//   console.log(result);
+// };
 
-exec();
+// exec();
 
 module.exports = EmployeeTrainingDepartment;

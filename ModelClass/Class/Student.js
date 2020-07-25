@@ -49,10 +49,10 @@ const Student = class extends User {
         yearStart = lastestSemester.getYearStart();
         yearEnd = lastestSemester.getYearEnd();
       }
-      const sqlQuery = 
+      const sqlQuery =
         `SELECT * ` +
         `FROM THOIKHOABIEU AS TKB ` +
-        `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`
+        `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -88,10 +88,10 @@ const Student = class extends User {
         yearStart = lastestSemester.getYearStart();
         yearEnd = lastestSemester.getYearEnd();
       }
-      const sqlQuery = 
+      const sqlQuery =
         `SELECT * ` +
         `FROM PHONGTHI AS PT, LICHTHI AS LT ` +
-        `WHERE PT.mahs ='${id}' AND PT.maphongthi = LT.maphongthi AND LT.mahk = '${semesterID}' AND LT.nambd = '${yearStart}' AND LT.namkt = '${yearEnd}'`
+        `WHERE PT.mahs ='${id}' AND PT.maphongthi = LT.maphongthi AND LT.mahk = '${semesterID}' AND LT.nambd = '${yearStart}' AND LT.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -109,7 +109,7 @@ const Student = class extends User {
             roomID,
             subjectID,
             date,
-            start
+            start,
           });
         }
         return listExamSchedule;
@@ -126,10 +126,10 @@ const Student = class extends User {
         yearStart = lastestSemester.getYearStart();
         yearEnd = lastestSemester.getYearEnd();
       }
-      const sqlQuery = 
+      const sqlQuery =
         `SELECT * ` +
         `FROM DIEM AS D ` +
-        `WHERE D.mahs ='${id}' AND D.mahk = '${semesterID}' AND D.nambd = '${yearStart}' AND D.namkt = '${yearEnd}'`
+        `WHERE D.mahs ='${id}' AND D.mahk = '${semesterID}' AND D.nambd = '${yearStart}' AND D.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -151,7 +151,7 @@ const Student = class extends User {
             score1,
             score2,
             score3,
-            score4
+            score4,
           });
         }
         return listScore;
@@ -162,10 +162,8 @@ const Student = class extends User {
 
   static async getReExamination(id) {
     if (id) {
-      const sqlQuery = 
-        `SELECT * ` +
-        `FROM PHUCKHAO AS PK ` +
-        `WHERE PK.mahs ='${id}'`
+      const sqlQuery =
+        `SELECT * ` + `FROM PHUCKHAO AS PK ` + `WHERE PK.mahs ='${id}'`;
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -187,7 +185,7 @@ const Student = class extends User {
             yearStart,
             yearEnd,
             substance,
-            status
+            status,
           });
         }
         return listReExamination;
@@ -195,9 +193,6 @@ const Student = class extends User {
       return null;
     }
   }
-
-
-
 
   async getScore(semesterID, yearStart, yearEnd) {
     const scores = await Score.Find(
