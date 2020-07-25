@@ -59,7 +59,34 @@ const TeachingPlan = class {
   }
 
   //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
-  static async Find({ studentID }) {}
+
+  static async Find({ classID, teacherID }, semesterID, yearStart, yearEnd) {
+    if (typeof semesterID === "undefined") {
+      const lastestSemester = await semesterID.getLastestSemester();
+      semesterID = lastestSemester.getSemesterID();
+      yearStart = lastestSemester.getYearStart();
+      yearEnd = lastestSemester.getYearEnd();
+    }
+    if (classID !== null) {
+      // Lấy TKB của học sinh theo mã lớp
+      const sqlQuery =
+        `SELECT TKB.magv AS teacherID, TKB.mabm AS subjectID, TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection ` +
+        `FROM THOIKHOABIEU AS TKB ` +
+        `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
+      const result = await ExecuteSQL(sqlQuery);
+      return result.length === 0 ? null : result;
+    }
+    if (teacherID !== null) {
+      // Lấy TKB của giáo viên
+      const sqlQuery =
+        `SELECT TKB.malop AS classID, TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection ` +
+        `FROM THOIKHOABIEU AS TKB ` +
+        `WHERE TKB.magv ='${teacherID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
+      const result = await ExecuteSQL(sqlQuery);
+
+      return result.length === 0 ? null : result;
+    }
+  }
 
   static save() {}
 };

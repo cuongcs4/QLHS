@@ -57,34 +57,34 @@ const Teacher = class extends Employee {
       semesterID = latestSemester.getSemesterID();
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();
-    }
 
-    const sqlQuery =
-      `SELECT * ` +
-      `FROM LOPHOC AS LH INNER JOIN THOIKHOABIEU AS TKB ON LH.malop=TKB.malop ` +
-      `WHERE TKB.magv='${this.id}' AND TKB.mahk='${semesterID}' AND TKB.nambd='${yearStart}' AND TKB.namkt='${yearEnd}'`;
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM LOPHOC AS LH INNER JOIN THOIKHOABIEU AS TKB ON LH.malop=TKB.malop ` +
+        `WHERE TKB.magv='${this.id}' AND TKB.mahk='${semesterID}' AND TKB.nambd='${yearStart}' AND TKB.namkt='${yearEnd}'`;
 
-    const result = await ExecuteSQL(sqlQuery);
+      const result = await ExecuteSQL(sqlQuery);
 
-    if (result.length !== 0) {
-      const listClass = [];
+      if (result.length !== 0) {
+        const listClass = [];
 
-      for (let i = 0; i < result.length; i++) {
-        const classID = result[i].malop;
-        const managerClass = result[i].magvcn;
-        const roomID = result[i].maphong;
-        const course = result[i].namnhaphoc;
-        const status = result[i].trangthai;
+        for (let i = 0; i < result.length; i++) {
+          const classID = result[i].malop;
+          const managerClass = result[i].magvcn;
+          const roomID = result[i].maphong;
+          const course = result[i].namnhaphoc;
+          const status = result[i].trangthai;
 
-        listClass.push(
-          new Class(classID, managerClass, roomID, course, status)
-        );
+          listClass.push(
+            new Class(classID, managerClass, roomID, course, status)
+          );
+        }
+
+        return listClass;
       }
 
-      return listClass;
+      return null;
     }
-
-    return null;
   }
 
   //Lấy danh sách điểm theo lớp
@@ -113,7 +113,7 @@ const Teacher = class extends Employee {
   //Lấy thời khóa biểu của giáo viên
   async getSchedule(semesterID, yearStart, yearEnd) {
     const result = await TeachingPlan.Find(
-      { teacherID: this.teacherID, classID: null },
+      { teacherID: this.id, classID: null },
       semesterID,
       yearStart,
       yearEnd
