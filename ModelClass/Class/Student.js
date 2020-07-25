@@ -5,6 +5,7 @@ const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
+const Score = require("./Score");
 
 const Student = class extends User {
   constructor(
@@ -198,6 +199,37 @@ const Student = class extends User {
 
 
 
+  async getScore(semesterID, yearStart, yearEnd) {
+    const scores = await Score.Find(
+      { studentID: this.id, classID: null, subjectID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return scores;
+  }
+
+  async getGPA(semesterID, yearStart, yearEnd) {
+    const scores = await this.getScore(semesterID, yearStart, yearEnd);
+
+    let GPA = 0;
+
+    for (let i = 0; i < scores.length; i++) {
+      const score = scores[i];
+
+      if (score.subjectID !== "TheDuc") {
+        GPA +=
+          (score.score1 + score.score2 + 2 * score.score3 + 3 * score.score4) /
+          7;
+      }
+    }
+
+    GPA /= scores.length - 1;
+
+    return GPA;
+  }
+
   static async Find({ id, classID }) {
     if (id) {
       const sqlQuery =
@@ -212,13 +244,14 @@ const Student = class extends User {
 
         const id = studentOnDB.mahs;
         const username = studentOnDB.mahs;
-        const password = studentOnDB.matkhau;
+        const password = studentOnDB.matKhau;
         const dob = new Date(studentOnDB.ngaysinh);
         const identityCard = studentOnDB.cmnd;
         const fullName = studentOnDB.hoten;
         const address = studentOnDB.diachi;
         const classID = studentOnDB.malop;
-        const status = studentOnDB.status;
+        const status = studentOnDB.trangthai;
+        const typeUser = flagClass.TYPE_USER.STUDENT;
 
         return new Student(
           id,
@@ -229,6 +262,7 @@ const Student = class extends User {
           dob,
           address,
           status,
+          typeUser,
           classID
         );
       }
@@ -252,13 +286,14 @@ const Student = class extends User {
 
           const id = studentOnDB.mahs;
           const username = studentOnDB.mahs;
-          const password = studentOnDB[0].matKhau;
+          const password = studentOnDB.matKhau;
           const dob = new Date(studentOnDB.ngaysinh);
           const identityCard = studentOnDB.cmnd;
           const fullName = studentOnDB.hoten;
           const address = studentOnDB.diachi;
           const classID = studentOnDB.malop;
-          const status = studentOnDB.status;
+          const status = studentOnDB.trangthai;
+          const typeUser = flagClass.TYPE_USER.STUDENT;
 
           listStudents.push(
             new Student(
@@ -270,6 +305,7 @@ const Student = class extends User {
               dob,
               address,
               status,
+              typeUser,
               classID
             )
           );
@@ -339,14 +375,14 @@ const Student = class extends User {
 };
 
 // async function exec() {
-//   const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
-//   const result = await ExecuteSQL(sqlQuery);
+//   // const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
+//   // const result = await ExecuteSQL(sqlQuery);
 
-//   console.log(result);
+//   // console.log(result);
 
-//   const result = await Student.Find({ id: "HS03", classID: null });
+//   const result = await Student.Find({ id: "HS20180101", classID: null });
 
-//   console.log(new Date(result.ngaysinh).getFullYear());
+//   console.log(await result.getGPA());
 // }
 // exec();
 
