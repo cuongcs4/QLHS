@@ -3,25 +3,22 @@ var router = express.Router();
 
 router.get("/examtable", function (req, res, next) {
   res.render("student/examTable", {
-    title: "Exam Table",
-    style: "styleTable.css",
-    pagename: "Lịch thi",
+    title: "Lịch thi học kì",
+    style: ["styleTable.css"],
   });
 });
 
 router.get("/resulttable", function (req, res, next) {
   res.render("student/resultTable", {
     title: "Kết quả học tập",
-    style: "styleTable.css",
-    pagename: "Kết quả học tập",
+    style: ["styleTable.css"],
   });
 });
 
 router.get("/schedule", function (req, res, next) {
   res.render("student/schedule", {
-    title: "Schedule",
-    style: "styleSchedule.css",
-    pagename: "Thời khoá biểu",
+    title: "Thời khoá biểu",
+    style: ["styleSchedule.css"],
   });
 });
 

@@ -14,7 +14,7 @@ router.get("/", checkLogin, (req, res, next) => {
 router.get("/profile", function (req, res, next) {
   res.render("profile", {
     title: "Profile",
-    style: "styleProfile.css",
+    style: ["styleProfile.css"],
     pagename: "Thông tin cá nhân",
   });
 });

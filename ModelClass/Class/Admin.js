@@ -34,8 +34,35 @@ const Admin = class extends Employee {
     );
   }
 
-  getEmployee() {
-    const sqlQuery = ``;
+  static async getEmployee() {
+    const sqlQuery = 
+      `SELECT * ` +
+      `FROM NGUOIDUNG AS ND, NHANVIEN AS NV ` +
+      `WHEREOR ND.tenDangNhap = NV.manv`
+
+    const result = await ExecuteSQL(sqlQuery);
+    if (result.length !== 0){
+      const listEmployee = [];
+      for (let i = 0; i < result.length; i++) {
+        const employeeOnDB = result[i];
+
+        const employeeID = employeeOnDB.manv;
+        const employeeName = employeeOnDB.hoten;
+        const dateOfBirth = employeeOnDB.ngaysinh;
+        const address = employeeOnDB.diachi;
+        const state = employeeOnDB.trangthai;
+
+        listEmployee.push({
+          employeeID,
+          employeeName,
+          dateOfBirth,
+          address,
+          state
+        });
+      }
+      return listEmployee;
+    }
+    return null;
   }
 
   disableEmployee() {}
@@ -52,7 +79,7 @@ const Admin = class extends Employee {
     const sqlQuery =
       `SELECT * ` +
       `FROM NGUOIDUNG AS ND INNER JOIN NHANVIEN AS NV ON ND.tenDangNhap=NV.manv ` +
-      `WHERE tenDangNhap='${userName}' AND NV.maloaiNV='admin'`;
+      `WHERE ND.tenDangNhap='${userName}' AND NV.maloaiNV='admin'`;
 
     const adminOnDB = await ExecuteSQL(sqlQuery);
     const id = adminOnDB[0].manv;

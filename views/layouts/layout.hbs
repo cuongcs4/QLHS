@@ -6,15 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
     integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-  <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Custom styles for this template-->
-  <link rel="stylesheet" href="../css/{{style}}">
-  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  {{#each style}}
+        <link rel="stylesheet" href="../css/{{this}}">
+  {{/each}}
+  <link rel="stylesheet" href="../css/sb-admin-2.min.css">
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <title>{{ title }}</title>
 </head>
@@ -40,12 +42,12 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
+          {{!-- <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">{{pagename}}</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div>
+          </div> --}}
           {{{body}}}
           <!-- Content Row -->
           <div class="row">
@@ -112,7 +114,6 @@
   <script src="../js/demo/datatables-demo.js"></script>
 
   {{!-- script schedule --}}
-  <script>document.getElementsByTagName("html")[0].className += " js";</script>
   <script src="../js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
   <script src="../js/main.js"></script>
 </body>

@@ -32,7 +32,7 @@ const Semester = class {
     this.status = newStatus;
   }
 
-  static async GetLatestSemester() {
+  static async getLatestSemester() {
     const sqlQuery = `SELECT * FROM HOCKY`;
     const result = await ExecuteSQL(sqlQuery);
 

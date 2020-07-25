@@ -1,10 +1,25 @@
 <div class="row">
     <div class="semester ml-2 mb-2">
-        <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
+        <p class="labelSemester">Năm học: 2019-2020</p>
     </div>
-    <div class="semester ml-2 mb-2">
-        <p style="text-align:center; vertical-align:middle; line-height:2rem; color: black">Học kì: 2</p>
-    </div>
+    <form class="form-inline labelSemester ml-2 mb-2" action="" method="GET" onchange="submit()">
+        <div class="semester form-group"> 
+                <lable for="semester">Học kì :</lable>
+                <select class="semester mb-1 accordion" style="border: none; color:blanchedalmond; height:auto !important" name="semester" id="semester">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+        </div>
+        <div class="semester form-group ml-2">
+                <lable for="grade">Khối :</lable>
+                <select class="semester mb-1 form-control" style="border: none; color:blanchedalmond; height:auto !important" name="grade" id="grade">
+                    <option value="all">Tất cả </option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>   
+        </div>
+    </form>
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
@@ -55,19 +70,21 @@
 
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-roomID">Tên học sinh</label>
-                    <input type="text" id="defaultForm-roomID" class="form-control validate">                
+                    <input type="text" id="defaultForm-roomID" class="form-control validate">
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-startTime">Bắt đầu</label>
-                    <input type="text" id="defaultForm-startTime" class="form-control validate">                
+                    <input type="text" id="defaultForm-startTime" class="form-control validate">
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName1">Tên giám thị 1</label>
-                    <input type="text" id="defaultForm-supervisorName1" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName1">Tên giám thị
+                        1</label>
+                    <input type="text" id="defaultForm-supervisorName1" class="form-control validate">
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName2">Tên giám thị 2</label>
-                    <input type="text" id="defaultForm-supervisorName2" class="form-control validate">                
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName2">Tên giám thị
+                        2</label>
+                    <input type="text" id="defaultForm-supervisorName2" class="form-control validate">
                 </div>
 
 

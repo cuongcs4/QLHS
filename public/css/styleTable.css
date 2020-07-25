@@ -9,9 +9,16 @@
 }
 
 .semester {
-    border-radius: 10px; 
-    height: 2rem;
-    padding: 0 5px;
-    background-color: #4e73df;
-    display: inline-block;
+    border-radius: 10px !important; 
+    height: 2rem !important;
+    padding: 0 5px !important;
+    background-color: #4e73df !important;
+    display: inline-block !important;
+}
+
+.labelSemester {
+    text-align:center;
+    vertical-align:middle; 
+    line-height:2rem; 
+    color:black !important
 }

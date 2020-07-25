@@ -9,7 +9,8 @@ const TeachingPlan = class {
     subjectID,
     classID,
     dayInWeek,
-    startSection
+    startSection,
+    totalSection
   ) {
     this.semester = semester || null;
     this.teacherID = teacherID || null;
@@ -17,6 +18,7 @@ const TeachingPlan = class {
     this.classID = classID || null;
     this.dayInWeek = dayInWeek || null;
     this.startSection = startSection || null;
+    this.totalSection = totalSection || null;
   }
 
   getSemester() {}
@@ -55,6 +57,8 @@ const TeachingPlan = class {
   setStartSection(newStartSection) {
     this.startSection = newStartSection;
   }
+
+  
 
   static find() {}
 
