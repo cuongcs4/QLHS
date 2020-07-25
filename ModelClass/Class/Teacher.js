@@ -5,6 +5,8 @@ const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
 const Class = require("./Class");
+const Semester = require("./Semester");
+const Score = require("./Score");
 
 const Teacher = class extends Employee {
   constructor(
@@ -45,35 +47,13 @@ const Teacher = class extends Employee {
     this.subjectID = newSubjectID;
   }
 
-  async getClass({ semesterID, yearStart, yearEnd }) {
+  async getClass(semesterID, yearStart, yearEnd) {
     //Mặc định lấy những lớp học ở học kỳ hiện tại nếu có.
-    if (semesterID === null) {
-      const sqlQuery =
-        `SELECT LH.malop, LH.maphong, LH.magvcn, LH.namnhaphoc, LH.trangthai ` +
-        `FROM LOPHOC AS LH, THOIKHOABIEU AS TKB, HOCKY AS HK ` +
-        `WHERE LH.malop=TKB.malop AND HK.mahk=TKB.mahk AND HK.nambd=TKB.nambd AND HK.namkt=TKB.namkt AND TKB.magv='${this.id}' AND HK.trangthai=1 AND LH.trangthai=1`;
-
-      const result = await ExecuteSQL(sqlQuery);
-
-      if (result.length !== 0) {
-        const listClass = [];
-
-        for (let i = 0; i < result.length; i++) {
-          const classID = result[i].malop;
-          const managerClass = result[i].magvcn;
-          const roomID = result[i].maphong;
-          const course = result[i].namnhaphoc;
-          const status = result[i].trangthai;
-
-          listClass.push(
-            new Class(classID, managerClass, roomID, course, status)
-          );
-        }
-
-        return listClass;
-      }
-
-      return null;
+    if (typeof semesterID == "undefined") {
+      const latestSemester = await Semester.GetLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
     }
 
     const sqlQuery =
@@ -106,13 +86,17 @@ const Teacher = class extends Employee {
 
   //Lấy danh sách điểm theo lớp
   async getScore(classID, semesterID, yearStart, yearEnd) {
-    const sqlQuery =
-      `SELECT * ` +
-      `FROM DIEM AS DI INNER JOIN HOCSINH AS HS ON DI.mahs=HS.mahs ` +
-      `WHERE DI.malop='${classID}' AND DI.mahk=${semesterID} AND DI.nambd=${yearStart} AND DI.mahk=${yearEnd}`;
+    const scores = await Score.Find(
+      { studentID: null, subjectID: this.subjectID, classID: classID },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return scores;
   }
 
-  getReExamine() {}
+  async getReExamine(semesterID, yearStart, yearEnd) {}
 
   getSchedule() {}
 
