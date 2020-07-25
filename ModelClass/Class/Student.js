@@ -1,6 +1,7 @@
 // Sơ đò lớp của Student kế thừa từ User.
 
 const User = require("./User");
+const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
@@ -39,6 +40,164 @@ const Student = class extends User {
   setClassID(newClassID) {
     this.classID = newClassID;
   }
+
+  static async getSchedule(classID, semesterID, yearStart, yearEnd) {
+    if (classID) {
+      if (typeof semesterID === "undefined") {
+        const lastestSemester = await semesterID.getLastestSemester();
+        semesterID = lastestSemester.getSemesterID();
+        yearStart = lastestSemester.getYearStart();
+        yearEnd = lastestSemester.getYearEnd();
+      }
+      const sqlQuery = 
+        `SELECT * ` +
+        `FROM THOIKHOABIEU AS TKB ` +
+        `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listSchedule = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const scheduleOnDB = result[i];
+          const subjectID = scheduleOnDB.mabm;
+          const teacherID = scheduleOnDB.magv;
+          const dayInWeek = scheduleOnDB.ngaytrongtuan;
+          const start = scheduleOnDB.tietbd;
+          const period = scheduleOnDB.tiet;
+
+          listSchedule.push({
+            subjectID,
+            teacherID,
+            dayInWeek,
+            start,
+            period,
+          });
+        }
+        return listSchedule;
+      }
+      return null;
+    }
+  }
+
+  static async getScheduleExam(id, semesterID, yearStart, yearEnd) {
+    if (id) {
+      if (typeof semesterID === "undefined") {
+        const lastestSemester = await semesterID.getLastestSemester();
+        semesterID = lastestSemester.getSemesterID();
+        yearStart = lastestSemester.getYearStart();
+        yearEnd = lastestSemester.getYearEnd();
+      }
+      const sqlQuery = 
+        `SELECT * ` +
+        `FROM PHONGTHI AS PT, LICHTHI AS LT ` +
+        `WHERE PT.mahs ='${id}' AND PT.maphongthi = LT.maphongthi AND LT.mahk = '${semesterID}' AND LT.nambd = '${yearStart}' AND LT.namkt = '${yearEnd}'`
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listExamSchedule = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const examScheduleOnDB = result[i];
+
+          const roomID = examScheduleOnDB.maphong;
+          const subjectID = examScheduleOnDB.mabm;
+          const date = examScheduleOnDB.ngaythi;
+          const start = examScheduleOnDB.tietbd;
+
+          listExamSchedule.push({
+            roomID,
+            subjectID,
+            date,
+            start
+          });
+        }
+        return listExamSchedule;
+      }
+      return null;
+    }
+  }
+
+  static async getScore(id, semesterID, yearStart, yearEnd) {
+    if (id) {
+      if (typeof semesterID === "undefined") {
+        const lastestSemester = await semesterID.getLastestSemester();
+        semesterID = lastestSemester.getSemesterID();
+        yearStart = lastestSemester.getYearStart();
+        yearEnd = lastestSemester.getYearEnd();
+      }
+      const sqlQuery = 
+        `SELECT * ` +
+        `FROM DIEM AS D ` +
+        `WHERE D.mahs ='${id}' AND D.mahk = '${semesterID}' AND D.nambd = '${yearStart}' AND D.namkt = '${yearEnd}'`
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listScore = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const scoreOnDB = result[i];
+
+          const studentID = scoreOnDB.mahs;
+          const subjectID = scoreOnDB.mabm;
+          const score1 = scoreOnDB.cot1;
+          const score2 = scoreOnDB.cot2;
+          const score3 = scoreOnDB.cot3;
+          const score4 = scoreOnDB.cot4;
+
+          listScore.push({
+            studentID,
+            subjectID,
+            score1,
+            score2,
+            score3,
+            score4
+          });
+        }
+        return listScore;
+      }
+      return null;
+    }
+  }
+
+  static async getReExamination(id) {
+    if (id) {
+      const sqlQuery = 
+        `SELECT * ` +
+        `FROM PHUCKHAO AS PK ` +
+        `WHERE PK.mahs ='${id}'`
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listReExamination = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const reExaminationOnDB = result[i];
+
+          const subjectID = reExaminationOnDB.mabm;
+          const semesterID = reExaminationOnDB.mahk;
+          const yearStart = reExaminationOnDB.nambd;
+          const yearEnd = reExaminationOnDB.namkt;
+          const substance = reExaminationOnDB.noidung;
+          const status = reExaminationOnDB.trangthai;
+
+          listReExamination.push({
+            subjectID,
+            semesterID,
+            yearStart,
+            yearEnd,
+            substance,
+            status
+          });
+        }
+        return listReExamination;
+      }
+      return null;
+    }
+  }
+
+
+
 
   async getScore(semesterID, yearStart, yearEnd) {
     const scores = await Score.Find(

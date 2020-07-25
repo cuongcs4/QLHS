@@ -1,0 +1,135 @@
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>MÃ NHÂN VIÊN</th>
+                        <th>TÊN GIÁO VIÊN</th>
+                        <th>NGÀY SINH</th>
+                        <th>ĐỊA CHỈ</th>
+                        <th>TRẠNG THÁI</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>000001</td>
+                        <td>Trần Minh Triết</td>
+                        <td>02/03/1978</td>
+                        <td>64 Trần Hưng Đạo, Quận 5</td>
+                        <td>Hoạt động</td>
+                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditUser"
+                                aria-hidden="true"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalAddUser">Thêm
+                    CB-CNV</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Thêm CB-CNV</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Họ Tên</label>
+                    <input type="text" id="defaultForm-userName" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-dateOfBirth">Ngày sinh</label>
+                    <input type="text" id="defaultForm-dateOfBirth" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userAddress">Địa chỉ</label>
+                    <input type="text" id="defaultForm-userAddress" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userType">Loại CB-CNV</label>
+                    <select class="form-control validate" id="defaultForm-userType">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userSubject">Bộ môn</label>
+                    <select class="form-control validate" id="defaultForm-userSubject">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userState">Trạng thái</label>
+                    <select class="form-control validate" id="defaultForm-userState">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Chỉnh sửa CB-CNV</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Họ Tên</label>
+                    <input type="text" id="defaultForm-userName" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-dateOfBirth">Ngày sinh</label>
+                    <input type="text" id="defaultForm-dateOfBirth" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userAddress">Địa chỉ</label>
+                    <input type="text" id="defaultForm-userAddress" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userType">Loại CB-CNV</label>
+                    <select class="form-control validate" id="defaultForm-userType">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userSubject">Bộ môn</label>
+                    <select class="form-control validate" id="defaultForm-userSubject">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userState">Trạng thái</label>
+                    <select class="form-control validate" id="defaultForm-userState">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
