@@ -136,7 +136,7 @@ const Teacher = class extends Employee {
   static async Find(userName) {
     const sqlQuery =
       `SELECT * ` +
-      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv=NG.tenDangNhap` +
+      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv=ND.tenDangNhap ` +
       `WHERE GV.magv='${userName}'`;
 
     const result = await ExecuteSQL(sqlQuery);
@@ -144,7 +144,7 @@ const Teacher = class extends Employee {
     if (result.length !== 0) {
       const id = result[0].magv;
       const username = result[0].magv;
-      const password = result[0].matkhau;
+      const password = result[0].matKhau;
       const identityCard = result[0].cmnd;
       const fullName = result[0].hoten;
       const dob = new Date(result[0].dob);
@@ -153,6 +153,7 @@ const Teacher = class extends Employee {
       const phoneNumber = result[0].std;
       const typeEmployee = result[0].loai;
       const subjectID = result[0].mabm;
+      const typeUser = flagClass.TYPE_USER.TEACHER;
 
       return new Teacher(
         id,
@@ -163,6 +164,7 @@ const Teacher = class extends Employee {
         dob,
         address,
         status,
+        typeUser,
         phoneNumber,
         typeEmployee,
         subjectID

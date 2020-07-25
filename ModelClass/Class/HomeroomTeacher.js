@@ -1,6 +1,8 @@
 // Sơ đò lớp của HomeroomTeacher kế thừa từ Teacher.
 
 const Teacher = require("./Teacher");
+const Class = require("./Class");
+const Student = require("./Student");
 
 const HomeroomTeacher = class extends User {
   constructor(
@@ -35,13 +37,24 @@ const HomeroomTeacher = class extends User {
     this.classID = classID || null;
   }
 
-  getClass() {}
+  getClass() {
+    return this.classID;
+  }
 
-  setClass() {}
+  setClass(newClassID) {
+    this.classID = newClassID;
+  }
 
-  getStudent() {}
+  async getStudent() {
+    const studentInClass = await Student.Find({
+      id: null,
+      classID: this.classID,
+    });
 
-  getConduct() {}
+    return studentInClass;
+  }
+
+  getConduct(semesterID, yearStart, yearEnd) {}
 
   static find() {}
 
