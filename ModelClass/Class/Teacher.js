@@ -49,8 +49,8 @@ const Teacher = class extends Employee {
     //Mặc định lấy những lớp học ở học kỳ hiện tại nếu có.
     if (semesterID === null) {
       const sqlQuery =
-        `SELECT LH.malop, LH.maphong, LH.magvcn, LH.namnhaphoc, LH.trangthai ` +
-        `FROM LOPHOC AS LH, THOIKHOABIEU AS TKB, HOCKY AS HK ` +
+          `SELECT LH.malop, LH.maphong, LH.magvcn, LH.namnhaphoc, LH.trangthai ` +
+          `FROM LOPHOC AS LH, THOIKHOABIEU AS TKB, HOCKY AS HK ` +
         `WHERE LH.malop=TKB.malop AND HK.mahk=TKB.mahk AND HK.nambd=TKB.nambd AND HK.namkt=TKB.namkt AND TKB.magv='${this.id}' AND HK.trangthai=1 AND LH.trangthai=1`;
 
       const result = await ExecuteSQL(sqlQuery);
@@ -114,7 +114,16 @@ const Teacher = class extends Employee {
 
   getReExamine() {}
 
-  getSchedule() {}
+  async getSchedule(semesterID, yearStart, yearEnd) {
+    const schedule = await TeachingPlan.Find(
+      { classID: null, teacherID: this.id},
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return schedule;
+  }
 
   getScheduleExam() {}
 
