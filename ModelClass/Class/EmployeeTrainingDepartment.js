@@ -449,12 +449,16 @@ const EmployeeTrainingDepartment = class extends Employee {
   editQuestionSurvey() {}
 
   static async Find(userName) {
+    const condition =
+      typeof userName == "undefined" ? "1" : `tenDangNhap='${userName}'`;
+
     const sqlQuery =
       `SELECT * ` +
       `FROM NGUOIDUNG AS ND INNER JOIN NHANVIEN AS NV ON ND.tenDangNhap=NV.manv ` +
-      `WHERE tenDangNhap='${userName}' AND NV.maloaiNV='admin'`;
+      `WHERE ${condition} AND NV.maloaiNV='GiaoVu'`;
 
     const employeeOnDB = await ExecuteSQL(sqlQuery);
+
     const id = employeeOnDB[0].manv;
     const username = employeeOnDB[0].manv;
     const password = employeeOnDB[0].matKhau;

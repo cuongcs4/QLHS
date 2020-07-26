@@ -28,6 +28,10 @@ const flagClass = {
     TYPE_3: 3,
     TYPE_4: 4,
   },
+  GENDER: {
+    MALE: 1,
+    FEMALE: 0,
+  },
 };
 
 module.exports = flagClass;
