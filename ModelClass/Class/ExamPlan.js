@@ -68,8 +68,34 @@ const ExamPlan = class {
   }
 
   //Tìm kiếm lịch thi theo khối, học kỳ.
-  static async Find() {
-    const sqlQuery = `SELECT * ` + `FROM LICHTHI ` + `WHERE `;
+  static async Find({ studentID, teacherID }, semesterID, yearStart, yearEnd) {
+    if (typeof semesterID === "undefined") {
+      const lastestSemester = await semesterID.getLastestSemester();
+      semesterID = lastestSemester.getSemesterID();
+      yearStart = lastestSemester.getYearStart();
+      yearEnd = lastestSemester.getYearEnd();
+    }
+    if (studentID !== null) {
+      // Lấy lịch thi của học sinh theo mã hs
+      const sqlQuery =
+        `SELECT LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection ` +
+        `FROM LICHTHI AS LT INNER JOIN PHONGTHI AS PT ON LT.maphong = PT.maphongthi ` +
+        `WHERE PT.mahs = '${studentID}' AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
+      const result = await ExecuteSQL(sqlQuery);
+      return result.length === 0 ? null : result;
+    }
+    if (teacherID !== null) {
+       // Lấy lịch gác thi của giáo viên
+       const sqlQuery =
+       `SELECT LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection, ` +
+       `LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +
+       `FROM LICHTHI AS LT ` +
+       `WHERE (LT.giamthi1 = '${teacherID}' OR LT.giamthi2 = '${teacherID}') ` +
+       `AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
+     const result = await ExecuteSQL(sqlQuery);
+     
+     return result.length === 0 ? null : result;
+    }
   }
 
   static save() {}

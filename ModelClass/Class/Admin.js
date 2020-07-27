@@ -4,6 +4,9 @@ const Employee = require("./Employee");
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
+const Teacher = require("./Teacher");
+const EmployeeTrainingDepartment = require("./EmployeeTrainingDepartment");
+const { enable } = require("debug");
 
 const Admin = class extends Employee {
   constructor(
@@ -34,42 +37,45 @@ const Admin = class extends Employee {
     );
   }
 
-  static async getEmployee() {
-    const sqlQuery = 
-      `SELECT * ` +
-      `FROM NGUOIDUNG AS ND, NHANVIEN AS NV ` +
-      `WHEREOR ND.tenDangNhap = NV.manv`
-
-    const result = await ExecuteSQL(sqlQuery);
-    if (result.length !== 0){
-      const listEmployee = [];
-      for (let i = 0; i < result.length; i++) {
-        const employeeOnDB = result[i];
-
-        const employeeID = employeeOnDB.manv;
-        const employeeName = employeeOnDB.hoten;
-        const dateOfBirth = employeeOnDB.ngaysinh;
-        const address = employeeOnDB.diachi;
-        const state = employeeOnDB.trangthai;
-
-        listEmployee.push({
-          employeeID,
-          employeeName,
-          dateOfBirth,
-          address,
-          state
-        });
-      }
-      return listEmployee;
-    }
-    return null;
+  async getEmployee() {
+    const listTeachers = await Teacher.Find();
+    const listEmployees = await EmployeeTrainingDepartment.Find();
+    return {listTeachers, listEmployees}
   }
 
-  disableEmployee() {}
+  disableEmployee(username) {
+    const teacher = await Teacher.Find(username);
+    const employee = await EmployeeTrainingDepartment.Find(username);
+    if (teacher !== null){
+      teacher[0].status = flagClass.STATUS(DISABLE); // 
+      await Teacher.Save(teacher[0]);
+    } else if (employee !== null) {
+      employee[0].status = flagClass.STATUS(DISABLE)
+      await EmployeeTrainingDepartment.Save(employee[0]);   
+    }
+    else {
+      return null;
+    }
+  }
 
-  enableEmployee() {}
+  enableEmployee() {
+    const teacher = await Teacher.Find(username);
+    const employee = await EmployeeTrainingDepartment.Find(username);
+    if (teacher !== null){
+      teacher[0].status = flagClass.STATUS.ENABLE; // 
+      await Teacher.Save(teacher[0]);
+    } else if (employee !== null) {
+      employee[0].status = flagClass.STATUS.ENABLE
+      await EmployeeTrainingDepartment.Save(employee[0]);   
+    } else
+    {
+      return null;
+    }
+  }
 
-  createNewEmployee() {}
+  createNewEmployee() {
+    
+  }
 
   createNewSemester() {}
 

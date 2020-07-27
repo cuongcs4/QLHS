@@ -132,46 +132,52 @@ const Teacher = class extends Employee {
 
     return result;
   }
-
+  
   static async Find(userName) {
+    const condition = typeof userName == "undefined" ? "1" : "0";
     const sqlQuery =
       `SELECT * ` +
-      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv=ND.tenDangNhap ` +
-      `WHERE GV.magv='${userName}'`;
+      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv = ND.tenDangNhap ` +
+      `WHERE GV.magv='${userName}' or ${condition}`;
 
     const result = await ExecuteSQL(sqlQuery);
 
     if (result.length !== 0) {
-      const id = result[0].magv;
-      const username = result[0].magv;
-      const password = result[0].matKhau;
-      const identityCard = result[0].cmnd;
-      const fullName = result[0].hoten;
-      const dob = new Date(result[0].dob);
-      const address = result[0].diachi;
-      const status = result[0].trangthai;
-      const phoneNumber = result[0].std;
-      const typeEmployee = result[0].loai;
-      const subjectID = result[0].mabm;
-      const typeUser = flagClass.TYPE_USER.TEACHER;
+      const listTeachers = [];
+      for (let i = 0; i < result.length; i++) {
+        const teacherOnDB = result[i];
 
-      return new Teacher(
-        id,
-        username,
-        password,
-        identityCard,
-        fullName,
-        dob,
-        address,
-        status,
-        typeUser,
-        phoneNumber,
-        typeEmployee,
-        subjectID
-      );
+        const id = teacherOnDB.id;
+        const username = teacherOnDB.magv;
+        const password = teacherOnDB.matkhau;
+        const identityCard = teacherOnDB.cmnd;
+        const fullName = teacherOnDB.hoten;
+        const dob = new Date(teacherOnDB.dob);
+        const address = teacherOnDB.diachi;
+        const status = teacherOnDB.trangthai;
+        const phoneNumber = teacherOnDB.std;
+        const typeEmployee = teacherOnDB.loai;
+        const subjectID = teacherOnDB.mabm;
+
+        listTeachers.push(
+          new Teacher(
+            id,
+            username,
+            password,
+            identityCard,
+            fullName,
+            dob,
+            address,
+            status,
+            phoneNumber,
+            typeEmployee,
+            subjectID
+          )
+        );
+        return listTeachers;
+      }
+      return null;
     }
-
-    return null;
   }
 
   static async Save(teacher) {

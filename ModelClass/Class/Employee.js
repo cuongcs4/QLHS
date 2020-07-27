@@ -47,3 +47,4 @@ const Employee = class extends User {
 };
 
 module.exports = Employee;
+  
