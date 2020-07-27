@@ -79,7 +79,7 @@ const Student = class extends User {
   }
   async getExamSchedule(semesterID, yearStart, yearEnd) {
     const schedule = await ExamPlan.Find(
-      { studentID: this.id, teacherID: null},
+      { studentID: this.id, teacherID: null },
       semesterID,
       yearStart,
       yearEnd
@@ -88,9 +88,7 @@ const Student = class extends User {
     return schedule;
   }
 
-  static async getScore(id, semesterID, yearStart, yearEnd) {
-    
-  }
+  static async getScore(id, semesterID, yearStart, yearEnd) {}
 
   static async getReExamination(id) {
     if (id) {
