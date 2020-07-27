@@ -34,11 +34,11 @@ const Admin = class extends Employee {
     );
   }
 
-  static async getEmployee() {
+  async getEmployee() {
     const sqlQuery = 
       `SELECT * ` +
-      `FROM NGUOIDUNG AS ND, NHANVIEN AS NV ` +
-      `WHEREOR ND.tenDangNhap = NV.manv`
+      `FROM NGUOIDUNG AS ND, NHANVIEN AS NV, GIAOVIEN AS GV ` +
+      `WHEREOR ND.tenDangNhap = NV.manv OR ND.tenDangNhap = GV.MaGV`
 
     const result = await ExecuteSQL(sqlQuery);
     if (result.length !== 0){
@@ -64,8 +64,9 @@ const Admin = class extends Employee {
     }
     return null;
   }
-
-  disableEmployee() {}
+  
+  disableEmployee() {
+  }
 
   enableEmployee() {}
 

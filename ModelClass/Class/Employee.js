@@ -44,6 +44,5 @@ const Employee = class extends User {
   setTypeEmployee(newTypeEmployee) {
     this.typeEmployee = newTypeEmployee;
   }
-};
 
 module.exports = Employee;

@@ -9,7 +9,6 @@ const Class = require("./Class");
 const Student = require("./Student");
 const RoomExam = require("./RoomExam");
 const ExamRoom = require("./RoomExam");
-const ResultSurvey = require("./ResultSurvey");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(
@@ -197,11 +196,7 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy kết quả khảo sát
-  async getResultSurvey(semesterID, yearStart, yearEnd) {
-    const result = await ResultSurvey.Find(semesterID, yearStart, yearEnd);
-
-    return result;
-  }
+  getResultSurvey() {}
 
   //Mở đợt khảo sát
   openSurvey() {}
@@ -210,45 +205,60 @@ const EmployeeTrainingDepartment = class extends Employee {
   editQuestionSurvey() {}
 
   static async Find(userName) {
+    const condition = typeof userName == "undefined" ? "1" : "0";
     const sqlQuery =
       `SELECT * ` +
-      `FROM NGUOIDUNG AS ND INNER JOIN NHANVIEN AS NV ON ND.tenDangNhap=NV.manv ` +
-      `WHERE tenDangNhap='${userName}' AND NV.maloaiNV='admin'`;
+      `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv = ND.tenDangNhap ` +
+      `WHERE NV.manv='${userName}' or ${condition}`;
 
-    const employeeOnDB = await ExecuteSQL(sqlQuery);
-    const id = employeeOnDB[0].manv;
-    const username = employeeOnDB[0].manv;
-    const password = employeeOnDB[0].matKhau;
-    const identityCard = employeeOnDB[0].cmnd;
-    const fullName = employeeOnDB[0].hoten;
-    const dob = new Date(employeeOnDB[0].ngaysinh);
-    const address = employeeOnDB[0].diachi;
-    const status = employeeOnDB[0].trangthai;
-    const phoneNumber = employeeOnDB[0].std;
-    const typeEmployee = flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT;
+    const result = await ExecuteSQL(sqlQuery);
 
-    return new EmployeeTrainingDepartment(
-      id,
-      username,
-      password,
-      identityCard,
-      fullName,
-      dob,
-      address,
-      status,
-      phoneNumber,
-      typeEmployee
-    );
+    if (result.length !== 0) {
+      const listEmployees = [];
+      for (let i = 0; i < result.length; i++) {
+        const employeeOnDB = result[i];
+
+        const id = employeeOnDB.id;
+        const username = employeeOnDB.magv;
+        const password = employeeOnDB.matkhau;
+        const identityCard = employeeOnDB.cmnd;
+        const fullName = employeeOnDB.hoten;
+        const dob = new Date(employeeOnDB.dob);
+        const address = employeeOnDB.diachi;
+        const status = employeeOnDB.trangthai;
+        const phoneNumber = employeeOnDB.std;
+        const typeEmployee = employeeOnDB.loai;
+        const subjectID = employeeOnDB.mabm;
+
+        listEmployees.push(
+          new Teacher(
+            id,
+            username,
+            password,
+            identityCard,
+            fullName,
+            dob,
+            address,
+            status,
+            phoneNumber,
+            typeEmployee,
+            subjectID
+          )
+        );
+        return listEmployees;
+      }
+      return null;
+    }
   }
 };
 
-// const exec = async () => {
-//   //const studentID = "HS20190101";
-//   const result = await EmployeeTrainingDepartment.getClass();
+const exec = async () => {
+  //const studentID = "HS20190101";
+  const result = await EmployeeTrainingDepartment.getClass();
 
-//   console.log(result);
-// };
+  console.log(result);
+};
 
-// exec();
+exec();
 
 module.exports = EmployeeTrainingDepartment;

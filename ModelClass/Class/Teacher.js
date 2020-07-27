@@ -134,9 +134,10 @@ const Teacher = class extends Employee {
   }
 
   static async Find(userName) {
+    if (us)
     const sqlQuery =
       `SELECT * ` +
-      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv=NG.tenDangNhap` +
+      `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv = ND.tenDangNhap` +
       `WHERE GV.magv='${userName}'`;
 
     const result = await ExecuteSQL(sqlQuery);
