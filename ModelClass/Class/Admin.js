@@ -40,20 +40,19 @@ const Admin = class extends Employee {
   async getEmployee() {
     const listTeachers = await Teacher.Find();
     const listEmployees = await EmployeeTrainingDepartment.Find();
-    return {listTeachers, listEmployees}
+    return { listTeachers, listEmployees };
   }
 
   async disableEmployee(username) {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
-    if (teacher !== null){
-      teacher[0].status = flagClass.STATUS(DISABLE); // 
+    if (teacher !== null) {
+      teacher[0].status = flagClass.STATUS(DISABLE); //
       await Teacher.Save(teacher[0]);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS(DISABLE)
-      await EmployeeTrainingDepartment.Save(employee[0]);   
-    }
-    else {
+      employee[0].status = flagClass.STATUS(DISABLE);
+      await EmployeeTrainingDepartment.Save(employee[0]);
+    } else {
       return null;
     }
   }
@@ -61,14 +60,13 @@ const Admin = class extends Employee {
   async enableEmployee() {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
-    if (teacher !== null){
-      teacher[0].status = flagClass.STATUS.ENABLE; // 
+    if (teacher !== null) {
+      teacher[0].status = flagClass.STATUS.ENABLE; //
       await Teacher.Save(teacher[0]);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS.ENABLE
-      await EmployeeTrainingDepartment.Save(employee[0]);   
-    } else
-    {
+      employee[0].status = flagClass.STATUS.ENABLE;
+      await EmployeeTrainingDepartment.Save(employee[0]);
+    } else {
       return null;
     }
   }
@@ -104,6 +102,7 @@ const Admin = class extends Employee {
     const status = adminOnDB[0].trangthai;
     const phoneNumber = adminOnDB[0].std;
     const typeEmployee = flagClass.TYPE_USER.ADMIN;
+    const typeUser = flagClass.TYPE_USER.ADMIN;
 
     return new Admin(
       id,
@@ -114,6 +113,7 @@ const Admin = class extends Employee {
       dob,
       address,
       status,
+      typeUser,
       phoneNumber,
       typeEmployee
     );

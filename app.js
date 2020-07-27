@@ -6,6 +6,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const hbs = require("express-handlebars");
+const handlebars = require("handlebars");
 const expressValidator = require("express-validator");
 const expressSession = require("express-session");
 const bodyParser = require("body-parser");
@@ -23,6 +24,8 @@ const teacherRouter = require("./routes/teacher.js");
 const authenticateRouter = require("./routes/authenticate");
 const { SSL_OP_LEGACY_SERVER_CONNECT } = require("constants");
 const { authenticate } = require("passport");
+const registerAll = require("./HandlebarHelper/register");
+registerAll(handlebars);
 
 var app = express();
 

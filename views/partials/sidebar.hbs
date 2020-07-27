@@ -25,77 +25,8 @@
     Interface
   </div> --}}
 
-  <!-- Học sinh Collapse Menu -->
-  {{#if student}}
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-      aria-controls="collapseTwo">
-      <span>Học sinh</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        {{!-- <h6 class="collapse-header">Custom Components:</h6> --}}
-        <a class="collapse-item" href="/student/schedule">Thời khoá biểu</a>
-        <a class="collapse-item" href="/student/examtable">Lịch thi</a>
-        <a class="collapse-item" href="/student/resulttable">Kết quả học tập</a>
-      </div>
-    </div>
-  </li>
-  {{/if}}
-
-  {{#if staff}}
-  <!-- Giáo vụ Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStaff" aria-expanded="true"
-      aria-controls="collapseStaff">
-      <span>Giáo vụ</span>
-    </a>
-    <div id="collapseStaff" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="/staff/class">Quản lý lớp học</a>
-        <a class="collapse-item" href="/staff/exam">Lịch thi</a>
-        <a class="collapse-item" href="/staff/room-exam">Phòng thi</a>
-        <a class="collapse-item" href="/staff/report">Báo cáo</a>
-        <a class="collapse-item" href="/staff/survey">Khảo sát</a>
-      </div>
-    </div>
-  </li>
-  {{/if}}
-
-  {{#if teacher}}
-  <!-- Giáo viên Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeacher" aria-expanded="true"
-      aria-controls="collapseTeacher">
-      <span>Giáo viên</span>
-    </a>
-    <div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="/teacher/mangerClass">Quản lý lớp chủ nhiệm</a>
-        <a class="collapse-item" href="/teacher/class">Quản lý lớp học</a>
-        <a class="collapse-item" href="/teacher/exam">Lịch coi thi</a>
-        <a class="collapse-item" href="/teacher/schedule">Lịch giảng dạy</a>
-        <a class="collapse-item" href="/teacher/reExamine">Đơn phúc khảo</a>
-      </div>
-    </div>
-  </li>
-  {{/if}}
-
-  {{#if admin}}
-  <!-- Hiệu trường Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrincipal" aria-expanded="true"
-      aria-controls="collapsePrincipal">
-      <span>Admin</span>
-    </a>
-    <div id="collapsePrincipal" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="/admin/employee">Quản lí nhân viên</a>
-        <a class="collapse-item" href="/admin/semester">Quản lí năm học</a>
-      </div>
-    </div>
-  </li>
-  {{/if}}
+  <!-- User Collapse Menu -->
+  {{#sideBar user}}{{/sideBar}}
 
   <!-- Nav Item - Charts -->
   <!-- Divider -->
