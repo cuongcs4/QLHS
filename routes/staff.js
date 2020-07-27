@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const checkLogin = require("../Passport/checkLogin");
+const checkStaff = require("../Passport/checkStaff");
 
-router.get("/class", checkLogin, (req, res, next) => {
+router.get("/class", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/classTable", {
     title: "Class Table",
     style: ["styleTable.css"],
@@ -10,7 +11,7 @@ router.get("/class", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/student", checkLogin, (req, res, next) => {
+router.get("/student", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/studentTable", {
     title: "Danh sách học sinh",
     style: ["styleTable.css"],
@@ -18,7 +19,7 @@ router.get("/student", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/exam", checkLogin, (req, res, next) => {
+router.get("/exam", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/examTable", {
     title: "Lịch thi học kì",
     style: ["styleTable.css"],
@@ -26,7 +27,7 @@ router.get("/exam", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/room-exam", checkLogin, (req, res, next) => {
+router.get("/room-exam", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/examRoom_studentListTable", {
     title: "Danh sách thí sinh",
     style: ["styleTable.css"],
@@ -34,7 +35,7 @@ router.get("/room-exam", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/report", checkLogin, (req, res, next) => {
+router.get("/report", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/report", {
     title: "Báo cáo",
     style: ["styleTable.css"],
@@ -42,7 +43,7 @@ router.get("/report", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/survey", checkLogin, (req, res, next) => {
+router.get("/survey", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/examRoomTable", {
     title: "Khảo sát",
     style: ["styleTable.css"],
@@ -50,7 +51,7 @@ router.get("/survey", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/examroom", checkLogin, (req, res, next) => {
+router.get("/examroom", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/examRoomTable", {
     title: "Danh sách phòng thi",
     style: ["styleTable.css"],

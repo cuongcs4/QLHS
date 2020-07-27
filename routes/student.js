@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const checkLogin = require("../Passport/checkLogin");
+const checkStudent = require("../Passport/checkStudent");
 
-router.get("/examtable", checkLogin, (req, res, next) => {
+router.get("/examtable", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/examTable", {
     title: "Lịch thi học kì",
     style: ["styleTable.css"],
@@ -10,7 +11,7 @@ router.get("/examtable", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/resulttable", checkLogin, (req, res, next) => {
+router.get("/resulttable", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/resultTable", {
     title: "Kết quả học tập",
     style: ["styleTable.css"],
@@ -18,7 +19,7 @@ router.get("/resulttable", checkLogin, (req, res, next) => {
   });
 });
 
-router.get("/schedule", checkLogin, (req, res, next) => {
+router.get("/schedule", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/schedule", {
     title: "Thời khoá biểu",
     style: ["styleSchedule.css"],
@@ -26,6 +27,6 @@ router.get("/schedule", checkLogin, (req, res, next) => {
   });
 });
 
-router.post("/submit", checkLogin, (req, res, next) => {});
+router.post("/submit", checkLogin, checkStudent, (req, res, next) => {});
 
 module.exports = router;

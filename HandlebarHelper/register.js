@@ -45,7 +45,7 @@ const registerSideBar = (handlebars) => {
             `</a>` +
             `<div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">` +
             `<div class="bg-white py-2 collapse-inner rounded">` +
-            `<a class="collapse-item" href="/teacher/mangerClass">Quản lý lớp chủ nhiệm</a>` +
+            `<a class="collapse-item" href="/teacher/managerClass">Quản lý lớp chủ nhiệm</a>` +
             `<a class="collapse-item" href="/teacher/class">Quản lý lớp học</a>` +
             `<a class="collapse-item" href="/teacher/exam">Lịch coi thi</a>` +
             `<a class="collapse-item" href="/teacher/schedule">Lịch giảng dạy</a>` +
