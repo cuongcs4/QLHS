@@ -132,52 +132,93 @@ const Teacher = class extends Employee {
 
     return result;
   }
-  
+
   static async Find(userName) {
-    const condition = typeof userName == "undefined" ? "1" : "0";
+    if (typeof userName == "undefined") {
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv = ND.tenDangNhap `;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listTeachers = [];
+        for (let i = 0; i < result.length; i++) {
+          const teacherOnDB = result[i];
+
+          const id = teacherOnDB.magv;
+          const username = teacherOnDB.magv;
+          const password = teacherOnDB.matKhau;
+          const identityCard = teacherOnDB.cmnd;
+          const fullName = teacherOnDB.hoten;
+          const dob = new Date(teacherOnDB.ngaysinh);
+          const address = teacherOnDB.diachi;
+          const status = teacherOnDB.trangthai;
+          const phoneNumber = teacherOnDB.std;
+          const typeEmployee = teacherOnDB.loai;
+          const subjectID = teacherOnDB.mabm;
+          const typeUser = flagClass.TYPE_USER.TEACHER;
+
+          listTeachers.push(
+            new Teacher(
+              id,
+              username,
+              password,
+              identityCard,
+              fullName,
+              dob,
+              address,
+              status,
+              typeUser,
+              phoneNumber,
+              typeEmployee,
+              subjectID
+            )
+          );
+          return listTeachers;
+        }
+        return null;
+      }
+    }
+
     const sqlQuery =
       `SELECT * ` +
       `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv = ND.tenDangNhap ` +
-      `WHERE GV.magv='${userName}' or ${condition}`;
+      `WHERE GV.magv='${userName}'`;
 
     const result = await ExecuteSQL(sqlQuery);
 
-    if (result.length !== 0) {
-      const listTeachers = [];
-      for (let i = 0; i < result.length; i++) {
-        const teacherOnDB = result[i];
+    if (result.length === 0) return null;
 
-        const id = teacherOnDB.id;
-        const username = teacherOnDB.magv;
-        const password = teacherOnDB.matkhau;
-        const identityCard = teacherOnDB.cmnd;
-        const fullName = teacherOnDB.hoten;
-        const dob = new Date(teacherOnDB.dob);
-        const address = teacherOnDB.diachi;
-        const status = teacherOnDB.trangthai;
-        const phoneNumber = teacherOnDB.std;
-        const typeEmployee = teacherOnDB.loai;
-        const subjectID = teacherOnDB.mabm;
+    const teacherOnDB = result[0];
 
-        listTeachers.push(
-          new Teacher(
-            id,
-            username,
-            password,
-            identityCard,
-            fullName,
-            dob,
-            address,
-            status,
-            phoneNumber,
-            typeEmployee,
-            subjectID
-          )
-        );
-        return listTeachers;
-      }
-      return null;
-    }
+    const id = teacherOnDB.magv;
+    const username = teacherOnDB.magv;
+    const password = teacherOnDB.matKhau;
+    const identityCard = teacherOnDB.cmnd;
+    const fullName = teacherOnDB.hoten;
+    const dob = new Date(teacherOnDB.ngaysinh);
+    const address = teacherOnDB.diachi;
+    const status = teacherOnDB.trangthai;
+    const phoneNumber = teacherOnDB.std;
+    const typeEmployee = teacherOnDB.loai;
+    const subjectID = teacherOnDB.mabm;
+    const typeUser = flagClass.TYPE_USER.TEACHER;
+
+    return new Teacher(
+      id,
+      username,
+      password,
+      identityCard,
+      fullName,
+      dob,
+      address,
+      status,
+      typeUser,
+      phoneNumber,
+      typeEmployee,
+      subjectID
+    );
   }
 
   static async Save(teacher) {
@@ -239,4 +280,13 @@ const Teacher = class extends Employee {
   }
 };
 
+const exec = async () => {
+  console.log("Teacher");
+
+  const result = await Teacher.Find("GV01");
+
+  console.log(result);
+};
+
+exec();
 module.exports = Teacher;

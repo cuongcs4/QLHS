@@ -94,6 +94,7 @@ const Admin = class extends Employee {
     const status = adminOnDB[0].trangthai;
     const phoneNumber = adminOnDB[0].std;
     const typeEmployee = flagClass.TYPE_USER.ADMIN;
+    const typeUser = flagClass.TYPE_USER.ADMIN;
 
     return new Admin(
       id,
@@ -104,6 +105,7 @@ const Admin = class extends Employee {
       dob,
       address,
       status,
+      typeUser,
       phoneNumber,
       typeEmployee
     );
