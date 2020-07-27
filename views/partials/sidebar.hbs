@@ -26,6 +26,7 @@
   </div> --}}
 
   <!-- Học sinh Collapse Menu -->
+  {{#if student}}
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
       aria-controls="collapseTwo">
@@ -40,7 +41,9 @@
       </div>
     </div>
   </li>
+  {{/if}}
 
+  {{#if staff}}
   <!-- Giáo vụ Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStaff" aria-expanded="true"
@@ -57,7 +60,9 @@
       </div>
     </div>
   </li>
+  {{/if}}
 
+  {{#if teacher}}
   <!-- Giáo viên Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeacher" aria-expanded="true"
@@ -74,7 +79,9 @@
       </div>
     </div>
   </li>
+  {{/if}}
 
+  {{#if admin}}
   <!-- Hiệu trường Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrincipal" aria-expanded="true"
@@ -88,21 +95,9 @@
       </div>
     </div>
   </li>
+  {{/if}}
 
   <!-- Nav Item - Charts -->
-  <li class="nav-item">
-    <a class="nav-link" href="charts.html">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>Charts</span></a>
-  </li>
-
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="tables.html">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Tables</span></a>
-  </li>
-
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 

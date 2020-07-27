@@ -9,6 +9,8 @@ const Class = require("./Class");
 const Student = require("./Student");
 const RoomExam = require("./RoomExam");
 const ExamRoom = require("./RoomExam");
+const ResultSurvey = require("./ResultSurvey");
+const Score = require("./Score");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(
@@ -43,9 +45,9 @@ const EmployeeTrainingDepartment = class extends Employee {
   static async getClass() {
     //Câu truy vấn lấy tất cả các lớp học đang hoạt động trong trường.
     const sqlQuery =
-      `SELECT LP.malop AS classID, LP.magvcn AS managerClass, GV.hoten AS managerName, LP.namnhaphoc AS course ` +
-      `FROM LOPHOC AS LP INNER JOIN GIAOVIEN AS GV ON LP.magvcn=GV.magv ` +
-      `WHERE LP.trangthai=1`;
+      `SELECT LH.malop AS classID, LH.magvcn AS managerClass, GV.hoten AS managerName, LH.namnhaphoc AS course, LH.maphong AS roomID, LH.trangthai AS status ` +
+      `FROM LOPHOC AS LH INNER JOIN GIAOVIEN AS GV ON LH.magvcn=GV.magv ` +
+      `WHERE LH.trangthai=1`;
 
     const result = await ExecuteSQL(sqlQuery);
     const latestSemester = await Semester.getLatestSemester();
@@ -57,7 +59,7 @@ const EmployeeTrainingDepartment = class extends Employee {
 
     for (let i = 0; i < result.length; i++) {
       const itemClass = result[i];
-      const course = itemClass.course - latestSemester.getYearStart() + 10;
+      const course = latestSemester.getYearStart() - itemClass.course + 10;
 
       switch (course) {
         case 10:
@@ -179,27 +181,265 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy điểm số của tất cả các học sinh
-  async getScore() {
+  //1. Lấy tất cả các lớp học, chia khối
+  //2. Lấy tất cả các học sinh trong lớp, phân loại, tính loại
+  static async getScore(semesterID, yearStart, yearEnd) {
+    console.log("getScore");
     //1. Lấy tất cả các lớp học, phân loại
-    const sqlQueryGetClass = `SELECT * ` + `FROM LOPHOC ` + `WHERE 1`;
+    const class10 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
+    const class11 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
+    const class12 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
 
-    //2. Lấy điểm của từng lớp
-    //3. Phân loại điểm
-    //4.
+    const { listClass10, listClass11, listClass12 } = await this.getClass();
+
+    //Phân loại lớp 10
+    for (let i = 0; i < listClass10.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass10[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].classifyAverageScore(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.SCORE.TYPE_1:
+            class10.type1++;
+            break;
+
+          case flagClass.SCORE.TYPE_2:
+            class10.type2++;
+            break;
+
+          case flagClass.SCORE.TYPE_3:
+            class10.type3++;
+            break;
+
+          case flagClass.SCORE.TYPE_4:
+            class10.type4++;
+            break;
+
+          case flagClass.SCORE.TYPE_5:
+            class10.type5++;
+            break;
+        }
+      }
+    }
+
+    //Phân loại lớp 11
+    for (let i = 0; i < listClass11.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass11[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].classifyAverageScore(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.SCORE.TYPE_1:
+            class11.type1++;
+            break;
+
+          case flagClass.SCORE.TYPE_2:
+            class11.type2++;
+            break;
+
+          case flagClass.SCORE.TYPE_3:
+            class11.type3++;
+            break;
+
+          case flagClass.SCORE.TYPE_4:
+            class11.type4++;
+            break;
+
+          case flagClass.SCORE.TYPE_5:
+            class11.type5++;
+            break;
+        }
+      }
+    }
+
+    //Phân loại lớp 12
+    for (let i = 0; i < listClass12.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass12[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].classifyAverageScore(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.SCORE.TYPE_1:
+            class12.type1++;
+            break;
+
+          case flagClass.SCORE.TYPE_2:
+            class12.type2++;
+            break;
+
+          case flagClass.SCORE.TYPE_3:
+            class12.type3++;
+            break;
+
+          case flagClass.SCORE.TYPE_4:
+            class12.type4++;
+            break;
+
+          case flagClass.SCORE.TYPE_5:
+            class12.type5++;
+            break;
+        }
+      }
+    }
+
+    return { class10, class11, class12 };
   }
 
   //Lấy hạnh kiểm của tất cả các học sinh
-  getConduct() {
-    //1. Lấy tất cả các lớp, phân loại
-    //2. Lấy hạnh kiểm của từng lớp
-    //3. Phân loại
+  static async getConduct(semesterID, yearStart, yearEnd) {
+    //1. Lấy tất cả các lớp học, phân loại
+    const class10 = { type1: 0, type2: 0, type3: 0, type4: 0 };
+    const class11 = { type1: 0, type2: 0, type3: 0, type4: 0 };
+    const class12 = { type1: 0, type2: 0, type3: 0, type4: 0 };
+
+    const { listClass10, listClass11, listClass12 } = await this.getClass();
+
+    //Phân loại lớp 10
+    for (let i = 0; i < listClass10.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass10[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].getConduct(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.CONDUCT.TYPE_1:
+            class10.type1++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_2:
+            class10.type2++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_3:
+            class10.type3++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_4:
+            class10.type4++;
+            break;
+        }
+      }
+    }
+
+    //Phân loại lớp 11
+    for (let i = 0; i < listClass11.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass11[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].getConduct(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.CONDUCT.TYPE_1:
+            class11.type1++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_2:
+            class11.type2++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_3:
+            class11.type3++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_4:
+            class11.type4++;
+            break;
+        }
+      }
+    }
+
+    //Phân loại lớp 12
+    for (let i = 0; i < listClass12.length; i++) {
+      const listStudentInClass = await Student.Find({
+        id: null,
+        classID: listClass12[i].classID,
+      });
+
+      if (listStudentInClass === null) break;
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        const type = await listStudentInClass[j].getConduct(
+          semesterID,
+          yearStart,
+          yearEnd
+        );
+
+        switch (type) {
+          case flagClass.CONDUCT.TYPE_1:
+            class12.type1++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_2:
+            class12.type2++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_3:
+            class12.type3++;
+            break;
+
+          case flagClass.CONDUCT.TYPE_4:
+            class12.type4++;
+            break;
+        }
+      }
+    }
+
+    return { class10, class11, class12 };
   }
 
   //Lấy kết quả khảo sát
   getResultSurvey() {}
 
   //Mở đợt khảo sát
-  openSurvey() {}
+  openSurvey(dateStart, dateEnd) {}
 
   //Chỉnh sửa câu hỏi phiếu khảo sát
   editQuestionSurvey() {}

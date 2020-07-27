@@ -13,7 +13,9 @@ const ResultSurvey = class {
     this.answer = answer || null;
   }
 
-  getSemester() {}
+  getSemester() {
+    return this.semester;
+  }
 
   getStudentID() {
     return this.studentID;
@@ -53,7 +55,7 @@ const ResultSurvey = class {
     return result.length === 0 ? null : result;
   }
 
-  static save() {}
+  static async Save(resultSurvey) {}
 };
 
 module.exports = ResultSurvey;

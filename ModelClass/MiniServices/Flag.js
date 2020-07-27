@@ -15,6 +15,23 @@ const flagClass = {
     ENABLE: 1,
     DISABLE: 0,
   },
+  SCORE: {
+    TYPE_1: 1,
+    TYPE_2: 2,
+    TYPE_3: 3,
+    TYPE_4: 4,
+    TYPE_5: 5,
+  },
+  CONDUCT: {
+    TYPE_1: 1,
+    TYPE_2: 2,
+    TYPE_3: 3,
+    TYPE_4: 4,
+  },
+  GENDER: {
+    MALE: 1,
+    FEMALE: 0,
+  },
 };
 
 module.exports = flagClass;

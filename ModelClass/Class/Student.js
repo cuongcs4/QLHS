@@ -7,6 +7,7 @@ const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
 const Score = require("./Score");
 const TeachingPlan = require("./TeachingPlan");
+const Conduct = require("./Conduct");
 
 const Student = class extends User {
   constructor(
@@ -40,6 +41,14 @@ const Student = class extends User {
   }
   setClassID(newClassID) {
     this.classID = newClassID;
+  }
+
+  async getClassName() {
+    const latestSemester = await Semester.getLatestSemester();
+    const course = parseInt(this.classID.slice(2, 6));
+    const classID = parseInt(this.classID.slice(6, 9));
+
+    return `${latestSemester.getYearStart() - course + 10}A${classID}`;
   }
 
   // static async getSchedule(classID, semesterID, yearStart, yearEnd) {
@@ -236,10 +245,23 @@ const Student = class extends User {
     return scores;
   }
 
+  async getConduct(semesterID, yearStart, yearEnd) {
+    const result = await Conduct.Find(
+      { studentID: this.id, classID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    return result === null ? null : result.grade;
+  }
+
   async getGPA(semesterID, yearStart, yearEnd) {
     const scores = await this.getScore(semesterID, yearStart, yearEnd);
 
     let GPA = 0;
+
+    if (scores === null) return GPA;
 
     for (let i = 0; i < scores.length; i++) {
       const score = scores[i];
@@ -254,6 +276,109 @@ const Student = class extends User {
     GPA /= scores.length - 1;
 
     return GPA;
+  }
+
+  async classifyAverageScore(semesterID, yearStart, yearEnd) {
+    const scoreAverage = await this.getGPA(semesterID, yearStart, yearEnd);
+    const scores = await this.getScore(semesterID, yearStart, yearEnd);
+
+    if (scores === null) return flagClass.SCORE.TYPE_5;
+
+    const listGpaSubject = [];
+    for (let i = 0; i < scores.length; i++) {
+      const gpaSubject =
+        (scores[i].score1 +
+          scores[i].score2 +
+          scores[i].score3 * 2 +
+          scores[i].score4 * 3) /
+        7;
+
+      listGpaSubject.push(gpaSubject);
+    }
+
+    const scoreMath = await Score.Find(
+      { studentID: this.id, subjectID: "Toan", classID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+
+    const gpaMath =
+      (scoreMath.score1 +
+        scoreMath.score2 +
+        scoreMath.score3 * 2 +
+        scoreMath.score4 * 3) /
+      7;
+
+    const scoreLiterature = await Score.Find(
+      { studentID: this.id, subjectID: "NguVan", classID: null },
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+    const gpaLiterature =
+      (scoreLiterature.score1 +
+        scoreLiterature.score2 +
+        scoreLiterature.score3 * 2 +
+        scoreLiterature.score4 * 3) /
+      7;
+
+    //Loại giói (DTB các môn học >= 6.5, gpa >= 8.0, toán or văn >= 8.0)
+    if (scoreAverage >= 8.0) {
+      if (gpaMath >= 8.0 || gpaLiterature >= 8.0) {
+        let isTrue = true;
+        for (let i = 0; i < listGpaSubject.length; i++) {
+          if (listGpaSubject[i] < 6.5) {
+            isTrue = false;
+            break;
+          }
+        }
+        if (isTrue) return flagClass.SCORE.TYPE_1;
+      }
+    }
+
+    //Loại khá
+    if (scoreAverage >= 6.5) {
+      if (gpaMath >= 6.5 || gpaLiterature >= 6.5) {
+        let isTrue = true;
+        for (let i = 0; i < listGpaSubject.length; i++) {
+          if (listGpaSubject[i] < 5.0) {
+            isTrue = false;
+            break;
+          }
+        }
+        if (isTrue) return flagClass.SCORE.TYPE_2;
+      }
+    }
+
+    //Loại trung bình
+    if (scoreAverage >= 5.0) {
+      if (gpaMath >= 5.0 || gpaLiterature >= 5.0) {
+        let isTrue = true;
+        for (let i = 0; i < listGpaSubject.length; i++) {
+          if (listGpaSubject[i] < 3.5) {
+            isTrue = false;
+            break;
+          }
+        }
+        if (isTrue) return flagClass.SCORE.TYPE_3;
+      }
+    }
+
+    //Loại yếu (Điểm các môn học > 2.0 và gpa >= 3.5)
+    if (scoreAverage >= 3.5) {
+      let isTrue = true;
+      for (let i = 0; i < listGpaSubject.length; i++) {
+        if (listGpaSubject[i] < 2.0) {
+          isTrue = false;
+          break;
+        }
+      }
+      if (isTrue) return flagClass.SCORE.TYPE_4;
+    }
+
+    return flagClass.SCORE.TYPE_5;
+    //Loại kém
   }
 
   static async Find({ id, classID }) {
@@ -401,14 +526,9 @@ const Student = class extends User {
 };
 
 // async function exec() {
-//   // const sqlQuery = `SELECT * FROM HOCSINH AS HS inner join NGUOIDUNG AS ND on HS.mahs = ND.tenDangNhap`;
-//   // const result = await ExecuteSQL(sqlQuery);
-
-//   // console.log(result);
-
 //   const result = await Student.Find({ id: "HS20180101", classID: null });
 
-//   console.log(await result.getGPA());
+//   console.log(await result.getClassName());
 // }
 // exec();
 

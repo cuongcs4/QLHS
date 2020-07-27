@@ -36,7 +36,7 @@ const configPassport = (passport) => {
         });
       }
 
-      console.log(user.getStatus());
+      console.log(user);
       if (user.getStatus() === flagClass.STATUS_USER.DISABLE) {
         return done(null, false, {
           message: "Incorrect username and password",

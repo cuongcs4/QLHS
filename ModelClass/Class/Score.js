@@ -64,8 +64,9 @@ const Score = class {
     yearStart,
     yearEnd
   ) {
-    if (typeof semesterID == "undefined") {
-      const latestSemester = await Semester.GetLatestSemester();
+    if (typeof semesterID === "undefined") {
+      const latestSemester = await Semester.getLatestSemester();
+
       semesterID = latestSemester.getSemesterID();
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();

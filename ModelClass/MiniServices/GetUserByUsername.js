@@ -18,11 +18,11 @@ const getUserByUsername = async (userName) => {
         break;
 
       case flagClass.TYPE_USER.TEACHER:
-        user = await Teacher.Find(userName);
+        usr = await Teacher.Find(userName);
         break;
 
       case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:
-        user = await EmployeeTrainingDepartment.Find(userName);
+        usr = await EmployeeTrainingDepartment.Find(userName);
         break;
 
       case flagClass.TYPE_USER.STUDENT:
