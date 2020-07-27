@@ -85,7 +85,7 @@ const ExamPlan = class {
       return result.length === 0 ? null : result;
     }
     if (teacherID !== null) {
-       // Lấy TKB của giáo viên
+       // Lấy lịch gác thi của giáo viên
        const sqlQuery =
        `SELECT LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection, ` +
        `LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +

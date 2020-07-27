@@ -77,128 +77,20 @@ const Student = class extends User {
     );
     return schedule;
   }
+  async getExamSchedule(semesterID, yearStart, yearEnd) {
+    const schedule = await ExamPlan.Find(
+      { studentID: this.id, teacherID: null},
+      semesterID,
+      yearStart,
+      yearEnd
+    );
 
-  async getScheduleExam(id, semesterID, yearStart, yearEnd) {
-    if (id) {
-      if (typeof semesterID === "undefined") {
-        const lastestSemester = await semesterID.getLastestSemester();
-        semesterID = lastestSemester.getSemesterID();
-        yearStart = lastestSemester.getYearStart();
-        yearEnd = lastestSemester.getYearEnd();
-      }
-      const sqlQuery =
-        `SELECT * ` +
-        `FROM PHONGTHI AS PT, LICHTHI AS LT ` +
-        `WHERE PT.mahs ='${id}' AND PT.maphongthi = LT.maphongthi AND LT.mahk = '${semesterID}' AND LT.nambd = '${yearStart}' AND LT.namkt = '${yearEnd}'`;
-      const result = await ExecuteSQL(sqlQuery);
-
-      if (result.length !== 0) {
-        const listExamSchedule = [];
-
-        for (let i = 0; i < result.length; i++) {
-          const examScheduleOnDB = result[i];
-
-          const roomID = examScheduleOnDB.maphong;
-          const subjectID = examScheduleOnDB.mabm;
-          const date = examScheduleOnDB.ngaythi;
-          const start = examScheduleOnDB.tietbd;
-
-          listExamSchedule.push({
-            roomID,
-            subjectID,
-            date,
-            start,
-          });
-        }
-        return listExamSchedule;
-      }
-      return null;
-    }
+    return schedule;
   }
 
   static async getScore(id, semesterID, yearStart, yearEnd) {
-    if (id) {
-      if (typeof semesterID === "undefined") {
-        const lastestSemester = await semesterID.getLastestSemester();
-        semesterID = lastestSemester.getSemesterID();
-        yearStart = lastestSemester.getYearStart();
-        yearEnd = lastestSemester.getYearEnd();
-      }
-      const sqlQuery =
-        `SELECT * ` +
-        `FROM DIEM AS D ` +
-        `WHERE D.mahs ='${id}' AND D.mahk = '${semesterID}' AND D.nambd = '${yearStart}' AND D.namkt = '${yearEnd}'`;
-      const result = await ExecuteSQL(sqlQuery);
-
-      if (result.length !== 0) {
-        const listScore = [];
-
-        for (let i = 0; i < result.length; i++) {
-          const scoreOnDB = result[i];
-
-          const studentID = scoreOnDB.mahs;
-          const subjectID = scoreOnDB.mabm;
-          const score1 = scoreOnDB.cot1;
-          const score2 = scoreOnDB.cot2;
-          const score3 = scoreOnDB.cot3;
-          const score4 = scoreOnDB.cot4;
-
-          listScore.push({
-            studentID,
-            subjectID,
-            score1,
-            score2,
-            score3,
-            score4,
-          });
-        }
-        return listScore;
-      }
-      return null;
-    }
+    
   }
-
-  // static async getScore(id, semesterID, yearStart, yearEnd) {
-  //   if (id) {
-  //     if (typeof semesterID === "undefined") {
-  //       const lastestSemester = await semesterID.getLastestSemester();
-  //       semesterID = lastestSemester.getSemesterID();
-  //       yearStart = lastestSemester.getYearStart();
-  //       yearEnd = lastestSemester.getYearEnd();
-  //     }
-  //     const sqlQuery =
-  //       `SELECT * ` +
-  //       `FROM DIEM AS D ` +
-  //       `WHERE D.mahs ='${id}' AND D.mahk = '${semesterID}' AND D.nambd = '${yearStart}' AND D.namkt = '${yearEnd}'`
-  //     const result = await ExecuteSQL(sqlQuery);
-
-  //     if (result.length !== 0) {
-  //       const listScore = [];
-
-  //       for (let i = 0; i < result.length; i++) {
-  //         const scoreOnDB = result[i];
-
-  //         const studentID = scoreOnDB.mahs;
-  //         const subjectID = scoreOnDB.mabm;
-  //         const score1 = scoreOnDB.cot1;
-  //         const score2 = scoreOnDB.cot2;
-  //         const score3 = scoreOnDB.cot3;
-  //         const score4 = scoreOnDB.cot4;
-
-  //         listScore.push({
-  //           studentID,
-  //           subjectID,
-  //           score1,
-  //           score2,
-  //           score3,
-  //           score4
-  //         });
-  //       }
-  //       return listScore;
-  //     }
-  //     return null;
-  //   }
-  // }
 
   static async getReExamination(id) {
     if (id) {
