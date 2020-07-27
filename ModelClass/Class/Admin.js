@@ -40,42 +40,38 @@ const Admin = class extends Employee {
   async getEmployee() {
     const listTeachers = await Teacher.Find();
     const listEmployees = await EmployeeTrainingDepartment.Find();
-    return {listTeachers, listEmployees}
+    return { listTeachers, listEmployees };
   }
 
-  disableEmployee(username) {
+  async disableEmployee(username) {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
-    if (teacher !== null){
-      teacher[0].status = flagClass.STATUS(DISABLE); // 
+    if (teacher !== null) {
+      teacher[0].status = flagClass.STATUS(DISABLE); //
       await Teacher.Save(teacher[0]);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS(DISABLE)
-      await EmployeeTrainingDepartment.Save(employee[0]);   
-    }
-    else {
+      employee[0].status = flagClass.STATUS(DISABLE);
+      await EmployeeTrainingDepartment.Save(employee[0]);
+    } else {
       return null;
     }
   }
 
-  enableEmployee() {
+  async enableEmployee() {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
-    if (teacher !== null){
-      teacher[0].status = flagClass.STATUS.ENABLE; // 
+    if (teacher !== null) {
+      teacher[0].status = flagClass.STATUS.ENABLE; //
       await Teacher.Save(teacher[0]);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS.ENABLE
-      await EmployeeTrainingDepartment.Save(employee[0]);   
-    } else
-    {
+      employee[0].status = flagClass.STATUS.ENABLE;
+      await EmployeeTrainingDepartment.Save(employee[0]);
+    } else {
       return null;
     }
   }
 
-  createNewEmployee() {
-    
-  }
+  createNewEmployee() {}
 
   createNewSemester() {}
 
