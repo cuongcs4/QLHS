@@ -492,13 +492,13 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 };
 
-const exec = async () => {
-  //const studentID = "HS20190101";
-  const result = await EmployeeTrainingDepartment.getClass();
+// const exec = async () => {
+//   //const studentID = "HS20190101";
+//   const result = await EmployeeTrainingDepartment.getClass();
 
-  console.log(result);
-};
+//   console.log(result);
+// };
 
-exec();
+// exec();
 
 module.exports = EmployeeTrainingDepartment;

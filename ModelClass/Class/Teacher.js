@@ -280,13 +280,13 @@ const Teacher = class extends Employee {
   }
 };
 
-const exec = async () => {
-  console.log("Teacher");
+// const exec = async () => {
+//   console.log("Teacher");
 
-  const result = await Teacher.Find("GV01");
+//   const result = await Teacher.Find("GV01");
 
-  console.log(result);
-};
+//   console.log(result);
+// };
 
-exec();
+// exec();
 module.exports = Teacher;
