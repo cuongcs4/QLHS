@@ -71,7 +71,15 @@ const Admin = class extends Employee {
     }
   }
 
-  createNewEmployee() {}
+  async createNewEmployee(employee) {
+    if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER)
+    {
+      await Teacher.Save(employee);
+    }
+    else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
+      await EmployeeTrainingDepartment.Save(employee);
+    }
+  }
 
   createNewSemester() {}
 
@@ -111,5 +119,26 @@ const Admin = class extends Employee {
     );
   }
 };
+
+// async function exec() {
+//   const employee = new Employee({id: "1",
+//     username: "GV16",
+//     password: "123",
+//     identityCard: "1234",
+//     fullName: "Nguyễn Văn Xịt",
+//     address: "Thủ Đức",
+//     status: "ENABLE",
+//     typeEmployee: "3"
+//   })
+//   if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER)
+//     {
+//       const result = await Teacher.Save(employee);
+//     }
+//     else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
+//       const result = await EmployeeTrainingDepartment.Save(employee);
+//     }
+
+// }
+// exec();
 
 module.exports = Admin;
