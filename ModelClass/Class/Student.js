@@ -272,7 +272,54 @@ const Student = class extends User {
   }
 
   static async Find({ id, classID }) {
-    if (id) {
+    // tìm tất cả học sinh
+    if (id == null && classID == null) {
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap`;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listStudents = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const studentOnDB = result[i];
+
+          const id = studentOnDB.mahs;
+          const username = studentOnDB.mahs;
+          const password = studentOnDB.matKhau;
+          const dob = new Date(studentOnDB.ngaysinh);
+          const identityCard = studentOnDB.cmnd;
+          const fullName = studentOnDB.hoten;
+          const address = studentOnDB.diachi;
+          const classID = studentOnDB.malop;
+          const status = studentOnDB.trangthai;
+          const typeUser = flagClass.TYPE_USER.STUDENT;
+
+          listStudents.push(
+            new Student(
+              id,
+              username,
+              password,
+              identityCard,
+              fullName,
+              dob,
+              address,
+              status,
+              typeUser,
+              classID
+            )
+          );
+        }
+
+        return listStudents;
+      }
+      return null;
+    }
+
+    // tìm học sinh theo mã hs
+    if (id !== null) {
       const sqlQuery =
         `SELECT * ` +
         `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
@@ -311,12 +358,13 @@ const Student = class extends User {
       return null;
     }
 
-    if (classID) {
+    // tìm danh sách học sinh của lớp
+    if (classID !== null) {
       const sqlQuery =
         `SELECT * ` +
         `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
         `WHERE HS.malop='${classID}'`;
-
+      console.log(sqlQuery);
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -351,7 +399,6 @@ const Student = class extends User {
             )
           );
         }
-
         return listStudents;
       }
 
@@ -415,11 +462,10 @@ const Student = class extends User {
   }
 };
 
-// async function exec() {
-//   const result = await Student.Find({ id: "HS20180101", classID: null });
-
-//   console.log(await result.getClassName());
-// }
+// const exec = async () => {
+//   const result = await Student.Find({ id: null, classID: "LH202004" });
+//   console.log(result);
+// };
 // exec();
 
 module.exports = Student;

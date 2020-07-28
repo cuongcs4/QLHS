@@ -18,18 +18,36 @@ const Subject = class {
   }
 
   static async Find(subjectID) {
-    const sqlQuery = `SELECT * FROM BOMON WHERE mabm='${subjectID}'`;
+    if (typeof subjectID !== "undefined") {
+      const sqlQuery = `SELECT * FROM BOMON WHERE mabm='${subjectID}'`;
 
-    const result = await ExecuteSQL(sqlQuery);
+      const result = await ExecuteSQL(sqlQuery);
 
-    if (result.length !== 0) {
-      const subjectID = result[0].mabm;
-      const subjectName = result[0].tenbm;
+      if (result.length !== 0) {
+        const subjectID = result[0].mabm;
+        const subjectName = result[0].tenbm;
 
-      return new Subject(subjectID, subjectName);
+        return new Subject(subjectID, subjectName);
+      }
+
+      return null;
     }
+    else {
+      const sqlQuery = `SELECT * FROM BOMON`;
+      const result = await ExecuteSQL(sqlQuery);
+      if (result.length !== 0) {
+        const listSubjects = []; 
 
-    return null;
+        for (let i = 0; i<result.length; i++){
+          const subjectID = result[i].mabm;
+          const subjectName = result[i].tenbm;
+
+          listSubjects.push( new Subject(subjectID,subjectID) )
+        }
+        return listSubjects;
+      }
+      return null;
+    }
   }
 
   static async Save(subject) {
@@ -55,5 +73,12 @@ const Subject = class {
     return flagClass.DB.NEW;
   }
 };
+
+// const exec = async () => {
+//   const result = await Subject.Find();
+//   console.log(result);
+// };
+// exec();
+
 
 module.exports = Subject;

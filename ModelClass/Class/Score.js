@@ -2,12 +2,15 @@
 
 const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const flagClass = require("../MiniServices/Flag")
+const TeachingPlan = require("./TeachingPlan");
 
 const Score = class {
   constructor(
     semester,
     studentID,
     teacherID,
+    classID,
     subjectID,
     score1,
     score2,
@@ -17,6 +20,7 @@ const Score = class {
     this.semester = semester || null;
     this.studentID = studentID || null;
     this.teacherID = teacherID || null;
+    this.classID = classID || null;
     this.subjectID = subjectID || null;
     this.score1 = score1 || null;
     this.score2 = score2 || null;
@@ -24,7 +28,9 @@ const Score = class {
     this.score4 = score4 || null;
   }
 
-  getSemester() {}
+  getSemester() {
+    return this.semester;
+  }
 
   getStudentID() {
     return this.studentID;
@@ -32,6 +38,9 @@ const Score = class {
 
   getTeacherID() {
     return this.teacherID;
+  }
+  getClassID() {
+    return this.classID;
   }
 
   getSubjectID() {
@@ -127,25 +136,52 @@ const Score = class {
       return result.length === 0 ? null : result;
     }
   }
+  static async NewRecord(score, semester) {
+    if (typeof semester === "undefined")
+    {
+      semester = await Semester.getLatestSemester();
+    }
+    //1. Insert bảng điểm mới
+    const sqlQuery =
+      `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
+      `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}, ` +
+      `'${semester.getSemesterID()}', '${semester.getYearStart()}', '${semester.getYearEnd()}', '${score.getScore1()}', ` +
+      `'${score.getScore2()}', '${score.getScore3()}', '${score.getScore4()}')`;
 
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.NEW;
+  }
   static async Save() {}
 };
 
-// const exec = async () => {
-//   const result = await Score.Find(
-//     {
-//       studentID: null,
-//       classID: "LH201901",
-//       subjectID: "Toan",
-//     },
-//     1,
-//     2019,
-//     2020
-//   );
+const exec = async () => {
+  const lastSemester = await Semester.getLatestSemester();
+    if (lastSemester.semesterID === 1) {
+      lastSemester.semesterID = 2;
+    }
+    else {
+      lastSemester.semesterID = 1;
+      lastSemester.yearStart += 1;
+      lastSemester.yearEnd += 1;
+    }
+    console.log(lastSemester)
+    const newSemester = new Semester(
+      lastSemester.semesterID,
+      lastSemester.yearStart,
+      lastSemester.yearEnd,
+      1
+    )
+  const score = new Score(newSemester,"HS20180101", "GV01", "LH201801","Toan");
+  const sqlQuery =
+      `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
+      `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}', ` +
+      `'${newSemester.getSemesterID()}', '${newSemester.getYearStart()}', '${newSemester.getYearEnd()}', ` +
+      `'${score.getScore1()}', '${score.getScore2()}', '${score.getScore3()}', '${score.getScore4()}')`;
+    console.log(sqlQuery);
+    await ExecuteSQL(sqlQuery);
 
-//   console.log(result);
-// };
-
-// exec();
+    return flagClass.DB.NEW;
+};
 
 module.exports = Score;

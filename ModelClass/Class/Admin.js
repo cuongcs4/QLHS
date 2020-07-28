@@ -7,6 +7,11 @@ const flagClass = require("../MiniServices/Flag");
 const Teacher = require("./Teacher");
 const EmployeeTrainingDepartment = require("./EmployeeTrainingDepartment");
 const { enable } = require("debug");
+const TeachingPlan = require("./TeachingPlan");
+const Student = require("./Student");
+const Subject = require("./Subject");
+const Score = require("./Score");
+const Semester = require("./Semester");
 
 const Admin = class extends Employee {
   constructor(
@@ -47,11 +52,11 @@ const Admin = class extends Employee {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
     if (teacher !== null) {
-      teacher[0].status = flagClass.STATUS(DISABLE); //
-      await Teacher.Save(teacher[0]);
+      teacher.status = flagClass.STATUS.DISABLE; //
+      await Teacher.Save(teacher);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS(DISABLE);
-      await EmployeeTrainingDepartment.Save(employee[0]);
+      employee.status = flagClass.STATUS.DISABLE;
+      await EmployeeTrainingDepartment.Save(employee);
     } else {
       return null;
     }
@@ -61,11 +66,11 @@ const Admin = class extends Employee {
     const teacher = await Teacher.Find(username);
     const employee = await EmployeeTrainingDepartment.Find(username);
     if (teacher !== null) {
-      teacher[0].status = flagClass.STATUS.ENABLE; //
-      await Teacher.Save(teacher[0]);
+      teacher.status = flagClass.STATUS.ENABLE; //
+      await Teacher.Save(teacher);
     } else if (employee !== null) {
-      employee[0].status = flagClass.STATUS.ENABLE;
-      await EmployeeTrainingDepartment.Save(employee[0]);
+      employee.status = flagClass.STATUS.ENABLE;
+      await EmployeeTrainingDepartment.Save(employee);
     } else {
       return null;
     }
@@ -81,7 +86,36 @@ const Admin = class extends Employee {
     }
   }
 
-  createNewSemester() {}
+  static async createNewSemester() {
+    const listStudents = await Student.Find({id: null, class:null});
+    const listSubjects = await Subject.Find()
+    const lastSemester = await Semester.getLatestSemester();
+    if (lastSemester.mahk === 1) {
+      lastSemester.mahk = 2;
+    }
+    else {
+      lastSemester.mahk = 1;
+      lastSemester.nambd += 1;
+      lastSemester.namkt += 1;
+    }
+    const newSemester = new Semester(
+      lastSemester.mahk,
+      lastSemester.nambd,
+      lastSemester.namkt,
+      flagClass.status.ENABLE
+    )
+    await Semester.Save(newSemester);
+    for (let i = 0; i < listStudents.length; i++) {
+      const student = listStudents[i];
+      const studentNewScoreBoard = [];
+      for (let j = 0; j < listSubjects.length; j++) {
+        const subject = listSubjects[j];
+        const studentID = student.username;
+        const subjectID = subject.subjectID;
+
+      }
+    }
+  }
 
   closeSemester() {}
 
@@ -120,20 +154,6 @@ const Admin = class extends Employee {
   }
 };
 
-// const exec = async () => {
-//   const teacher = new EmployeeTrainingDepartment('1','GV21','GV21','215487789','Nguyễn Văn Trỗi',new Date(1999,02,25),null,1,2,'0987654321',4);
-//   console.log(teacher);
-//   if (teacher.typeEmployee === flagClass.TYPE_USER.TEACHER)
-//     {
-//       const result = await Teacher.Save(teacher);
-//       console.log(result)
-//     }
-//   else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
-//       const result = await EmployeeTrainingDepartment.Save(employee);
-//       console.log(result)
-//     }
 
-// }
-// exec();
 
 module.exports = Admin;

@@ -22,7 +22,7 @@ router.get("/resulttable", checkLogin, checkStudent, (req, res, next) => {
 router.get("/schedule", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/schedule", {
     title: "Thời khoá biểu",
-    style: ["styleSchedule.css"],
+    style: ["styleTable.css"],
     user: req.user,
   });
 });

@@ -2,7 +2,6 @@
     display:flex;
     flex-wrap:wrap;
     width:1000px;
-    margin-left: 20%;
 }
 #days{
     display:flex;
@@ -11,8 +10,6 @@ p{
    margin-top:4px; 
 }
 .day{
-    width:150px;
-    height:60px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -22,8 +19,6 @@ p{
     margin:0 2px;
 }
 .hour{
-    height:60px;
-    width:150px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -31,8 +26,6 @@ p{
     font-weight:600;
 }
 #board{
-    width:770px;
-    height:800px;
     background:#eee;
     position:relative;
 }
