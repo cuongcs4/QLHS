@@ -47,24 +47,11 @@ const conductFormat = {
   propName: ["id", "studentId", "fullName", "gender", "grade"],
 };
 
-const compareString = (string1, string2) => {
-  string1 = string1.toLowerCase();
-  string2 = string2.toLowerCase();
-
-  //string1 = string2 = "a";
-  const arrString1 = string1.split(" ");
-  const arrString2 = string2.split(" ");
-
-  if (arrString1.length !== arrString2.length) return false;
-
-  for (let i = 0; i < arrString1.length; i++) {
-    if (arrString1[i] != arrString2[i]) return false;
-  }
-
-  return true;
-};
+const compareString = require("./compareString");
 
 const parseFileExcel = (fileName, format) => {
+  console.log("parseFileExcel");
+
   const result = {
     data: [],
     err: [],
@@ -75,14 +62,13 @@ const parseFileExcel = (fileName, format) => {
   const ws = wb.Sheets[`${wb.SheetNames[0]}`];
 
   for (let e in format.filed) {
-    let string = "";
-    Object.keys(format.filed).map((key) => {
-      string += `[${format.filed[key]} (${key})]`;
-    });
-
-    // console.log(string);
+    console.log(e);
 
     if (!compareString(ws[e].v, format.filed[e])) {
+      let string = "";
+      Object.keys(format.filed).map((key) => {
+        string += `[${format.filed[key]} (${key})]`;
+      });
       result.err.push(
         `Tên cột trong file không chính xác, kiểm tra lại định dạng`
       );
@@ -111,9 +97,9 @@ const parseFileExcel = (fileName, format) => {
       item[`${format.propName[j]}`] = mapData[j];
     }
 
-    if (typeof item.gender != "undefined") {
-      item.gender =
-        compareString(item.gender, "nam") === true
+    if (typeof item["gender"] != "undefined") {
+      item["gender"] =
+        compareString(item["gender"], "nam") === true
           ? flagClass.GENDER.MALE
           : flagClass.GENDER.FEMALE;
     }
@@ -126,15 +112,20 @@ const parseFileExcel = (fileName, format) => {
   return result;
 };
 
+module.exports = parseFileExcel;
+
 const fileName = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/dshocsinh.xlsx";
 const fileScore = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/Điểm 12A1.xlsx";
 const fileConduct = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/Hạnh kiểm.xlsx";
 //const result = parseFileExcel(fileName, studentFormat);
 
-const result = parseFileExcel(fileConduct, conductFormat);
+const result = parseFileExcel(fileScore, scoreFormat);
 
-//console.log(result);
+console.log(result);
 
 if (result.err.length !== 0) {
   console.log(result.err);
 } else console.log(result.data);
+
+const str = "Abc";
+console.log(str.toLowerCase());
