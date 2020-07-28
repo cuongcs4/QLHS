@@ -120,22 +120,17 @@ const Admin = class extends Employee {
   }
 };
 
-// async function exec() {
-//   const employee = new Employee({id: "1",
-//     username: "GV16",
-//     password: "123",
-//     identityCard: "1234",
-//     fullName: "Nguyễn Văn Xịt",
-//     address: "Thủ Đức",
-//     status: "ENABLE",
-//     typeEmployee: "3"
-//   })
-//   if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER)
+// const exec = async () => {
+//   const teacher = new EmployeeTrainingDepartment('1','GV21','GV21','215487789','Nguyễn Văn Trỗi',new Date(1999,02,25),null,1,2,'0987654321',4);
+//   console.log(teacher);
+//   if (teacher.typeEmployee === flagClass.TYPE_USER.TEACHER)
 //     {
-//       const result = await Teacher.Save(employee);
+//       const result = await Teacher.Save(teacher);
+//       console.log(result)
 //     }
-//     else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
+//   else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
 //       const result = await EmployeeTrainingDepartment.Save(employee);
+//       console.log(result)
 //     }
 
 // }

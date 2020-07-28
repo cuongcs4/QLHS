@@ -226,12 +226,9 @@ const Teacher = class extends Employee {
       "NGUOIDUNG",
       "tenDangNhap",
       teacher.username
-    );
-
-    const dobFormat = `${teacher.dob.getFullYear()}-${
-      teacher.dob.getMonth() + 1
-    }-${teacher.dob.getDate()}`;
-
+    )
+    const dobFormat = `${teacher.dob.getFullYear()}-${teacher.dob.getMonth()}-${teacher.dob.getDate()}`;
+    console.log(dobFormat);
     if (isExist) {
       //update
 
@@ -239,20 +236,19 @@ const Teacher = class extends Employee {
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${teacher.getPassWord()}", cmnd='${teacher.getIdentityCard()}' ` +
-        `WHERE tenDangNhap='${teacher.getID()}'`;
+        `WHERE tenDangNhap='${teacher.getUserName()}'`;
       await ExecuteSQL(sqlQuery1);
 
       //2. update GIAOVIEN
       const sqlQuery2 =
         `UPDATE GIAOVIEN ` +
-        `SET ngaySinh="${dobFormat}", ` +
+        `SET ngaysinh="${dobFormat}", ` +
         `hoten="${teacher.getFullName()}", ` +
         `diachi="${teacher.getAddress()}", ` +
         `std="${teacher.getPhoneNumber()}", ` +
         `mabm="${teacher.getSubjectID()}", ` +
         `trangthai=${teacher.getStatus()} ` +
-        `WHERE mahs="${teacher.getID()}"`;
-
+        `WHERE magv="${teacher.getUserName()}"`;
       await ExecuteSQL(sqlQuery2);
 
       return flagClass.DB.UPDATE;
