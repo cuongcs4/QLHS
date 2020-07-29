@@ -20,6 +20,9 @@ router.post("/", (req, res, next) => {
 router.get("/logout", (req, res, next) => {
   req.logOut();
   req.flash("success_msg", "Đăng xuất thành công!");
+
+  //console.log(req.flash("success_msg"));
+
   res.redirect("/login");
 });
 

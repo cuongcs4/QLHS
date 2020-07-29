@@ -15,13 +15,11 @@ const configPassport = (passport) => {
     console.log(id);
     const user = await controllerMiniService.getUserByUsername(id);
 
-    console.log(user);
-
     if (user !== null) return done(null, user);
 
     console.log("error deserializeUser");
     return done(null, false, {
-      message: "Incorrect username and password",
+      error_msg: "Incorrect username and password",
     });
   });
 
@@ -30,16 +28,15 @@ const configPassport = (passport) => {
       const user = await controllerMiniService.getUserByUsername(username);
 
       if (user === null) {
-        console.log("error");
+        console.log("error user null");
         return done(null, false, {
-          message: "Incorrect username and password",
+          message: "Tài khoản không tồn tại",
         });
       }
 
-      console.log(user);
       if (user.getStatus() === flagClass.STATUS_USER.DISABLE) {
         return done(null, false, {
-          message: "Incorrect username and password",
+          message: "Tài khoản đã bị khóa",
         });
       }
 

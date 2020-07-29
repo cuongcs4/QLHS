@@ -7,6 +7,7 @@ const checkTeacher = (req, res, next) => {
   ) {
     return next();
   } else {
+    req.flash("error_msg", "Bạn không phải là giáo viên!");
     res.redirect("/");
   }
 };
