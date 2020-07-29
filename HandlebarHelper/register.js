@@ -45,7 +45,6 @@ const registerSideBar = (handlebars) => {
             `</a>` +
             `<div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">` +
             `<div class="bg-white py-2 collapse-inner rounded">` +
-            `<a class="collapse-item" href="/teacher/managerClass">Quản lý lớp chủ nhiệm</a>` +
             `<a class="collapse-item" href="/teacher/class">Quản lý lớp học</a>` +
             `<a class="collapse-item" href="/teacher/exam">Lịch coi thi</a>` +
             `<a class="collapse-item" href="/teacher/schedule">Lịch giảng dạy</a>` +
@@ -64,7 +63,7 @@ const registerSideBar = (handlebars) => {
             `</a>` +
             `<div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">` +
             `<div class="bg-white py-2 collapse-inner rounded">` +
-            `<a class="collapse-item" href="/teacher/mangerClass">Quản lý lớp chủ nhiệm</a>` +
+            `<a class="collapse-item" href="/teacher/managerClass">Quản lý lớp chủ nhiệm</a>` +
             `<a class="collapse-item" href="/teacher/class">Quản lý lớp học</a>` +
             `<a class="collapse-item" href="/teacher/exam">Lịch coi thi</a>` +
             `<a class="collapse-item" href="/teacher/schedule">Lịch giảng dạy</a>` +
@@ -102,7 +101,87 @@ const registerProfile = (handlebars) => {
   handlebars.registerHelper("profile", function (user, block) {
     switch (user.typeUser) {
       case flagClass.TYPE_USER.ADMIN:
-        return new handlebars.SafeString();
+        return new handlebars.SafeString(
+          `<div class="row">` +
+            `<div class="col-md-4">` +
+            `<div class="profile-img">` +
+            `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
+            `<div class="file btn btn-lg btn-primary">` +
+            `Change Photo` +
+            `<input type="file" name="file" />` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<div class="profile-head">` +
+            `<h5>` +
+            `${user.fullName}` +
+            `</h5>` +
+            `</h6>` +
+            `<ul class="nav nav-tabs" id="myTab" role="tablist">` +
+            `<li class="nav-item">` +
+            `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>` +
+            `</li>` +
+            `</ul>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-2">` +
+            `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-2">` +
+            `</div>` +
+            `<div class="col-md-8">` +
+            `<div class="tab-content profile-tab" id="myTabContent">` +
+            `<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Mã học sinh</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.id}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Họ và tên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.fullName}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Ngày sinh</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.dob.getDate()}/${
+              user.dob.getMonth() + 1
+            }/${user.dob.getFullYear()}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>CMND</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.identityCard}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Địa chỉ</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.address}</p>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>`
+        );
         break;
 
       case flagClass.TYPE_USER.STUDENT:
@@ -164,6 +243,24 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="row">` +
               `<div class="col-md-6">` +
+              `<label>Ngày sinh</label>` +
+              `</div>` +
+              `<div class="col-md-6">` +
+              `<p>${user.dob.getDate()}/${
+                user.dob.getMonth() + 1
+              }/${user.dob.getFullYear()}</p>` +
+              `</div>` +
+              `</div>` +
+              `<div class="row">` +
+              `<div class="col-md-6">` +
+              `<label>CMND</label>` +
+              `</div>` +
+              `<div class="col-md-6">` +
+              `<p>${user.identityCard}</p>` +
+              `</div>` +
+              `</div>` +
+              `<div class="row">` +
+              `<div class="col-md-6">` +
               `<label>Địa chỉ</label>` +
               `</div>` +
               `<div class="col-md-6">` +
@@ -179,11 +276,270 @@ const registerProfile = (handlebars) => {
         break;
 
       case flagClass.TYPE_USER.TEACHER:
-        return new handlebars.SafeString();
+        return new handlebars.SafeString(
+          `<div class="row">` +
+            `<div class="col-md-4">` +
+            `<div class="profile-img">` +
+            `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
+            `<div class="file btn btn-lg btn-primary">` +
+            `Change Photo` +
+            `<input type="file" name="file" />` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<div class="profile-head">` +
+            `<h5>` +
+            `${user.fullName}` +
+            `</h5>` +
+            `<h6>` +
+            `${user.subjectName}` +
+            `</h6>` +
+            `<h6>` +
+            `${user.subjectID}` +
+            `</h6>` +
+            `<ul class="nav nav-tabs" id="myTab" role="tablist">` +
+            `<li class="nav-item">` +
+            `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>` +
+            `</li>` +
+            `</ul>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-2">` +
+            `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-2">` +
+            `</div>` +
+            `<div class="col-md-8">` +
+            `<div class="tab-content profile-tab" id="myTabContent">` +
+            `<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Mã giáo viên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.id}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Họ và tên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.fullName}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Ngày sinh</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.dob.getDate()}/${
+              user.dob.getMonth() + 1
+            }/${user.dob.getFullYear()}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>CMND</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.identityCard}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Địa chỉ</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.address}</p>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>`
+        );
+        break;
+
+      case flagClass.TYPE_USER.TEACHER:
+        return new handlebars.SafeString(
+          `<div class="row">` +
+            `<div class="col-md-4">` +
+            `<div class="profile-img">` +
+            `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
+            `<div class="file btn btn-lg btn-primary">` +
+            `Change Photo` +
+            `<input type="file" name="file" />` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<div class="profile-head">` +
+            `<h5>` +
+            `${user.fullName}` +
+            `</h5>` +
+            `<h6>` +
+            `${user.subjectName}` +
+            `</h6>` +
+            `<h6>` +
+            `${user.subjectID}` +
+            `</h6>` +
+            `<ul class="nav nav-tabs" id="myTab" role="tablist">` +
+            `<li class="nav-item">` +
+            `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>` +
+            `</li>` +
+            `</ul>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-2">` +
+            `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-2">` +
+            `</div>` +
+            `<div class="col-md-8">` +
+            `<div class="tab-content profile-tab" id="myTabContent">` +
+            `<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Mã giáo viên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.id}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Họ và tên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.fullName}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Ngày sinh</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.dob.getDate()}/${
+              user.dob.getMonth() + 1
+            }/${user.dob.getFullYear()}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>CMND</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.identityCard}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Địa chỉ</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.address}</p>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>`
+        );
         break;
 
       case flagClass.TYPE_USER.HOMEROOM_TEACHER:
-        return new handlebars.SafeString();
+        return new handlebars.SafeString(
+          `<div class="row">` +
+            `<div class="col-md-4">` +
+            `<div class="profile-img">` +
+            `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
+            `<div class="file btn btn-lg btn-primary">` +
+            `Change Photo` +
+            `<input type="file" name="file" />` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<div class="profile-head">` +
+            `<h5>` +
+            `${user.fullName}` +
+            `</h5>` +
+            `<h6>` +
+            `${user.subjectName}` +
+            `</h6>` +
+            `<h6>` +
+            `${user.subjectID}` +
+            `</h6>` +
+            `<ul class="nav nav-tabs" id="myTab" role="tablist">` +
+            `<li class="nav-item">` +
+            `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>` +
+            `</li>` +
+            `</ul>` +
+            `</div>` +
+            `</div>` +
+            `<div class="col-md-2">` +
+            `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-2">` +
+            `</div>` +
+            `<div class="col-md-8">` +
+            `<div class="tab-content profile-tab" id="myTabContent">` +
+            `<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Mã giáo viên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.id}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Họ và tên</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.fullName}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Ngày sinh</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.dob.getDate()}/${
+              user.dob.getMonth() + 1
+            }/${user.dob.getFullYear()}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>CMND</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.identityCard}</p>` +
+            `</div>` +
+            `</div>` +
+            `<div class="row">` +
+            `<div class="col-md-6">` +
+            `<label>Địa chỉ</label>` +
+            `</div>` +
+            `<div class="col-md-6">` +
+            `<p>${user.address}</p>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>` +
+            `</div>`
+        );
         break;
 
       case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:

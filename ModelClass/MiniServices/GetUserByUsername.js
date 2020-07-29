@@ -1,6 +1,7 @@
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const Admin = require("../Class/Admin");
 const Teacher = require("../Class/Teacher");
+const HomeroomTeacher = require("../Class/HomeroomTeacher");
 const EmployeeTrainingDepartment = require("../Class/EmployeeTrainingDepartment");
 const Student = require("../Class/Student");
 const flagClass = require("../MiniServices/Flag");
@@ -19,6 +20,11 @@ const getUserByUsername = async (userName) => {
 
       case flagClass.TYPE_USER.TEACHER:
         usr = await Teacher.Find(userName);
+        break;
+
+      case flagClass.TYPE_USER.HOMEROOM_TEACHER:
+        console.log("HomeroomTeacher");
+        usr = await HomeroomTeacher.Find(userName);
         break;
 
       case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:

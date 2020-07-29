@@ -8,6 +8,7 @@ const flagClass = require("../MiniServices/Flag");
 const Score = require("./Score");
 const TeachingPlan = require("./TeachingPlan");
 const Conduct = require("./Conduct");
+const Class = require("./Class");
 
 const Student = class extends User {
   constructor(
@@ -44,11 +45,7 @@ const Student = class extends User {
   }
 
   async getClassName() {
-    const latestSemester = await Semester.getLatestSemester();
-    const course = parseInt(this.classID.slice(2, 6));
-    const classID = parseInt(this.classID.slice(6, 9));
-
-    return `${latestSemester.getYearStart() - course + 10}A${classID}`;
+    return await Class.GetClassName(this.classID);
   }
 
   // static async getSchedule(classID, semesterID, yearStart, yearEnd) {

@@ -2,15 +2,15 @@ const excel = require("excel4node");
 const path = require("path");
 const flagClass = require("./Flag");
 
-const parseFileExcel = require("./parseFileExcel");
 const fileScore = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/Điểm 12A1.xlsx";
 const fileConduct = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/hạnh kiểm.xlsx";
 
+const parseFileExcel = require("./parseFileExcel");
 const formatFileExcel = require("./formatFileExcel");
 
 const exportFileExcel = (fileName, data, format) => {
   // Create a new instance of a Workbook class
-  const workbook = new excel.Workbook();
+  const workbook = new excel.Workbook({ dateFormat: "mm/dd/yyyy" });
 
   // Add Worksheets to the workbook
   const worksheet = workbook.addWorksheet("Sheet 1");
@@ -22,7 +22,7 @@ const exportFileExcel = (fileName, data, format) => {
     },
     border: {
       left: {
-        style: "medium", //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'thick', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
+        style: "medium",
         color: "black",
       },
       right: {
@@ -95,7 +95,6 @@ const exportFileExcel = (fileName, data, format) => {
         return data[i][key] === flagClass.GENDER.MALE ? "nam" : "nữ";
       return data[i][key];
     });
-    console.log(mapData);
 
     for (let j = 0; j < mapData.length; j++) {
       switch (typeof mapData[j]) {
@@ -105,13 +104,14 @@ const exportFileExcel = (fileName, data, format) => {
             .number(mapData[j])
             .style(styleData);
           break;
+
         case "string":
           worksheet
             .cell(i + 2, j + 1)
             .string(mapData[j])
             .style(styleData);
           break;
-        case "Date":
+
         case "object":
           worksheet
             .cell(i + 2, j + 1)
@@ -122,16 +122,20 @@ const exportFileExcel = (fileName, data, format) => {
     }
   }
 
-  console.log();
   workbook.write(`${path.join(__dirname, "data")}\\${fileName}.xlsx`);
+
+  return `${path.join(__dirname, "data")}\\${fileName}.xlsx`;
 };
 
-// module.exports = exportFileExcel;
+module.exports = exportFileExcel;
 const fileName = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/dshocsinh.xlsx";
-const data = parseFileExcel(fileConduct, formatFileExcel.conductFormat);
+const data = parseFileExcel(fileName, formatFileExcel.studentFormat);
 console.log(data);
-exportFileExcel("data", data.data, formatFileExcel.conductFormat);
 
-const date = new Date();
+exportFileExcel("data", data.data, formatFileExcel.studentFormat);
 
-console.log(typeof date);
+// const date = new Date();
+
+// console.log(typeof date);
+
+//const date = new Date();

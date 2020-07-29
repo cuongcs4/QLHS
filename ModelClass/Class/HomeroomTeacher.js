@@ -3,8 +3,10 @@
 const Teacher = require("./Teacher");
 const Class = require("./Class");
 const Student = require("./Student");
+const ExecuteSQL = require("../Database/ExecuteSQL");
+const flagClass = require("../MiniServices/Flag");
 
-const HomeroomTeacher = class extends User {
+const HomeroomTeacher = class extends Teacher {
   constructor(
     id,
     username,
@@ -17,7 +19,7 @@ const HomeroomTeacher = class extends User {
     typeUser,
     phoneNumber,
     typeEmployee,
-    subject,
+    subjectID,
     classID
   ) {
     super(
@@ -32,13 +34,17 @@ const HomeroomTeacher = class extends User {
       typeUser,
       phoneNumber,
       typeEmployee,
-      subject
+      subjectID
     );
     this.classID = classID || null;
   }
 
   getClass() {
     return this.classID;
+  }
+
+  async getClassName() {
+    return await Class.GetClassName(this.classID);
   }
 
   setClass(newClassID) {
@@ -56,7 +62,52 @@ const HomeroomTeacher = class extends User {
 
   getConduct(semesterID, yearStart, yearEnd) {}
 
-  static find() {}
+  static async Find(teacherID) {
+    const teacher = await Teacher.Find(teacherID);
+
+    if (teacher === null) return null;
+    const {
+      id,
+      username,
+      password,
+      identityCard,
+      fullName,
+      dob,
+      address,
+      status,
+      phoneNumber,
+      typeEmployee,
+      subjectID,
+    } = teacher;
+
+    const sqlQuery =
+      `SELECT LH.malop AS classID ` +
+      `FROM LOPHOC AS LH ` +
+      `WHERE LH.magvcn='${teacherID}'`;
+
+    const claSs = await ExecuteSQL(sqlQuery);
+
+    if (claSs.length === 0) return null;
+
+    const classID = claSs[0].classID;
+    const typeUser = flagClass.TYPE_USER.HOMEROOM_TEACHER;
+
+    return new HomeroomTeacher(
+      id,
+      username,
+      password,
+      identityCard,
+      fullName,
+      dob,
+      address,
+      status,
+      typeUser,
+      phoneNumber,
+      typeEmployee,
+      subjectID,
+      classID
+    );
+  }
 
   static save() {}
 };

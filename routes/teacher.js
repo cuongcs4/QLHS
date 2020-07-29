@@ -2,18 +2,24 @@ const express = require("express");
 const router = express.Router();
 const checkLogin = require("../Passport/checkLogin");
 const checkTeacher = require("../Passport/checkTeacher");
+const checkHomeroomTeacher = require("../Passport/checkHomeroomTeacher");
 
-router.get("/managerClass", checkLogin, checkTeacher, (req, res, next) => {
-  //console.log(req.user);
+router.get(
+  "/managerClass",
+  checkLogin,
+  checkHomeroomTeacher,
+  (req, res, next) => {
+    //console.log(req.user);
 
-  // res.render("teacher/managerClass", {
-  //   title: "Lớp chủ nhiệm",
-  //   style: "",
-  //   user: req.user,
-  // });
+    // res.render("teacher/managerClass", {
+    //   title: "Lớp chủ nhiệm",
+    //   style: "",
+    //   user: req.user,
+    // });
 
-  res.send("Hello mother fucker");
-});
+    res.send("Hello mother fucker");
+  }
+);
 
 router.get("/class", checkLogin, checkTeacher, (req, res, next) => {
   res.send("Quản lý lớp học");

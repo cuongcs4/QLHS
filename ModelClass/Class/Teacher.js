@@ -10,6 +10,7 @@ const Score = require("./Score");
 const ReExamine = require("./ReExamine");
 const TeachingPlan = require("./TeachingPlan");
 const ExamPlan = require("./ExamPlan");
+const Subject = require("./Subject");
 
 const Teacher = class extends Employee {
   constructor(
@@ -44,6 +45,12 @@ const Teacher = class extends Employee {
 
   getSubjectID() {
     return this.subjectID;
+  }
+
+  async getSubjectName() {
+    const result = await Subject.Find(this.subjectID);
+
+    return result.getSubjectName();
   }
 
   setSubject(newSubjectID) {
@@ -226,7 +233,7 @@ const Teacher = class extends Employee {
       "NGUOIDUNG",
       "tenDangNhap",
       teacher.username
-    )
+    );
     const dobFormat = `${teacher.dob.getFullYear()}-${teacher.dob.getMonth()}-${teacher.dob.getDate()}`;
     console.log(dobFormat);
     if (isExist) {

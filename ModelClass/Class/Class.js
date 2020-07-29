@@ -3,6 +3,7 @@
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
+const Semester = require("./Semester");
 
 const Class = class {
   constructor(classID, managerClass, roomID, course, status) {
@@ -49,6 +50,14 @@ const Class = class {
     const result = await ExecuteSQL(sqlQuery);
 
     return result.length === 0 ? null : result;
+  }
+
+  static async GetClassName(classID) {
+    const latestSemester = await Semester.getLatestSemester();
+    const course = parseInt(classID.slice(2, 6));
+    const id = parseInt(classID.slice(6, 9));
+
+    return `${latestSemester.getYearStart() - course + 10}A${id}`;
   }
 
   static async Find(classID) {
