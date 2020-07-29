@@ -234,7 +234,10 @@ const Teacher = class extends Employee {
       "tenDangNhap",
       teacher.username
     );
-    const dobFormat = `${teacher.dob.getFullYear()}-${teacher.dob.getMonth()}-${teacher.dob.getDate()}`;
+    const dobFormat = `${teacher.dob.getFullYear()}-${
+      teacher.dob.getMonth() + 1
+    }-${teacher.dob.getDate()}`;
+
     console.log(dobFormat);
     if (isExist) {
       //update

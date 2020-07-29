@@ -66,7 +66,7 @@ const TeachingPlan = class {
   //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
   static async Find({ classID, teacherID }, semesterID, yearStart, yearEnd) {
     if (typeof semesterID === "undefined") {
-      const latestSemester = await semesterID.getLatestSemester();
+      const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();
