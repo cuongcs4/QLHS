@@ -2,9 +2,15 @@
     <div class="semester ml-2 mb-2">
         <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
     </div>
-    <div class="semester ml-2 mb-2">
-        <p style="text-align:center; vertical-align:middle; line-height:2rem; color: black">Học kì: 2</p>
-    </div>
+    <form class="semester labelSemester ml-2 mb-2" action="" method="GET">
+        <div align="center">
+            <span>Học kì:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester" onchange="this.form.submit();">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+    </form>
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">

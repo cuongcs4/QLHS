@@ -210,7 +210,10 @@ const registerProfile = (handlebars) => {
               `</h6>` +
               `<ul class="nav nav-tabs" id="myTab" role="tablist">` +
               `<li class="nav-item">` +
-              `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>` +
+              `<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Thông tin</a>` +
+              `</li>` +
+              `<li class="nav-item">` +
+              `<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Người thân</a>` +
               `</li>` +
               `</ul>` +
               `</div>` +
@@ -220,8 +223,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `</div>` +
               `<div class="row">` +
-              `<div class="col-md-2">` +
-              `</div>` +
+              `<div class="col-md-4"></div>` +
               `<div class="col-md-8">` +
               `<div class="tab-content profile-tab" id="myTabContent">` +
               `<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">` +
@@ -267,6 +269,32 @@ const registerProfile = (handlebars) => {
               `<p>${user.address}</p>` +
               `</div>` +
               `</div>` +
+              `</div>` +
+              `<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">` +
+              `<div class="row">` +
+              `<div class="col-md-6">` +
+              `<label>Họ tên</label>` +
+              `</div>` +
+              `<div class="col-md-6">` +
+              `<p>Trần Văn B</p>` +
+              `</div>` +
+              `</div>` +
+              `<div class="row">` +
+              `<div class="col-md-6">` +
+              `<label>Quan hệ</label>` +
+              `</div>` +
+              `<div class="col-md-6">` +
+              `<p>Bố</p>` +
+              `</div>` +
+              `</div>` +
+              `<div class="row">` +
+              `<div class="col-md-6">` +
+              `<label>SĐT</label>` +
+              `</div>` +
+              `<div class="col-md-6">` +
+              `<p>0909090808</p>` +
+              `</div>` +
+              `   </div>` +
               `</div>` +
               `</div>` +
               `</div>` +

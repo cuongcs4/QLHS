@@ -173,6 +173,19 @@ const exec = async () => {
       1
     )
   const score = new Score(newSemester,"HS20180101", "GV01", "LH201801","Toan");
+  const isExist = (await Score.Find(
+    {  studentID: score.getStudentID(),
+       classID: score.getClassID(), 
+       subjectID: score.getSubjectID()
+      },
+    score.getSemester().getSemesterID(),
+    score.getSemester().getYearStart(),
+    score.getSemester().getYearEnd()
+  )) !== null
+    ? true
+    : false;
+    console.log(isExist);
+  if (isExist === false) {
   const sqlQuery =
       `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
       `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}', ` +
@@ -182,6 +195,8 @@ const exec = async () => {
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.NEW;
+  }
 };
+exec();
 
 module.exports = Score;
