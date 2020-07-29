@@ -2,6 +2,7 @@ const handleSemester = require("../ModelClass/MiniServices/handleSemester");
 const Class = require("../ModelClass/Class/Class");
 const Room = require("../ModelClass/Class/Room");
 const Teacher = require("../ModelClass/Class/Teacher");
+const Student = require("../ModelClass/Class/Student");
 
 const getScheduleExam = async (req, res, next) => {
   let { year, semester } = req.query;
@@ -198,10 +199,12 @@ const getManagerClass = async (req, res, next) => {
   const listScoreView = [];
 
   for (let i = 0; i < listScores.length; i++) {
+    const result = await Student.Find({id: listScores[i].studentID, classID: null});
+ 
     const student = {
       id: i + 1,
-      fullName: listScores[i].studentName,
       studentID: listScores[i].studentID,
+      fullName : result.fullName,
       score1: listScores[i].score1,
       score2: listScores[i].score2,
       score3: listScores[i].score3,

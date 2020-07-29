@@ -2,7 +2,7 @@
 
 const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const flagClass = require("../MiniServices/Flag");
+const flagClass = require("../MiniServices/Flag")
 const TeachingPlan = require("./TeachingPlan");
 
 const Score = class {
@@ -112,12 +112,11 @@ const Score = class {
       //Lấy danh sách điểm theo mã lớp và mã môn học
       if (subjectID !== null) {
         const sqlQuery =
-          `SELECT HS.hoten AS studentName, DI.mahs AS studentID, DI.malop AS classID, DI.mabm AS subjectID, ` +
+          `SELECT DI.mahs AS studentID, DI.malop AS classID, DI.mabm AS subjectID, ` +
           `DI.cot1 AS score1, DI.cot2 AS score2, DI.cot3 AS score3, DI.cot4 AS score4, ` +
           `HK.mahk AS semesterID, HK.nambd AS yearStart, HK.namkt AS yearEnd ` +
-          `FROM DIEM AS DI, HOCKY AS HK, HOCSINH AS HS ` +
-          `WHERE DI.mahk=HK.mahk AND DI.nambd=HK.nambd AND DI.namkt=HK.namkt AND DI.malop='${classID}' AND HS.mahs=DI.mahs ` +
-          `AND DI.mabm='${subjectID}' AND HK.mahk=${semesterID} AND HK.nambd=${yearStart} AND HK.namkt=${yearEnd}`;
+          `FROM DIEM AS DI INNER JOIN HOCKY AS HK ON DI.mahk=HK.mahk AND DI.nambd=HK.nambd AND DI.namkt=HK.namkt ` +
+          `WHERE DI.malop='${classID}' AND DI.mabm='${subjectID}' AND HK.mahk=${semesterID} AND HK.nambd=${yearStart} AND HK.namkt=${yearEnd}`;
 
         const result = await ExecuteSQL(sqlQuery);
 
@@ -138,19 +137,35 @@ const Score = class {
     }
   }
   static async NewRecord(score, semester) {
-    if (typeof semester === "undefined") {
+    if (typeof semester === "undefined")
+    {
       semester = await Semester.getLatestSemester();
     }
     //1. Insert bảng điểm mới
+    const isExist = (await Score.Find(
+      {  studentID: score.getStudentID(),
+         classID: score.getClassID(), 
+         subjectID: score.getSubjectID()
+        },
+      score.getSemester().getSemesterID(),
+      score.getSemester().getYearStart(),
+      score.getSemester().getYearEnd()
+    )) !== null
+      ? true
+      : false;
+      console.log(isExist);
+    if (isExist === false) {
     const sqlQuery =
       `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
       `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}, ` +
       `'${semester.getSemesterID()}', '${semester.getYearStart()}', '${semester.getYearEnd()}', '${score.getScore1()}', ` +
       `'${score.getScore2()}', '${score.getScore3()}', '${score.getScore4()}')`;
-
+      
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.NEW;
+    }
+    return null;
   }
   static async Save() {}
 };
@@ -175,7 +190,7 @@ const Score = class {
 //   const score = new Score(newSemester,"HS20180101", "GV01", "LH201801","Toan");
 //   const isExist = (await Score.Find(
 //     {  studentID: score.getStudentID(),
-//        classID: score.getClassID(),
+//        classID: score.getClassID(), 
 //        subjectID: score.getSubjectID()
 //       },
 //     score.getSemester().getSemesterID(),
