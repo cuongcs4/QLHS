@@ -1330,3 +1330,54 @@ INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
     ('HS20190405', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+
+
+/*THOIKHOABIEU*/
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 2);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 2);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 2);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 2);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 2);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 1);
+INSERT INTO THOIKHOABIEU
+    (mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet)
+VALUES
+    (2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 2);

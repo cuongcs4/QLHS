@@ -1,15 +1,29 @@
 <div class="row">
-    <div class="semester ml-2 mb-2">
-        <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
-    </div>
-    <form class="semester labelSemester ml-2 mb-2" action="" method="GET">
-        <div align="center">
+    <form class="semester labelSemester ml-2 mb-2" action="/teacher/schedule" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
             <span>Học kì:</span>
-            <select class="semester" style="border: none; color:blanchedalmond" name="semester" onchange="this.form.submit();">
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
                 <option value="1">1</option>
                 <option value="2">2</option>
+                {{/if}}
             </select>
-        </div>
+        </span>
     </form>
 </div>
 <div class="card shadow mb-4">
@@ -24,17 +38,18 @@
                         <th>THỨ 4</th>
                         <th>THỨ 5</th>
                         <th>THỨ 6</th>
+                        <th>THỨ 7</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each scheduleView}}
                     <tr>
-                        <td>1</td>
-                        <td>Toán</td>
-                        <td>Văn</td>
-                        <td>Toán</td>
-                        <td>Anh</td>
-                        <td>Lý</td>
+                        {{#each this}}
+                        <td>{{this}}</td>
+                        {{/each}}
                     </tr>
+                    {{/each}}
+
                 </tbody>
             </table>
         </div>

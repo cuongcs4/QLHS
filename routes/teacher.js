@@ -34,13 +34,12 @@ router.get(
   teacherController.getScheduleExam
 );
 
-router.get("/schedule", checkLogin, checkTeacher, (req, res, next) => {
-  res.render("teacher/schedule", {
-    title: "Lịch dạy học",
-    style: ["styleSchedule.css", "styleTable.css"],
-    user: req.user,
-  });
-});
+router.get(
+  "/schedule",
+  checkLogin,
+  checkTeacher,
+  teacherController.getSchedule
+);
 
 router.get("/reexamine", checkLogin, checkTeacher, (req, res, next) => {
   res.render("teacher/reExamination", {

@@ -78,7 +78,7 @@ const TeachingPlan = class {
         `FROM THOIKHOABIEU AS TKB ` +
         `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
-      return result.length === 0 ? null : result;
+      return result;
     }
 
     if (teacherID !== null) {
@@ -89,7 +89,7 @@ const TeachingPlan = class {
         `WHERE TKB.magv ='${teacherID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
 
-      return result.length === 0 ? null : result;
+      return result;
     }
   }
 
