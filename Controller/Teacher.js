@@ -9,6 +9,7 @@ const getScheduleExam = async (req, res, next) => {
     semester
   );
 
+  //Lấy lịch coi thi của giáo viên
   let scheduleExam;
 
   if (typeof year == "undefined" && typeof semester == "undefined") {
@@ -26,8 +27,7 @@ const getScheduleExam = async (req, res, next) => {
     );
   }
 
-  const date = [];
-
+  //Sắp xếp lịch thi
   scheduleExam.sort((a, b) => {
     if (a.dayExam < b.dayExam) {
       return -1;
@@ -41,6 +41,7 @@ const getScheduleExam = async (req, res, next) => {
     return 0;
   });
 
+  //Gán lại cách hiển thị ngày coi thi
   for (let i = 0; i < scheduleExam.length; i++) {
     const dayExam = scheduleExam[i].dayExam;
     scheduleExam[i].dayExam = `${dayExam.getDate()}/${
@@ -50,6 +51,7 @@ const getScheduleExam = async (req, res, next) => {
     date.push(dayExam);
   }
 
+  //Render kết quả
   res.render("teacher/exam", {
     title: "Lịch gác thi",
     style: ["styleTable.css"],
@@ -71,6 +73,7 @@ const getSchedule = async (req, res, next) => {
 
   let schedule;
 
+  //Lấy thời khóa biểu của giáo viên
   if (typeof year == "undefined" && typeof semester == "undefined") {
     schedule = await req.user.getSchedule();
   } else {
@@ -82,6 +85,7 @@ const getSchedule = async (req, res, next) => {
     schedule = await req.user.getSchedule(semesterID, yearStart, yearEnd);
   }
 
+  //Tạo thời khóa biểu dùng để hiển thị cho view
   const scheduleView = [];
 
   for (let i = 1; i <= 10; i++) {
@@ -99,8 +103,7 @@ const getSchedule = async (req, res, next) => {
     ] = await Class.GetClassName(schedule[i].classID);
   }
 
-  console.log(scheduleView);
-
+  //Render kết quả
   res.render("teacher/schedule", {
     title: "Lịch dạy",
     style: ["styleTable.css"],
