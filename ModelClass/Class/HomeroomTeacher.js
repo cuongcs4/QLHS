@@ -39,7 +39,7 @@ const HomeroomTeacher = class extends Teacher {
     this.classID = classID || null;
   }
 
-  getClass() {
+  getClassID() {
     return this.classID;
   }
 

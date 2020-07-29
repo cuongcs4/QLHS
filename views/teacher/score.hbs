@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class='col'>abc</div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>MÃ HỌC SINH</th>
+                        <th>HỌ TÊN</th>
+                        <th>CỘT 1</th>
+                        <th>CỘT 2</th>
+                        <th>CỘT 3</th>
+                        <th>CỘT 4</th>
+                    </tr>
+                </thead>
+                {{#each listScoreView}}
+                <tbody>
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{studentID}}</td>
+                        <td>{{fullName}}</td>
+                        <td>{{score1}}</td>
+                        <td>{{score2}}</td>
+                        <td>{{score3}}</td>
+                        <td>{{score4}}</td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>

@@ -85,8 +85,6 @@ const Student = class extends User {
     return schedule;
   }
 
-  static async getScore(id, semesterID, yearStart, yearEnd) {}
-
   static async getReExamination(id) {
     if (id) {
       const sqlQuery =

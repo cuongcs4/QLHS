@@ -1,0 +1,58 @@
+<div class="row">
+
+    <form class="semester labelSemester ml-2 mb-2" action="/teacher/class" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
+            <span>Học kì:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                {{/if}}
+            </select>
+        </span>
+    </form>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>MÃ LỚP</th>
+                        <th>TÊN LỚP</th>
+                        <th>GVCN</th>
+                        <th>PHÒNG HỌC</th>
+                        <th>QUẢN LÝ</th>
+                    </tr>
+                </thead>
+                {{#each listClassView}}
+                <tbody>
+                    <tr>
+                        <td>{{classID}}</td>
+                        <td>{{className}}</td>
+                        <td>{{managerName}}</td>
+                        <td>{{roomName}}</td>
+                        <td><a href="{{linkManager}}">Quản lý</a></td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>

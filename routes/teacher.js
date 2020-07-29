@@ -23,9 +23,14 @@ router.get(
   }
 );
 
-router.get("/class", checkLogin, checkTeacher, (req, res, next) => {
-  res.send("Quản lý lớp học");
-});
+router.get("/class", checkLogin, checkTeacher, teacherController.getClass);
+
+router.get(
+  "/class/:classID",
+  checkLogin,
+  checkTeacher,
+  teacherController.getManagerClass
+);
 
 router.get(
   "/exam",

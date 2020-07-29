@@ -1,5 +1,8 @@
 const handleSemester = require("../ModelClass/MiniServices/handleSemester");
 const Class = require("../ModelClass/Class/Class");
+const Room = require("../ModelClass/Class/Room");
+const Teacher = require("../ModelClass/Class/Teacher");
+
 const getScheduleExam = async (req, res, next) => {
   let { year, semester } = req.query;
 
@@ -112,4 +115,108 @@ const getSchedule = async (req, res, next) => {
   });
 };
 
-module.exports = { getScheduleExam, getSchedule };
+const getClass = async (req, res, next) => {
+  let { year, semester } = req.query;
+
+  //Lấy tất cả các học kỳ đã có
+  const { allYearSemester, isLastSemester } = await handleSemester(
+    year,
+    semester
+  );
+
+  //Lấy lịch coi thi của giáo viên
+  let listClass;
+
+  if (typeof year == "undefined" && typeof semester == "undefined") {
+    listClass = await req.user.getClass();
+  } else {
+    const yearArray = year.split("-");
+    const yearStart = parseInt(yearArray[0]);
+    const yearEnd = parseInt(yearArray[1]);
+    const semesterID = parseInt(semester);
+
+    listClass = await req.user.getClass(semesterID, yearStart, yearEnd);
+  }
+
+  //Sắp xếp lịch thi
+  // listClass.sort((a, b) => {
+  //   if (a.getCourse() < b.getCourse()) {
+  //     return -1;
+  //   }
+
+  //   if (a.getCourse() > b.getCourse()) {
+  //     return 1;
+  //   }
+
+  //   // a == b
+  //   return 0;
+  // });
+
+  const listClassView = [];
+  for (let i = 0; i < listClass.length; i++) {
+    const classID = listClass[i].getClassID();
+    const className = await Class.GetClassName(classID);
+    const roomName = (await Room.Find(listClass[i].getRoomID())).getRoomName();
+    const managerName = (
+      await Teacher.Find(listClass[i].getManagerClass())
+    ).getFullName();
+
+    const linkManager = `/teacher/class/${classID}`;
+
+    listClassView.push({
+      classID,
+      className,
+      roomName,
+      managerName,
+      linkManager,
+    });
+  }
+
+  console.log(listClassView);
+  //Render kết quả
+  res.render("teacher/class", {
+    title: "Quản lý lớp học",
+    style: ["styleTable.css"],
+    user: req.user,
+    listClassView,
+    allYearSemester,
+    isLastSemester,
+  });
+};
+
+const getManagerClass = async (req, res, next) => {
+  const classID = req.params.classID;
+
+  if (typeof classID == "undefined") res.redirect("/teacher/class");
+
+  //const claSs = await Class.Find(classID);
+  const className = await Class.GetClassName(classID);
+
+  const listScores = await req.user.getScore(classID);
+  console.log(listScores);
+
+  const listScoreView = [];
+
+  for (let i = 0; i < listScores.length; i++) {
+    const student = {
+      id: i + 1,
+      fullName: listScores[i].studentName,
+      studentID: listScores[i].studentID,
+      score1: listScores[i].score1,
+      score2: listScores[i].score2,
+      score3: listScores[i].score3,
+      score4: listScores[i].score4,
+    };
+
+    listScoreView.push(student);
+  }
+
+  res.render("teacher/score", {
+    title: `Quản lý lớp học ${className}`,
+    style: ["styleTable.css"],
+    user: req.user,
+    listScoreView,
+  });
+};
+
+module.exports = { getScheduleExam, getSchedule, getClass, getManagerClass };

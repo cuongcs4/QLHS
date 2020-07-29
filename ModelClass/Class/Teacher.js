@@ -11,6 +11,7 @@ const ReExamine = require("./ReExamine");
 const TeachingPlan = require("./TeachingPlan");
 const ExamPlan = require("./ExamPlan");
 const Subject = require("./Subject");
+const Student = require("./Student");
 
 const Teacher = class extends Employee {
   constructor(
@@ -58,40 +59,35 @@ const Teacher = class extends Employee {
   }
 
   async getClass(semesterID, yearStart, yearEnd) {
+    console.log("TEACHER GET CLASS TEACHER.JS");
+
     //Mặc định lấy những lớp học ở học kỳ hiện tại nếu có.
     if (typeof semesterID == "undefined") {
-      const latestSemester = await Semester.GetLatestSemester();
+      const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();
+    }
 
-      const sqlQuery =
-        `SELECT * ` +
-        `FROM LOPHOC AS LH INNER JOIN THOIKHOABIEU AS TKB ON LH.malop=TKB.malop ` +
-        `WHERE TKB.magv='${this.id}' AND TKB.mahk='${semesterID}' AND TKB.nambd='${yearStart}' AND TKB.namkt='${yearEnd}'`;
+    const sqlQuery =
+      `SELECT TKB.malop AS classID ` +
+      `FROM THOIKHOABIEU AS TKB ` +
+      `WHERE TKB.magv='${this.id}' AND TKB.mahk='${semesterID}' AND TKB.nambd='${yearStart}' AND TKB.namkt='${yearEnd}' ` +
+      `GROUP BY TKB.malop`;
 
-      const result = await ExecuteSQL(sqlQuery);
+    const result = await ExecuteSQL(sqlQuery);
 
-      if (result.length !== 0) {
-        const listClass = [];
+    if (result.length !== 0) {
+      const listClass = [];
 
-        for (let i = 0; i < result.length; i++) {
-          const classID = result[i].malop;
-          const managerClass = result[i].magvcn;
-          const roomID = result[i].maphong;
-          const course = result[i].namnhaphoc;
-          const status = result[i].trangthai;
-
-          listClass.push(
-            new Class(classID, managerClass, roomID, course, status)
-          );
-        }
-
-        return listClass;
+      for (let i = 0; i < result.length; i++) {
+        listClass.push(await Class.Find(result[i].classID));
       }
 
-      return null;
+      return listClass;
     }
+
+    return [];
   }
 
   //Lấy danh sách điểm theo lớp
