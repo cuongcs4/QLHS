@@ -4,6 +4,8 @@ const checkLogin = require("../Passport/checkLogin");
 const checkTeacher = require("../Passport/checkTeacher");
 const checkHomeroomTeacher = require("../Passport/checkHomeroomTeacher");
 
+const teacherController = require("../Controller/Teacher");
+
 router.get(
   "/managerClass",
   checkLogin,
@@ -25,13 +27,12 @@ router.get("/class", checkLogin, checkTeacher, (req, res, next) => {
   res.send("Quản lý lớp học");
 });
 
-router.get("/exam", checkLogin, checkTeacher, (req, res, next) => {
-  res.render("teacher/exam", {
-    title: "Lịch gác thi",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get(
+  "/exam",
+  checkLogin,
+  checkTeacher,
+  teacherController.getScheduleExam
+);
 
 router.get("/schedule", checkLogin, checkTeacher, (req, res, next) => {
   res.render("teacher/schedule", {

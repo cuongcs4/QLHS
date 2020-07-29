@@ -1,6 +1,7 @@
 //Sơ đồ lớp của ExamPlan
 
 const Semester = require("./Semester");
+const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const ExamPlan = class {
   constructor(
@@ -70,11 +71,12 @@ const ExamPlan = class {
   //Tìm kiếm lịch thi theo khối, học kỳ.
   static async Find({ studentID, teacherID }, semesterID, yearStart, yearEnd) {
     if (typeof semesterID === "undefined") {
-      const lastestSemester = await semesterID.getLastestSemester();
-      semesterID = lastestSemester.getSemesterID();
-      yearStart = lastestSemester.getYearStart();
-      yearEnd = lastestSemester.getYearEnd();
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
     }
+
     if (studentID !== null) {
       // Lấy lịch thi của học sinh theo mã hs
       const sqlQuery =
@@ -84,21 +86,31 @@ const ExamPlan = class {
       const result = await ExecuteSQL(sqlQuery);
       return result.length === 0 ? null : result;
     }
+
     if (teacherID !== null) {
-       // Lấy lịch gác thi của giáo viên
-       const sqlQuery =
-       `SELECT LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection, ` +
-       `LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +
-       `FROM LICHTHI AS LT ` +
-       `WHERE (LT.giamthi1 = '${teacherID}' OR LT.giamthi2 = '${teacherID}') ` +
-       `AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
-     const result = await ExecuteSQL(sqlQuery);
-     
-     return result.length === 0 ? null : result;
+      // Lấy lịch gác thi của giáo viên
+      const sqlQuery =
+        `SELECT BM.tenbm AS subjectName, PH.tenphong AS roomName, LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietBD AS startSection, ` +
+        `LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +
+        `FROM LICHTHI AS LT, BOMON AS BM, PHONGHOC AS PH ` +
+        `WHERE LT.maphong=PH.maphong AND LT.mabm=BM.mabm ` +
+        `AND (LT.giamthi1='${teacherID}' OR LT.giamthi2='${teacherID}') ` +
+        `AND LT.mahk = ${semesterID} AND LT.nambd = ${yearStart} AND LT.namkt = ${yearEnd}`;
+      const result = await ExecuteSQL(sqlQuery);
+
+      return result.length === 0 ? [] : result;
     }
   }
 
   static save() {}
 };
+
+// const exec = async () => {
+//   const result = await ExamPlan.Find({ studentID: null, teacherID: "GV01" });
+
+//   console.log(result);
+// };
+
+// exec();
 
 module.exports = ExamPlan;

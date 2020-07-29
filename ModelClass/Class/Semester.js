@@ -47,6 +47,16 @@ const Semester = class {
   }
 
   static async Find(semesterID, yearStart, yearEnd) {
+    if (typeof semesterID == "undefined") {
+      const sqlQuery =
+        `SELECT HK.nambd AS yearStart, HK.namkt AS yearEnd, HK.mahk AS semesterID ` +
+        `FROM HOCKY AS HK `;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      return result;
+    }
+
     const sqlQuery =
       `SELECT * ` +
       `FROM HOCKY AS HK ` +

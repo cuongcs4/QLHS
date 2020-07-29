@@ -108,7 +108,7 @@ const Teacher = class extends Employee {
 
   async getReExamination(semesterID, yearStart, yearEnd) {
     const result = await ReExamine.Find(
-      { teacherID: this.teacherID, studentID: null },
+      { teacherID: this.id, studentID: null },
       semesterID,
       yearStart,
       yearEnd
@@ -131,7 +131,7 @@ const Teacher = class extends Employee {
 
   async getScheduleExam(semesterID, yearStart, yearEnd) {
     const result = await ExamPlan.Find(
-      { classID: null, teacherID: this.teacherID },
+      { studentID: null, teacherID: this.id },
       semesterID,
       yearStart,
       yearEnd
