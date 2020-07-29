@@ -47,8 +47,6 @@ const getScheduleExam = async (req, res, next) => {
     scheduleExam[i].dayExam = `${dayExam.getDate()}/${
       dayExam.getMonth() + 1
     }/${dayExam.getFullYear()}`;
-
-    date.push(dayExam);
   }
 
   //Render kết quả

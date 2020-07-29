@@ -7,6 +7,8 @@ const Student = require("../Class/Student");
 const flagClass = require("../MiniServices/Flag");
 
 const getUserByUsername = async (userName) => {
+  userName = userName.toUpperCase();
+
   const sql = `SELECT * FROM NGUOIDUNG WHERE tenDangNhap='${userName}'`;
   const result = await ExecuteSQL(sql);
 
