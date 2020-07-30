@@ -1,0 +1,110 @@
+<div class="row">
+    <a class="semester labelSemester col-md-2 align-self-end" href="/teacher/managerClass">Quay lại</a>
+
+    <form class="semester labelSemester col-md-5" action="/teacher/managerClass/score" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
+            <span>Học kì:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                {{/if}}
+            </select>
+        </span>
+    </form>
+</div>
+
+<div class="card shadow mb-4 row">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0"
+                style="font-size: 12px; color: black">
+                <thead>
+                    <tr>
+                        <th style="padding:0; text-align: center; background-color:grey">STT</th>
+                        <th style="padding:0; text-align: center; background-color:grey">HỌ TÊN</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Toán</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Vật lý</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Hóa học</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Sinh học</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Tin học</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Ngữ văn</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Lịch sử</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Địa lý</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Ngoại ngữ</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Công dân</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Công nghệ</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Thể dục</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Quốc phòng</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Trung bình</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Hạnh kiểm</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Học lực</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listScore}}
+                    {{#if isFill}}
+                    <tr style="background-color: darkgray;">
+                        <th style="padding:0; text-align: center;">{{id}}</th>
+                        <th style="padding:0; text-align: center;">{{fullName}}</th>
+                        <th style="padding:0; text-align: center;">{{Toan}}</th>
+                        <th style="padding:0; text-align: center;">{{VatLy}}</th>
+                        <th style="padding:0; text-align: center;">{{HoaHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{SinhHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{TinHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{NguVan}}</th>
+                        <th style="padding:0; text-align: center;">{{LichSu}}</th>
+                        <th style="padding:0; text-align: center;">{{DiaLy}}</th>
+                        <th style="padding:0; text-align: center;">{{AnhVan}}</th>
+                        <th style="padding:0; text-align: center;">{{GDCD}}</th>
+                        <th style="padding:0; text-align: center;">{{CongNghe}}</th>
+                        <th style="padding:0; text-align: center;">{{TheDuc}}</th>
+                        <th style="padding:0; text-align: center;">{{GDQP}}</th>
+                        <th style="padding:0; text-align: center;">{{gpa}}</th>
+                        <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        <th style="padding:0; text-align: center;">{{classify}}</th>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <th style="padding:0; text-align: center;">{{id}}</th>
+                        <th style="padding:0; text-align: center;">{{fullName}}</th>
+                        <th style="padding:0; text-align: center;">{{Toan}}</th>
+                        <th style="padding:0; text-align: center;">{{VatLy}}</th>
+                        <th style="padding:0; text-align: center;">{{HoaHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{SinhHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{TinHoc}}</th>
+                        <th style="padding:0; text-align: center;">{{NguVan}}</th>
+                        <th style="padding:0; text-align: center;">{{LichSu}}</th>
+                        <th style="padding:0; text-align: center;">{{DiaLy}}</th>
+                        <th style="padding:0; text-align: center;">{{AnhVan}}</th>
+                        <th style="padding:0; text-align: center;">{{GDCD}}</th>
+                        <th style="padding:0; text-align: center;">{{CongNghe}}</th>
+                        <th style="padding:0; text-align: center;">{{TheDuc}}</th>
+                        <th style="padding:0; text-align: center;">{{GDQP}}</th>
+                        <th style="padding:0; text-align: center;">{{gpa}}</th>
+                        <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        <th style="padding:0; text-align: center;">{{classify}}</th>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

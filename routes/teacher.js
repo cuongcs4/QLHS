@@ -10,17 +10,14 @@ router.get(
   "/managerClass",
   checkLogin,
   checkHomeroomTeacher,
-  (req, res, next) => {
-    //console.log(req.user);
+  teacherController.getManagerClass
+);
 
-    // res.render("teacher/managerClass", {
-    //   title: "Lớp chủ nhiệm",
-    //   style: "",
-    //   user: req.user,
-    // });
-
-    res.send("Hello mother fucker");
-  }
+router.get(
+  "/managerClass/score",
+  checkLogin,
+  checkHomeroomTeacher,
+  teacherController.getManagerClassScore
 );
 
 router.get("/class", checkLogin, checkTeacher, teacherController.getClass);
@@ -29,7 +26,7 @@ router.get(
   "/class/:classID",
   checkLogin,
   checkTeacher,
-  teacherController.getManagerClass
+  teacherController.getStudentInClass
 );
 
 router.get(
