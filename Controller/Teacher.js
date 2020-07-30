@@ -186,10 +186,15 @@ const getStudentInClass = async (req, res, next) => {
   const listScoreView = [];
 
   for (let i = 0; i < listScores.length; i++) {
+    const result = await Student.Find({
+      id: listScores[i].studentID,
+      classID: null,
+    });
+
     const student = {
       id: i + 1,
-      fullName: listScores[i].studentName,
       studentID: listScores[i].studentID,
+      fullName: result.fullName,
       score1: listScores[i].score1,
       score2: listScores[i].score2,
       score3: listScores[i].score3,

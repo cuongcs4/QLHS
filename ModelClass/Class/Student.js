@@ -269,7 +269,7 @@ const Student = class extends User {
 
   static async Find({ id, classID }) {
     // tìm tất cả học sinh
-    if (id == null && classID == null) {
+    if (id === null && classID === null) {
       const sqlQuery =
         `SELECT * ` +
         `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap`;
@@ -459,7 +459,7 @@ const Student = class extends User {
 };
 
 // const exec = async () => {
-//   const result = await Student.Find({ id: null, classID: "LH202004" });
+//   const result = await Student.Find({ id: "HS20180102", classID: null });
 //   console.log(result);
 // };
 // exec();
