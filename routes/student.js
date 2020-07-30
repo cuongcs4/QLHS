@@ -4,13 +4,7 @@ const checkLogin = require("../Passport/checkLogin");
 const checkStudent = require("../Passport/checkStudent");
 const studentController = require("../Controller/Student")
 
-router.get("/examtable", checkLogin, checkStudent, (req, res, next) => {
-  res.render("student/examTable", {
-    title: "Lịch thi học kì",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get("/examtable", checkLogin, checkStudent, studentController.getExamSchedule);
 
 router.get("/resulttable", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/resultTable", {

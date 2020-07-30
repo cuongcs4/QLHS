@@ -6,12 +6,17 @@
         </div>
         <form class="form-inline labelSemester ml-2 mb-2" action="" method="GET" onchange="submit()">
             <div class="semester form-group">
-                <lable for="semester">Học kì :</lable>
-                <select class="semester mb-1 accordion"
-                    style="border: none; color:blanchedalmond; height:auto !important" name="semester" id="semester">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
+                <span>Học kì:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                {{/if}}
+            </select>
             </div>
             </div>
         </form>

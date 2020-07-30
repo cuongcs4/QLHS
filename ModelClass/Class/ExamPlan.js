@@ -80,9 +80,9 @@ const ExamPlan = class {
     if (studentID !== null) {
       // Lấy lịch thi của học sinh theo mã hs
       const sqlQuery =
-        `SELECT LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection ` +
-        `FROM LICHTHI AS LT INNER JOIN PHONGTHI AS PT ON LT.maphong = PT.maphongthi ` +
-        `WHERE PT.mahs = '${studentID}' AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
+        `SELECT LT.mabm AS subjectID, PH.tenphong AS roomName, BM.tenbm AS subjectName, LT.ngaythi AS dayExam, LT.maphong AS roomID, LT.tietbd AS startSection ` +
+        `FROM LICHTHI AS LT, BOMON AS BM, PHONGTHI AS PT, PHONGHOC AS PH ` +
+        `WHERE PH.maphong = PT.phonghoc AND PT.mahs = '${studentID}' AND BM.mabm = LT.mabm AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);
       return result.length === 0 ? null : result;
     }

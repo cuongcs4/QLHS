@@ -7,6 +7,7 @@ const checkExist = require("../MiniServices/checkExist");
 const flagClass = require("../MiniServices/Flag");
 const Score = require("./Score");
 const TeachingPlan = require("./TeachingPlan");
+const ExamPlan = require("./ExamPlan");
 const Conduct = require("./Conduct");
 const Class = require("./Class");
 
@@ -69,7 +70,7 @@ const Student = class extends User {
     const schedule = await TeachingPlan.Find(
       { classID: this.classID, teacherID: null },
       semesterID,
-      yearStart,
+      yearStart,  
       yearEnd
     );
     return schedule;

@@ -1,21 +1,35 @@
 <div class="row">
-    <div class="semester ml-2 mb-2">
-        <p style="text-align:center; vertical-align:middle; line-height:2rem; color:black">Năm học: 2019-2020</p>
-    </div>
-    <form class="semester labelSemester ml-2 mb-2" action="" method="GET">
-        <div align="center">
+    <form class="semester labelSemester ml-2 mb-2" action="/student/schedule" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
             <span>Học kì:</span>
-            <select class="semester" style="border: none; color:blanchedalmond" name="semester" onchange="this.form.submit();">
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
                 <option value="1">1</option>
                 <option value="2">2</option>
+                {{/if}}
             </select>
-        </div>
+        </span>
     </form>
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" style="width: 100%; table-layout:fixed" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" style="width: 100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>TIẾT</th>
@@ -29,12 +43,12 @@
                 {{#each listScheduleView}}
                 <tbody>
                     <tr>
-                        <td>{{id}}</td>
-                        <td>{{subject1}}</td>
-                        <td>{{subject2}}</td>
-                        <td>{{subject3}}</td>
-                        <td>{{subject4}}</td>
-                        <td>{{subject5}}</td>
+                        <td style="text-align:center; width: 50px;">{{id}}</td>
+                        <td style="width: 20%">{{subject1}}</td>
+                        <td style="width: 20%">{{subject2}}</td>
+                        <td style="width: 20%">{{subject3}}</td>
+                        <td style="width: 20%">{{subject4}}</td>
+                        <td style="width: 20%">{{subject5}}</td>
                     </tr>
                 </tbody>
                 {{/each}}
