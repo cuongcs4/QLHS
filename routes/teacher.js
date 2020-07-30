@@ -20,7 +20,35 @@ router.get(
   teacherController.getManagerClassScore
 );
 
+router.post(
+  "/managerClass/score",
+  checkLogin,
+  checkHomeroomTeacher,
+  teacherController.postManagerClassScore
+);
+
+router.post(
+  "/managerClass/score/excel",
+  checkLogin,
+  checkHomeroomTeacher,
+  teacherController.postManagerClassScoreExcel
+);
+
 router.get("/class", checkLogin, checkTeacher, teacherController.getClass);
+
+router.post(
+  "/class/:classID",
+  checkLogin,
+  checkTeacher,
+  teacherController.postStudentInClass
+);
+
+router.post(
+  "/class/excel/:classID",
+  checkLogin,
+  checkTeacher,
+  teacherController.postStudentInClassExcel
+);
 
 router.get(
   "/class/:classID",

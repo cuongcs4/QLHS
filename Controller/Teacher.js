@@ -1,9 +1,32 @@
-const handleSemester = require("../ModelClass/MiniServices/handleSemester");
+const Formidable = require("formidable");
+
 const Class = require("../ModelClass/Class/Class");
 const Room = require("../ModelClass/Class/Room");
 const Teacher = require("../ModelClass/Class/Teacher");
 const Student = require("../ModelClass/Class/Student");
+const Semester = require("../ModelClass/Class/Semester");
+const Score = require("../ModelClass/Class/Score");
+const Conduct = require("../ModelClass/Class/Conduct");
+
 const flagClass = require("../ModelClass/MiniServices/Flag");
+const formatFileExcel = require("../ModelClass/MiniServices/formatFileExcel");
+const parseFileExcel = require("../ModelClass/MiniServices/parseFileExcel");
+const handleSemester = require("../ModelClass/MiniServices/handleSemester");
+
+const parseForm = async (req) => {
+  const form = new Formidable.IncomingForm();
+  const formParse = await new Promise(function (resolve, reject) {
+    form.parse(req, function (err, fields, files) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve({ path: files.fileExcel.path, fields: fields });
+    });
+  });
+
+  return formParse;
+};
 
 const getScheduleExam = async (req, res, next) => {
   let { year, semester } = req.query;
@@ -116,7 +139,6 @@ const getSchedule = async (req, res, next) => {
     isLastSemester,
   });
 };
-
 const getClass = async (req, res, next) => {
   let { year, semester } = req.query;
 
@@ -172,16 +194,108 @@ const getClass = async (req, res, next) => {
   });
 };
 
+const postStudentInClass = async (req, res, next) => {
+  const classID = req.params.classID;
+  console.log("Hello");
+  const { studentID, score1, score2, score3, score4 } = req.body;
+
+  const latestSemester = await Semester.getLatestSemester();
+
+  const subjectID = req.user.getSubjectID();
+  const teacherID = req.user.getID();
+
+  const score = new Score(
+    latestSemester,
+    studentID,
+    teacherID,
+    classID,
+    subjectID,
+    score1,
+    score2,
+    score3,
+    score4
+  );
+
+  await Score.Save(score);
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect(`/teacher/class/${classID}`);
+};
+
+const postStudentInClassExcel = async (req, res, next) => {
+  const form = await parseForm(req);
+
+  const path = form.path;
+  const { classID } = form.fields;
+
+  const { data, err } = parseFileExcel(path, formatFileExcel.scoreFormat);
+
+  //Kiểm tra nếu có lỗi
+  if (err.length !== 0) {
+    req.flash("error_msg", err);
+    res.redirect(`/teacher/class/${classID}`);
+  }
+
+  //Kiểm tra nếu không có dữ liệu
+  if (data.length === 0) {
+    req.flash("error_msg", "Vui lòng kiểm tra lại file, file rỗng");
+    res.redirect(`/teacher/class/${classID}`);
+  }
+
+  //Kiểm tra có trùng khớp lơp hay không
+  for (let i = 0; i < data.length; i++) {
+    const studentID = data[i].studentId;
+    const classIDStudent = `LH${studentID.slice(2, 8)}`;
+
+    if (classID !== classIDStudent) {
+      req.flash(
+        "error_msg",
+        `Mã học sinh không đúng. (Hàng ${i + 1}, MHS: ${studentID})`
+      );
+      res.redirect(`/teacher/class/${classID}`);
+    }
+  }
+
+  //Tiến hành cập nhật điểm cho học sinh.
+  const subjectID = req.user.getSubjectID();
+  const teacherID = req.user.getID();
+  const latestSemester = await Semester.getLatestSemester();
+
+  for (let i = 0; i < data.length; i++) {
+    const { studentId, score1, score2, score3, score4 } = data[i];
+    const score = new Score(
+      latestSemester,
+      studentId,
+      teacherID,
+      classID,
+      subjectID,
+      score1,
+      score2,
+      score3,
+      score4
+    );
+
+    Score.Save(score);
+  }
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect(`/teacher/class/${classID}`);
+};
+
 const getStudentInClass = async (req, res, next) => {
   const classID = req.params.classID;
 
-  if (typeof classID == "undefined") res.redirect("/teacher/class");
+  if (typeof classID == "undefined") {
+    res.redirect("/teacher/class");
+  }
 
-  //const claSs = await Class.Find(classID);
+  const actionForm = `/teacher/class/${classID}`;
+  const actionFormExcel = `/teacher/class/excel/${classID}`;
+  const managerClassID = (await Class.Find(classID)).getManagerClass();
+  const managerClassName = (await Teacher.Find(managerClassID)).getFullName();
   const className = await Class.GetClassName(classID);
 
   const listScores = await req.user.getScore(classID);
-  console.log(listScores);
 
   const listScoreView = [];
 
@@ -191,24 +305,40 @@ const getStudentInClass = async (req, res, next) => {
       classID: null,
     });
 
+    const { studentID, score1, score2, score3, score4 } = listScores[i];
+
     const student = {
       id: i + 1,
-      studentID: listScores[i].studentID,
+      studentID,
       fullName: result.fullName,
-      score1: listScores[i].score1,
-      score2: listScores[i].score2,
-      score3: listScores[i].score3,
-      score4: listScores[i].score4,
+      score1,
+      score2,
+      score3,
+      score4,
+      dataTarget: `modalScoreEditHS${i + 1}`,
     };
 
+    student.gpa =
+      Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
     listScoreView.push(student);
   }
 
+  const latestSemester = await Semester.getLatestSemester();
+  const year = `${latestSemester.getYearStart()}-${latestSemester.getYearEnd()}`;
+  const semesterID = latestSemester.getSemesterID();
+
   res.render("teacher/score", {
-    title: `Quản lý lớp học ${className}`,
+    title: `Quản lý lớp học ${className} (${classID})`,
     style: ["styleTable.css"],
     user: req.user,
     listScoreView,
+    actionForm,
+    actionFormExcel,
+    year,
+    semesterID,
+    managerClassName,
+    className,
+    classID,
   });
 };
 
@@ -272,6 +402,8 @@ const getManagerClassScore = async (req, res, next) => {
       fullName: listStudent[i].getFullName(),
       id: i + 1,
       isFill: i % 2 !== 0 ? true : false,
+      dataTarget: `modalScoreEditHS${i + 1}`,
+      studentID: listStudent[i].getID(),
     };
 
     const scores =
@@ -284,6 +416,8 @@ const getManagerClassScore = async (req, res, next) => {
           2 * scores[j].score3 +
           3 * scores[j].score4) /
         7;
+      student[`${scores[j].subjectID}`] =
+        Math.round(student[`${scores[j].subjectID}`] * 10) / 10;
     }
 
     student[`gpa`] = await listStudent[i].getGPA(
@@ -296,7 +430,7 @@ const getManagerClassScore = async (req, res, next) => {
       yearStart,
       yearEnd
     );
-    student[`conduct`] = await listStudent[i].getConduct(
+    student[`conductNumber`] = await listStudent[i].getConduct(
       semesterID,
       yearStart,
       yearEnd
@@ -324,7 +458,7 @@ const getManagerClassScore = async (req, res, next) => {
         break;
     }
 
-    switch (student[`conduct`]) {
+    switch (student[`conductNumber`]) {
       case flagClass.CONDUCT.TYPE_1:
         student[`conduct`] = "tốt";
         break;
@@ -345,8 +479,6 @@ const getManagerClassScore = async (req, res, next) => {
     listScore.push(student);
   }
 
-  console.log(listScore);
-
   res.render("teacher/managerClassScore", {
     title: `Quản lý lớp chủ nhiệm ${className}`,
     style: ["styleTable.css"],
@@ -354,7 +486,104 @@ const getManagerClassScore = async (req, res, next) => {
     listScore,
     allYearSemester,
     isLastSemester,
+    className,
+    classID,
+    managerClassName: req.user.getFullName(),
   });
+};
+
+const postManagerClassScore = async (req, res, next) => {
+  const { studentID, conduct } = req.body;
+  const latestSemester = await Semester.getLatestSemester();
+
+  const newConduct = new Conduct(latestSemester, studentID, conduct);
+
+  Conduct.Save(newConduct);
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect("/teacher/managerClass/score");
+};
+
+const postManagerClassScoreExcel = async (req, res, next) => {
+  // const { studentID, conduct } = req.body;
+  // const latestSemester = await Semester.getLatestSemester();
+
+  // const newConduct = new Conduct(latestSemester, studentID, conduct);
+
+  // Conduct.Save(newConduct);
+
+  // req.flash("success_msg", "Thành công.");
+  // res.redirect("/teacher/managerClass/score");
+
+  const { path, fields } = await parseForm(req);
+
+  const { classID } = fields;
+
+  const { data, err } = parseFileExcel(path, formatFileExcel.conductFormat);
+
+  //Kiểm tra nếu có lỗi
+  if (err.length !== 0) {
+    req.flash("error_msg", err);
+    res.redirect(`/teacher/managerClass/score`);
+  }
+
+  //Kiểm tra nếu không có dữ liệu
+  if (data.length === 0) {
+    req.flash("error_msg", "Vui lòng kiểm tra lại file, file rỗng");
+    res.redirect(`/teacher/managerClass/score`);
+  }
+
+  //Kiểm tra có trùng khớp lơp hay không
+  for (let i = 0; i < data.length; i++) {
+    const studentID = data[i].studentId;
+    const classIDStudent = `LH${studentID.slice(2, 8)}`;
+
+    switch (data[i].grade.toLowerCase()) {
+      case "tốt":
+        data[i].grade = flagClass.CONDUCT.TYPE_1;
+        break;
+      case "khá":
+        data[i].grade = flagClass.CONDUCT.TYPE_2;
+        break;
+      case "tb":
+        data[i].grade = flagClass.CONDUCT.TYPE_3;
+        break;
+      case "yếu":
+        data[i].grade = flagClass.CONDUCT.TYPE_4;
+        break;
+
+      default:
+        req.flash(
+          "error_msg",
+          `Loại hạnh kiểm không đúng. (Hàng ${i + 1}, MHS: ${studentID})`
+        );
+        req.flash("error_msg", `Các loại: tốt - khá - tb - yếu`);
+        res.redirect(`/teacher/managerClass/score`);
+    }
+
+    if (classID !== classIDStudent) {
+      req.flash(
+        "error_msg",
+        `Mã học sinh không đúng. (Hàng ${i + 1}, MHS: ${studentID})`
+      );
+      res.redirect(`/teacher/managerClass/score`);
+    }
+  }
+
+  console.log(data);
+
+  //Tiến hành cập nhật
+  const latestSemester = await Semester.getLatestSemester();
+
+  for (let i = 0; i < data.length; i++) {
+    const { studentId, grade } = data[i];
+    const newConduct = new Conduct(latestSemester, studentId, grade);
+
+    Conduct.Save(newConduct);
+  }
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect("/teacher/managerClass/score");
 };
 
 module.exports = {
@@ -364,4 +593,8 @@ module.exports = {
   getStudentInClass,
   getManagerClass,
   getManagerClassScore,
+  postStudentInClass,
+  postStudentInClassExcel,
+  postManagerClassScore,
+  postManagerClassScoreExcel,
 };

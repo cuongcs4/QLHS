@@ -2,6 +2,7 @@
 
 const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const flagClass = require("../MiniServices/Flag");
 
 const Conduct = class {
   constructor(semester, studentID, grade) {
@@ -54,7 +55,19 @@ const Conduct = class {
     }
   }
 
-  static save() {}
+  static async Save(conduct) {
+    const { studentID, grade } = conduct;
+    const { semesterID, yearStart, yearEnd } = conduct.getSemester();
+
+    const sqlQuery =
+      `UPDATE HANHKIEM ` +
+      `SET xeploai=${grade} ` +
+      `WHERE mahs='${studentID}' AND mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd} `;
+
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.UPDATE;
+  }
 };
 
 module.exports = Conduct;
