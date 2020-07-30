@@ -8,65 +8,75 @@ const parseFileExcel = (fileName, format) => {
     err: [],
   };
 
-  const wb = xlsx.readFile(fileName, {
-    cellDates: true,
-    dateFormat: "dd/mm/yyyy",
-  });
+  try {
+    const wb = xlsx.readFile(fileName, {
+      cellDates: true,
+      dateFormat: "dd/mm/yyyy",
+    });
 
-  const ws = wb.Sheets[`${wb.SheetNames[0]}`];
+    const ws = wb.Sheets[`${wb.SheetNames[0]}`];
 
-  for (let e in format.filed) {
-    if (!compareString(ws[e].v, format.filed[e])) {
-      let string = "";
-      Object.keys(format.filed).map((key) => {
-        string += `[${format.filed[key]} (${key})]`;
-      });
-      result.err.push(
-        `Tên cột trong file không chính xác, kiểm tra lại định dạng`
-      );
-      result.err.push(`Định dạng mẫu: ${string}`);
+    for (let e in format.filed) {
+      if (!compareString(ws[e].v, format.filed[e])) {
+        let string = "";
+        Object.keys(format.filed).map((key) => {
+          string += `[${format.filed[key]} (${key})]`;
+        });
+        result.err.push(
+          `Tên cột trong file không chính xác, kiểm tra lại định dạng`
+        );
+        result.err.push(`Định dạng mẫu: ${string}`);
 
-      return result;
+        return result;
+      }
     }
+
+    const data = xlsx.utils.sheet_to_json(ws);
+
+    const listItems = [];
+
+    for (let i = 0; i < data.length; i++) {
+      const mapData = Object.keys(data[i]).map((key) => data[i][key]);
+
+      if (mapData.length < format.propName.length) {
+        result.err.push("Điền thiếu thông tin");
+
+        return result;
+      }
+
+      const item = {};
+
+      for (let j = 0; j < mapData.length; j++) {
+        item[`${format.propName[j]}`] = mapData[j];
+      }
+
+      if (typeof item["gender"] != "undefined") {
+        item["gender"] =
+          compareString(item["gender"], "nam") === true
+            ? flagClass.GENDER.MALE
+            : flagClass.GENDER.FEMALE;
+      }
+
+      //Lòng vòng như Hải Phòng -_-
+      if (typeof item["dob"] != "undefined") {
+        const date = new Date(item["dob"]);
+        item["dob"] = new Date(date.setDate(date.getDate() + 1));
+      }
+
+      listItems.push(item);
+    }
+
+    result.data = listItems;
+  } catch {
+    result.err.push(
+      "Lỗi! File không đúng định dạng là file excel (.xlsx) hoặc định dạng mẫu."
+    );
+    let string = "";
+    Object.keys(format.filed).map((key) => {
+      string += `[${format.filed[key]} (${key})]`;
+    });
+    result.err.push(`Định dạng mẫu: ${string}.`);
   }
-
-  const data = xlsx.utils.sheet_to_json(ws);
-
-  const listItems = [];
-
-  for (let i = 0; i < data.length; i++) {
-    const mapData = Object.keys(data[i]).map((key) => data[i][key]);
-
-    if (mapData.length < format.propName.length) {
-      result.err.push("Điền thiếu thông tin");
-
-      return result;
-    }
-
-    const item = {};
-
-    for (let j = 0; j < mapData.length; j++) {
-      item[`${format.propName[j]}`] = mapData[j];
-    }
-
-    if (typeof item["gender"] != "undefined") {
-      item["gender"] =
-        compareString(item["gender"], "nam") === true
-          ? flagClass.GENDER.MALE
-          : flagClass.GENDER.FEMALE;
-    }
-
-    //Lòng vòng như Hải Phòng -_-
-    if (typeof item["dob"] != "undefined") {
-      const date = new Date(item["dob"]);
-      item["dob"] = new Date(date.setDate(date.getDate() + 1));
-    }
-
-    listItems.push(item);
-  }
-
-  result.data = listItems;
-
   return result;
 };
 

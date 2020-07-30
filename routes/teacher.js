@@ -28,6 +28,12 @@ router.post(
   checkTeacher,
   teacherController.postStudentInClass
 );
+router.post(
+  "/class/excel/:classID",
+  checkLogin,
+  checkTeacher,
+  teacherController.postStudentInClassExcel
+);
 
 router.get(
   "/class/:classID",
