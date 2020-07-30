@@ -1,0 +1,34 @@
+<div class="row">
+    <a href="/teacher/managerClass/score" class="semester labelSemester ml-2 mb-2 col-md-4">Xem bảng điểm tổng hợp</a>
+</div>
+
+<div class="card shadow mb-4 row">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0"
+                style="font-size: 12px; color: black">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>MÃ HỌC SINH</th>
+                        <th>HỌ TÊN</th>
+                        <th>NGÀY SINH</th>
+                        <th>ĐỊA CHỈ</th>
+                        <th>SĐT NGƯỜI THÂN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listStudentView}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{username}}</td>
+                        <td>{{fullName}}</td>
+                        <td>{{dob}}</td>
+                        <td>{{address}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

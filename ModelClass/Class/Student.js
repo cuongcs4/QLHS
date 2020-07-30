@@ -159,6 +159,7 @@ const Student = class extends User {
     }
 
     GPA /= scores.length - 1;
+    GPA = Math.round(GPA * 10) / 10;
 
     return GPA;
   }

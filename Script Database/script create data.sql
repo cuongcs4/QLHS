@@ -46,6 +46,10 @@ VALUES
 INSERT INTO BOMON
     (mabm, tenbm)
 VALUES
+    ('CongNghe', N'Công nghệ');
+INSERT INTO BOMON
+    (mabm, tenbm)
+VALUES
     ('TheDuc', N'Thể dục');
 
 /*NGUOIDUNG*/
@@ -883,6 +887,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20180101', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180101', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180101', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 
 INSERT INTO DIEM
@@ -929,6 +941,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20180102', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180102', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180102', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
@@ -974,6 +994,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20180103', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180103', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180103', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 
 INSERT INTO DIEM
@@ -1020,6 +1048,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20180104', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180104', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180104', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
@@ -1065,8 +1101,281 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20180105', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180105', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180105', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
+/**/
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'Toan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'NguVan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'HoaHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'DiaLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'LichSu', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'GDCD', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'GDQP', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180201', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'Toan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'NguVan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'HoaHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'DiaLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'LichSu', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'GDCD', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'GDQP', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180202', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
+
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'Toan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'NguVan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'HoaHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'DiaLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'LichSu', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'GDCD', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'GDQP', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180203', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
+
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'Toan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'NguVan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'HoaHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'DiaLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'LichSu', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'GDCD', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'GDQP', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180204', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
+
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'Toan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'NguVan', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'HoaHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'DiaLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'LichSu', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'GDCD', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'GDQP', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20180205', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
+/**/
 INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
@@ -1111,6 +1420,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20190101', 'LH201901', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20190101', 'LH201901', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20190101', 'LH201901', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
@@ -1156,7 +1473,14 @@ INSERT INTO DIEM
     (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
 VALUES
     ('HS20190102', 'LH201901', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10);
-
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20190102', 'LH201901', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10);
+INSERT INTO DIEM
+    (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4)
+VALUES
+    ('HS20190102', 'LH201901', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10);
 
 
 /*HANHKIEM*/
@@ -1165,171 +1489,171 @@ VALUES
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 4);
+    ('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180102', 'LH201801', 'GV01', 2, 2019, 2020, 4);
+    ('HS20180102', 'LH201801', 'GV01', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180103', 'LH201801', 'GV01', 2, 2019, 2020, 4);
+    ('HS20180103', 'LH201801', 'GV01', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180104', 'LH201801', 'GV01', 2, 2019, 2020, 4);
+    ('HS20180104', 'LH201801', 'GV01', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180105', 'LH201801', 'GV01', 2, 2019, 2020, 4);
+    ('HS20180105', 'LH201801', 'GV01', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180201', 'LH201802', 'GV02', 2, 2019, 2020, 4);
+    ('HS20180201', 'LH201802', 'GV02', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180202', 'LH201802', 'GV02', 2, 2019, 2020, 4);
+    ('HS20180202', 'LH201802', 'GV02', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180203', 'LH201802', 'GV02', 2, 2019, 2020, 4);
+    ('HS20180203', 'LH201802', 'GV02', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180204', 'LH201802', 'GV02', 2, 2019, 2020, 4);
+    ('HS20180204', 'LH201802', 'GV02', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180205', 'LH201802', 'GV02', 2, 2019, 2020, 4);
+    ('HS20180205', 'LH201802', 'GV02', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180301', 'LH201803', 'GV03', 2, 2019, 2020, 4);
+    ('HS20180301', 'LH201803', 'GV03', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180302', 'LH201803', 'GV03', 2, 2019, 2020, 4);
+    ('HS20180302', 'LH201803', 'GV03', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180303', 'LH201803', 'GV03', 2, 2019, 2020, 4);
+    ('HS20180303', 'LH201803', 'GV03', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180304', 'LH201803', 'GV03', 2, 2019, 2020, 4);
+    ('HS20180304', 'LH201803', 'GV03', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180305', 'LH201803', 'GV03', 2, 2019, 2020, 4);
+    ('HS20180305', 'LH201803', 'GV03', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180401', 'LH201804', 'GV04', 2, 2019, 2020, 4);
+    ('HS20180401', 'LH201804', 'GV04', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180402', 'LH201804', 'GV04', 2, 2019, 2020, 4);
+    ('HS20180402', 'LH201804', 'GV04', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180403', 'LH201804', 'GV04', 2, 2019, 2020, 4);
+    ('HS20180403', 'LH201804', 'GV04', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180404', 'LH201804', 'GV04', 2, 2019, 2020, 4);
+    ('HS20180404', 'LH201804', 'GV04', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20180405', 'LH201804', 'GV04', 2, 2019, 2020, 4);
+    ('HS20180405', 'LH201804', 'GV04', 2, 2019, 2020, 1);
 
 /*2019*/
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190101', 'LH201901', 'GV05', 2, 2019, 2020, 4);
+    ('HS20190101', 'LH201901', 'GV05', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190102', 'LH201901', 'GV05', 2, 2019, 2020, 4);
+    ('HS20190102', 'LH201901', 'GV05', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190103', 'LH201901', 'GV05', 2, 2019, 2020, 4);
+    ('HS20190103', 'LH201901', 'GV05', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190104', 'LH201901', 'GV05', 2, 2019, 2020, 4);
+    ('HS20190104', 'LH201901', 'GV05', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190105', 'LH201901', 'GV05', 2, 2019, 2020, 4);
+    ('HS20190105', 'LH201901', 'GV05', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190201', 'LH201902', 'GV06', 2, 2019, 2020, 4);
+    ('HS20190201', 'LH201902', 'GV06', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190202', 'LH201902', 'GV06', 2, 2019, 2020, 4);
+    ('HS20190202', 'LH201902', 'GV06', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190203', 'LH201902', 'GV06', 2, 2019, 2020, 4);
+    ('HS20190203', 'LH201902', 'GV06', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190204', 'LH201902', 'GV06', 2, 2019, 2020, 4);
+    ('HS20190204', 'LH201902', 'GV06', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190205', 'LH201902', 'GV06', 2, 2019, 2020, 4);
+    ('HS20190205', 'LH201902', 'GV06', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190301', 'LH201903', 'GV07', 2, 2019, 2020, 4);
+    ('HS20190301', 'LH201903', 'GV07', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190302', 'LH201903', 'GV07', 2, 2019, 2020, 4);
+    ('HS20190302', 'LH201903', 'GV07', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190303', 'LH201903', 'GV07', 2, 2019, 2020, 4);
+    ('HS20190303', 'LH201903', 'GV07', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190304', 'LH201903', 'GV07', 2, 2019, 2020, 4);
+    ('HS20190304', 'LH201903', 'GV07', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190305', 'LH201903', 'GV07', 2, 2019, 2020, 4);
+    ('HS20190305', 'LH201903', 'GV07', 2, 2019, 2020, 1);
 
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190401', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+    ('HS20190401', 'LH201904', 'GV08', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190402', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+    ('HS20190402', 'LH201904', 'GV08', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190403', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+    ('HS20190403', 'LH201904', 'GV08', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190404', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+    ('HS20190404', 'LH201904', 'GV08', 2, 2019, 2020, 1);
 INSERT INTO HANHKIEM
     (mahs, malop, magv, mahk, nambd, namkt, xeploai)
 VALUES
-    ('HS20190405', 'LH201904', 'GV08', 2, 2019, 2020, 4);
+    ('HS20190405', 'LH201904', 'GV08', 2, 2019, 2020, 1);
 
 
 /*THOIKHOABIEU*/
