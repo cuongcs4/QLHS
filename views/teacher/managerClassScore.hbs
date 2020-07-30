@@ -1,33 +1,46 @@
-<div class="row">
-    <a class="semester labelSemester col-md-2 align-self-end" href="/teacher/managerClass">Quay lại</a>
+<div class="row" style="margin-bottom: 5px;">
+    <div class="col col-md-6">
+        <form class="semester labelSemester" action="/teacher/managerClass/score" method="GET">
+            <span align="center">
+                <span>Năm học:</span>
+                <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                    onchange="this.form.submit();">
+                    {{#each allYearSemester}}
+                    {{#if this}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/if}}
+                    {{/each}}
+                </select>
+            </span>
+            <span align="center">
+                <span>Học kì:</span>
+                <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                    onchange="this.form.submit();">
+                    {{#if isLastSemester}}
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    {{else}}
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    {{/if}}
+                </select>
+            </span>
+        </form>
+    </div>
 
-    <form class="semester labelSemester col-md-5" action="/teacher/managerClass/score" method="GET">
-        <span align="center">
-            <span>Năm học:</span>
-            <select class="semester" style="border: none; color:blanchedalmond" name="year"
-                onchange="this.form.submit();">
-                {{#each allYearSemester}}
-                {{#if this}}
-                <option value="{{this}}">{{this}}</option>
-                {{/if}}
-                {{/each}}
-            </select>
+    <div class="col-md-6" style="text-align:end">
+        <div class="semester ml-2 mb-2">
+            <a class="labelSemester fa fa-pencil-square-o" href="#" data-toggle="modal" data-target="#importFileExcel"
+                aria-hidden="true"> Nhập
+                file</a>
+        </div>
+        <span class="col-md-12" style="text-align:end; margin-bottom: 5px">
+            <a class="semester labelSemester" href="/teacher/managerClass">Quay lại</a>
         </span>
-        <span align="center">
-            <span>Học kì:</span>
-            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
-                onchange="this.form.submit();">
-                {{#if isLastSemester}}
-                <option value="2">2</option>
-                <option value="1">1</option>
-                {{else}}
-                <option value="1">1</option>
-                <option value="2">2</option>
-                {{/if}}
-            </select>
-        </span>
-    </form>
+
+    </div>
 </div>
+
 
 <div class="card shadow mb-4 row">
     <div class="card-body">
@@ -39,21 +52,22 @@
                         <th style="padding:0; text-align: center; background-color:grey">STT</th>
                         <th style="padding:0; text-align: center; background-color:grey">HỌ TÊN</th>
                         <th style="padding:0; text-align: center; background-color:grey">Toán</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Vật lý</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Hóa học</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Sinh học</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Tin học</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Ngữ văn</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Lịch sử</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Địa lý</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Ngoại ngữ</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Công dân</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Công nghệ</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Thể dục</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Quốc phòng</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Trung bình</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Hạnh kiểm</th>
-                        <th style="padding:0; text-align: center; background-color:grey">Học lực</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Lý</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Hóa</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Sinh</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Tin</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Văn</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Sử</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Địa</th>
+                        <th style="padding:0; text-align: center; background-color:grey">AV</th>
+                        <th style="padding:0; text-align: center; background-color:grey">CD</th>
+                        <th style="padding:0; text-align: center; background-color:grey">CN</th>
+                        <th style="padding:0; text-align: center; background-color:grey">TD</th>
+                        <th style="padding:0; text-align: center; background-color:grey">QP</th>
+                        <th style="padding:0; text-align: center; background-color:grey">TB</th>
+                        <th style="padding:0; text-align: center; background-color:grey">HL</th>
+                        <th style="padding:0; text-align: center; background-color:grey">HK</th>
+                        <th style="padding:0; text-align: center; background-color:grey">Sửa HK</th>
 
                     </tr>
                 </thead>
@@ -77,8 +91,10 @@
                         <th style="padding:0; text-align: center;">{{TheDuc}}</th>
                         <th style="padding:0; text-align: center;">{{GDQP}}</th>
                         <th style="padding:0; text-align: center;">{{gpa}}</th>
-                        <th style="padding:0; text-align: center;">{{conduct}}</th>
                         <th style="padding:0; text-align: center;">{{classify}}</th>
+                        <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        <td style="width: 10%; text-align:center"><a href="#" class="fa fa-pencil-square-o"
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
                     </tr>
                     {{else}}
                     <tr>
@@ -98,13 +114,99 @@
                         <th style="padding:0; text-align: center;">{{TheDuc}}</th>
                         <th style="padding:0; text-align: center;">{{GDQP}}</th>
                         <th style="padding:0; text-align: center;">{{gpa}}</th>
-                        <th style="padding:0; text-align: center;">{{conduct}}</th>
                         <th style="padding:0; text-align: center;">{{classify}}</th>
+                        <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        <td style="width: 10%; text-align:center"><a href="#" class="fa fa-pencil-square-o"
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
                     </tr>
                     {{/if}}
                     {{/each}}
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+{{#each listScore}}
+<div class="modal fade" id="{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/teacher/managerClass/score" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Cập nhật hạnh kiểm</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>
+                    <input name="studentID" type="text" id="defaultForm-studentID" class="form-control validate"
+                        value="{{studentID}}" readonly>
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
+                        sinh</label>
+                    <input type="text" id="defaultForm-studentName" class="form-control validate" value="{{fullName}}"
+                        readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Hạnh kiểm</label>
+                    <input name="conduct" type="number" min="1" max="4" id="defaultForm-score1"
+                        class="form-control validate" value="{{conductNumber}}">
+                </div>
+                <div class="md-form mb-2" style="text-align: center;">
+                    Tốt: 1 - Khá: 2 - Trung bình: 3 - Yếu: 4
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/each}}
+
+<div class="modal fade" id="importFileExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/teacher/managerClass/score/excel" method="POST"
+            enctype="multipart/form-data">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Cập nhật hạnh kiểm bằng file excel</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentID">Lớp</label>
+                    <input type="text" id="defaultForm-studentID" class="form-control validate" value="{{className}}"
+                        readonly>
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentName">Mã lớp</label>
+                    <input class="form-control validate" type="text" id="defaultForm-studentName" name="classID"
+                        value="{{classID}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">GVCN</label>
+                    <input type="text" id="defaultForm-score1" class="form-control validate"
+                        value="{{managerClassName}}" readonly>
+                </div>
+                <div class="md-form mb-2" style="text-align: center;">
+                    <label style="cursor: pointer;" for="upload-file-excel">Tải file lên</label>
+                    <input style="border-radius: 5px; padding: 5px; background-color:orange" name="fileExcel"
+                        id="upload-file-excel" type="file" required />
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
+            </div>
+        </form>
     </div>
 </div>

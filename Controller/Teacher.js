@@ -6,6 +6,7 @@ const Teacher = require("../ModelClass/Class/Teacher");
 const Student = require("../ModelClass/Class/Student");
 const Semester = require("../ModelClass/Class/Semester");
 const Score = require("../ModelClass/Class/Score");
+const Conduct = require("../ModelClass/Class/Conduct");
 
 const flagClass = require("../ModelClass/MiniServices/Flag");
 const formatFileExcel = require("../ModelClass/MiniServices/formatFileExcel");
@@ -401,6 +402,8 @@ const getManagerClassScore = async (req, res, next) => {
       fullName: listStudent[i].getFullName(),
       id: i + 1,
       isFill: i % 2 !== 0 ? true : false,
+      dataTarget: `modalScoreEditHS${i + 1}`,
+      studentID: listStudent[i].getID(),
     };
 
     const scores =
@@ -427,7 +430,7 @@ const getManagerClassScore = async (req, res, next) => {
       yearStart,
       yearEnd
     );
-    student[`conduct`] = await listStudent[i].getConduct(
+    student[`conductNumber`] = await listStudent[i].getConduct(
       semesterID,
       yearStart,
       yearEnd
@@ -455,7 +458,7 @@ const getManagerClassScore = async (req, res, next) => {
         break;
     }
 
-    switch (student[`conduct`]) {
+    switch (student[`conductNumber`]) {
       case flagClass.CONDUCT.TYPE_1:
         student[`conduct`] = "tốt";
         break;
@@ -476,8 +479,6 @@ const getManagerClassScore = async (req, res, next) => {
     listScore.push(student);
   }
 
-  console.log(listScore);
-
   res.render("teacher/managerClassScore", {
     title: `Quản lý lớp chủ nhiệm ${className}`,
     style: ["styleTable.css"],
@@ -485,7 +486,104 @@ const getManagerClassScore = async (req, res, next) => {
     listScore,
     allYearSemester,
     isLastSemester,
+    className,
+    classID,
+    managerClassName: req.user.getFullName(),
   });
+};
+
+const postManagerClassScore = async (req, res, next) => {
+  const { studentID, conduct } = req.body;
+  const latestSemester = await Semester.getLatestSemester();
+
+  const newConduct = new Conduct(latestSemester, studentID, conduct);
+
+  Conduct.Save(newConduct);
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect("/teacher/managerClass/score");
+};
+
+const postManagerClassScoreExcel = async (req, res, next) => {
+  // const { studentID, conduct } = req.body;
+  // const latestSemester = await Semester.getLatestSemester();
+
+  // const newConduct = new Conduct(latestSemester, studentID, conduct);
+
+  // Conduct.Save(newConduct);
+
+  // req.flash("success_msg", "Thành công.");
+  // res.redirect("/teacher/managerClass/score");
+
+  const { path, fields } = await parseForm(req);
+
+  const { classID } = fields;
+
+  const { data, err } = parseFileExcel(path, formatFileExcel.conductFormat);
+
+  //Kiểm tra nếu có lỗi
+  if (err.length !== 0) {
+    req.flash("error_msg", err);
+    res.redirect(`/teacher/managerClass/score`);
+  }
+
+  //Kiểm tra nếu không có dữ liệu
+  if (data.length === 0) {
+    req.flash("error_msg", "Vui lòng kiểm tra lại file, file rỗng");
+    res.redirect(`/teacher/managerClass/score`);
+  }
+
+  //Kiểm tra có trùng khớp lơp hay không
+  for (let i = 0; i < data.length; i++) {
+    const studentID = data[i].studentId;
+    const classIDStudent = `LH${studentID.slice(2, 8)}`;
+
+    switch (data[i].grade.toLowerCase()) {
+      case "tốt":
+        data[i].grade = flagClass.CONDUCT.TYPE_1;
+        break;
+      case "khá":
+        data[i].grade = flagClass.CONDUCT.TYPE_2;
+        break;
+      case "tb":
+        data[i].grade = flagClass.CONDUCT.TYPE_3;
+        break;
+      case "yếu":
+        data[i].grade = flagClass.CONDUCT.TYPE_4;
+        break;
+
+      default:
+        req.flash(
+          "error_msg",
+          `Loại hạnh kiểm không đúng. (Hàng ${i + 1}, MHS: ${studentID})`
+        );
+        req.flash("error_msg", `Các loại: tốt - khá - tb - yếu`);
+        res.redirect(`/teacher/managerClass/score`);
+    }
+
+    if (classID !== classIDStudent) {
+      req.flash(
+        "error_msg",
+        `Mã học sinh không đúng. (Hàng ${i + 1}, MHS: ${studentID})`
+      );
+      res.redirect(`/teacher/managerClass/score`);
+    }
+  }
+
+  console.log(data);
+
+  //Tiến hành cập nhật
+  const latestSemester = await Semester.getLatestSemester();
+
+  for (let i = 0; i < data.length; i++) {
+    const { studentId, grade } = data[i];
+    const newConduct = new Conduct(latestSemester, studentId, grade);
+
+    Conduct.Save(newConduct);
+  }
+
+  req.flash("success_msg", "Thành công.");
+  res.redirect("/teacher/managerClass/score");
 };
 
 module.exports = {
@@ -497,4 +595,6 @@ module.exports = {
   getManagerClassScore,
   postStudentInClass,
   postStudentInClassExcel,
+  postManagerClassScore,
+  postManagerClassScoreExcel,
 };

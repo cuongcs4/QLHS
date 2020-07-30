@@ -1,5 +1,12 @@
-<div class="row">
+{{!-- <div class="row">
     <a href="/teacher/managerClass/score" class="semester labelSemester ml-2 mb-2 col-md-4">Xem bảng điểm tổng hợp</a>
+</div> --}}
+
+<div class="row">
+    <div class="col-md-12" style="text-align:end; margin-bottom: 5px">
+        <a href="/teacher/managerClass/score" class="semester labelSemester">Xem bảng điểm tổng
+            hợp</a>
+    </div>
 </div>
 
 <div class="card shadow mb-4 row">
@@ -25,6 +32,7 @@
                         <td>{{fullName}}</td>
                         <td>{{dob}}</td>
                         <td>{{address}}</td>
+                        <td></td>
                     </tr>
                     {{/each}}
                 </tbody>
