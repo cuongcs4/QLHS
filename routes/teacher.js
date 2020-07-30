@@ -22,6 +22,13 @@ router.get(
 
 router.get("/class", checkLogin, checkTeacher, teacherController.getClass);
 
+router.post(
+  "/class/:classID",
+  checkLogin,
+  checkTeacher,
+  teacherController.postStudentInClass
+);
+
 router.get(
   "/class/:classID",
   checkLogin,

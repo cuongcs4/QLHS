@@ -4,6 +4,8 @@ const Room = require("../ModelClass/Class/Room");
 const Teacher = require("../ModelClass/Class/Teacher");
 const Student = require("../ModelClass/Class/Student");
 const flagClass = require("../ModelClass/MiniServices/Flag");
+const Semester = require("../ModelClass/Class/Semester");
+const Score = require("../ModelClass/Class/Score");
 
 const getScheduleExam = async (req, res, next) => {
   let { year, semester } = req.query;
@@ -172,16 +174,46 @@ const getClass = async (req, res, next) => {
   });
 };
 
+const postStudentInClass = async (req, res, next) => {
+  const classID = req.params.classID;
+  console.log("Hello");
+  const { studentID, score1, score2, score3, score4 } = req.body;
+
+  const latestSemester = await Semester.getLatestSemester();
+
+  const subjectID = req.user.getSubjectID();
+  const teacherID = req.user.getID();
+
+  const score = new Score(
+    latestSemester,
+    studentID,
+    teacherID,
+    classID,
+    subjectID,
+    score1,
+    score2,
+    score3,
+    score4
+  );
+
+  await Score.Save(score);
+
+  res.redirect(`/teacher/class/${classID}`);
+};
+
 const getStudentInClass = async (req, res, next) => {
   const classID = req.params.classID;
 
-  if (typeof classID == "undefined") res.redirect("/teacher/class");
+  if (typeof classID == "undefined") {
+    res.redirect("/teacher/class");
+  }
 
-  //const claSs = await Class.Find(classID);
+  const actionForm = `/teacher/class/${classID}`;
+  const managerClassID = (await Class.Find(classID)).getManagerClass();
+  const managerClassName = (await Teacher.Find(managerClassID)).getFullName();
   const className = await Class.GetClassName(classID);
 
   const listScores = await req.user.getScore(classID);
-  console.log(listScores);
 
   const listScoreView = [];
 
@@ -191,24 +223,37 @@ const getStudentInClass = async (req, res, next) => {
       classID: null,
     });
 
+    const { studentID, score1, score2, score3, score4 } = listScores[i];
+
     const student = {
       id: i + 1,
-      studentID: listScores[i].studentID,
+      studentID,
       fullName: result.fullName,
-      score1: listScores[i].score1,
-      score2: listScores[i].score2,
-      score3: listScores[i].score3,
-      score4: listScores[i].score4,
+      score1,
+      score2,
+      score3,
+      score4,
+      dataTarget: `modalScoreEditHS${i + 1}`,
     };
 
+    student.gpa =
+      Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
     listScoreView.push(student);
   }
 
+  const latestSemester = await Semester.getLatestSemester();
+  const year = `${latestSemester.getYearStart()}-${latestSemester.getYearEnd()}`;
+  const semesterID = latestSemester.getSemesterID();
+
   res.render("teacher/score", {
-    title: `Quản lý lớp học ${className}`,
+    title: `Quản lý lớp học ${className} (${classID})`,
     style: ["styleTable.css"],
     user: req.user,
     listScoreView,
+    actionForm,
+    year,
+    semesterID,
+    managerClassName,
   });
 };
 
@@ -284,6 +329,8 @@ const getManagerClassScore = async (req, res, next) => {
           2 * scores[j].score3 +
           3 * scores[j].score4) /
         7;
+      student[`${scores[j].subjectID}`] =
+        Math.round(student[`${scores[j].subjectID}`] * 10) / 10;
     }
 
     student[`gpa`] = await listStudent[i].getGPA(
@@ -364,4 +411,5 @@ module.exports = {
   getStudentInClass,
   getManagerClass,
   getManagerClassScore,
+  postStudentInClass,
 };
