@@ -15,7 +15,7 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" style="width: 100%; table-layout:fixed" cellspacing="0">
                 <thead>
                     <tr>
                         <th>TIẾT</th>
@@ -26,16 +26,18 @@
                         <th>THỨ 6</th>
                     </tr>
                 </thead>
+                {{#each listScheduleView}}
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Toán</td>
-                        <td>Văn</td>
-                        <td>Toán</td>
-                        <td>Anh</td>
-                        <td>Lý</td>
+                        <td>{{id}}</td>
+                        <td>{{subject1}}</td>
+                        <td>{{subject2}}</td>
+                        <td>{{subject3}}</td>
+                        <td>{{subject4}}</td>
+                        <td>{{subject5}}</td>
                     </tr>
                 </tbody>
+                {{/each}}
             </table>
         </div>
     </div>

@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const checkLogin = require("../Passport/checkLogin");
 const checkStudent = require("../Passport/checkStudent");
+const studentController = require("../Controller/Student")
 
 router.get("/examtable", checkLogin, checkStudent, (req, res, next) => {
   res.render("student/examTable", {
@@ -19,13 +20,7 @@ router.get("/resulttable", checkLogin, checkStudent, (req, res, next) => {
   });
 });
 
-router.get("/schedule", checkLogin, checkStudent, (req, res, next) => {
-  res.render("student/schedule", {
-    title: "Thời khoá biểu",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get("/schedule", checkLogin, checkStudent, studentController.getSchedule);
 
 router.post("/submit", checkLogin, checkStudent, (req, res, next) => {});
 
