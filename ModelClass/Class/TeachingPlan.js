@@ -84,7 +84,7 @@ const TeachingPlan = class {
     if (teacherID !== null) {
       // Lấy TKB của giáo viên
       const sqlQuery =
-        `SELECT TKB.malop AS classID, TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection ` +
+        `SELECT TKB.malop AS classID, TKB.mabm AS subjectID, TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection ` +
         `FROM THOIKHOABIEU AS TKB ` +
         `WHERE TKB.magv ='${teacherID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
       const result = await ExecuteSQL(sqlQuery);

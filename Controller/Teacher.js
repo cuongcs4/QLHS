@@ -31,19 +31,19 @@ const getScheduleExam = async (req, res, next) => {
     );
   }
 
-  //Sắp xếp lịch thi
-  scheduleExam.sort((a, b) => {
-    if (a.dayExam < b.dayExam) {
-      return -1;
-    }
+  // //Sắp xếp lịch thi
+  // scheduleExam.sort((a, b) => {
+  //   if (a.dayExam < b.dayExam) {
+  //     return -1;
+  //   }
 
-    if (a.dayExam > b.dayExam) {
-      return 1;
-    }
+  //   if (a.dayExam > b.dayExam) {
+  //     return 1;
+  //   }
 
-    // a == b
-    return 0;
-  });
+  //   // a == b
+  //   return 0;
+  // });
 
   //Gán lại cách hiển thị ngày coi thi
   for (let i = 0; i < scheduleExam.length; i++) {

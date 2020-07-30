@@ -32,6 +32,13 @@ const flagClass = {
     MALE: 1,
     FEMALE: 0,
   },
+  DAY_IN_WEEK: {
+    MON: 2,
+    TUE: 3,
+    WEB: 4,
+    THU: 5,
+    FRI: 6
+  }
 };
 
 module.exports = flagClass;
