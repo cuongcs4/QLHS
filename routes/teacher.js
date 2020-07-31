@@ -71,12 +71,11 @@ router.get(
   teacherController.getSchedule
 );
 
-router.get("/reexamine", checkLogin, checkTeacher, (req, res, next) => {
-  res.render("teacher/reExamination", {
-    title: "Phúc khảo",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get(
+  "/reexamine",
+  checkLogin,
+  checkTeacher,
+  teacherController.getReExamination
+);
 
 module.exports = router;

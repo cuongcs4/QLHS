@@ -1,6 +1,14 @@
 <div class="row">
     <div class="col-md-6">
         <div class="row">
+            <a class="labelSemester semester ml-2 mb-2" href="/teacher/class">Quay lại</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
             <div class="semester ml-2 mb-2">
                 <p class="labelSemester">Năm học: {{year}}</p>
             </div>
@@ -13,16 +21,15 @@
 
     <div class="col-md-6" style="text-align:end">
         <div class="semester ml-2 mb-2">
-
             <p class="labelSemester">GVCN: {{managerClassName}}</p>
-
         </div>
+        {{#if statusSemester}}
         <div class="semester ml-2 mb-2">
             <a class="labelSemester fa fa-pencil-square-o" href="#" data-toggle="modal" data-target="#importFileExcel"
                 aria-hidden="true"> Nhập
                 file</a>
         </div>
-
+        {{/if}}
     </div>
 </div>
 
@@ -42,7 +49,9 @@
                         <th>60'</th>
                         <th>THI CK</th>
                         <th>TB</th>
+                        {{#if statusSemester}}
                         <th>SỬA</th>
+                        {{/if}}
                     </tr>
                 </thead>
                 {{#each listScoreView}}
@@ -56,8 +65,10 @@
                         <td style="width: 10%; text-align:end">{{score3}}</td>
                         <td style="width: 10%; text-align:end">{{score4}}</td>
                         <td style="width: 10%; text-align:end">{{gpa}}</td>
+                        {{#if statusSemester}}
                         <td style="width: 10%; text-align:center"><a href="#" class="fa fa-pencil-square-o"
                                 data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
+                        {{/if}}
                     </tr>
                 </tbody>
                 {{/each}}
@@ -66,6 +77,7 @@
     </div>
 </div>
 
+{{#if statusSemester}}
 {{#each listScoreView}}
 <div class="modal fade" id="{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
@@ -159,3 +171,5 @@
         </form>
     </div>
 </div>
+
+{{/if}}

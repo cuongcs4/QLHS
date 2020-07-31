@@ -26,26 +26,28 @@
         </span>
     </form>
 </div>
-<div class="card shadow mb-4">
+
+<div class="card shadow mb-4 row">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0"
+                style="font-size: 15px; color: black">
                 <thead>
                     <tr>
-                        <th>TIẾT</th>
-                        <th>THỨ 2</th>
-                        <th>THỨ 3</th>
-                        <th>THỨ 4</th>
-                        <th>THỨ 5</th>
-                        <th>THỨ 6</th>
-                        <th>THỨ 7</th>
+                        <th style="width: 5%; text-align: center;">TIẾT</th>
+                        <th style="text-align: center;">THỨ 2</th>
+                        <th style="text-align: center;">THỨ 3</th>
+                        <th style="text-align: center;">THỨ 4</th>
+                        <th style="text-align: center;">THỨ 5</th>
+                        <th style="text-align: center;">THỨ 6</th>
+                        <th style="text-align: center;">THỨ 7</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each scheduleView}}
                     <tr>
                         {{#each this}}
-                        <td>{{this}}</td>
+                        <td style="text-align: center;">{{this}}</td>
                         {{/each}}
                     </tr>
                     {{/each}}

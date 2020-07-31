@@ -3,7 +3,7 @@
         <form class="semester labelSemester" action="/teacher/managerClass/score" method="GET">
             <span align="center">
                 <span>Năm học:</span>
-                <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer" name="year"
                     onchange="this.form.submit();">
                     {{#each allYearSemester}}
                     {{#if this}}
@@ -14,7 +14,7 @@
             </span>
             <span align="center">
                 <span>Học kì:</span>
-                <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                <select class="semester" style="border: none; color:blanchedalmond; cursor: pointer" name="semester"
                     onchange="this.form.submit();">
                     {{#if isLastSemester}}
                     <option value="2">2</option>
@@ -29,11 +29,13 @@
     </div>
 
     <div class="col-md-6" style="text-align:end">
+        {{#if statusSemester}}
         <div class="semester ml-2 mb-2">
-            <a class="labelSemester fa fa-pencil-square-o" href="#" data-toggle="modal" data-target="#importFileExcel"
-                aria-hidden="true"> Nhập
+            <a class="labelSemester fa fa-pencil-square-o" style="cursor: pointer;" data-toggle="modal"
+                data-target="#importFileExcel" aria-hidden="true"> Nhập
                 file</a>
         </div>
+        {{/if}}
         <span class="col-md-12" style="text-align:end; margin-bottom: 5px">
             <a class="semester labelSemester" href="/teacher/managerClass">Quay lại</a>
         </span>
@@ -67,8 +69,9 @@
                         <th style="padding:0; text-align: center; background-color:grey">TB</th>
                         <th style="padding:0; text-align: center; background-color:grey">HL</th>
                         <th style="padding:0; text-align: center; background-color:grey">HK</th>
+                        {{#if statusSemester}}
                         <th style="padding:0; text-align: center; background-color:grey">Sửa HK</th>
-
+                        {{/if}}
                     </tr>
                 </thead>
                 <tbody>
@@ -93,8 +96,10 @@
                         <th style="padding:0; text-align: center;">{{gpa}}</th>
                         <th style="padding:0; text-align: center;">{{classify}}</th>
                         <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        {{#if statusSemester}}
                         <td style="width: 10%; text-align:center"><a href="#" class="fa fa-pencil-square-o"
-                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"> Sửa</a></td>
+                        {{/if}}
                     </tr>
                     {{else}}
                     <tr>
@@ -116,8 +121,10 @@
                         <th style="padding:0; text-align: center;">{{gpa}}</th>
                         <th style="padding:0; text-align: center;">{{classify}}</th>
                         <th style="padding:0; text-align: center;">{{conduct}}</th>
+                        {{#if statusSemester}}
                         <td style="width: 10%; text-align:center"><a href="#" class="fa fa-pencil-square-o"
-                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"> Sửa</a></td>
+                        {{/if}}
                     </tr>
                     {{/if}}
                     {{/each}}
@@ -127,6 +134,7 @@
     </div>
 </div>
 
+{{#if statusSemester}}
 {{#each listScore}}
 <div class="modal fade" id="{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
@@ -210,3 +218,4 @@
         </form>
     </div>
 </div>
+{{/if}}

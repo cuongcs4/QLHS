@@ -1,28 +1,58 @@
-    <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Phúc khảo</h6>
-    </div>
+<div class="row">
+
+    <form class="semester labelSemester ml-2 mb-2" action="/teacher/class" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer;" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
+            <span>Học kì:</span>
+            <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer;" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                {{/if}}
+            </select>
+        </span>
+    </form>
+</div>
+
+<div class="card shadow mb-4 row">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0"
+                style="font-size: 12px; color: black">
                 <thead>
                     <tr>
-                        <th>MÔN HỌC</th>
-                        <th>HỌC KÌ</th>
-                        <th>NĂM HỌC</th>
-                        <th>CỘT ĐIỂM</th>
-                        <th>GHI CHÚ</th>
-                        <th>TRẠNG THÁI</th>
+                        <th style="width: 10%;">MÃ HS</th>
+                        <th style="width: 20%;">HỌ TÊN</th>
+                        <th style="width: 5%;">LỚP</th>
+                        <th style="width: 10%;">MÃ LỚP</th>
+                        <th style="width: 5%;">CỘT ĐIỂM</th>
+                        <th style="width: 40%;">GHI CHÚ</th>
+                        <th style="width: 10%;">TRẠNG THÁI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Toán</td>
-                        <td>1</td>
-                        <td>2019-2020</td>
+                        <td>HS20180101</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>12A1</td>
+                        <td>LH201801</td>
                         <td>1 tiết</td>
                         <td>Em dò bài với bạn thấy đúng gần hết</td>
-                        <td>GV đã phúc khảo</td>
+                        <td>Đã phản hồi</td>
                     </tr>
                 </tbody>
             </table>

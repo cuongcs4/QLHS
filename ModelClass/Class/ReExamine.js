@@ -22,7 +22,9 @@ const ReExamine = class {
     this.status = status || null;
   }
 
-  getSemester() {}
+  getSemester() {
+    return this.semester;
+  }
 
   getStudentID() {
     return this.studentID;
@@ -65,7 +67,7 @@ const ReExamine = class {
     if (studentID) {
       const sqlQuery =
         `SELECT PK.mahs AS studentID, PK.noidung AS content, PK.trangthai AS status, BM.tenbm AS subjectName, BM.mabm AS subjectID ` +
-        `FROM PHUCKHAO AS PK INNER JOIN BOMON AS BM ON BM.mabm=PK.mabm` +
+        `FROM PHUCKHAO AS PK INNER JOIN BOMON AS BM ON BM.mabm=PK.mabm ` +
         `WHERE PK.mahs='${studentID}' AND PK.mahk=${semesterID} AND PK.nambd=${yearStart} AND PK.namkt=${yearEnd}`;
 
       const result = await ExecuteSQL(sqlQuery);
@@ -85,7 +87,9 @@ const ReExamine = class {
     }
   }
 
-  static save() {}
+  static async Save(reExamine) {
+    const sqlQuery = ``;
+  }
 };
 
 module.exports = ReExamine;
