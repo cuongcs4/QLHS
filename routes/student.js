@@ -6,13 +6,7 @@ const studentController = require("../Controller/Student")
 
 router.get("/examtable", checkLogin, checkStudent, studentController.getExamSchedule);
 
-router.get("/resulttable", checkLogin, checkStudent, (req, res, next) => {
-  res.render("student/resultTable", {
-    title: "Kết quả học tập",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get("/resulttable", checkLogin, checkStudent, studentController.getResultTable);
 
 router.get("/schedule", checkLogin, checkStudent, studentController.getSchedule);
 

@@ -29,7 +29,7 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" style="width: 100%" cellspacing="0">
+            <table class="table table-bordered" id="scheduleTable" style="width: 100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>TIẾT</th>
@@ -43,12 +43,15 @@
                 {{#each listScheduleView}}
                 <tbody>
                     <tr>
-                        <td style="text-align:center; width: 50px;">{{id}}</td>
+                        {{!-- <td style="text-align:center; width: 50px;">{{id}}</td>
                         <td style="width: 20%">{{subject1}}</td>
                         <td style="width: 20%">{{subject2}}</td>
                         <td style="width: 20%">{{subject3}}</td>
                         <td style="width: 20%">{{subject4}}</td>
-                        <td style="width: 20%">{{subject5}}</td>
+                        <td style="width: 20%">{{subject5}}</td> --}}
+                        {{#each this}}
+                        <td>{{this}}</td>
+                        {{/each}}
                     </tr>
                 </tbody>
                 {{/each}}

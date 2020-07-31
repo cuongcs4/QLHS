@@ -26,21 +26,18 @@ const getSchedule = async (req, res, next) => {
   }
   const listScheduleView = [];
 
-  for (let j = 0; j < 10; j++) {
+  for (let j = 1; j <= 10; j++) {
     const sectionSchedule = [];
     for (let k = 0; k < 5; k++) {
       for (let i = 0; i < schedule.length; i++) {
-        if (
-          schedule[i].startSection === j + 1 &&
-          schedule[i].dayInWeek === k + 2
-        ) {
+        if (schedule[i].startSection === j && schedule[i].dayInWeek === k + 2) {
           const subject = await Subject.Find(schedule[i].subjectID);
           sectionSchedule[k] = subject.subjectName;
         }
       }
     }
     listScheduleView.push({
-      id: j + 1,
+      id: j,
       subject1: sectionSchedule[0],
       subject2: sectionSchedule[1],
       subject3: sectionSchedule[2],
@@ -74,9 +71,12 @@ const getExamSchedule = async (req, res, next) => {
     const yearEnd = parseInt(yearArray[1]);
     const semesterID = parseInt(semester);
 
-    scheduleExam = await req.user.getExamSchedule(semesterID, yearStart, yearEnd);
+    scheduleExam = await req.user.getExamSchedule(
+      semesterID,
+      yearStart,
+      yearEnd
+    );
   }
-  console.log(scheduleExam);
   //Gán lại cách hiển thị ngày coi thi
   for (let i = 0; i < scheduleExam.length; i++) {
     const dayExam = scheduleExam[i].dayExam;
@@ -95,4 +95,56 @@ const getExamSchedule = async (req, res, next) => {
     isLastSemester,
   });
 };
-module.exports = { getSchedule, getExamSchedule };
+
+const getResultTable = async (req, res, next) => {
+  let { year, semester } = req.query;
+  //Lấy tất cả các học kỳ đã có
+  const { allYearSemester, isLastSemester } = await handleSemester(
+    year,
+    semester
+  );
+  let listScores = [];
+  if (typeof year == "undefined" && typeof semester == "undefined") {
+    listScores = await req.user.getScore();
+  } else {
+    const yearArray = year.split("-");
+    const yearStart = parseInt(yearArray[0]);
+    const yearEnd = parseInt(yearArray[1]);
+    const semesterID = parseInt(semester);
+
+    listScores = await req.user.getScore(
+      semesterID,
+      yearStart,
+      yearEnd
+    );
+  }
+  const listScoreView = []
+  for (let i = 0; i < listScores.length; i++) {
+    const {subjectName, score1, score2, score3, score4 } = listScores[i];
+
+    const score = {
+      id: i + 1,
+      subjectName,
+      score1,
+      score2,
+      score3,
+      score4
+    };
+    score.gpa =
+      Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
+    listScoreView.push(score);
+  }
+  console.log(listScoreView);
+  // render kết quảs
+  res.render("student/resultTable", {
+    title: "Kết quả học tập",
+    style: ["styleTable.css"],
+    user: req.user,
+    listScoreView,
+    allYearSemester,
+    isLastSemester,
+  });
+
+};
+
+module.exports = { getSchedule, getExamSchedule, getResultTable };

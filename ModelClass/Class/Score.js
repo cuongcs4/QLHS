@@ -97,11 +97,11 @@ const Score = class {
 
       //Lấy danh sách điểm của một học sinh theo học kỳ.
       const sqlQuery =
-        `SELECT DI.mahs AS studentID, DI.malop AS classID, DI.mabm AS subjectID, ` +
+        `SELECT DI.mahs AS studentID, DI.malop AS classID, DI.mabm AS subjectID, BM.tenbm AS subjectName, ` +
         `DI.cot1 AS score1, DI.cot2 AS score2, DI.cot3 AS score3, DI.cot4 AS score4, ` +
-        `HK.mahk AS semesterID, HK.nambd AS yearStart, HK.namkt AS yearEnd ` +
-        `FROM DIEM AS DI INNER JOIN HOCKY AS HK ON DI.mahk=HK.mahk AND DI.nambd=HK.nambd AND DI.namkt=HK.namkt ` +
-        `WHERE DI.mahs='${studentID}' AND HK.mahk=${semesterID} AND HK.nambd=${yearStart} AND HK.namkt=${yearEnd}`;
+        `DI.mahk AS semesterID, DI.nambd AS yearStart, DI.namkt AS yearEnd ` +
+        `FROM DIEM AS DI INNER JOIN BOMON AS BM ON BM.mabm = DI.mabm ` +
+        `WHERE DI.mahs='${studentID}' AND DI.mahk=${semesterID} AND DI.nambd=${yearStart} AND DI.namkt=${yearEnd}`;
 
       const result = await ExecuteSQL(sqlQuery);
 

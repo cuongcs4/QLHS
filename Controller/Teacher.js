@@ -123,8 +123,8 @@ const getSchedule = async (req, res, next) => {
     line.push(i);
     for (let j = 1; j <= 6; j++) {
       line.push(" ");
+      scheduleView.push(line);
     }
-    scheduleView.push(line);
   }
 
   for (let i = 0; i < schedule.length; i++) {
