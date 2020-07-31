@@ -1,47 +1,61 @@
 <div class="row">
-    <div class="semester ml-2 mb-2">
-        <p class="labelSemester">Năm học: 2019-2020</p>
-    </div>
-    <form class="semester labelSemester ml-2 mb-2" action="" method="GET">
-        <div align="center">
+    <form class="semester labelSemester ml-2 mb-2" action="/student/result" method="GET">
+        <span align="center">
+            <span>Năm học:</span>
+            <select class="semester" style="border: none; color:blanchedalmond" name="year"
+                onchange="this.form.submit();">
+                {{#each allYearSemester}}
+                {{#if this}}
+                <option value="{{this}}">{{this}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+        </span>
+        <span align="center">
             <span>Học kì:</span>
-            <select class="semester" style="border: none; color:blanchedalmond" name="semester" onchange="this.form.submit();">
+            <select class="semester" style="border: none; color:blanchedalmond" name="semester"
+                onchange="this.form.submit();">
+                {{#if isLastSemester}}
+                <option value="2">2</option>
+                <option value="1">1</option>
+                {{else}}
                 <option value="1">1</option>
                 <option value="2">2</option>
+                {{/if}}
             </select>
-        </div>
+        </span>
     </form>
 </div>
 
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="resultTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>TÊN HỌC SINH</th>
+                        <th>STT</th>
                         <th>MÔN HỌC</th>
-                        <th>15 PHÚT</th>
+                        <th>15 PHÚT<sup>1</sup></th>
+                        <th>15 PHÚT<sup>2</sup></th>
                         <th>1 TIẾT</th>
                         <th>THI CUỐI KÌ</th>
                         <th>TRUNG BÌNH</th>
                     </tr>
                 </thead>
+                {{#each listScoreView}}
                 <tbody>
                     <tr>
-                        <td>Nguyễn Văn A</td>
-                        <td>Toán</td>
-                        <td>10</td>
-                        <td>9.5</td>
-                        <td>9.5</td>
-                        <td>9.6</td>
+                        {{#each this}}
+                        <td>{{this}}</td>
+                        {{/each}}
                     </tr>
                 </tbody>
+                {{/each}}
             </table>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalReExaminationForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -87,7 +101,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="reExaminationTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>MÔN HỌC</th>
@@ -110,8 +124,10 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm" aria-hidden="true">Tạo đơn
-            phúc khảo</button>
+        <div class="text-center">
+                <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
+                    data-target="#modalReExaminationForm">TẠO ĐƠN PHUC KHẢO</a>
+            </div>
         <hr>
     </div>
 </div>

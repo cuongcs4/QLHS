@@ -118,7 +118,7 @@ const getSchedule = async (req, res, next) => {
     const line = [];
     line.push(i);
     for (let j = 1; j <= 6; j++) {
-      line.push("Trống");
+      line.push("");
     }
     scheduleView.push(line);
   }
