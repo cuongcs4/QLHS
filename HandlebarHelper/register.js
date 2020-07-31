@@ -1,4 +1,4 @@
-const flagClass = require("../ModelClass/MiniServices/Flag");
+const flagClass = require("../ModelClass/Helper/resource/Flag");
 
 const registerSideBar = (handlebars) => {
   handlebars.registerHelper("sideBar", function (user, block) {

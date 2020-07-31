@@ -1,4 +1,4 @@
-const ExecuteSQL = require("../Database/ExecuteSQL");
+const ExecuteSQL = require("../../Database/ExecuteSQL");
 
 const checkExist = async (table, field, condition) => {
   const sqlQuery = `SELECT * FROM ${table} WHERE ${field}="${condition}"`;

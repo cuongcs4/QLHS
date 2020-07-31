@@ -58,51 +58,51 @@ VALUES
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV01', 'GV01', '215487789', 2);
+    ('GV01', 'GV01', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV02', 'GV02', '215487789', 2);
+    ('GV02', 'GV02', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV03', 'GV03', '215487789', 2);
+    ('GV03', 'GV03', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV04', 'GV04', '215487789', 2);
+    ('GV04', 'GV04', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV05', 'GV05', '215487789', 2);
+    ('GV05', 'GV05', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV06', 'GV06', '215487789', 2);
+    ('GV06', 'GV06', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV07', 'GV07', '215487789', 2);
+    ('GV07', 'GV07', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV08', 'GV08', '215487789', 2);
+    ('GV08', 'GV08', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV09', 'GV09', '215487789', 2);
+    ('GV09', 'GV09', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV10', 'GV10', '215487789', 2);
+    ('GV10', 'GV10', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV11', 'GV11', '215487789', 2);
+    ('GV11', 'GV11', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES
-    ('GV12', 'GV12', '215487789', 2);
+    ('GV12', 'GV12', '215487789', 3);
 INSERT INTO NGUOIDUNG
     (tenDangNhap, matKhau, cmnd, loai)
 VALUES

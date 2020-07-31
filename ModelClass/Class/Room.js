@@ -1,8 +1,9 @@
 //Sơ đồ lớp của Room
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const Room = class {
   constructor(roomID, roomName, roomType) {

@@ -1,10 +1,12 @@
 // Sơ đò lớp của Student kế thừa từ User.
 
+const ExecuteSQL = require("../Database/ExecuteSQL");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
+
 const User = require("./User");
 const Semester = require("./Semester");
-const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
 const Score = require("./Score");
 const TeachingPlan = require("./TeachingPlan");
 const ExamPlan = require("./ExamPlan");
@@ -70,7 +72,7 @@ const Student = class extends User {
     const schedule = await TeachingPlan.Find(
       { classID: this.classID, teacherID: null },
       semesterID,
-      yearStart,  
+      yearStart,
       yearEnd
     );
     return schedule;

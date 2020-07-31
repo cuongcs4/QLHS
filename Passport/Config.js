@@ -1,8 +1,8 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
-const controllerMiniService = require("../ModelClass/MiniServices/ControllerMiniService");
-const flagClass = require("../ModelClass/MiniServices/Flag");
+const getUserByUsername = require("../ModelClass/Helper/services/GetUserByUsername");
+const flagClass = require("../ModelClass/Helper/resource/Flag");
 
 const configPassport = (passport) => {
   console.log("Config Passport");
@@ -13,7 +13,7 @@ const configPassport = (passport) => {
 
   passport.deserializeUser(async (id, done) => {
     console.log(id);
-    const user = await controllerMiniService.getUserByUsername(id);
+    const user = await getUserByUsername(id);
 
     if (user !== null) return done(null, user);
 
@@ -25,7 +25,7 @@ const configPassport = (passport) => {
 
   passport.use(
     new LocalStrategy(async (username, password, done) => {
-      const user = await controllerMiniService.getUserByUsername(username);
+      const user = await getUserByUsername(username);
 
       if (user === null) {
         console.log("error user null");

@@ -1,4 +1,4 @@
-const Semester = require("../Class/Semester");
+const Semester = require("../../Class/Semester");
 
 //Lấy toàn bộ học kỳ, xử lý để hiển thị trong thanh chọn năm học và học kỳ.
 const handleSemester = async (yearString, semesterID) => {

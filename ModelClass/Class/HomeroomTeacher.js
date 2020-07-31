@@ -3,8 +3,10 @@
 const Teacher = require("./Teacher");
 const Class = require("./Class");
 const Student = require("./Student");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const flagClass = require("../MiniServices/Flag");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const HomeroomTeacher = class extends Teacher {
   constructor(

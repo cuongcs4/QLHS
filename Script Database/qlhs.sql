@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 27, 2020 lúc 10:26 AM
+-- Thời gian đã tạo: Th7 31, 2020 lúc 03:34 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.7
 
@@ -261,6 +261,7 @@ CREATE TABLE `phongthi` (
 --
 
 CREATE TABLE `phuckhao` (
+  `mapk` varchar(36) COLLATE latin1_bin NOT NULL,
   `mahs` varchar(15) COLLATE latin1_bin NOT NULL,
   `magv` varchar(15) COLLATE latin1_bin NOT NULL,
   `mabm` varchar(15) COLLATE latin1_bin NOT NULL,
@@ -268,6 +269,7 @@ CREATE TABLE `phuckhao` (
   `nambd` int(11) NOT NULL,
   `namkt` int(11) NOT NULL,
   `noidung` varchar(5000) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `phanhoi` varchar(5000) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `trangthai` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -414,10 +416,11 @@ ALTER TABLE `phongthi`
 -- Chỉ mục cho bảng `phuckhao`
 --
 ALTER TABLE `phuckhao`
-  ADD PRIMARY KEY (`mahs`,`magv`,`mabm`,`mahk`,`nambd`,`namkt`),
+  ADD PRIMARY KEY (`mapk`),
   ADD KEY `FK_PHUCKHAO_GIAOVIEN` (`magv`),
   ADD KEY `FK_PHUCKHAO_BOMON` (`mabm`),
-  ADD KEY `FK_PHUCKHAO_HOCKY` (`mahk`,`nambd`,`namkt`);
+  ADD KEY `FK_PHUCKHAO_HOCKY` (`mahk`,`nambd`,`namkt`),
+  ADD KEY `FK_PHUCKHAO_HOCSINH` (`mahs`);
 
 --
 -- Chỉ mục cho bảng `thoikhoabieu`

@@ -1,9 +1,10 @@
 // Sơ đò lớp của EmployeeTrainingDepartment kế thừa từ Employee.
 
-const Employee = require("./Employee");
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
+
 const Semester = require("./Semester");
 const Class = require("./Class");
 const Student = require("./Student");
@@ -11,6 +12,7 @@ const RoomExam = require("./RoomExam");
 const ExamRoom = require("./RoomExam");
 const ResultSurvey = require("./ResultSurvey");
 const Score = require("./Score");
+const Employee = require("./Employee");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(

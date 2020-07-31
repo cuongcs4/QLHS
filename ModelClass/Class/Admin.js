@@ -1,12 +1,15 @@
 // Sơ đò lớp của Admin kế thừa từ Employee.
 
-const Employee = require("./Employee");
+const { enable } = require("debug");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
+
+const Employee = require("./Employee");
 const Teacher = require("./Teacher");
 const EmployeeTrainingDepartment = require("./EmployeeTrainingDepartment");
-const { enable } = require("debug");
 const TeachingPlan = require("./TeachingPlan");
 const Student = require("./Student");
 const Subject = require("./Subject");
@@ -77,23 +80,22 @@ const Admin = class extends Employee {
   }
 
   async createNewEmployee(employee) {
-    if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER)
-    {
+    if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER) {
       await Teacher.Save(employee);
-    }
-    else if (employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT){
+    } else if (
+      employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT
+    ) {
       await EmployeeTrainingDepartment.Save(employee);
     }
   }
 
   static async createNewSemester() {
-    const listStudents = await Student.Find({id: null, class:null});
-    const listSubjects = await Subject.Find()
+    const listStudents = await Student.Find({ id: null, class: null });
+    const listSubjects = await Subject.Find();
     const lastSemester = await Semester.getLatestSemester();
     if (lastSemester.mahk === 1) {
       lastSemester.mahk = 2;
-    }
-    else {
+    } else {
       lastSemester.mahk = 1;
       lastSemester.nambd += 1;
       lastSemester.namkt += 1;
@@ -103,7 +105,7 @@ const Admin = class extends Employee {
       lastSemester.nambd,
       lastSemester.namkt,
       flagClass.status.ENABLE
-    )
+    );
     await Semester.Save(newSemester);
     for (let i = 0; i < listStudents.length; i++) {
       const student = listStudents[i];
@@ -112,7 +114,6 @@ const Admin = class extends Employee {
         const subject = listSubjects[j];
         const studentID = student.username;
         const subjectID = subject.subjectID;
-
       }
     }
   }
@@ -153,7 +154,5 @@ const Admin = class extends Employee {
     );
   }
 };
-
-
 
 module.exports = Admin;

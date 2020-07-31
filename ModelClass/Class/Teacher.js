@@ -1,13 +1,15 @@
 // Sơ đò lớp của Teacher kế thừa từ Employee.
 
-const Employee = require("./Employee");
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
+
+const Employee = require("./Employee");
 const Class = require("./Class");
 const Semester = require("./Semester");
 const Score = require("./Score");
-const ReExamine = require("./ReExamine");
+const ReExamination = require("./ReExamination");
 const TeachingPlan = require("./TeachingPlan");
 const ExamPlan = require("./ExamPlan");
 const Subject = require("./Subject");

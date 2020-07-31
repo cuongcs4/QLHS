@@ -1,9 +1,11 @@
 //Sơ đồ lớp của Score
 
-const Semester = require("./Semester");
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const flagClass = require("../MiniServices/Flag");
+
+const flagClass = require("../Helper/resource/Flag");
+
 const TeachingPlan = require("./TeachingPlan");
+const Semester = require("./Semester");
 
 const Score = class {
   constructor(

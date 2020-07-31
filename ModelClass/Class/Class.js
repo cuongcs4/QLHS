@@ -1,8 +1,10 @@
 //Sơ đồ lớp của Class
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
+
 const Semester = require("./Semester");
 
 const Class = class {

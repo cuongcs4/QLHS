@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const checkLogin = require("../Passport/checkLogin");
-const flagClass = require("../ModelClass/MiniServices/Flag");
+const flagClass = require("../ModelClass/Helper/resource/Flag");
 
 /* GET home page. */
 router.get("/", checkLogin, (req, res, next) => {

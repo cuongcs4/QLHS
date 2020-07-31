@@ -1,8 +1,10 @@
 //Sơ đồ lớp của Conduct
 
 const Semester = require("./Semester");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const flagClass = require("../MiniServices/Flag");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const Conduct = class {
   constructor(semester, studentID, grade) {

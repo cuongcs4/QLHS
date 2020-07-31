@@ -1,9 +1,11 @@
 //Sơ đồ lớp của TeachingPlan
 
 const Semester = require("./Semester");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const flagClass = require("../MiniServices/Flag");
-const checkExist = require("../MiniServices/checkExist");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const TeachingPlan = class {
   constructor(

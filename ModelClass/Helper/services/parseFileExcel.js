@@ -1,5 +1,5 @@
 const xlsx = require("xlsx");
-const flagClass = require("./Flag");
+const flagClass = require("../resource/Flag");
 const compareString = require("./compareString");
 
 const parseFileExcel = (fileName, format) => {

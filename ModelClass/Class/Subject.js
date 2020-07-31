@@ -1,7 +1,8 @@
 //Sơ đồ lớp của Subject
 const ExecuteSQL = require("../Database/ExecuteSQL");
-const checkExist = require("../MiniServices/checkExist");
-const flagClass = require("../MiniServices/Flag");
+const checkExist = require("../Helper/services/checkExist");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const Subject = class {
   constructor(subjectID, subjectName) {
@@ -31,18 +32,17 @@ const Subject = class {
       }
 
       return null;
-    }
-    else {
+    } else {
       const sqlQuery = `SELECT * FROM BOMON`;
       const result = await ExecuteSQL(sqlQuery);
       if (result.length !== 0) {
-        const listSubjects = []; 
+        const listSubjects = [];
 
-        for (let i = 0; i<result.length; i++){
+        for (let i = 0; i < result.length; i++) {
           const subjectID = result[i].mabm;
           const subjectName = result[i].tenbm;
 
-          listSubjects.push( new Subject(subjectID,subjectID) )
+          listSubjects.push(new Subject(subjectID, subjectID));
         }
         return listSubjects;
       }
@@ -79,6 +79,5 @@ const Subject = class {
 //   console.log(result);
 // };
 // exec();
-
 
 module.exports = Subject;

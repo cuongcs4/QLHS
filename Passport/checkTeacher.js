@@ -1,4 +1,4 @@
-const flagClass = require("../ModelClass/MiniServices/Flag");
+const flagClass = require("../ModelClass/Helper/resource/Flag");
 
 const checkTeacher = (req, res, next) => {
   if (

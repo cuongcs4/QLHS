@@ -1,10 +1,15 @@
 //Sơ đồ lớp của ReExamine
 
 const Semester = require("./Semester");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const generateGUID = require("../Helper/services/generateGUID");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const ReExamine = class {
   constructor(
+    id,
     semester,
     studentID,
     teacherID,
@@ -88,7 +93,14 @@ const ReExamine = class {
   }
 
   static async Save(reExamine) {
-    const sqlQuery = ``;
+    const sqlQuery =
+      `UPDATE PHUCKHAO ` +
+      `SET phanhoi='${reExamine.getResponse()}', trangthai=${reExamine.getStatus()} ` +
+      `WHERE mahs='${1}' `;
+
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.UPDATE;
   }
 };
 

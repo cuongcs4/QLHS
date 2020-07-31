@@ -1,4 +1,4 @@
-const handleSemester = require("../ModelClass/MiniServices/handleSemester");
+const handleSemester = require("../ModelClass/Helper/services/handleSemester");
 const Class = require("../ModelClass/Class/Class");
 const Room = require("../ModelClass/Class/Room");
 const Student = require("../ModelClass/Class/Student");
@@ -112,15 +112,11 @@ const getResultTable = async (req, res, next) => {
     const yearEnd = parseInt(yearArray[1]);
     const semesterID = parseInt(semester);
 
-    listScores = await req.user.getScore(
-      semesterID,
-      yearStart,
-      yearEnd
-    );
+    listScores = await req.user.getScore(semesterID, yearStart, yearEnd);
   }
-  const listScoreView = []
+  const listScoreView = [];
   for (let i = 0; i < listScores.length; i++) {
-    const {subjectName, score1, score2, score3, score4 } = listScores[i];
+    const { subjectName, score1, score2, score3, score4 } = listScores[i];
 
     const score = {
       id: i + 1,
@@ -128,7 +124,7 @@ const getResultTable = async (req, res, next) => {
       score1,
       score2,
       score3,
-      score4
+      score4,
     };
     score.gpa =
       Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
@@ -144,7 +140,6 @@ const getResultTable = async (req, res, next) => {
     allYearSemester,
     isLastSemester,
   });
-
 };
 
 module.exports = { getSchedule, getExamSchedule, getResultTable };

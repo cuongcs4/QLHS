@@ -1,6 +1,7 @@
 //Sơ đồ lớp của ExamPlan
 
 const Semester = require("./Semester");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const ExamPlan = class {

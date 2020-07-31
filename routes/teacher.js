@@ -4,7 +4,7 @@ const checkLogin = require("../Passport/checkLogin");
 const checkTeacher = require("../Passport/checkTeacher");
 const checkHomeroomTeacher = require("../Passport/checkHomeroomTeacher");
 
-const teacherController = require("../Controller/Teacher");
+const teacherController = require("../Controller/TeacherController/register");
 
 router.get(
   "/managerClass",

@@ -1,6 +1,7 @@
 //Sơ đồ lớp của ResultSurvey
 
 const Semester = require("./Semester");
+
 const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const ResultSurvey = class {
