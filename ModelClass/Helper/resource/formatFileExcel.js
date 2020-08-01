@@ -51,6 +51,30 @@ const scoreFormat = {
   },
 };
 
+const scoreFormatExport = {
+  filed: {
+    A1: "STT",
+    B1: "Mã học sinh",
+    C1: "Họ tên",
+    D1: "5'",
+    E1: "15'",
+    F1: "60'",
+    G1: "Cuối kỳ",
+    H1: "Trung bình",
+  },
+  propName: [],
+  width: {
+    A1: 5,
+    B1: 20,
+    C1: 30,
+    D1: 10,
+    E1: 10,
+    F1: 10,
+    G1: 10,
+    H1: 10,
+  },
+};
+
 const conductFormat = {
   filed: {
     A1: "STT",
@@ -124,4 +148,5 @@ module.exports = {
   scoreFormat,
   conductFormat,
   compositeTranscriptFormat,
+  scoreFormatExport,
 };

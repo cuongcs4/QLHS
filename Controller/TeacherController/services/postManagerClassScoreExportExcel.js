@@ -13,8 +13,6 @@ const postManagerClassScoreExportExcel = async (req, res, next) => {
   {
     const { semesterID, yearStart, yearEnd } = req.body;
 
-    const compositeTranscript = [];
-
     //Lấy mã lớp và tên lớp.
     const classID = req.user.getClassID();
     const className = await Class.GetClassName(classID);

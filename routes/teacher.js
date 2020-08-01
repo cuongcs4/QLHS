@@ -57,6 +57,13 @@ router.post(
   teacherController.postStudentInClassExcel
 );
 
+router.post(
+  "/class/export/export-excel",
+  checkLogin,
+  checkTeacher,
+  teacherController.postStudentInClassExportExcel
+);
+
 router.get(
   "/class/:classID",
   checkLogin,

@@ -4,6 +4,11 @@
             <a class="labelSemester semester ml-2 mb-2" href="/teacher/class">Quay lại</a>
         </div>
     </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <div class="row">
+            <p class="labelSemester semester ml-2 mb-2">GVCN: {{managerClassName}}</p>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -19,17 +24,21 @@
         </div>
     </div>
 
-    <div class="col-md-6" style="text-align:end">
-        <div class="semester ml-2 mb-2">
-            <p class="labelSemester">GVCN: {{managerClassName}}</p>
-        </div>
+    <div class="col-md-6 d-flex justify-content-end" style="text-align:end">
+
         {{#if statusSemester}}
         <div class="semester ml-2 mb-2">
-            <a class="labelSemester fa fa-pencil-square-o" href="#" data-toggle="modal" data-target="#importFileExcel"
-                aria-hidden="true"> Nhập
-                file</a>
+            <i class="labelSemester fa fa-pencil-square-o" style="cursor:pointer" data-toggle="modal"
+                data-target="#importFileExcel" aria-hidden="true"> Nhập
+                file</i>
         </div>
         {{/if}}
+
+        <div class="semester ml-2 mb-2">
+            <a class="labelSemester fa fa-pencil-square-o" style="cursor: pointer;" data-toggle="modal"
+                data-target="#exportFileExcel" aria-hidden="true"> Xuất
+                file</a>
+        </div>
     </div>
 </div>
 
@@ -174,3 +183,50 @@
 </div>
 
 {{/if}}
+
+<div class="modal fade" id="exportFileExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/teacher/class/export/export-excel" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Xuất bảng điểm ra file excel</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentID">Lớp</label>
+                    <input type="text" id="defaultForm-studentID" class="form-control validate" value="{{className}}"
+                        readonly>
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentName">Mã lớp</label>
+                    <input class="form-control validate" name="classID" type="text" id="defaultForm-studentName"
+                        value="{{classID}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">GVCN</label>
+                    <input type="text" id="defaultForm-score1" class="form-control validate"
+                        value="{{managerClassName}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Học kỳ</label>
+                    <input type="text" id="defaultForm-score1" class="form-control validate" name="semester"
+                        value="{{semesterID}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Năm học</label>
+                    <input type="text" id="defaultForm-score1" name="year" class="form-control validate"
+                        value="{{year}}" readonly>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>

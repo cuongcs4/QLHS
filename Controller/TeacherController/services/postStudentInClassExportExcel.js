@@ -1,0 +1,73 @@
+const Semester = require("../../../ModelClass/Class/Semester");
+const Class = require("../../../ModelClass/Class/Class");
+const Teacher = require("../../../ModelClass/Class/Teacher");
+const Student = require("../../../ModelClass/Class/Student");
+
+const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
+const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
+
+const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
+
+const postStudentInClassExportExcel = async (req, res, next) => {
+  //Lấy các tham số từ query string url, nếu không có thì chuyển hướng về và thông báo lỗi.
+  const { year, semester, classID } = req.body;
+
+  //res.send({ year, semester, classID });
+
+  //Phân tách year (type: string) => yearStart & yearEnd (type: number)
+  //Chuyển semester (type: string) => semesterID (type: number)
+  const yearArray = year.split("-");
+  const yearStart = parseInt(yearArray[0]);
+  const yearEnd = parseInt(yearArray[1]);
+  const semesterID = parseInt(semester);
+  const className = await Class.GetClassName(classID);
+
+  //Lấy danh sách điểm của học sinh
+  const listScores = await req.user.getScore(
+    classID,
+    semesterID,
+    yearStart,
+    yearEnd
+  );
+
+  //Xử lý điểm đã lấy để hiển thị
+  const listScoreView = [];
+
+  for (let i = 0; i < listScores.length; i++) {
+    const result = await Student.Find({
+      id: listScores[i].studentID,
+      classID: null,
+    });
+
+    const { studentID, score1, score2, score3, score4 } = listScores[i];
+
+    const student = {
+      id: i + 1,
+      studentID,
+      fullName: result.fullName,
+      score1,
+      score2,
+      score3,
+      score4,
+    };
+
+    student.gpa =
+      Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
+    listScoreView.push(student);
+  }
+
+  const path = await exportFileExcel(
+    `Bảng điểm tổng kết môn ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}`,
+    listScoreView,
+    formatFileExcel.scoreFormatExport
+  );
+
+  //res.send(path);
+
+  res.download(path);
+  deleteFile(path);
+
+  return;
+};
+
+module.exports = postStudentInClassExportExcel;
