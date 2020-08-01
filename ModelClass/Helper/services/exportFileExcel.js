@@ -1,14 +1,16 @@
 const excel = require("excel4node");
 const path = require("path");
-const flagClass = require("./Flag");
+const flagClass = require("../resource/Flag");
 
 const fileScore = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/Điểm 12A1.xlsx";
 const fileConduct = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/hạnh kiểm.xlsx";
 
 const parseFileExcel = require("./parseFileExcel");
-const formatFileExcel = require("./formatFileExcel");
+const formatFileExcel = require("../resource/formatFileExcel");
 
-const exportFileExcel = (fileName, data, format) => {
+const process = require("process");
+
+const exportFileExcel = async (fileName, data, format) => {
   // Create a new instance of a Workbook class
   const workbook = new excel.Workbook({ dateFormat: "mm/dd/yyyy" });
 
@@ -122,17 +124,20 @@ const exportFileExcel = (fileName, data, format) => {
     }
   }
 
-  workbook.write(`${path.join(__dirname, "data")}\\${fileName}.xlsx`);
+  workbook.write(`./public/${fileName}.xlsx`);
 
-  return `${path.join(__dirname, "data")}\\${fileName}.xlsx`;
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  return `./public/${fileName}.xlsx`;
 };
 
 module.exports = exportFileExcel;
-const fileName = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/dshocsinh.xlsx";
-const data = parseFileExcel(fileName, formatFileExcel.studentFormat);
-console.log(data);
 
-exportFileExcel("data", data.data, formatFileExcel.studentFormat);
+// const fileName = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/dshocsinh.xlsx";
+// const data = parseFileExcel(fileName, formatFileExcel.studentFormat);
+// console.log(data);
+
+// exportFileExcel("data1", data.data, formatFileExcel.studentFormat);
 
 // const date = new Date();
 

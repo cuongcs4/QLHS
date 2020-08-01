@@ -10,6 +10,7 @@ const Employee = class extends User {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser,
@@ -23,6 +24,7 @@ const Employee = class extends User {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser
@@ -47,4 +49,3 @@ const Employee = class extends User {
 };
 
 module.exports = Employee;
-  

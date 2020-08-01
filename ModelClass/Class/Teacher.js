@@ -23,6 +23,7 @@ const Teacher = class extends Employee {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser,
@@ -37,6 +38,7 @@ const Teacher = class extends Employee {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser,
@@ -203,6 +205,7 @@ const Teacher = class extends Employee {
     const identityCard = teacherOnDB.cmnd;
     const fullName = teacherOnDB.hoten;
     const dob = new Date(teacherOnDB.ngaysinh);
+    const gender = teacherOnDB.gioitinh;
     const address = teacherOnDB.diachi;
     const status = teacherOnDB.trangthai;
     const phoneNumber = teacherOnDB.std;
@@ -217,6 +220,7 @@ const Teacher = class extends Employee {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser,

@@ -9,6 +9,7 @@ const postManagerClassScore = require("./services/postManagerClassScore");
 const postManagerClassScoreExcel = require("./services/postManagerClassScoreExcel");
 const getStudentInClass = require("./services/getStudentInClass");
 const getReExamination = require("./services/getReExamination");
+const postManagerClassScoreExportExcel = require("./services/postManagerClassScoreExportExcel");
 
 module.exports = {
   getScheduleExam,
@@ -22,4 +23,5 @@ module.exports = {
   postManagerClassScoreExcel,
   getStudentInClass,
   getReExamination,
+  postManagerClassScoreExportExcel,
 };

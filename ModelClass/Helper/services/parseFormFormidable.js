@@ -1,4 +1,6 @@
 const Formidable = require("formidable");
+const path = require("path");
+
 const parseForm = async (req) => {
   const form = new Formidable.IncomingForm();
   const formParse = await new Promise(function (resolve, reject) {

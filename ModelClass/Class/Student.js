@@ -21,6 +21,7 @@ const Student = class extends User {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser,
@@ -33,6 +34,7 @@ const Student = class extends User {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser
@@ -289,6 +291,7 @@ const Student = class extends User {
           const username = studentOnDB.mahs;
           const password = studentOnDB.matKhau;
           const dob = new Date(studentOnDB.ngaysinh);
+          const gender = studentOnDB.gioitinh;
           const identityCard = studentOnDB.cmnd;
           const fullName = studentOnDB.hoten;
           const address = studentOnDB.diachi;
@@ -304,6 +307,7 @@ const Student = class extends User {
               identityCard,
               fullName,
               dob,
+              gender,
               address,
               status,
               typeUser,
@@ -333,6 +337,7 @@ const Student = class extends User {
         const username = studentOnDB.mahs;
         const password = studentOnDB.matKhau;
         const dob = new Date(studentOnDB.ngaysinh);
+        const gender = studentOnDB.gioitinh;
         const identityCard = studentOnDB.cmnd;
         const fullName = studentOnDB.hoten;
         const address = studentOnDB.diachi;
@@ -347,6 +352,7 @@ const Student = class extends User {
           identityCard,
           fullName,
           dob,
+          gender,
           address,
           status,
           typeUser,
@@ -376,6 +382,7 @@ const Student = class extends User {
           const username = studentOnDB.mahs;
           const password = studentOnDB.matKhau;
           const dob = new Date(studentOnDB.ngaysinh);
+          const gender = studentOnDB.gioitinh;
           const identityCard = studentOnDB.cmnd;
           const fullName = studentOnDB.hoten;
           const address = studentOnDB.diachi;
@@ -391,6 +398,7 @@ const Student = class extends User {
               identityCard,
               fullName,
               dob,
+              gender,
               address,
               status,
               typeUser,

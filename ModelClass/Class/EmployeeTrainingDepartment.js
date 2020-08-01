@@ -22,6 +22,7 @@ const EmployeeTrainingDepartment = class extends Employee {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser,
@@ -35,6 +36,7 @@ const EmployeeTrainingDepartment = class extends Employee {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser,
@@ -466,6 +468,7 @@ const EmployeeTrainingDepartment = class extends Employee {
         const identityCard = employeeOnDB.cmnd;
         const fullName = employeeOnDB.hoten;
         const dob = new Date(employeeOnDB.dob);
+        const gender = employeeOnDB[0].gioitinh;
         const address = employeeOnDB.diachi;
         const status = employeeOnDB.trangthai;
         const phoneNumber = employeeOnDB.std;
@@ -480,6 +483,7 @@ const EmployeeTrainingDepartment = class extends Employee {
             identityCard,
             fullName,
             dob,
+            gender,
             address,
             status,
             phoneNumber,

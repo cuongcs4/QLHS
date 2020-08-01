@@ -69,6 +69,59 @@ const conductFormat = {
   },
 };
 
-const formatFileExcel = { studentFormat, scoreFormat, conductFormat };
+const compositeTranscriptFormat = {
+  filed: {
+    A1: "STT",
+    B1: "Mã học sinh",
+    C1: "Họ tên",
+    D1: "Ngày sinh",
+    E1: "Giới tính",
+    F1: "Toán",
+    G1: "Vật lý",
+    H1: "Hóa học",
+    I1: "Sinh học",
+    J1: "Tin học",
+    K1: "Ngữ văn",
+    L1: "Lịch sử",
+    M1: "Địa lý",
+    N1: "Anh văn",
+    O1: "Công dân",
+    P1: "Công nghệ",
+    Q1: "Thể dục",
+    R1: "Quốc phòng",
+    S1: "Trung bình",
+    T1: "Học lực",
+    U1: "Hạnh kiểm",
+  },
+  propName: [],
+  width: {
+    A1: 5,
+    B1: 20,
+    C1: 30,
+    D1: 10,
+    E1: 15,
+    F1: 10,
+    G1: 10,
+    H1: 10,
+    I1: 10,
+    J1: 10,
+    K1: 10,
+    L1: 10,
+    M1: 10,
+    N1: 10,
+    O1: 10,
+    P1: 10,
+    Q1: 10,
+    R1: 10,
+    S1: 10,
+    T1: 10,
+    U1: 10,
+  },
+};
 
-module.exports = formatFileExcel;
+module.exports = {
+  studentFormat,
+  scoreFormat,
+  conductFormat,
+  compositeTranscriptFormat,
+};

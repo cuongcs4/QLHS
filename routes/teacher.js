@@ -34,6 +34,13 @@ router.post(
   teacherController.postManagerClassScoreExcel
 );
 
+router.post(
+  "/managerClass/score/export-excel",
+  checkLogin,
+  checkHomeroomTeacher,
+  teacherController.postManagerClassScoreExportExcel
+);
+
 router.get("/class", checkLogin, checkTeacher, teacherController.getClass);
 
 router.post(

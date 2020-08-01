@@ -385,63 +385,63 @@ VALUES
 
 /*GIAOVIEN*/
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV01', '1980-06-15', N'Nguyễn Văn Toán', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'Toan', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV02', '1980-06-15', N'Nguyễn Văn Ngữ Văn', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'NguVan', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV03', '1980-06-15', N'Nguyễn Văn Tiếng Anh', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'AnhVan', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV04', '1980-06-15', N'Nguyễn Văn Vật Lý', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'VatLy', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV05', '1980-06-15', N'Nguyễn Văn Hóa Học', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'HoaHoc', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV06', '1980-06-15', N'Nguyễn Văn Sinh Học', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'SinhHoc', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV07', '1980-06-15', N'Nguyễn Văn Lịch Sử', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'LichSu', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV08', '1980-06-15', N'Nguyễn Văn Địa Lý', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'DiaLy', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV09', '1980-06-15', N'Nguyễn Văn Công Dân', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'GDCD', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV10', '1980-06-15', N'Nguyễn Văn Tin Học', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'TinHoc', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV11', '1980-06-15', N'Nguyễn Văn Quốc Phòng', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'GDQP', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV12', '1980-06-15', N'Nguyễn Văn Thể Chất', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'TheDuc', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV13', '1980-06-15', N'Nguyễn Văn Toán Học', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'Toan', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV14', '1980-06-15', N'Nguyễn Văn Toán Hình', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'Toan', 1);
 INSERT INTO GIAOVIEN
-    (magv, ngaysinh, hoten, gioitinh, diachi, std, mabm, trangthai)
+    (magv, ngaysinh, hoten, gioitinh, diachi, sdt, mabm, trangthai)
 VALUES
     ('GV15', '1980-06-15', N'Nguyễn Văn Văn', 1, N'01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'NguVan', 1);
 
@@ -818,9 +818,9 @@ VALUES
 
 /*NHANVIEN*/
 INSERT INTO NHANVIEN
-    (manv, hoten, ngaysinh, diachi, std, trangthai, maloainv)
+    (manv, hoten, ngaysinh, gioitinh, diachi, sdt, trangthai, maloainv)
 VALUES
-    ('admin', N'Admin', '2020-1-1', N'admin', '0', 1, 'admin');
+    ('admin', N'Admin', '2020-1-1', 1, N'admin', '0', 1, 'admin');
 
 
 /*HOCKY*/

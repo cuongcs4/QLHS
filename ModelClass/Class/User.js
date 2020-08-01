@@ -8,6 +8,7 @@ const User = class {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser
@@ -18,6 +19,7 @@ const User = class {
     this.identityCard = identityCard || "Unknown";
     this.fullName = fullName || "Unknown";
     this.dob = dob || "Unknown";
+    this.gender = gender;
     this.address = address || "Unknown";
     this.status = status;
     this.typeUser = typeUser;
@@ -49,6 +51,12 @@ const User = class {
   }
   setDob(newDoB) {
     this.dob = newDoB;
+  }
+  getGender() {
+    return this.gender;
+  }
+  setGender(newGender) {
+    this.gender = newGender;
   }
   getAddress() {
     return this.address;

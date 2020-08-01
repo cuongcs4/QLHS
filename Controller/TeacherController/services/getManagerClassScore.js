@@ -142,6 +142,9 @@ const getManagerClassScore = async (req, res, next) => {
     classID,
     managerClassName: req.user.getFullName(),
     statusSemester,
+    semesterID,
+    yearStart,
+    yearEnd,
   });
 };
 

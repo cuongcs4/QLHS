@@ -24,6 +24,7 @@ const Admin = class extends Employee {
     identityCard,
     fullName,
     dob,
+    gender,
     address,
     status,
     typeUser,
@@ -37,6 +38,7 @@ const Admin = class extends Employee {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser,
@@ -133,6 +135,7 @@ const Admin = class extends Employee {
     const identityCard = adminOnDB[0].cmnd;
     const fullName = adminOnDB[0].hoten;
     const dob = new Date(adminOnDB[0].ngaysinh);
+    const gender = adminOnDB[0].gioitinh;
     const address = adminOnDB[0].diachi;
     const status = adminOnDB[0].trangthai;
     const phoneNumber = adminOnDB[0].std;
@@ -146,6 +149,7 @@ const Admin = class extends Employee {
       identityCard,
       fullName,
       dob,
+      gender,
       address,
       status,
       typeUser,

@@ -74,7 +74,7 @@ CREATE TABLE `giaovien` (
   `hoten` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `gioitinh` int(11) DEFAULT NULL,
   `diachi` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `std` varchar(11) COLLATE latin1_bin DEFAULT NULL,
+  `sdt` varchar(11) COLLATE latin1_bin DEFAULT NULL,
   `mabm` varchar(15) COLLATE latin1_bin DEFAULT NULL,
   `trangthai` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
@@ -221,8 +221,9 @@ CREATE TABLE `nhanvien` (
   `manv` varchar(15) COLLATE latin1_bin NOT NULL,
   `hoten` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `ngaysinh` date DEFAULT NULL,
+  `gioitinh` int(11) DEFAULT NULL,
   `diachi` varchar(100) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `std` varchar(11) COLLATE latin1_bin DEFAULT NULL,
+  `sdt` varchar(11) COLLATE latin1_bin DEFAULT NULL,
   `trangthai` int(11) DEFAULT NULL,
   `maloainv` varchar(15) COLLATE latin1_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
