@@ -40,8 +40,9 @@
                         <th>QUẢN LÝ</th>
                     </tr>
                 </thead>
-                {{#each listClassView}}
+                
                 <tbody>
+                    {{#each listClassView}}
                     <tr>
                         <td>{{classID}}</td>
                         <td>{{className}}</td>
@@ -49,8 +50,9 @@
                         <td>{{roomName}}</td>
                         <td><a href="{{linkManager}}">Quản lý</a></td>
                     </tr>
+                    {{/each}}
                 </tbody>
-                {{/each}}
+                
             </table>
         </div>
     </div>

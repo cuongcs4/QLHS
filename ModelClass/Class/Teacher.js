@@ -141,13 +141,12 @@ const Teacher = class extends Employee {
   }
 
   static async Find(userName) {
-    if (typeof userName == "undefined") {
+    if (typeof userName === "undefined") {
       const sqlQuery =
         `SELECT * ` +
         `FROM GIAOVIEN AS GV INNER JOIN NGUOIDUNG AS ND ON GV.magv = ND.tenDangNhap `;
 
       const result = await ExecuteSQL(sqlQuery);
-
       if (result.length !== 0) {
         const listTeachers = [];
         for (let i = 0; i < result.length; i++) {
@@ -181,11 +180,11 @@ const Teacher = class extends Employee {
               typeEmployee,
               subjectID
             )
-          );
-          return listTeachers;
+          ); 
         }
-        return null;
+        return listTeachers;
       }
+      return null;
     }
 
     const sqlQuery =

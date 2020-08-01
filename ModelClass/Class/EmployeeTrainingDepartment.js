@@ -476,7 +476,7 @@ const EmployeeTrainingDepartment = class extends Employee {
         const subjectID = employeeOnDB.mabm;
 
         listEmployees.push(
-          new Teacher(
+          new EmployeeTrainingDepartment(
             id,
             username,
             password,

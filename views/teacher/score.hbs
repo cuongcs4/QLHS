@@ -53,8 +53,9 @@
                         {{/if}}
                     </tr>
                 </thead>
-                {{#each listScoreView}}
+
                 <tbody>
+                    {{#each listScoreView}}
                     <tr>
                         <td style="width: 5%">{{id}}</td>
                         <td style="width: 15%;">{{studentID}}</td>
@@ -69,8 +70,9 @@
                                 data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></a></td>
                         {{/if}}
                     </tr>
+
+                    {{/each}}
                 </tbody>
-                {{/each}}
             </table>
         </div>
     </div>
