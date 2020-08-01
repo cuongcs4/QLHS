@@ -40,16 +40,18 @@
                         <th>TIẾT BẮT ĐẦU</th>
                     </tr>
                 </thead>
-                {{#each scheduleExam}}
+                
                 <tbody>
+                    {{#each scheduleExam}}
                     <tr>
                         <td>{{subjectName}}</td>
                         <td>{{dayExam}}</td>
                         <td>{{roomName}}</td>
                         <td>{{startSection}}</td>
                     </tr>
+                    {{/each}}
                 </tbody>
-                {{/each}}
+                
             </table>
         </div>
     </div>

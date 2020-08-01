@@ -42,15 +42,21 @@
                         <th>TRUNG BÌNH</th>
                     </tr>
                 </thead>
-                {{#each listScoreView}}
+
                 <tbody>
+                    {{#each listScoreView}}
                     <tr>
-                        {{#each this}}
-                        <td>{{this}}</td>
-                        {{/each}}
+                        <td>{{id}}</td>
+                        <td>{{subjectName}}</td>
+                        <td>{{score1}}</td>
+                        <td>{{score2}}</td>
+                        <td>{{score3}}</td>
+                        <td>{{score4}}</td>
+                        <td>{{gpa}}</td>
                     </tr>
+
+                    {{/each}}
                 </tbody>
-                {{/each}}
             </table>
         </div>
     </div>
@@ -125,9 +131,9 @@
             </table>
         </div>
         <div class="text-center">
-                <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
-                    data-target="#modalReExaminationForm">TẠO ĐƠN PHUC KHẢO</a>
-            </div>
+            <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
+                data-target="#modalReExaminationForm">TẠO ĐƠN PHUC KHẢO</a>
+        </div>
         <hr>
     </div>
 </div>

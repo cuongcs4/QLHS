@@ -1,5 +1,5 @@
 const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
-
+const Subject = require("../../../ModelClass/Class/Subject");
 const getSchedule = async (req, res, next) => {
   let { year, semester } = req.query;
   //Lấy tất cả các học kỳ đã có

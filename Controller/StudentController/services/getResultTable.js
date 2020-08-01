@@ -1,5 +1,4 @@
 const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
-
 const getResultTable = async (req, res, next) => {
   let { year, semester } = req.query;
   //Lấy tất cả các học kỳ đã có
