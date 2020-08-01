@@ -92,4 +92,11 @@ router.get(
   teacherController.getReExamination
 );
 
+router.post(
+  "/reexamine",
+  checkLogin,
+  checkTeacher,
+  teacherController.postReExamination
+);
+
 module.exports = router;

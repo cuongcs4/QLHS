@@ -122,12 +122,14 @@ const postManagerClassScoreExportExcel = async (req, res, next) => {
     console.log(listScore);
 
     const path = await exportFileExcel(
-      `Bảng điểm tổng kết ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}`,
       listScore,
       formatFileExcel.compositeTranscriptFormat
     );
 
-    res.download(path);
+    res.download(
+      path,
+      `Bảng điểm tổng kết ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}`
+    );
     deleteFile(path);
 
     return;

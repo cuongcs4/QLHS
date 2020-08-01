@@ -2,6 +2,8 @@ const excel = require("excel4node");
 const path = require("path");
 const flagClass = require("../resource/Flag");
 
+const generateGUID = require("../../Helper/services/generateGUID");
+
 const fileScore = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/Điểm 12A1.xlsx";
 const fileConduct = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/hạnh kiểm.xlsx";
 
@@ -10,7 +12,7 @@ const formatFileExcel = require("../resource/formatFileExcel");
 
 const process = require("process");
 
-const exportFileExcel = async (fileName, data, format) => {
+const exportFileExcel = async (data, format) => {
   // Create a new instance of a Workbook class
   const workbook = new excel.Workbook({ dateFormat: "mm/dd/yyyy" });
 
@@ -124,8 +126,11 @@ const exportFileExcel = async (fileName, data, format) => {
     }
   }
 
+  const fileName = generateGUID();
+
   workbook.write(`./public/${fileName}.xlsx`);
 
+  //Chờ trong 100ms để đảm bảo file đã được ghi xong
   await new Promise((resolve) => setTimeout(resolve, 100));
 
   return `./public/${fileName}.xlsx`;

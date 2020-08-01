@@ -1,5 +1,6 @@
 const Class = require("../../../ModelClass/Class/Class");
 const Student = require("../../../ModelClass/Class/Student");
+const Relatives = require("../../../ModelClass/Class/Relatives");
 
 const getManagerClass = async (req, res, next) => {
   const classID = req.user.getClassID();
@@ -13,6 +14,13 @@ const getManagerClass = async (req, res, next) => {
   for (let i = 0; i < listStudent.length; i++) {
     const { id, identityCard, fullName, dob, address } = listStudent[i];
 
+    const listRelatives = await Relatives.Find(id);
+
+    const listRelativeView = listRelatives.map((item) => {
+      const { relative, phoneNumber } = item;
+      return `${phoneNumber}-${relative}`;
+    });
+
     listStudentView.push({
       id: i + 1,
       username: id,
@@ -20,6 +28,7 @@ const getManagerClass = async (req, res, next) => {
       fullName,
       dob: `${dob.getDate()}-${dob.getMonth() + 1}-${dob.getFullYear()}`,
       address,
+      listRelativeView,
     });
   }
   console.log(listStudentView);

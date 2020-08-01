@@ -57,14 +57,16 @@ const postStudentInClassExportExcel = async (req, res, next) => {
   }
 
   const path = await exportFileExcel(
-    `Bảng điểm tổng kết môn ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}`,
     listScoreView,
     formatFileExcel.scoreFormatExport
   );
 
   //res.send(path);
 
-  res.download(path);
+  res.download(
+    path,
+    `Bảng điểm tổng kết môn ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}.xlsx`
+  );
   deleteFile(path);
 
   return;

@@ -6,11 +6,21 @@ const flagClass = require("../ModelClass/Helper/resource/Flag");
 
 /* GET home page. */
 router.get("/", checkLogin, (req, res, next) => {
-  res.render("index", {
-    title: "Home",
-    pagename: "Home",
-    user: req.user,
-  });
+  const typeUser = req.user.getTypeUser();
+
+  switch (typeUser) {
+    case flagClass.TYPE_USER.TEACHER:
+    case flagClass.TYPE_USER.HOMEROOM_TEACHER:
+      res.redirect("/teacher/class");
+      break;
+
+    default:
+      res.render("index", {
+        title: "Home",
+        pagename: "Home",
+        user: req.user,
+      });
+  }
 });
 
 router.get("/changePassword", checkLogin, (req, res, next) => {

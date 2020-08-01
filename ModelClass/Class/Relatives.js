@@ -1,5 +1,7 @@
 //Sơ đồ lớp của Relatives
 
+const ExecuteSQL = require("../Database/ExecuteSQL");
+
 const Relatives = class {
   constructor(studentID, relative, fullName, phoneNumber) {
     this.studentID = studentID || null;
@@ -33,7 +35,16 @@ const Relatives = class {
     this.phoneNumber = newPhoneNumber;
   }
 
-  static find() {}
+  static async Find(studentID) {
+    const sqlQuery =
+      `SELECT NT.quanhe AS relative, NT.sdt AS phoneNumber ` +
+      `FROM NGUOITHAN AS NT ` +
+      `WHERE NT.mahs='${studentID}'`;
+
+    const result = await ExecuteSQL(sqlQuery);
+
+    return result;
+  }
 
   static save() {}
 };

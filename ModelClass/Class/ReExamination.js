@@ -18,6 +18,7 @@ const ReExamine = class {
     response,
     status
   ) {
+    this.id = id || generateGUID();
     this.semester = semester || null;
     this.studentID = studentID || null;
     this.teacherID = teacherID || null;
@@ -25,6 +26,10 @@ const ReExamine = class {
     this.content = content || null;
     this.response = response || null;
     this.status = status || null;
+  }
+
+  getID() {
+    return this.id;
   }
 
   getSemester() {
@@ -63,7 +68,7 @@ const ReExamine = class {
 
   static async Find({ studentID, teacherID }, semesterID, yearStart, yearEnd) {
     if (typeof semesterID == "undefined") {
-      const latestSemester = await Semester.GetLatestSemester();
+      const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();
@@ -82,13 +87,13 @@ const ReExamine = class {
 
     if (teacherID) {
       const sqlQuery =
-        `SELECT * ` +
-        `FROM PHUCKHAO AS PK ` +
+        `SELECT PK.mapk AS id, PK.mahs AS studentID, HS.hoten AS studentName, HS.malop AS classID, PK.noidung AS content, PK.phanhoi AS response, PK.trangthai AS status ` +
+        `FROM PHUCKHAO AS PK INNER JOIN HOCSINH AS HS ON PK.mahs=HS.mahs ` +
         `WHERE PK.magv='${teacherID}' AND PK.mahk=${semesterID} AND PK.nambd=${yearStart} AND PK.namkt=${yearEnd}`;
 
       const result = await ExecuteSQL(sqlQuery);
 
-      return result.length === 0 ? null : result;
+      return result;
     }
   }
 
@@ -96,7 +101,7 @@ const ReExamine = class {
     const sqlQuery =
       `UPDATE PHUCKHAO ` +
       `SET phanhoi='${reExamine.getResponse()}', trangthai=${reExamine.getStatus()} ` +
-      `WHERE mahs='${1}' `;
+      `WHERE mapk='${reExamine.getID()}' `;
 
     await ExecuteSQL(sqlQuery);
 

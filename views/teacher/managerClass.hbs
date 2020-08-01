@@ -31,7 +31,12 @@
                         <td>{{fullName}}</td>
                         <td>{{dob}}</td>
                         <td>{{address}}</td>
-                        <td></td>
+
+                        <td>
+                            {{#each listRelativeView}}
+                            {{this}}<br>
+                            {{/each}}
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

@@ -1,6 +1,6 @@
 <div class="row">
 
-    <form class="semester labelSemester ml-2 mb-2" action="/teacher/class" method="GET">
+    <form class="semester labelSemester ml-2 mb-2" action="/teacher/reExamine" method="GET">
         <span align="center">
             <span>Năm học:</span>
             <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer;" name="year"
@@ -35,28 +35,117 @@
                 style="font-size: 12px; color: black">
                 <thead>
                     <tr>
-                        <th style="width: 10%;">MÃ HS</th>
-                        <th style="width: 20%;">HỌ TÊN</th>
-                        <th style="width: 5%;">LỚP</th>
-                        <th style="width: 10%;">MÃ LỚP</th>
-                        <th style="width: 5%;">CỘT ĐIỂM</th>
-                        <th style="width: 40%;">GHI CHÚ</th>
-                        <th style="width: 10%;">TRẠNG THÁI</th>
+                        <th style="width: 10%; text-align: center;">MÃ HS</th>
+                        <th style="width: 20%; text-align: center;">HỌ TÊN</th>
+                        <th style="width: 5%; text-align: center;">LỚP</th>
+                        <th style="width: 10%; text-align: center;">MÃ LỚP</th>
+                        <th style="width: 30%; text-align: center;">NỘI DUNG</th>
+                        <th style="width: 10%; text-align: center;">TRẠNG THÁI</th>
+                        <th style="width: 10%; text-align: center;">QUẢN LÝ</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each listReExaminationView}}
                     <tr>
-                        <td>HS20180101</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>12A1</td>
-                        <td>LH201801</td>
-                        <td>1 tiết</td>
-                        <td>Em dò bài với bạn thấy đúng gần hết</td>
+                        <td>{{studentID}}</td>
+                        <td>{{studentName}}</td>
+                        <td>{{className}}</td>
+                        <td>{{classID}}</td>
+                        <td>{{content}}</td>
+                        {{#if status}}
                         <td>Đã phản hồi</td>
+                        {{else}}
+                        <td>Chưa phản hồi</td>
+                        {{/if}}
+                        <td style="width: 10%; text-align:center"><a href="#" data-toggle="modal"
+                                data-target="#{{dataTarget}}" aria-hidden="true">Chi tiết</a></td>
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>
         <hr>
     </div>
 </div>
+
+{{#each listReExaminationView}}
+<div class="modal fade" id="{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/teacher/reExamine" style="width: 120%;" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Chi tiết đơn phúc khảo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>
+                    <input name="studentID" type="text" id="defaultForm-studentID" class="form-control validate"
+                        value="{{studentID}}" readonly>
+                </div>
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
+                        sinh</label>
+                    <input type="text" id="defaultForm-studentName" class="form-control validate"
+                        value="{{studentName}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Lớp</label>
+                    <input type="text" id="defaultForm-score1" class="form-control validate" value="{{className}}"
+                        readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Mã lớp</label>
+                    <input name="classID" type="text" id="defaultForm-score1" class="form-control validate"
+                        value="{{classID}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Nội dung</label>
+
+                    <textarea name="content" style="resize: none; height: 10em;" type="text" class="form-control" id=""
+                        placeholder="nội dung" readonly>{{content}}</textarea>
+                </div>
+
+                {{#if status}}
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Phản hồi</label>
+
+                    <textarea name="response" style="resize: none; height: 10em;" type="text" class="form-control" id=""
+                        placeholder="phản hồi" readonly>{{response}}</textarea>
+                </div>
+                {{else}}
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-score1">Phản hồi</label>
+
+                    <textarea name="response" style="resize: none; height: 10em;" type="text" class="form-control" id=""
+                        placeholder="phản hồi">{{response}}</textarea>
+                </div>
+                {{/if}}
+
+
+
+                <div>
+                    <input name="id" type="text" value="{{id}}" style="display: none;">
+                    <input name="status" type="text" value="{{status}}" style="display: none;">
+                    <input name="semesterID" type="text" value="{{semesterID}}" style="display: none;">
+                    <input name="yearStart" type="text" value="{{yearStart}}" style="display: none;">
+                    <input name="yearEnd" type="text" value="{{yearEnd}}" style="display: none;">
+                    <input name="teacherID" type="text" value="{{teacherID}}" style="display: none;">
+                    <input name="subjectID" type="text" value="{{subjectID}}" style="display: none;">
+                </div>
+            </div>
+
+            {{#if status}}
+            {{else}}
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
+            </div>
+            {{/if}}
+
+        </form>
+    </div>
+</div>
+{{/each}}
