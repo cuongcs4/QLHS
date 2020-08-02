@@ -122,6 +122,16 @@ INSERT INTO NGUOIDUNG
 VALUES
     ('admin', 'admin', '215487789', 5);
 
+/*NHANVIEN (GIAOVU)*/
+INSERT INTO NGUOIDUNG
+    (tenDangNhap, matKhau, cmnd, loai)
+VALUES
+    ('NV01', 'NV01', '215487789', 4);
+INSERT INTO NGUOIDUNG
+    (tenDangNhap, matKhau, cmnd, loai)
+VALUES
+    ('NV02', 'NV02', '215487789', 4);
+
 /*HOCSINH*/
 
 /*HS2018*/
@@ -821,6 +831,16 @@ INSERT INTO NHANVIEN
     (manv, hoten, ngaysinh, gioitinh, diachi, sdt, trangthai, maloainv)
 VALUES
     ('admin', N'Admin', '2020-1-1', 1, N'admin', '0', 1, 'admin');
+
+INSERT INTO NHANVIEN
+    (manv, hoten, ngaysinh, gioitinh, diachi, sdt, trangthai, maloainv)
+VALUES
+    ('NV01', N'Nguyễn Văn V', '1960-1-1', 1, N'2 Bà Trưng, Hà Nội', '123456789', 1, 'GiaoVu');
+
+INSERT INTO NHANVIEN
+    (manv, hoten, ngaysinh, gioitinh, diachi, sdt, trangthai, maloainv)
+VALUES
+    ('NV02', N'Nguyễn Văn V1', '1960-1-1', 1, N'Cầu Giấy, Hà Nội', '123456789', 1, 'GiaoVu');
 
 
 /*HOCKY*/

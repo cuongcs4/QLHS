@@ -40,6 +40,9 @@ const configPassport = (passport) => {
         });
       }
 
+      console.log("USER");
+      console.log(user);
+
       return done(null, user);
 
       // bcrypt.compare(password, user.password, function (err, result) {

@@ -449,51 +449,90 @@ const EmployeeTrainingDepartment = class extends Employee {
   editQuestionSurvey() {}
 
   static async Find(userName) {
-    const condition = typeof userName == "undefined" ? "1" : "0";
-    const sqlQuery =
-      `SELECT * ` +
-      `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv = ND.tenDangNhap ` +
-      `WHERE NV.manv='${userName}' or ${condition}`;
+    if (typeof userName === "undefined") {
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv=ND.tenDangNhap`;
 
-    const result = await ExecuteSQL(sqlQuery);
+      const result = await ExecuteSQL(sqlQuery);
 
-    if (result.length !== 0) {
-      const listEmployees = [];
-      for (let i = 0; i < result.length; i++) {
-        const employeeOnDB = result[i];
+      if (result.length !== 0) {
+        const listEmployees = [];
+        for (let i = 0; i < result.length; i++) {
+          const employeeOnDB = result[i];
 
-        const id = employeeOnDB.id;
-        const username = employeeOnDB.magv;
-        const password = employeeOnDB.matkhau;
-        const identityCard = employeeOnDB.cmnd;
-        const fullName = employeeOnDB.hoten;
-        const dob = new Date(employeeOnDB.dob);
-        const gender = employeeOnDB[0].gioitinh;
-        const address = employeeOnDB.diachi;
-        const status = employeeOnDB.trangthai;
-        const phoneNumber = employeeOnDB.std;
-        const typeEmployee = employeeOnDB.loai;
-        const subjectID = employeeOnDB.mabm;
+          const id = employeeOnDB.manv;
+          const username = employeeOnDB.manv;
+          const password = employeeOnDB.matKhau;
+          const identityCard = employeeOnDB.cmnd;
+          const fullName = employeeOnDB.hoten;
+          const dob = new Date(employeeOnDB.ngaysinh);
+          const gender = employeeOnDB.gioitinh;
+          const address = employeeOnDB.diachi;
+          const status = employeeOnDB.trangthai;
+          const phoneNumber = employeeOnDB.std;
+          const typeEmployee = employeeOnDB.loai;
+          const typeUser = flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT;
 
-        listEmployees.push(
-          new EmployeeTrainingDepartment(
-            id,
-            username,
-            password,
-            identityCard,
-            fullName,
-            dob,
-            gender,
-            address,
-            status,
-            phoneNumber,
-            typeEmployee,
-            subjectID
-          )
-        );
-        return listEmployees;
+          listEmployees.push(
+            new EmployeeTrainingDepartment(
+              id,
+              username,
+              password,
+              identityCard,
+              fullName,
+              dob,
+              gender,
+              address,
+              status,
+              typeUser,
+              phoneNumber,
+              typeEmployee
+            )
+          );
+          return listEmployees;
+        }
       }
       return null;
+    } else {
+      const sqlQuery =
+        `SELECT * ` +
+        `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv=ND.tenDangNhap ` +
+        `WHERE NV.manv='${userName}'`;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length === 0) return null;
+
+      const employeeOnDB = result[0];
+
+      const id = employeeOnDB.manv;
+      const username = employeeOnDB.manv;
+      const password = employeeOnDB.matKhau;
+      const identityCard = employeeOnDB.cmnd;
+      const fullName = employeeOnDB.hoten;
+      const dob = new Date(employeeOnDB.ngaysinh);
+      const gender = employeeOnDB.gioitinh;
+      const address = employeeOnDB.diachi;
+      const status = employeeOnDB.trangthai;
+      const phoneNumber = employeeOnDB.std;
+      const typeEmployee = employeeOnDB.loai;
+      const typeUser = flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT;
+
+      return new EmployeeTrainingDepartment(
+        id,
+        username,
+        password,
+        identityCard,
+        fullName,
+        dob,
+        gender,
+        address,
+        status,
+        typeUser,
+        phoneNumber,
+        typeEmployee
+      );
     }
   }
 };
