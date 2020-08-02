@@ -38,7 +38,7 @@ const Relatives = class {
 
   static async Find(studentID) {
     const sqlQuery =
-      `SELECT NT.quanhe AS relative, NT.sdt AS phoneNumber ` +
+      `SELECT NT.quanhe AS relative, NT.hoten AS fullName, NT.sdt AS phoneNumber ` +
       `FROM NGUOITHAN AS NT ` +
       `WHERE NT.mahs='${studentID}'`;
 

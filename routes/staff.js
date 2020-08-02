@@ -18,6 +18,12 @@ router.get(
 );
 
 router.post("/student", checkLogin, checkStaff, staffController.postStudent);
+router.post(
+  "/new-student",
+  checkLogin,
+  checkStaff,
+  staffController.postNewStudent
+);
 
 router.get("/exam", checkLogin, checkStaff, staffController.getExam);
 

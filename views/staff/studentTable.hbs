@@ -1,13 +1,26 @@
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col d-flex justify-content-center">
+        <form class="form-inline d-flex justify-content-end" action="/staff/student/{{classID}}">
+            <input style="height: 35px" name="studentID" class="form-control mr-sm-2" type="search"
+                placeholder="Mã học sinh" aria-label="Search">
+            <button style="height: 35px" class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm</button>
+        </form>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
         <div class="row">
             <a class="labelSemester semester ml-2 mb-2" href="/staff/class">Quay lại</a>
         </div>
     </div>
-    <div class="col-md-6 d-flex justify-content-end">
-        <div class="row">
-            <p class="labelSemester semester ml-2 mb-2">GVCN: {{managerClassName}}</p>
-        </div>
+    <div class="col-md-6 d-flex justify-content-center">
+        <p class="labelSemester semester ml-2 mb-2">GVCN: {{managerClassName}}</p>
+
+    </div>
+    <div class="col-md-3 d-flex justify-content-end">
+        <a class="labelSemester semester" style="cursor: pointer;" data-toggle="modal" data-target="#newStudent"
+            aria-hidden="true">Thêm học sinh</a>
     </div>
 </div>
 
@@ -23,7 +36,7 @@
                         <th style="text-align: center;">NGÀY SINH</th>
                         <th style="text-align: center;">ĐỊA CHỈ</th>
                         <th style="text-align: center;">TRẠNG THÁI</th>
-                        <th style="text-align: center;">KHÓA/MỞ</th>
+                        <th style="text-align: center;">CHI TIẾT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,16 +47,17 @@
                         <td style="text-align: center;">{{fullName}}</td>
                         <td style="text-align: center;">{{dob}}</td>
                         <td style="text-align: center;">{{address}}</td>
-
                         {{#if isLock}}
                         <td style="text-align: center; color: red;">{{status}}</td>
-                        <td style="text-align: center;"><a href="#" style="color: blue;" class="fa fa-pencil-square-o"
-                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true">Mở</a></td>
+                        {{!-- <td style="text-align: center;"><a href="#" style="color: blue;" class="fa fa-pencil-square-o"
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true">Mở</a></td> --}}
                         {{else}}
                         <td style="text-align: center; color: blue">{{status}}</td>
-                        <td style="text-align: center"><a href="#" class="fa fa-pencil-square-o" data-toggle="modal"
-                                data-target="#{{dataTarget}}" aria-hidden="true">Khóa</a></td>
+                        {{!-- <td style="text-align: center"><a href="#" class="fa fa-pencil-square-o" data-toggle="modal"
+                                data-target="#{{dataTarget}}" aria-hidden="true">Khóa</a></td> --}}
                         {{/if}}
+                        <td style="text-align: center;"><a href="#" data-toggle="modal" data-target="#{{dataTarget}}"
+                                aria-hidden="true">Chi tiết</a></td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -58,11 +72,8 @@
     <div class="modal-dialog" role="document">
         <form class="modal-content" action="/staff/student" method="POST">
             <div class="modal-header text-center">
-                {{#if isLock}}
-                <h4 class="modal-title w-100 font-weight-bold">Mở khóa tài khoản học sinh</h4>
-                {{else}}
-                <h4 class="modal-title w-100 font-weight-bold">Khóa tài khoản học sinh</h4>
-                {{/if}}
+
+                <h4 class="modal-title w-100 font-weight-bold">Thông tin học sinh</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -80,10 +91,41 @@
                         readonly>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Mã lớp</label>
-                    <input name="classID" type="text" id="defaultForm-studentClassID"
-                        class="form-control validate readonly" value="{{classID}}" readonly>
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Ngày sinh</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{dob}}" readonly>
                 </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Giới tính</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{gender}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Địa chỉ</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{address}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Họ tên Ba</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{dad.fullName}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">SĐT Ba</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{dad.phoneNumber}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">Họ tên Mẹ</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{mom.fullName}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-studentClassID">SĐT Mẹ</label>
+                    <input type="text" id="defaultForm-studentClassID" class="form-control validate readonly"
+                        value="{{mom.phoneNumber}}" readonly>
+                </div>
+
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-studentStatus">Trạng thái</label>
                     {{#if isLock}}
@@ -97,6 +139,7 @@
                 </div>
 
                 <div style="display:none">
+                    <input name="classID" value="{{classID}}" readonly>
                     {{#if isLock}}
                     <input name="status" value="1" readonly>
                     {{else}}
@@ -119,3 +162,68 @@
 </div>
 
 {{/each}}
+
+<div class="modal fade" id="newStudent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/staff/new-student" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Thêm học sinh</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Họ tên</label>
+                    <input name="fullName" type="text" id="defaultForm-teacherID" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Ngày sinh</label>
+                    <input name="dob" type="text" id="defaultForm-roomID" class="form-control validate"
+                        placeholder="mm/dd/yyyy" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Giới tính</label>
+                    <input name="gender" type="number" min="0" max="1" id="defaultForm-startDate"
+                        class="form-control validate" placeholder="0-nữ, 1-nam" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">CMND</label>
+                    <input name="identityCard" type="text" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Địa chỉ</label>
+                    <input name="address" type="text" id="defaultForm-startDate" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Họ tên Ba</label>
+                    <input name="dadFullName" type="text" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">SĐT Ba</label>
+                    <input name="dadPhoneNumber" type="text" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Họ tên Mẹ</label>
+                    <input name="momFullName" type="text" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">SĐT Mẹ</label>
+                    <input name="momPhoneNumber" type="text" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div style="display: none;">
+                    <input name="classID" type="text" value="{{classID}}" readonly>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>

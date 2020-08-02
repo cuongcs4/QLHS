@@ -99,6 +99,8 @@ const postClass = async (req, res, next) => {
       momPhoneNumber,
     } = data[i];
 
+    console.log(gender);
+
     let newID = `0${i + 1}`;
     newID = newID.slice(newID.length - 2, newID.length);
     const studentID = `HS${course}${newClassIDString}${newID}`;
@@ -118,7 +120,7 @@ const postClass = async (req, res, next) => {
 
     await Student.Save(newStudent);
 
-    const newDad = new Relatives(studentID, "Cha", dad, dadPhoneNumber);
+    const newDad = new Relatives(studentID, "Ba", dad, dadPhoneNumber);
     await Relatives.Save(newDad);
     const newMom = new Relatives(studentID, "Me", mom, momPhoneNumber);
     await Relatives.Save(newMom);
