@@ -60,7 +60,7 @@ router.get("/profile", checkLogin, async (req, res, next) => {
 
   res.render("profile", {
     title: "Profile",
-    style: ["styleProfile.css"],
+    style: ["styleProfile.css", "styleTable.css"],
     pagename: "Thông tin cá nhân",
     user,
   });

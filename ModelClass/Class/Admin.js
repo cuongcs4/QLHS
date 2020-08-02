@@ -29,7 +29,6 @@ const Admin = class extends Employee {
     status,
     typeUser,
     phoneNumber,
-    typeEmployee
   ) {
     super(
       id,
@@ -43,7 +42,6 @@ const Admin = class extends Employee {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee
     );
   }
 
@@ -83,10 +81,10 @@ const Admin = class extends Employee {
   }
 
   async createNewEmployee(employee) {
-    if (employee.typeEmployee === flagClass.TYPE_USER.TEACHER) {
+    if (employee.typeUser === flagClass.TYPE_USER.TEACHER) {
       await Teacher.Save(employee);
     } else if (
-      employee.typeEmployee === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT
+      employee.typeUser === flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT
     ) {
       await EmployeeTrainingDepartment.Save(employee);
     }
@@ -140,7 +138,6 @@ const Admin = class extends Employee {
     const address = adminOnDB[0].diachi;
     const status = adminOnDB[0].trangthai;
     const phoneNumber = adminOnDB[0].std;
-    const typeEmployee = flagClass.TYPE_USER.ADMIN;
     const typeUser = flagClass.TYPE_USER.ADMIN;
 
     return new Admin(
@@ -155,7 +152,6 @@ const Admin = class extends Employee {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee
     );
   }
 };

@@ -28,7 +28,6 @@ const Teacher = class extends Employee {
     status,
     typeUser,
     phoneNumber,
-    typeEmployee,
     subjectID
   ) {
     super(
@@ -43,9 +42,8 @@ const Teacher = class extends Employee {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee
     );
-    this.subjectID = subjectID || null;
+    this.subjectID = subjectID || "Unknown";
   }
 
   getSubjectID() {
@@ -162,7 +160,6 @@ const Teacher = class extends Employee {
           const address = teacherOnDB.diachi;
           const status = teacherOnDB.trangthai;
           const phoneNumber = teacherOnDB.sdt;
-          const typeEmployee = teacherOnDB.loai;
           const subjectID = teacherOnDB.mabm;
           const typeUser = flagClass.TYPE_USER.TEACHER;
 
@@ -179,7 +176,6 @@ const Teacher = class extends Employee {
               status,
               typeUser,
               phoneNumber,
-              typeEmployee,
               subjectID
             )
           ); 
@@ -210,8 +206,8 @@ const Teacher = class extends Employee {
     const address = teacherOnDB.diachi;
     const status = teacherOnDB.trangthai;
     const phoneNumber = teacherOnDB.std;
-    const typeEmployee = teacherOnDB.loai;
     const subjectID = teacherOnDB.mabm;
+    const typeUser = flagClass.TYPE_USER.TEACHER;
 
     return new Teacher(
       id,
@@ -223,8 +219,8 @@ const Teacher = class extends Employee {
       gender,
       address,
       status,
+      typeUser,
       phoneNumber,
-      typeEmployee,
       subjectID
     );
   }
@@ -236,7 +232,7 @@ const Teacher = class extends Employee {
       teacher.username
     );
     const dobArray = teacher.dob.split("-")
-      const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
     if (isExist) {
       //update
       //1. update NGUOIDUNG
@@ -262,9 +258,9 @@ const Teacher = class extends Employee {
       return flagClass.DB.UPDATE;
     }
     //insert
-    dobFormat = `${teacher.dob.getFullYear()}-${
-      teacher.dob.getMonth() + 1
-    }-${teacher.dob.getDate()}`;
+    // dobFormat = `${teacher.dob.getFullYear()}-${
+    //   teacher.dob.getMonth() + 1
+    // }-${teacher.dob.getDate()}`;
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
@@ -277,7 +273,8 @@ const Teacher = class extends Employee {
     //2. Insert GIAOVIEN
     const sqlQuery2 =
       `INSERT INTO GIAOVIEN (magv, ngaysinh, hoten, diachi, gioitinh, sdt, mabm, trangthai) ` +
-      `VALUES ('${teacher.getUserName()}', '${dobFormat}', '${teacher.getFullName()}', '${teacher.getAddress()}', '${teacher.getGender()}', '${teacher.getPhoneNumber()}', '${teacher.getSubjectID()}', ${teacher.getStatus()})`;
+      `VALUES ('${teacher.getUserName()}', '${dobFormat}', '${teacher.getFullName()}', ` + 
+      `'${teacher.getAddress()}', '${teacher.getGender()}', '${teacher.getPhoneNumber()}', '${teacher.getSubjectID()}', ${teacher.getStatus()})`;
 
     await ExecuteSQL(sqlQuery2);
 

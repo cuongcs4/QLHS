@@ -27,7 +27,6 @@ const EmployeeTrainingDepartment = class extends Employee {
     status,
     typeUser,
     phoneNumber,
-    typeEmployee
   ) {
     super(
       id,
@@ -41,7 +40,6 @@ const EmployeeTrainingDepartment = class extends Employee {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee
     );
   }
 
@@ -470,7 +468,7 @@ const EmployeeTrainingDepartment = class extends Employee {
           const address = employeeOnDB.diachi;
           const status = employeeOnDB.trangthai;
           const phoneNumber = employeeOnDB.std;
-          const typeEmployee = employeeOnDB.loai;
+          const typeUser = employeeOnDB.loai;
 
           listEmployees.push(
             new EmployeeTrainingDepartment(
@@ -483,7 +481,7 @@ const EmployeeTrainingDepartment = class extends Employee {
               gender,
               address,
               status,
-              typeEmployee,
+              typeUser,
               phoneNumber,
             )
           );
@@ -514,9 +512,8 @@ const EmployeeTrainingDepartment = class extends Employee {
       const address = employeeOnDB.diachi;
       const status = employeeOnDB.trangthai;
       const phoneNumber = employeeOnDB.std;
-      const typeEmployee = employeeOnDB.loai;
-      const typeUser = flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT;
-
+      const typeUser = employeeOnDB.loai;
+      
       return new EmployeeTrainingDepartment(
         id,
         username,
@@ -529,7 +526,6 @@ const EmployeeTrainingDepartment = class extends Employee {
         status,
         typeUser,
         phoneNumber,
-        typeEmployee
       );
     }
   }
@@ -566,9 +562,9 @@ const EmployeeTrainingDepartment = class extends Employee {
       return flagClass.DB.UPDATE;
     }
     //insert
-    dobFormat = `${employee.dob.getFullYear()}-${
-      employee.dob.getMonth() + 1
-    }-${employee.dob.getDate()}`;
+    // dobFormat = `${employee.dob.getFullYear()}-${
+    //   employee.dob.getMonth() + 1
+    // }-${employee.dob.getDate()}`;
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +

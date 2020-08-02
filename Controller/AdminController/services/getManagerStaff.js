@@ -1,7 +1,6 @@
 const Teacher = require("../../../ModelClass/Class/Teacher");
 const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
 const Subject = require("../../../ModelClass/Class/Subject");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
 const getManagerStaff = async (req, res, next) => {
   const listTeacher = await Teacher.Find();
   const listEmployee = await Employee.Find();
@@ -18,7 +17,7 @@ const getManagerStaff = async (req, res, next) => {
         address,
         phoneNumber,
         subjectID,
-        typeEmployee,
+        typeUser,
         status 
       } = listTeacher[i];
       listTeacherView.push({
@@ -32,7 +31,7 @@ const getManagerStaff = async (req, res, next) => {
         phoneNumber,
         subjectID,
         dataTarget: `modalEditTeacher${i + 1}`,
-        typeEmployee,
+        typeUser,
         status
       });
     }

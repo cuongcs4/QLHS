@@ -219,7 +219,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `</div>` +
               `<div class="col-md-2">` +
-              `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+              `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -512,7 +512,8 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `</div>` +
             `<div class="col-md-2">` +
-            `<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />` +
+            `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thêm
+            CB-CNV</a>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +

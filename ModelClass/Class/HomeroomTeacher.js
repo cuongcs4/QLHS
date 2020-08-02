@@ -21,7 +21,6 @@ const HomeroomTeacher = class extends Teacher {
     status,
     typeUser,
     phoneNumber,
-    typeEmployee,
     subjectID,
     classID
   ) {
@@ -37,7 +36,6 @@ const HomeroomTeacher = class extends Teacher {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee,
       subjectID
     );
     this.classID = classID || null;
@@ -81,7 +79,6 @@ const HomeroomTeacher = class extends Teacher {
       address,
       status,
       phoneNumber,
-      typeEmployee,
       subjectID,
     } = teacher;
 
@@ -109,7 +106,6 @@ const HomeroomTeacher = class extends Teacher {
       status,
       typeUser,
       phoneNumber,
-      typeEmployee,
       subjectID,
       classID
     );

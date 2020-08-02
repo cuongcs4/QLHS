@@ -66,22 +66,22 @@
                                 </div>
                                 <div class="modal-body mx-3">
                                     <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã Giáo Viên</label>
-                                        <input name="username" type="text" id="defaultForm-teacherID" class="form-control validate"
-                                            value="{{username}}" readonly>
+                                        <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã
+                                            Giáo Viên</label>
+                                        <input name="username" type="text" id="defaultForm-teacherID"
+                                            class="form-control validate" value="{{username}}" readonly>
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right" for="defaultForm-teacherName">Họ
                                             Tên</label>
-                                        <input name="fullName" type="text" id="defaultForm-teacherName" class="form-control validate"
-                                            value="{{fullName}}">
+                                        <input name="fullName" type="text" id="defaultForm-teacherName"
+                                            class="form-control validate" value="{{fullName}}">
                                     </div>
                                     <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherDoB">Ngày
+                                        <label data-error="wrong" data-success="right" for="defaultForm-teacherDoB">Ngày
                                             sinh</label>
-                                        <input name="dob" type="text" id="defaultForm-teacherDoB" class="form-control validate"
-                                            value="{{dob}}">
+                                        <input name="dob" type="text" id="defaultForm-teacherDoB"
+                                            class="form-control validate" value="{{dob}}">
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right"
@@ -99,19 +99,20 @@
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-teacherAddress">Địa
                                             chỉ</label>
-                                        <input name="address" type="text" id="defaultForm-teacherAddress" class="form-control validate"
-                                            value="{{address}}">
+                                        <input name="address" type="text" id="defaultForm-teacherAddress"
+                                            class="form-control validate" value="{{address}}">
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-teacherGender">Giới
                                             tính</label>
-                                        <select name="gender" class="form-control validate" id="defaultForm-teacherGender">
+                                        <select name="gender" class="form-control validate"
+                                            id="defaultForm-teacherGender">
                                             {{#ifCond gender 1}}
                                             <option value="1" selected>Nam</option>
-                                            <option value="0" >Nữ</option>
+                                            <option value="0">Nữ</option>
                                             {{else}}
-                                            <option value="1" >Nam</option>
+                                            <option value="1">Nam</option>
                                             <option value="0" selected>Nữ</option>
                                             {{/ifCond}}
                                         </select>
@@ -120,7 +121,8 @@
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-teacherSubject">Bộ
                                             môn</label>
-                                        <select name="subjectID" class="form-control validate" id="defaultForm-teacherSubject">
+                                        <select name="subjectID" class="form-control validate"
+                                            id="defaultForm-teacherSubject">
                                             {{#each ../listSubjectView}}
                                             {{#ifCond subject ../subjectID}}
                                             <option value="{{subject}}" selected>{{subjectName}}</option>
@@ -134,12 +136,13 @@
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-teacherStatus">Trạng
                                             thái</label>
-                                        <select name="status" class="form-control validate" id="defaultForm-teacherStatus">
+                                        <select name="status" class="form-control validate"
+                                            id="defaultForm-teacherStatus">
                                             {{#ifCond status 1}}
                                             <option value="1" selected>Hoạt động</option>
-                                            <option value="0" >Ngừng hoạt động</option>
+                                            <option value="0">Ngừng hoạt động</option>
                                             {{else}}
-                                            <option value="1" >Hoạt động</option>
+                                            <option value="1">Hoạt động</option>
                                             <option value="0" selected>Ngừng hoạt động</option>
                                             {{/ifCond}}
                                         </select>
@@ -210,14 +213,14 @@
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right" for="defaultForm-employeeID">Mã
                                             giáo vụ</label>
-                                        <input type="text" name="username" id="defaultForm-employeeID" class="form-control validate"
-                                            value="{{username}}">
+                                        <input type="text" name="username" id="defaultForm-employeeID"
+                                            class="form-control validate" value="{{username}}">
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right" for="defaultForm-employeeName">Họ
                                             Tên</label>
-                                        <input type="text" name="fullName" id="defaultForm-employeeName" class="form-control validate"
-                                            value="{{fullName}}">
+                                        <input type="text" name="fullName" id="defaultForm-employeeName"
+                                            class="form-control validate" value="{{fullName}}">
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right"
@@ -243,12 +246,13 @@
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-employeeGender">Giới
                                             tính</label>
-                                        <select name="gender" class="form-control validate" id="defaultForm-employeeGender">
+                                        <select name="gender" class="form-control validate"
+                                            id="defaultForm-employeeGender">
                                             {{#ifCond gender 1}}
                                             <option value="1" selected>Nam</option>
-                                            <option value="0" >Nữ</option>
+                                            <option value="0">Nữ</option>
                                             {{else}}
-                                            <option value="1" >Nam</option>
+                                            <option value="1">Nam</option>
                                             <option value="0" selected>Nữ</option>
                                             {{/ifCond}}
                                         </select>
@@ -257,12 +261,13 @@
                                         <label data-error="wrong" data-success="right"
                                             for="defaultForm-teacherStatus">Trạng
                                             thái</label>
-                                        <select name="status" class="form-control validate" id="defaultForm-teacherStatus">
+                                        <select name="status" class="form-control validate"
+                                            id="defaultForm-teacherStatus">
                                             {{#ifCond status 1}}
                                             <option value="1" selected>Hoạt động</option>
-                                            <option value="0" >Ngừng hoạt động</option>
+                                            <option value="0">Ngừng hoạt động</option>
                                             {{else}}
-                                            <option value="1" >Hoạt động</option>
+                                            <option value="1">Hoạt động</option>
                                             <option value="0" selected>Ngừng hoạt động</option>
                                             {{/ifCond}}
                                         </select>
@@ -286,7 +291,7 @@
 </div>
 <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" action="/admin/employee/add" method="POST">
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Thêm Giáo Viên</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -295,22 +300,39 @@
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Họ Tên</label>
-                    <input type="text" id="defaultForm-userName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Mã cán bộ</label>
+                    <input name="username" type="text" id="defaultForm-userName" class="form-control validate">
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-dateOfBirth">Ngày
+                    <label data-error="wrong" data-success="right" for="defaultForm-password">Mật khẩu</label>
+                    <input name="password" type="text" id="defaultForm-password" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-identityCard">CMND</label>
+                    <input name="identityCard" type="text" id="defaultForm-identityCard" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userFullame">Họ Tên</label>
+                    <input name="fullName" type="text" id="defaultForm-userFullname" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userDoB">Ngày
                         sinh</label>
-                    <input type="text" id="defaultForm-dateOfBirth" class="form-control validate">
+                    <input name="dob" type="text" id="defaultForm-userDoB" class="form-control validate"
+                        placeholder="DD-MM-YYYY">
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-userAddress">Địa
                         chỉ</label>
-                    <input type="text" id="defaultForm-userAddress" class="form-control validate">
+                    <input name="address" type="text" id="defaultForm-userAddress" class="form-control validate">
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-phoneNumber">SĐT</label>
+                    <input name="phoneNumber" type="text" id="defaultForm-phoneNumber" class="form-control validate">
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-userGender">Giới tính</label>
-                    <select class="form-control validate" id="defaultForm-userGender">
+                    <select name="gender" class="form-control validate" id="defaultForm-userGender">
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
                     </select>
@@ -318,15 +340,24 @@
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-userType">Loại
                         CB-CNV</label>
-                    <select class="form-control validate" id="defaultForm-userType">
+                    <select name="typeUser" class="form-control validate" id="defaultForm-userType">
                         <option value="2">Giáo Viên</option>
                         <option value="4">Giáo Vụ</option>
                     </select>
                 </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectID">Bộ môn</label>
+                    <select name="subjectID" class="form-control validate" id="defaultForm-subjectID">
+                        <option value="">KHÔNG</option>
+                        {{#each listSubjectView}}
+                        <option value="{{subject}}">{{subjectName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-danger">Xác nhận</button>
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
