@@ -5,6 +5,7 @@ const getRoomExam = require("./services/getRoomExam");
 const getReport = require("./services/getReport");
 const getSurvey = require("./services/getSurvey");
 const postClass = require("./services/postClass");
+const postStudent = require("./services/postStudent");
 
 module.exports = {
   getClass,
@@ -14,4 +15,5 @@ module.exports = {
   getReport,
   getSurvey,
   postClass,
+  postStudent,
 };

@@ -17,6 +17,8 @@ router.get(
   staffController.getStudent
 );
 
+router.post("/student", checkLogin, checkStaff, staffController.postStudent);
+
 router.get("/exam", checkLogin, checkStaff, staffController.getExam);
 
 router.get("/room-exam", checkLogin, checkStaff, staffController.getRoomExam);

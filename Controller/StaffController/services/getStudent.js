@@ -28,6 +28,8 @@ const getStudent = async (req, res, next) => {
       address,
       status: status === flagClass.STATUS.ENABLE ? "Đang mở" : "Đang khóa",
       isLock: status === flagClass.STATUS.DISABLE ? true : false,
+      dataTarget:
+        status === flagClass.STATUS.DISABLE ? `lock${i + 1}` : `unlock${i + 1}`,
     });
   }
 

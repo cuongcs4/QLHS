@@ -15,11 +15,19 @@ const configPassport = (passport) => {
     console.log(id);
     const user = await getUserByUsername(id);
 
-    if (user !== null) return done(null, user);
+    if (user !== null) {
+      if (user.getStatus() === flagClass.STATUS.DISABLE) {
+        return done(null, false, {
+          message: "Tài khoản đã bị khóa",
+        });
+      } else {
+        return done(null, user);
+      }
+    }
 
     console.log("error deserializeUser");
     return done(null, false, {
-      error_msg: "Incorrect username and password",
+      message: "Incorrect username and password",
     });
   });
 
