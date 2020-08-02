@@ -1,3 +1,3 @@
 const getManagerStaff = require("./services/getManagerStaff");;
-
-module.exports = { getManagerStaff  };
+const postManagerStaff = require("./services/postManagerStaff");;
+module.exports = { getManagerStaff, postManagerStaff  };

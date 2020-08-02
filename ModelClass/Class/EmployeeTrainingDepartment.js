@@ -455,7 +455,6 @@ const EmployeeTrainingDepartment = class extends Employee {
         `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv=ND.tenDangNhap`;
 
       const result = await ExecuteSQL(sqlQuery);
-
       if (result.length !== 0) {
         const listEmployees = [];
         for (let i = 0; i < result.length; i++) {
@@ -472,7 +471,6 @@ const EmployeeTrainingDepartment = class extends Employee {
           const status = employeeOnDB.trangthai;
           const phoneNumber = employeeOnDB.std;
           const typeEmployee = employeeOnDB.loai;
-          const typeUser = flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT;
 
           listEmployees.push(
             new EmployeeTrainingDepartment(
@@ -485,13 +483,13 @@ const EmployeeTrainingDepartment = class extends Employee {
               gender,
               address,
               status,
-              typeUser,
+              typeEmployee,
               phoneNumber,
-              typeEmployee
             )
           );
-          return listEmployees;
         }
+        
+        return listEmployees;
       }
       return null;
     } else {
@@ -534,6 +532,60 @@ const EmployeeTrainingDepartment = class extends Employee {
         typeEmployee
       );
     }
+  }
+
+  static async Save(employee) {
+    const isExist = await checkExist(
+      "NGUOIDUNG",
+      "tenDangNhap",
+      employee.username
+    );
+    const dobArray = employee.dob.split("-")
+      const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    if (isExist) {
+      //update
+      //1. update NGUOIDUNG
+      const sqlQuery1 =
+        `UPDATE NGUOIDUNG ` +
+        `SET matKhau="${employee.getPassWord()}", cmnd='${employee.getIdentityCard()}' ` +
+        `WHERE tenDangNhap='${employee.getUserName()}'`;
+      await ExecuteSQL(sqlQuery1);
+
+      //2. update GIAOVIEN
+      const sqlQuery2 =
+        `UPDATE NHANVIEN ` +
+        `SET ngaysinh="${dobFormat}", ` +
+        `hoten="${employee.getFullName()}", ` +
+        `diachi="${employee.getAddress()}", ` +
+        `gioitinh="${employee.getGender()}", ` +
+        `sdt="${employee.getPhoneNumber()}", ` +
+        `trangthai=${employee.getStatus()} ` +
+        `WHERE manv="${employee.getUserName()}"`;
+      await ExecuteSQL(sqlQuery2);
+
+      return flagClass.DB.UPDATE;
+    }
+    //insert
+    dobFormat = `${employee.dob.getFullYear()}-${
+      employee.dob.getMonth() + 1
+    }-${employee.dob.getDate()}`;
+    //1. Insert NGUOIDUNG
+    const sqlQuery1 =
+      `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
+      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', ${
+        flagClass.TYPE_USER.employee
+      })`;
+
+    await ExecuteSQL(sqlQuery1);
+
+    //2. Insert GIAOVIEN
+    const sqlQuery2 =
+      `INSERT INTO NHANVIEN (manv, ngaysinh, hoten, diachi, std, trangthai) ` +
+      `VALUES ('${employee.getUserName()}', '${dobFormat}', '${employee.getFullName()}', '${employee.getAddress()}', '${employee.getPhoneNumber()}', ${employee.getStatus()})`;
+
+    await ExecuteSQL(sqlQuery2);
+
+    return flagClass.DB.NEW;
   }
 };
 

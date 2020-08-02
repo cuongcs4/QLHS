@@ -576,10 +576,18 @@ const registerProfile = (handlebars) => {
     }
   });
 };
-
+const registerIfHelp = (handlebars) => {
+  handlebars.registerHelper("ifCond", function (v1, v2, options) {
+    if (v1 === v2) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
+};
 const registerAll = (handlebars) => {
   registerSideBar(handlebars);
   registerProfile(handlebars);
+  registerIfHelp(handlebars);
 };
 
 module.exports = registerAll;

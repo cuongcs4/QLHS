@@ -27,3 +27,24 @@ $(document).ready(function () {
   })
 })
 
+$(document).ready(function () {
+  $('#examTable').DataTable({
+    "searching": true,
+    "ordering": true,
+    "paging": false,
+    "info":     false
+  })
+})
+
+$(document).ready(function () {
+  $("#reExaminationTable").DataTable({
+    "searching": true,
+    "ordering": true,
+    "paging": false,
+    "info":     false,
+    "columnDefs" : [{"targets":1, "type":"date-eu"}]
+  });
+});
+
+
+

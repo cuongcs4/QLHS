@@ -30,7 +30,7 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="examTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>MÔN HỌC</th>
@@ -39,16 +39,17 @@
                         <th>TIẾT BẮT ĐẦU</th>
                     </tr>
                 </thead>
-                {{#each scheduleExam}}
+                
                 <tbody>
+                    {{#each scheduleExam}}
                     <tr>
-                        <td>{{subjectName}}</td>
-                        <td>{{dayExam}}</td>
-                        <td>{{roomName}}</td>
-                        <td>{{startSection}}</td>
+                        {{#each this}}
+                        <td>{{this}}</td>
+                        {{/each}}
                     </tr>
+                    {{/each}}
                 </tbody>
-                {{/each}}
+                
             </table>
         </div>
     </div>

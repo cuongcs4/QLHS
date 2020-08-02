@@ -28,36 +28,84 @@
 </div>
 
 <div class="card shadow mb-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#score" role="tab" aria-controls="home"
+                aria-selected="true">BẢNG ĐIỂM</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#reexamination" role="tab" aria-controls="profile"
+                aria-selected="false">PHÚC KHẢO</a>
+        </li>
+    </ul>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="resultTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>MÔN HỌC</th>
-                        <th>15 PHÚT<sup>1</sup></th>
-                        <th>15 PHÚT<sup>2</sup></th>
-                        <th>1 TIẾT</th>
-                        <th>THI CUỐI KÌ</th>
-                        <th>TRUNG BÌNH</th>
-                    </tr>
-                </thead>
+        <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="score" role="tabpanel" aria-labelledby="home-tab">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="resultTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>MÔN HỌC</th>
+                                <th>15 PHÚT<sup>1</sup></th>
+                                <th>15 PHÚT<sup>2</sup></th>
+                                <th>1 TIẾT</th>
+                                <th>THI CUỐI KÌ</th>
+                                <th>TRUNG BÌNH</th>
+                            </tr>
+                        </thead>
 
-                <tbody>
-                    {{#each listScoreView}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>{{subjectName}}</td>
-                        <td>{{score1}}</td>
-                        <td>{{score2}}</td>
-                        <td>{{score3}}</td>
-                        <td>{{score4}}</td>
-                        <td>{{gpa}}</td>
-                    </tr>
+                        <tbody>
+                            {{#each listScoreView}}
+                            <tr>
+                                <td>{{id}}</td>
+                                <td>{{subjectName}}</td>
+                                <td>{{score1}}</td>
+                                <td>{{score2}}</td>
+                                <td>{{score3}}</td>
+                                <td>{{score4}}</td>
+                                <td>{{gpa}}</td>
+                            </tr>
 
-                    {{/each}}
-                </tbody>
-            </table>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="reexamination" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="reExaminationTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>MÔN HỌC</th>
+                                <th>HỌC KÌ</th>
+                                <th>NĂM HỌC</th>
+                                <th>CỘT ĐIỂM</th>
+                                <th>GHI CHÚ</th>
+                                <th>TRẠNG THÁI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Toán</td>
+                                <td>1</td>
+                                <td>2019-2020</td>
+                                <td>1 tiết</td>
+                                <td>Em dò bài với bạn thấy đúng gần hết</td>
+                                <td>GV đã phúc khảo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center">
+                    <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
+                        data-target="#modalReExaminationForm">TẠO
+                        ĐƠN PHUC KHẢO</a>
+                </div>
+                <hr>
+            </div>
         </div>
     </div>
 </div>
@@ -80,18 +128,9 @@
                         <option value="">Tiếng Anh</option>
                     </select>
                 </div>
-
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-pointType">Cột điểm</label>
-                    <select id="defaultForm-pointType" class="form-control validate">
-                        <option value="">15 phút</option>
-                        <option value="">1 tiết</option>
-                        <option value="">Thi cuối kì</option>
-                    </select>
-                </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-note">Ghi chú</label>
-                    <input type="text" id="defaultForm-note" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-note">Nội dung phúc khảo</label>
+                    <textarea name="comment" class="form-control"></textarea>
                 </div>
 
             </div>
@@ -99,41 +138,5 @@
                 <button class="btn btn-danger">Xác nhận</button>
             </div>
         </div>
-    </div>
-</div>
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Phúc khảo</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="reExaminationTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>MÔN HỌC</th>
-                        <th>HỌC KÌ</th>
-                        <th>NĂM HỌC</th>
-                        <th>CỘT ĐIỂM</th>
-                        <th>GHI CHÚ</th>
-                        <th>TRẠNG THÁI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Toán</td>
-                        <td>1</td>
-                        <td>2019-2020</td>
-                        <td>1 tiết</td>
-                        <td>Em dò bài với bạn thấy đúng gần hết</td>
-                        <td>GV đã phúc khảo</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center">
-            <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
-                data-target="#modalReExaminationForm">TẠO ĐƠN PHUC KHẢO</a>
-        </div>
-        <hr>
     </div>
 </div>

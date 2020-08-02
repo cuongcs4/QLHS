@@ -23,16 +23,18 @@ const getExamSchedule = async (req, res, next) => {
     );
   }
   //Gán lại cách hiển thị ngày coi thi
-  for (let i = 0; i < scheduleExam.length; i++) {
-    const dayExam = scheduleExam[i].dayExam;
-    scheduleExam[i].dayExam = `${dayExam.getDate()}/${
-      dayExam.getMonth() + 1
-    }/${dayExam.getFullYear()}`;
+  if (scheduleExam !== null) {
+    for (let i = 0; i < scheduleExam.length; i++) {
+      const dayExam = scheduleExam[i].dayExam;
+      scheduleExam[i].dayExam = `${dayExam.getDate()}/${
+        dayExam.getMonth() + 1
+      }/${dayExam.getFullYear()}`;
+    }
   }
 
   // render kết quảs
   res.render("student/examTable", {
-    title: "Thời khoá biểu",
+    title: "Lịch thi",
     style: ["styleTable.css"],
     user: req.user,
     scheduleExam,

@@ -42,7 +42,7 @@ const Subject = class {
           const subjectID = result[i].mabm;
           const subjectName = result[i].tenbm;
 
-          listSubjects.push(new Subject(subjectID, subjectID));
+          listSubjects.push(new Subject(subjectID, subjectName));
         }
         return listSubjects;
       }

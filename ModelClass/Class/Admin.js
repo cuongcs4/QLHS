@@ -47,9 +47,10 @@ const Admin = class extends Employee {
     );
   }
 
-  async getEmployee() {
+  static async getEmployee() {
     const listTeachers = await Teacher.Find();
     const listEmployees = await EmployeeTrainingDepartment.Find();
+    console.log(listTeachers);
     return { listTeachers, listEmployees };
   }
 
