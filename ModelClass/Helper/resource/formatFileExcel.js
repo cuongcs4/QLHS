@@ -6,16 +6,23 @@ const studentFormat = {
     D1: "CMND",
     E1: "Giới tính",
     F1: "Địa chỉ",
+    G1: "Họ tên cha",
+    H1: "Sđt",
+    I1: "Họ tên mẹ",
+    J1: "Sđt",
   },
-  propName: ["id", "fullName", "dob", "identityCard", "gender", "address"],
-  width: {
-    A1: 5,
-    B1: 20,
-    C1: 15,
-    D1: 15,
-    E1: 10,
-    F1: 40,
-  },
+  propName: [
+    "id",
+    "fullName",
+    "dob",
+    "identityCard",
+    "gender",
+    "address",
+    "dad",
+    "dadPhoneNumber",
+    "mom",
+    "momPhoneNumber",
+  ],
 };
 
 const scoreFormat = {

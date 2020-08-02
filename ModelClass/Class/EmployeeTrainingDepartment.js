@@ -46,7 +46,7 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy tất cả các lớp đang hoạt động trong nhà trường.
-  static async getClass() {
+  async getClass() {
     //Câu truy vấn lấy tất cả các lớp học đang hoạt động trong trường.
     const sqlQuery =
       `SELECT LH.malop AS classID, LH.magvcn AS managerClass, GV.hoten AS managerName, LH.namnhaphoc AS course, LH.maphong AS roomID, LH.trangthai AS status ` +
