@@ -127,19 +127,12 @@ const EmployeeTrainingDepartment = class extends Employee {
     );
   }
 
-  //Tạo mới và lưu lớp học vào cơ sở dữ liệu.
-  createNewClass(classID, managerClass, roomID, course) {
-    Class.Save(
-      new Class(classID, managerClass, roomID, course, flagClass.STATUS.ENABLE)
-    );
-  }
-
   //Lấy thời khóa biểu của lớp học
   async getSchedule(classID, semesterID, yearStart, yearEnd) {
     const sqlQuery =
-      `SELECT TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection, BM.tenbm AS subjectName, GV.hoten AS teacherFullName ` +
+      `SELECT TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection, BM.tenbm AS subjectName, GV.hoten AS teacherFullName, GV.magv AS teacherID ` +
       `FROM THOIKHOABIEU AS TKB, BOMON AS BM, GIAOVIEN AS GV ` +
-      `WHERE GV.magv=TKB.magv AND TKB.mabm=BM.mabm AND TKB.malop='${classID} AND TKB.mahk=${semesterID} AND TKB.nambd=${yearStart} AND TKB.namkt=${yearEnd}'`;
+      `WHERE GV.magv=TKB.magv AND TKB.mabm=BM.mabm AND TKB.malop='${classID}' AND TKB.mahk=${semesterID} AND TKB.nambd=${yearStart} AND TKB.namkt=${yearEnd}`;
 
     const result = await ExecuteSQL(sqlQuery);
 

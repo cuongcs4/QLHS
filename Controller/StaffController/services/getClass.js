@@ -10,6 +10,7 @@ const getAllClass = async (req, res, next) => {
 
       listClass[key][i]["className"] = await Class.GetClassName(classID);
       listClass[key][i]["link"] = `/staff/student/${classID}`;
+      listClass[key][i]["schedule"] = `/staff/schedule/${classID}`;
     }
   }
 

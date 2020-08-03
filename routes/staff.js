@@ -25,6 +25,13 @@ router.post(
   staffController.postNewStudent
 );
 
+router.get(
+  "/schedule/:classID",
+  checkLogin,
+  checkStaff,
+  staffController.getSchedule
+);
+
 router.get("/exam", checkLogin, checkStaff, staffController.getExam);
 
 router.get("/room-exam", checkLogin, checkStaff, staffController.getRoomExam);

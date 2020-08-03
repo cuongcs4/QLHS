@@ -7,6 +7,7 @@ const getSurvey = require("./services/getSurvey");
 const postClass = require("./services/postClass");
 const postStudent = require("./services/postStudent");
 const postNewStudent = require("./services/postNewStudent");
+const getSchedule = require("./services/getSchedule");
 
 module.exports = {
   getClass,
@@ -18,4 +19,5 @@ module.exports = {
   postClass,
   postStudent,
   postNewStudent,
+  getSchedule,
 };
