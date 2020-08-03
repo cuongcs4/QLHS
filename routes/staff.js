@@ -31,6 +31,7 @@ router.get(
   checkStaff,
   staffController.getSchedule
 );
+router.post("/schedule/", checkLogin, checkStaff, staffController.postSchedule);
 
 router.get("/exam", checkLogin, checkStaff, staffController.getExam);
 

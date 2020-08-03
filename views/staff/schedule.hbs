@@ -29,11 +29,12 @@
     </div>
 
     <div class="col-md-6" style="text-align:end">
+        {{#if statusSemester}}
         <div class="semester ml-2 mb-2">
             <a class="labelSemester fa fa-pencil-square-o" style="cursor: pointer;" data-toggle="modal"
                 data-target="#editSchedule" aria-hidden="true"> Sửa TKB</a>
         </div>
-
+        {{/if}}
     </div>
 </div>
 <div class="card shadow mb-4 row">
@@ -94,6 +95,7 @@
     </div>
 </div>
 
+{{#if statusSemester}}
 <div class="modal fade" id="editSchedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form class="modal-content" action="/staff/schedule" method="POST">
@@ -106,12 +108,13 @@
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã lớp</label>
-                    <input name="classID" type="text" id="defaultForm-teacherID" class="form-control validate" required
-                        readonly>
+                    <input name="classID" type="text" id="defaultForm-teacherID" class="form-control validate"
+                        value="{{classID}}" required readonly>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-roomID">Tên lớp</label>
-                    <input type="text" id="defaultForm-roomID" class="form-control validate" required readonly>
+                    <input type="text" id="defaultForm-roomID" class="form-control validate" value="{{className}}"
+                        required readonly>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-startDate">Thứ</label>
@@ -145,3 +148,4 @@
         </form>
     </div>
 </div>
+{{/if}}

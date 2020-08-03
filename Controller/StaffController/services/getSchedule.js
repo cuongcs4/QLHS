@@ -6,8 +6,9 @@ const handleSemester = require("../../../ModelClass/Helper/services/handleSemest
 const getSchedule = async (req, res, next) => {
   const classID = req.params.classID;
   const className = await Class.GetClassName(classID);
+  let statusSemester;
 
-  const { year, semester } = req.query;
+  let { year, semester } = req.query;
 
   const { allYearSemester, isLastSemester } = await handleSemester(
     year,
@@ -21,11 +22,15 @@ const getSchedule = async (req, res, next) => {
     semesterID = latestSemester.getSemesterID();
     yearStart = latestSemester.getYearStart();
     yearEnd = latestSemester.getYearEnd();
+    statusSemester = latestSemester.getStatus();
   } else {
     const yearArray = year.split("-");
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
+    statusSemester = (
+      await Semester.Find(semesterID, yearStart, yearEnd)
+    ).getStatus();
   }
 
   const listSchedule = await req.user.getSchedule(
@@ -75,6 +80,11 @@ const getSchedule = async (req, res, next) => {
     listScheduleView,
     allYearSemester,
     isLastSemester,
+    statusSemester,
+    classID,
+    className,
+    year: `${yearStart}-${yearEnd}`,
+    semesterID,
   });
 };
 
