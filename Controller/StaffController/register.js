@@ -9,6 +9,8 @@ const postStudent = require("./services/postStudent");
 const postNewStudent = require("./services/postNewStudent");
 const getSchedule = require("./services/getSchedule");
 const postSchedule = require("./services/postSchedule");
+const postExam = require("./services/postExam");
+const postEditExam = require("./services/postEditExam");
 
 module.exports = {
   getClass,
@@ -22,4 +24,6 @@ module.exports = {
   postNewStudent,
   getSchedule,
   postSchedule,
+  postExam,
+  postEditExam,
 };

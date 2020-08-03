@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 02, 2020 lúc 11:10 AM
+-- Thời gian đã tạo: Th8 03, 2020 lúc 03:18 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.7
 
@@ -472,6 +472,7 @@ CREATE TABLE `kqkhaosat` (
 --
 
 CREATE TABLE `lichthi` (
+  `malt` varchar(50) COLLATE latin1_bin NOT NULL,
   `mahk` int(11) NOT NULL,
   `nambd` int(11) NOT NULL,
   `namkt` int(11) NOT NULL,
@@ -479,6 +480,7 @@ CREATE TABLE `lichthi` (
   `mabm` varchar(15) COLLATE latin1_bin NOT NULL,
   `ngaythi` date NOT NULL,
   `tietBD` int(11) NOT NULL,
+  `khoi` int(11) NOT NULL,
   `giamthi1` varchar(15) COLLATE latin1_bin DEFAULT NULL,
   `giamthi2` varchar(15) COLLATE latin1_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
@@ -837,11 +839,12 @@ ALTER TABLE `kqkhaosat`
 -- Chỉ mục cho bảng `lichthi`
 --
 ALTER TABLE `lichthi`
-  ADD PRIMARY KEY (`mahk`,`nambd`,`namkt`,`maphong`,`mabm`,`ngaythi`,`tietBD`),
+  ADD PRIMARY KEY (`malt`),
   ADD KEY `FK_LICHTHI_PHONGHOC` (`maphong`),
   ADD KEY `FK_LICHTHI_BOMON` (`mabm`),
   ADD KEY `FK_LICHTHI_GIAOVIEN1` (`giamthi1`),
-  ADD KEY `FK_LICHTHI_GIAOVIEN2` (`giamthi2`);
+  ADD KEY `FK_LICHTHI_GIAOVIEN2` (`giamthi2`),
+  ADD KEY `FK_LICHTHI_HOCKY` (`mahk`,`nambd`,`namkt`);
 
 --
 -- Chỉ mục cho bảng `loainv`

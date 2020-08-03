@@ -150,10 +150,32 @@ const compositeTranscriptFormat = {
   },
 };
 
+const examFormat = {
+  filed: {
+    A1: "STT",
+    B1: "Mã môn",
+    C1: "Phòng thi",
+    D1: "Ngày thi",
+    E1: "Tiết bắt đầu",
+    F1: "Giám thị 1",
+    G1: "Giám thị 2",
+  },
+  propName: [
+    "id",
+    "subjectID",
+    "roomID",
+    "dayExam",
+    "startSection",
+    "supervisorID1",
+    "supervisorID2",
+  ],
+};
+
 module.exports = {
   studentFormat,
   scoreFormat,
   conductFormat,
   compositeTranscriptFormat,
   scoreFormatExport,
+  examFormat,
 };

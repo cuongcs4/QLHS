@@ -34,6 +34,8 @@ router.get(
 router.post("/schedule/", checkLogin, checkStaff, staffController.postSchedule);
 
 router.get("/exam", checkLogin, checkStaff, staffController.getExam);
+router.post("/exam", checkLogin, checkStaff, staffController.postExam);
+router.post("/edit-exam", checkLogin, checkStaff, staffController.postEditExam);
 
 router.get("/room-exam", checkLogin, checkStaff, staffController.getRoomExam);
 

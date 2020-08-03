@@ -142,13 +142,35 @@ const EmployeeTrainingDepartment = class extends Employee {
   //Lấy lịch thi của tất cả các khối theo học kỳ
   async getScheduleExam(semesterID, yearStart, yearEnd) {
     const sqlQuery =
-      `SELECT TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection, BM.tenbm AS subjectName, GV.hoten AS teacherFullName ` +
-      `FROM THOIKHOABIEU AS TKB, BOMON AS BM, GIAOVIEN AS GV ` +
-      `WHERE GV.magv=TKB.magv AND TKB.mabm=BM.mabm AND TKB.malop='${classID} AND TKB.mahk=${semesterID} AND TKB.nambd=${yearStart} AND TKB.namkt=${yearEnd}'`;
+      `SELECT LT.malt AS id, LT.mahk AS semesterID, LT.nambd AS yearStart, LT.namkt AS yearEnd, ` +
+      `LT.maphong AS roomID, LT.mabm AS subjectID, LT.ngaythi AS dayExam, ` +
+      `LT.tietBD as section, LT.khoi AS class, LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +
+      `FROM LICHTHI AS LT ` +
+      `WHERE LT.mahk=${semesterID} AND LT.nambd=${yearStart} AND LT.namkt=${yearEnd}`;
 
     const result = await ExecuteSQL(sqlQuery);
 
-    return result;
+    const listScheduleExam10 = [];
+    const listScheduleExam11 = [];
+    const listScheduleExam12 = [];
+
+    for (let i = 0; i < result.length; i++) {
+      switch (result[i].class) {
+        case 10:
+          listScheduleExam10.push(result[i]);
+          break;
+
+        case 11:
+          listScheduleExam11.push(result[i]);
+          break;
+
+        case 12:
+          listScheduleExam12.push(result[i]);
+          break;
+      }
+    }
+
+    return { listScheduleExam10, listScheduleExam11, listScheduleExam12 };
   }
 
   //Lấy danh sách các phòng thi

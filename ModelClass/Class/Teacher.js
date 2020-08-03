@@ -131,7 +131,7 @@ const Teacher = class extends Employee {
 
   async getScheduleExam(semesterID, yearStart, yearEnd) {
     const result = await ExamPlan.Find(
-      { studentID: null, teacherID: this.id },
+      { studentID: null, teacherID: this.id, id: null },
       semesterID,
       yearStart,
       yearEnd
@@ -180,7 +180,7 @@ const Teacher = class extends Employee {
               typeEmployee,
               subjectID
             )
-          ); 
+          );
         }
         return listTeachers;
       }
