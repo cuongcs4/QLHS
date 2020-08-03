@@ -1,90 +1,198 @@
 <div class="row">
-    <div class="semester ml-2 mb-2">
-        <p class="labelSemester">Năm học: 2019-2020</p>
-    </div>
-    <form class="form-inline labelSemester ml-2 mb-2" action="" method="GET" onchange="submit()">
-        <div class="semester form-group"> 
-                <lable for="semester">Học kì :</lable>
-                <select class="semester mb-1 accordion" style="border: none; color:blanchedalmond; height:auto !important" name="semester" id="semester">
+    <div class="col col-md-9">
+        <form class="semester labelSemester" method="GET">
+            <span align="center">
+                <span>Năm học:</span>
+                <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer" name="year"
+                    onchange="this.form.submit();">
+                    {{#each allYearSemester}}
+                    {{#if this}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/if}}
+                    {{/each}}
+                </select>
+            </span>
+            <span align="center">
+                <span>Học kì:</span>
+                <select class="semester" style="border: none; color:blanchedalmond; cursor: pointer" name="semester"
+                    onchange="this.form.submit();">
+                    {{#if isLastSemester}}
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    {{else}}
                     <option value="1">1</option>
                     <option value="2">2</option>
+                    {{/if}}
                 </select>
+            </span>
+            <span align="center">
+                <span>Khối:</span>
+                <select class="semester" style="border: none; color:blanchedalmond; cursor: pointer" name="claSs"
+                    onchange="this.form.submit();">
+                    {{#each listClaSs}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </span>
+        </form>
+    </div>
+
+    <div class="col-md-3" style="text-align:end">
+        {{#if statusSemester}}
+        <div class="semester ml-2 mb-2">
+            <a class="labelSemester fa fa-pencil-square-o" style="cursor: pointer;" data-toggle="modal"
+                data-target="#newExam" aria-hidden="true"> Thêm lịch thi</a>
         </div>
-        <div class="semester form-group ml-2">
-                <lable for="grade">Khối :</lable>
-                <select class="semester mb-1 form-control" style="border: none; color:blanchedalmond; height:auto !important" name="grade" id="grade">
-                    <option value="all">Tất cả </option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                </select>   
-        </div>
-    </form>
+        {{/if}}
+    </div>
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <div style="text-align: center; font-size: 2em; color: black">LỚP {{claSs}}</div>
+            <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>MÔN HỌC</th>
-                        <th>NGÀY THI</th>
-                        <th>PHÒNG THI</th>
-                        <th>THỜI GIAN BẮT ĐẦU</th>
-                        <th>GIÁM THỊ 1</th>
-                        <th>GIÁM THỊ 2</th>
-                        <th></th>
+                        <th style="text-align: center;">MÔN</th>
+                        <th style="text-align: center;">MÃ</th>
+                        <th style="text-align: center;">PHÒNG THI</th>
+                        <th style="text-align: center;">NGÀY THI</th>
+                        <th style="text-align: center;">TIẾT BĐ</th>
+                        <th style="text-align: center;">GIÁM THỊ 1</th>
+                        <th style="text-align: center;">GIÁM THỊ 2</th>
+                        {{#if statusSemester}}
+                        <th style="text-align: center;">SỬA</th>
+                        {{/if}}
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each listScheduleExam}}
                     <tr>
-                        <td>Toán</td>
-                        <td>23/07/2020</td>
-                        <td>A101</td>
-                        <td>3</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nguyễn Văn b</td>
-                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalExamEdit"
-                                aria-hidden="true"></i></td>
+                        <td style="text-align: center;">{{subjectName}}</td>
+                        <td style="text-align: center;">{{subjectID}}</td>
+                        <td style="text-align: center;">{{roomName}}</td>
+                        <td style="text-align: center;">{{dayExam}}</td>
+                        <td style="text-align: center;">{{section}}</td>
+                        <td style="text-align: center;">
+                            <div>{{supervisor1}}</div>
+                            <hr style="margin: 0;">
+                            <div>{{supervisorID1}}</div>
+                        </td>
+                        <td style="text-align: center;">
+                            <div>{{supervisor2}}</div>
+                            <hr style="margin: 0;">
+                            <div>{{supervisorID2}}</div>
+                        </td>
+
+                        {{#if statusSemester}}
+                        <td style="text-align: center; cursor: pointer"><i class="fa fa-pencil-square-o"
+                                data-toggle="modal" data-target="#{{dataTarget}}" aria-hidden="true"></i></td>
+                        {{/if}}
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalExamEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+
+
+{{#if statusSemester}}
+{{#each listScheduleExam}}
+<div class="modal fade" id="{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" action="/staff/edit-exam" method="POST">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Sửa lịch thi</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Sửa lịch thi khối {{claSs}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Mã môn học</label>
+                    <input name="subjectID" type="text" id="defaultForm-roomID" class="form-control validate"
+                        value="{{subjectID}}" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Phòng thi</label>
+                    <input name="roomID" type="text" id="defaultForm-startTime" class="form-control validate"
+                        value="{{roomID}}" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Ngày thi</label>
+                    <input name="dayExam" type="text" id="defaultForm-startTime" class="form-control validate"
+                        value="{{dayExamInput}}" placeholder="mm/dd/yyyy" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Tiết thi</label>
+                    <input name="section" type="number" min="1" max="10" id="defaultForm-startTime"
+                        class="form-control validate" placeholder="1-10" value="{{section}}" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName1">Giám thị
+                        1</label>
+                    <input name="supervisor1" type="text" id="defaultForm-supervisorName1" class="form-control validate"
+                        value="{{supervisorID1}}" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName2">Giám thị
+                        2</label>
+                    <input name="supervisor2" type="text" id="defaultForm-supervisorName2" class="form-control validate"
+                        value="{{supervisorID2}}" required>
+                </div>
+                <div style="display:none">
+                    <input name="class" value="{{class}}">
+                    <input name="id" value="{{id}}">
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/each}}
+
+
+<div class="modal fade" id="newExam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/staff/exam" method="POST" enctype="multipart/form-data">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Thêm lịch thi</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-subjectName">Môn học</label>
-                    <input type="text" id="defaultForm-subjectName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectName">Học kỳ</label>
+                    <input name="semesterID" type="text" id="defaultForm-subjectName" class="form-control validate"
+                        value="{{semesterID}}" readonly required>
                 </div>
 
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Tên học sinh</label>
-                    <input type="text" id="defaultForm-roomID" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Năm học</label>
+                    <input name="year" type="text" id="defaultForm-roomID" class="form-control validate"
+                        value="{{year}}" readonly require>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Bắt đầu</label>
-                    <input type="text" id="defaultForm-startTime" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startTime">Khối</label>
+                    <input name="claSs" type="number" min="10" max="12" id="defaultForm-startTime"
+                        class="form-control validate" value="{{claSs}}" readonly required>
                 </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName1">Tên giám thị
-                        1</label>
-                    <input type="text" id="defaultForm-supervisorName1" class="form-control validate">
+                <div class="md-form mb-2" style="text-align: center;">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Lịch thi</label>
+
+                    <input style="border-radius: 5px; padding: 5px; background-color:orange" name="fileExcel"
+                        id="upload-file-excel" type="file" required />
                 </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-supervisorName2">Tên giám thị
-                        2</label>
-                    <input type="text" id="defaultForm-supervisorName2" class="form-control validate">
+                <div class="md-form mb-2" style="text-align: center;">
+                    (Tải file excel lên)
                 </div>
 
 
@@ -92,6 +200,7 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-danger">Xác nhận</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+{{/if}}

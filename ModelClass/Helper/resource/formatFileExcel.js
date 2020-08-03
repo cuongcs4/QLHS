@@ -6,16 +6,23 @@ const studentFormat = {
     D1: "CMND",
     E1: "Giới tính",
     F1: "Địa chỉ",
+    G1: "Họ tên cha",
+    H1: "Sđt",
+    I1: "Họ tên mẹ",
+    J1: "Sđt",
   },
-  propName: ["id", "fullName", "dob", "identityCard", "gender", "address"],
-  width: {
-    A1: 5,
-    B1: 20,
-    C1: 15,
-    D1: 15,
-    E1: 10,
-    F1: 40,
-  },
+  propName: [
+    "id",
+    "fullName",
+    "dob",
+    "identityCard",
+    "gender",
+    "address",
+    "dad",
+    "dadPhoneNumber",
+    "mom",
+    "momPhoneNumber",
+  ],
 };
 
 const scoreFormat = {
@@ -143,10 +150,32 @@ const compositeTranscriptFormat = {
   },
 };
 
+const examFormat = {
+  filed: {
+    A1: "STT",
+    B1: "Mã môn",
+    C1: "Phòng thi",
+    D1: "Ngày thi",
+    E1: "Tiết bắt đầu",
+    F1: "Giám thị 1",
+    G1: "Giám thị 2",
+  },
+  propName: [
+    "id",
+    "subjectID",
+    "roomID",
+    "dayExam",
+    "startSection",
+    "supervisorID1",
+    "supervisorID2",
+  ],
+};
+
 module.exports = {
   studentFormat,
   scoreFormat,
   conductFormat,
   compositeTranscriptFormat,
   scoreFormatExport,
+  examFormat,
 };

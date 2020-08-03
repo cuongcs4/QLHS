@@ -14,16 +14,14 @@ const TeachingPlan = class {
     subjectID,
     classID,
     dayInWeek,
-    startSection,
-    totalSection
+    startSection
   ) {
-    this.semester = semester || null;
-    this.teacherID = teacherID || null;
-    this.subjectID = subjectID || null;
-    this.classID = classID || null;
-    this.dayInWeek = dayInWeek || null;
-    this.startSection = startSection || null;
-    this.totalSection = totalSection || null;
+    this.semester = semester;
+    this.teacherID = teacherID;
+    this.subjectID = subjectID;
+    this.classID = classID;
+    this.dayInWeek = dayInWeek;
+    this.startSection = startSection;
   }
 
   getSemester() {
@@ -107,9 +105,11 @@ const TeachingPlan = class {
 
     const sqlQuery =
       `UPDATE THOIKHOABIEU ` +
-      `SET mahk=${semesterID}, nambd=${yearStart}, namkt=${yearEnd}, ` +
-      `magv='${teacherID}', mabm='${subjectID}', malop='${classID}', ` +
-      `ngaytrongtuan=${dayInWeek}, tiet=${startSection});`;
+      `SET magv='${teacherID}', mabm='${subjectID}' ` +
+      `WHERE mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd} ` +
+      `AND ngaytrongtuan=${dayInWeek} AND tiet=${startSection} AND malop='${classID}'`;
+
+    console.log(sqlQuery);
 
     await ExecuteSQL(sqlQuery);
 

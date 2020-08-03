@@ -3,24 +3,36 @@
 const Semester = require("./Semester");
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const checkExist = require("../Helper/services/checkExist");
+const generateGUID = require("../Helper/services/generateGUID");
+
+const flagClass = require("../Helper/resource/Flag");
 
 const ExamPlan = class {
   constructor(
+    id,
     semester,
     roomID,
     subjectID,
     dayExam,
     startSection,
+    claSs,
     supervisorID1,
     supervisorID2
   ) {
-    this.semester = semester || null;
-    this.roomID = roomID || null;
-    this.subjectID = subjectID || null;
-    this.dayExam = dayExam || null;
-    this.startSection = startSection || null;
-    this.supervisorID1 = supervisorID1 || null;
-    this.supervisorID2 = supervisorID2 || null;
+    this.id = id || generateGUID();
+    this.semester = semester;
+    this.roomID = roomID;
+    this.subjectID = subjectID;
+    this.dayExam = dayExam;
+    this.startSection = startSection;
+    this.claSs = claSs;
+    this.supervisorID1 = supervisorID1;
+    this.supervisorID2 = supervisorID2;
+  }
+
+  getID() {
+    return this.id;
   }
 
   getSemester() {
@@ -62,15 +74,20 @@ const ExamPlan = class {
     this.supervisorID1 = newSupervisorID;
   }
 
-  getSupervisor2ID() {
+  getSupervisorID2() {
     return this.supervisorID2;
   }
-  setSupervisor2ID(newSupervisorID) {
+  setSupervisorID2(newSupervisorID) {
     this.supervisorID2 = newSupervisorID;
   }
 
   //Tìm kiếm lịch thi theo khối, học kỳ.
-  static async Find({ studentID, teacherID }, semesterID, yearStart, yearEnd) {
+  static async Find(
+    { id, studentID, teacherID },
+    semesterID,
+    yearStart,
+    yearEnd
+  ) {
     if (typeof semesterID === "undefined") {
       const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
@@ -101,9 +118,92 @@ const ExamPlan = class {
 
       return result.length === 0 ? [] : result;
     }
+
+    if (id !== null) {
+      const sqlQuery =
+        `SELECT LT.malt AS id, LT.mahk AS semesterID, LT.nambd AS yearStart, LT.namkt AS yearEnd, ` +
+        `LT.maphong AS roomID, LT.mabm AS subjectID, LT.ngaythi AS dayExam, LT.tietBD AS section, ` +
+        `LT.khoi AS claSs, LT.giamthi1 AS supervisorID1, LT.giamthi2 AS supervisorID2 ` +
+        `FROM LICHTHI AS LT ` +
+        `WHERE LT.malt='${id}'`;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length === 0) return null;
+
+      const {
+        semesterID,
+        yearStart,
+        yearEnd,
+        roomID,
+        subjectID,
+        dayExam,
+        section,
+        claSs,
+        supervisorID1,
+        supervisorID2,
+      } = result[0];
+
+      const semester = await Semester.Find(semesterID, yearStart, yearEnd);
+      return new ExamPlan(
+        id,
+        semester,
+        roomID,
+        subjectID,
+        new Date(dayExam),
+        section,
+        claSs,
+        supervisorID1,
+        supervisorID2
+      );
+    }
   }
 
-  static save() {}
+  static async Save(examPlan) {
+    const isExist = await checkExist("LICHTHI", "malt", examPlan.getID());
+
+    const {
+      id,
+      roomID,
+      semester,
+      subjectID,
+      dayExam,
+      startSection,
+      claSs,
+      supervisorID1,
+      supervisorID2,
+    } = examPlan;
+
+    const dayString = `${dayExam.getFullYear()}-${
+      dayExam.getMonth() + 1
+    }-${dayExam.getDate()}`;
+
+    if (isExist) {
+      //update
+
+      const sqlQuery =
+        `UPDATE LICHTHI ` +
+        `SET maphong='${roomID}', mabm='${subjectID}', ngaythi='${dayString}', ` +
+        `tietBD=${startSection}, khoi=${claSs}, giamthi1='${supervisorID1}', giamthi2='${supervisorID2}' ` +
+        `WHERE malt='${id}'`;
+
+      await ExecuteSQL(sqlQuery);
+
+      return flagClass.DB.UPDATE;
+    } else {
+      //insert
+      const { semesterID, yearStart, yearEnd } = semester;
+
+      const sqlQuery =
+        `INSERT INTO LICHTHI(malt, mahk, nambd, namkt, maphong, mabm, ngaythi, tietBD, khoi, giamthi1, giamthi2) ` +
+        `VALUES ('${id}',${semesterID},${yearStart},${yearEnd},'${roomID}','${subjectID}',` +
+        `'${dayString}',${startSection},${claSs},'${supervisorID1}','${supervisorID2}')`;
+
+      await ExecuteSQL(sqlQuery);
+
+      return flagClass.DB.NEW;
+    }
+  }
 };
 
 // const exec = async () => {

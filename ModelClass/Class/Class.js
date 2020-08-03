@@ -62,6 +62,17 @@ const Class = class {
     return `${latestSemester.getYearStart() - course + 10}A${id}`;
   }
 
+  static async GetNewClassID(course) {
+    const sqlQuery =
+      `SELECT COUNT(LH.malop) AS total ` +
+      `FROM LOPHOC AS LH ` +
+      `WHERE LH.namnhaphoc=${course}`;
+
+    const { total } = (await ExecuteSQL(sqlQuery))[0];
+
+    return total + 1;
+  }
+
   static async Find(classID) {
     const sqlQuery = `SELECT * FROM LOPHOC WHERE malop='${classID}'`;
 
@@ -81,9 +92,23 @@ const Class = class {
   }
 
   static async Save(classN) {
-    const isExist = await checkExist("LOPHOC", "lop", classN.getClassID());
+    const isExist = await checkExist("LOPHOC", "malop", classN.getClassID());
 
     if (isExist) {
+      //Kiểm tra giáo viên có thay đổi hay không
+      const oldClass = await Class.Find(classN.getClassID());
+      const oldManagerClass = oldClass.getManagerClass();
+
+      if (oldManagerClass !== classN.getManagerClass()) {
+        const sqlUpdateOldManager = `UPDATE NGUOIDUNG SET loai=${flagClass.TYPE_USER.TEACHER} WHERE tenDangNhap='${oldManagerClass}'`;
+        ExecuteSQL(sqlUpdateOldManager);
+
+        const sqlUpdateNewManager = `UPDATE NGUOIDUNG SET loai=${
+          flagClass.TYPE_USER.TEACHER
+        } WHERE tenDangNhap='${classN.getManagerClass()}'`;
+        ExecuteSQL(sqlUpdateNewManager);
+      }
+
       //update
       const sqlQuery =
         `UPDATE LOPHOC ` +
@@ -97,17 +122,23 @@ const Class = class {
     //insert
     const sqlQuery =
       `INSERT INTO LOPHOC (malop, magvcn, maphong, namnhaphoc, trangthai) ` +
-      `VALUES ('${classN.getClassID()}', '${classN.getManagerClass()}', '${classN.getRoomID()}', ${classN.getCourse()}, ${classN.getStatus()}`;
+      `VALUES ('${classN.getClassID()}', '${classN.getManagerClass()}', '${classN.getRoomID()}', ${classN.getCourse()}, ${classN.getStatus()})`;
     await ExecuteSQL(sqlQuery);
+
+    //Thay đổi quyền của giáo viên
+    const sqlQueryChangeTeacher = `UPDATE NGUOIDUNG SET loai=${
+      flagClass.TYPE_USER.HOMEROOM_TEACHER
+    } WHERE tenDangNhap='${classN.getManagerClass()}'`;
+    ExecuteSQL(sqlQueryChangeTeacher);
 
     return flagClass.DB.NEW;
   }
 };
 
 // const exec = async () => {
-//   const findClass = await Class.Find("LH201801");
+//   const total = await Class.GetNewIDClass(2019);
 
-//   console.log(await findClass.getStudentInClass());
+//   console.log(total);
 // };
 
 // exec();

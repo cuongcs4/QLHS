@@ -81,7 +81,7 @@ const Student = class extends User {
   }
   async getExamSchedule(semesterID, yearStart, yearEnd) {
     const schedule = await ExamPlan.Find(
-      { studentID: this.id, teacherID: null },
+      { studentID: this.id, teacherID: null, id: null },
       semesterID,
       yearStart,
       yearEnd
@@ -272,6 +272,21 @@ const Student = class extends User {
     //Loại kém
   }
 
+  static async GetNewStudentID(classID) {
+    const sqlQuery =
+      `SELECT COUNT(mahs) AS total ` +
+      `FROM HOCSINH AS HS ` +
+      `WHERE HS.malop='${classID}'`;
+
+    const { total } = (await ExecuteSQL(sqlQuery))[0];
+
+    const newClassID = classID.slice(classID.length - 6, classID.length);
+
+    if (total + 1 < 10) return `HS${newClassID}0${total + 1}`;
+
+    return `HS${newClassID}${total + 1}`;
+  }
+
   static async Find({ id, classID }) {
     // tìm tất cả học sinh
     if (id === null && classID === null) {
@@ -460,8 +475,8 @@ const Student = class extends User {
 
     //2. Insert HOCSINH
     const sqlQuery2 =
-      `INSERT INTO HOCSINH (mahs, ngaysinh, hoten, diachi, malop, trangthai) ` +
-      `VALUES ('${student.getID()}', '${dobFormat}', '${student.getFullName()}', '${student.getAddress()}', '${student.getClassID()}', ${student.getStatus()})`;
+      `INSERT INTO HOCSINH (mahs, ngaysinh, hoten, gioitinh, diachi, malop, trangthai) ` +
+      `VALUES ('${student.getID()}', '${dobFormat}', '${student.getFullName()}', ${student.getGender()}, '${student.getAddress()}', '${student.getClassID()}', ${student.getStatus()})`;
 
     await ExecuteSQL(sqlQuery2);
 
@@ -470,7 +485,7 @@ const Student = class extends User {
 };
 
 // const exec = async () => {
-//   const result = await Student.Find({ id: "HS20180102", classID: null });
+//   const result = await Student.GetNewStudentID("LH201904");
 //   console.log(result);
 // };
 // exec();
