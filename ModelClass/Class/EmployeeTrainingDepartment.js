@@ -349,7 +349,7 @@ const EmployeeTrainingDepartment = class extends Employee {
   //Lấy điểm số của tất cả các học sinh
   //1. Lấy tất cả các lớp học, chia khối
   //2. Lấy tất cả các học sinh trong lớp, phân loại, tính loại
-  static async getScore(semesterID, yearStart, yearEnd) {
+  async getScore(semesterID, yearStart, yearEnd) {
     //1. Lấy tất cả các lớp học, phân loại
     const class10 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
     const class11 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
@@ -481,7 +481,7 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Lấy hạnh kiểm của tất cả các học sinh
-  static async getConduct(semesterID, yearStart, yearEnd) {
+  async getConduct(semesterID, yearStart, yearEnd) {
     //1. Lấy tất cả các lớp học, phân loại
     const class10 = { type1: 0, type2: 0, type3: 0, type4: 0 };
     const class11 = { type1: 0, type2: 0, type3: 0, type4: 0 };

@@ -585,10 +585,131 @@ const registerIfHelp = (handlebars) => {
     return options.inverse(this);
   });
 };
+
+const registerChartScore = (handlebars) => {
+  handlebars.registerHelper("chartScore", (listData, block) => {
+    if (!listData) return new handlebars.SafeString("");
+
+    const string = `<script>// Set new default font family and font color to mimic Bootstrap's default styling
+    (Chart.defaults.global.defaultFontFamily = "Nunito"),
+      '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = "#858796";
+
+    // Pie Chart Example
+    var ctx = document.getElementById("${listData.id}");
+    var myPieChart = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Giỏi", "Khá", "Trung Bình", "Yếu", "Kém"],
+        datasets: [
+          {
+            data: [${listData.type1.quantity}, ${listData.type2.quantity}, ${listData.type3.quantity}, ${listData.type4.quantity}, ${listData.type5.quantity}],
+            backgroundColor: [
+              "#4e73df",
+              "#1cc88a",
+              "#36b9cc",
+              "#f6c23e",
+              "#e74a3b",
+            ],
+            hoverBackgroundColor: [
+              "#2e59d9",
+              "#17a673",
+              "#2c9faf",
+              "#be8b09",
+              "#d12a1a",
+            ],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+          },
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: "#dddfeb",
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+        },
+        legend: {
+          display: false,
+        },
+        cutoutPercentage: 80,
+      },
+    });</script>`;
+
+    return new handlebars.SafeString(string);
+  });
+};
+
+const registerChartConduct = (handlebars) => {
+  handlebars.registerHelper("chartConduct", (listData, block) => {
+    if (!listData) return new handlebars.SafeString("");
+
+    const string = `<script>// Set new default font family and font color to mimic Bootstrap's default styling
+    (Chart.defaults.global.defaultFontFamily = "Nunito"),
+      '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = "#858796";
+
+    // Pie Chart Example
+    var ctx = document.getElementById("${listData.id}");
+    var myPieChart = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Tốt", "Khá", "Trung Bình", "Yếu"],
+        datasets: [
+          {
+            data: [${listData.type1.quantity}, ${listData.type2.quantity}, ${listData.type3.quantity}, ${listData.type4.quantity}],
+            backgroundColor: [
+              "#4e73df",
+              "#1cc88a",
+              "#36b9cc",
+              "#f6c23e",
+              "#e74a3b",
+            ],
+            hoverBackgroundColor: [
+              "#2e59d9",
+              "#17a673",
+              "#2c9faf",
+              "#be8b09",
+              "#d12a1a",
+            ],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+          },
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: "#dddfeb",
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+        },
+        legend: {
+          display: false,
+        },
+        cutoutPercentage: 80,
+      },
+    });</script>`;
+
+    return new handlebars.SafeString(string);
+  });
+};
+
 const registerAll = (handlebars) => {
   registerSideBar(handlebars);
   registerProfile(handlebars);
   registerIfHelp(handlebars);
+  registerChartScore(handlebars);
+  registerChartConduct(handlebars);
 };
 
 module.exports = registerAll;

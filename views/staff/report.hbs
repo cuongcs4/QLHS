@@ -1,77 +1,395 @@
 <div class="row">
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng học sinh</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">3000</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="col col-md-6">
+    <form class="semester labelSemester" method="GET">
+      <span align="center">
+        <span>Năm học:</span>
+        <select class="semester" style="border: none; color:blanchedalmond; cursor:pointer" name="year"
+          onchange="this.form.submit();">
+          {{#each allYearSemester}}
+          {{#if this}}
+          <option value="{{this}}">{{this}}</option>
+          {{/if}}
+          {{/each}}
+        </select>
+      </span>
+      <span align="center">
+        <span>Học kì:</span>
+        <select class="semester" style="border: none; color:blanchedalmond; cursor: pointer" name="semester"
+          onchange="this.form.submit();">
+          {{#if isLastSemester}}
+          <option value="2">2</option>
+          <option value="1">1</option>
+          {{else}}
+          <option value="1">1</option>
+          <option value="2">2</option>
+          {{/if}}
+        </select>
+      </span>
+    </form>
+  </div>
+
+  <div class="col-md-6" style="text-align:end">
+    <div class="semester ml-2 mb-2">
+      <a class="labelSemester fa fa-pencil-square-o" style="cursor: pointer;" data-toggle="modal"
+        data-target="#editSchedule" aria-hidden="true"> Xuất số liệu</a>
     </div>
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng NV-GV</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">120</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-users fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng học sinh</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">{{countStudent.total}}</div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-user fa-2x text-gray-300"></i>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng NV-GV</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">120</div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-users fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row">
+  <div class="col d-flex-justify-content-center" style="text-align: center; color: black; font-size:2em; margin: 5px">
+    TOÀN TRƯỜNG
+  </div>
 </div>
 <div class="row">
-    <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Học lực</h6>
-                  {{!-- <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div> --}}
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i>Giỏi
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i>Khá
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i>Trung Bình
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i>Yếu
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-danger"></i>Kém
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Học lực</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{totalScore.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Giỏi: {{totalScore.type1.quantity}}
+            ({{totalScore.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{totalScore.type2.quantity}} ({{totalScore.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{totalScore.type3.quantity}}
+            ({{totalScore.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{totalScore.type4.quantity}} ({{totalScore.type4.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-danger"></i>Kém: {{totalScore.type5.quantity}} ({{totalScore.type5.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Hạnh kiểm</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{totalConduct.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Tốt: {{totalConduct.type1.quantity}}
+            ({{totalConduct.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{totalConduct.type2.quantity}}
+            ({{totalConduct.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{totalConduct.type3.quantity}}
+            ({{totalConduct.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{totalConduct.type4.quantity}}
+            ({{totalConduct.type4.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col d-flex-justify-content-center" style="text-align: center; color: black; font-size:2em; margin: 5px">
+    KHỐI 10
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Học lực</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listScore.class10.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Giỏi: {{listScore.class10.type1.quantity}}
+            ({{listScore.class10.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listScore.class10.type2.quantity}}
+            ({{listScore.class10.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listScore.class10.type3.quantity}}
+            ({{listScore.class10.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listScore.class10.type4.quantity}}
+            ({{listScore.class10.type4.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-danger"></i>Kém: {{listScore.class10.type5.quantity}}
+            ({{listScore.class10.type5.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Hạnh kiểm</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listConduct.class10.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Tốt: {{listConduct.class10.type1.quantity}}
+            ({{listConduct.class10.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listConduct.class10.type2.quantity}}
+            ({{listConduct.class10.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listConduct.class10.type3.quantity}}
+            ({{listConduct.class10.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listConduct.class10.type4.quantity}}
+            ({{listConduct.class10.type4.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col d-flex-justify-content-center" style="text-align: center; color: black; font-size:2em; margin: 5px">
+    KHỐI 11
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Học lực</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listScore.class11.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Giỏi: {{listScore.class11.type1.quantity}}
+            ({{listScore.class11.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listScore.class11.type2.quantity}}
+            ({{listScore.class11.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listScore.class11.type3.quantity}}
+            ({{listScore.class11.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listScore.class11.type4.quantity}}
+            ({{listScore.class11.type4.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-danger"></i>Kém: {{listScore.class11.type5.quantity}}
+            ({{listScore.class11.type5.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Hạnh kiểm</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listConduct.class11.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Tốt: {{listConduct.class11.type1.quantity}}
+            ({{listConduct.class11.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listConduct.class11.type2.quantity}}
+            ({{listConduct.class11.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listConduct.class11.type3.quantity}}
+            ({{listConduct.class11.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listConduct.class11.type4.quantity}}
+            ({{listConduct.class11.type4.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<hr>
+
+<div class="row">
+  <div class="col d-flex-justify-content-center" style="text-align: center; color: black; font-size:2em; margin: 5px">
+    KHỐI 12
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Học lực</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listScore.class12.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Giỏi: {{listScore.class12.type1.quantity}}
+            ({{listScore.class12.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listScore.class12.type2.quantity}}
+            ({{listScore.class12.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listScore.class12.type3.quantity}}
+            ({{listScore.class12.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listScore.class12.type4.quantity}}
+            ({{listScore.class12.type4.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-danger"></i>Kém: {{listScore.class12.type5.quantity}}
+            ({{listScore.class12.type5.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-6 d-flex justify-content-center">
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Hạnh kiểm</h6>
+
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4 pb-2">
+          <canvas id="{{listConduct.class12.id}}"></canvas>
+        </div>
+        <div class="mt-4 small" style="padding-left: 25%;">
+          <div class="mr-2">
+            <i class="fas fa-circle text-primary"></i>Tốt: {{listConduct.class12.type1.quantity}}
+            ({{listConduct.class12.type1.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-success"></i>Khá: {{listConduct.class12.type2.quantity}}
+            ({{listConduct.class12.type2.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-info"></i>TB: {{listConduct.class12.type3.quantity}}
+            ({{listConduct.class12.type3.percent}}%)
+          </div>
+          <div class="mr-2">
+            <i class="fas fa-circle text-warning"></i>Yếu: {{listConduct.class12.type4.quantity}}
+            ({{listConduct.class12.type4.percent}}%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
