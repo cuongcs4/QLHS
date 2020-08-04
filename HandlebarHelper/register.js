@@ -156,9 +156,9 @@ const registerProfile = (handlebars) => {
             `<label>Ngày sinh</label>` +
             `</div>` +
             `<div class="col-md-6">` +
-            `<p>${user.dob.getDate()}/${
+            `<p>${user.dob.getDate()}-${
               user.dob.getMonth() + 1
-            }/${user.dob.getFullYear()}</p>` +
+            }-${user.dob.getFullYear()}</p>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -248,9 +248,9 @@ const registerProfile = (handlebars) => {
               `<label>Ngày sinh</label>` +
               `</div>` +
               `<div class="col-md-6">` +
-              `<p>${user.dob.getDate()}/${
+              `<p>${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
-              }/${user.dob.getFullYear()}</p>` +
+              }-${user.dob.getFullYear()}</p>` +
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -297,6 +297,49 @@ const registerProfile = (handlebars) => {
               `   </div>` +
               `</div>` +
               `</div>` +
+              `</div>` +
+              `</div>` +
+              `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
+              `<div class="modal-dialog" role="document">` +
+              `<form class="modal-content" action="/profile" method="POST">` +
+              `<div class="modal-header text-center">` +
+              `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
+              `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
+              `<span aria-hidden="true">&times;</span>` +
+              `</button>` +
+              `</div>` +
+              `<div class="modal-body mx-3">` +
+              `<div class="md-form mb-2 form-inline">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
+              `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
+              `</div>` +
+              `<div class="md-form mb-2 form-inline">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
+                        sinh</label>` +
+              `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+              `</div>` +
+              `<div class="md-form mb-2 form-inline">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
+              `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+                user.dob.getMonth() + 1
+              }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+              `</div>` +
+              `<div class="md-form mb-2 form-inline">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
+              `<input name="identityCard" max="10" id="defaultForm-studentIdCard"
+                        class="form-control validate" value="${user.identityCard}">` +
+              `</div>` +
+              `<div class="md-form mb-2 form-inline">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa Chỉ</label>` +
+              `<input name="address" type="text" id="defaultForm-studentAddress"
+                        class="form-control validate" value="${user.address}">` +
+              `</div>` +
+             // `<input type="hidden" id="typeUser" name="typeUser" value="1">` +
+              `</div>` +
+              `<div class="modal-footer d-flex justify-content-center">` +
+              `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
+              `</div>` +
+              `</form>` +
               `</div>` +
               `</div>`
           );
@@ -364,9 +407,9 @@ const registerProfile = (handlebars) => {
             `<label>Ngày sinh</label>` +
             `</div>` +
             `<div class="col-md-6">` +
-            `<p>${user.dob.getDate()}/${
+            `<p>${user.dob.getDate()}-${
               user.dob.getMonth() + 1
-            }/${user.dob.getFullYear()}</p>` +
+            }-${user.dob.getFullYear()}</p>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -453,9 +496,9 @@ const registerProfile = (handlebars) => {
             `<label>Ngày sinh</label>` +
             `</div>` +
             `<div class="col-md-6">` +
-            `<p>${user.dob.getDate()}/${
+            `<p>${user.dob.getDate()}-${
               user.dob.getMonth() + 1
-            }/${user.dob.getFullYear()}</p>` +
+            }-${user.dob.getFullYear()}</p>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -543,9 +586,9 @@ const registerProfile = (handlebars) => {
             `<label>Ngày sinh</label>` +
             `</div>` +
             `<div class="col-md-6">` +
-            `<p>${user.dob.getDate()}/${
+            `<p>${user.dob.getDate()}-${
               user.dob.getMonth() + 1
-            }/${user.dob.getFullYear()}</p>` +
+            }-${user.dob.getFullYear()}</p>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +

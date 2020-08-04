@@ -1,7 +1,6 @@
 const Teacher = require("../../../ModelClass/Class/Teacher");
 const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
-const Subject = require("../../../ModelClass/Class/Subject");
-const flag = require("../../../ModelClass/Helper/resource/Flag")
+const flag = require("../../../ModelClass/Helper/resource/Flag");
 
 const postAddStaff =  async (req, res, next) => {
     const {username, password, identityCard, fullName, dob, address, phoneNumber, gender, typeUser} = req.body;
@@ -9,7 +8,7 @@ const postAddStaff =  async (req, res, next) => {
     const genderInt = parseInt(gender,10);
     if (typeUserInt === flag.TYPE_USER.TEACHER)
     {
-        const subjectID = req.body;
+        const subjectID = req.body.subjectID;
         const newTeacher = new Teacher(
             username,
             username,
@@ -19,7 +18,7 @@ const postAddStaff =  async (req, res, next) => {
             dob,
             genderInt,
             address,
-            1,
+            flag.STATUS_USER.ENABLE,
             typeUserInt,
             phoneNumber,
             subjectID
@@ -37,9 +36,9 @@ const postAddStaff =  async (req, res, next) => {
             dob,
             genderInt,
             address,
-            1,
+            flag.STATUS_USER.ENABLE,
             typeUserInt,
-            phoneNumber,
+            phoneNumber
         );
         await Employee.Save(newEmployee);
     }

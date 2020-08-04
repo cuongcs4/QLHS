@@ -1,7 +1,6 @@
 const Teacher = require("../../../ModelClass/Class/Teacher");
-const EmployeeTrainingDepartment = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
+const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
 const Flag = require("../../../ModelClass/Helper/resource/Flag");
-const Employee = require("../../../ModelClass/Class/Employee");
 
 const postManagerStaff = async (req, res, next) => {
   const {
@@ -15,6 +14,7 @@ const postManagerStaff = async (req, res, next) => {
     subjectID,
     status,
   } = req.body;
+  const genderInt = parseInt(gender,10);
   const teacher = await Teacher.Find(username);
   const employee = await EmployeeTrainingDepartment.Find(username);
   if (teacher !== null) {
@@ -25,12 +25,11 @@ const postManagerStaff = async (req, res, next) => {
       identityCard,
       fullName,
       dob,
-      gender,
+      genderInt,
       address,
       status,
-      null,
+      Flag.TYPE_USER.Teacher,
       phoneNumber,
-      Flag.TYPE_USER.TEACHER,
       subjectID
     );
     await Teacher.Save(updateTeacher);
@@ -46,9 +45,8 @@ const postManagerStaff = async (req, res, next) => {
       gender,
       address,
       status,
-      null,
-      phoneNumber,
       Flag.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT,
+      phoneNumber,
     );
     await EmployeeTrainingDepartment.Save(updateEmployee);
   }

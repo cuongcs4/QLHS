@@ -434,11 +434,13 @@ const Student = class extends User {
       "tenDangNhap",
       student.getUserName()
     );
-
-    const dobFormat = `${student.dob.getFullYear()}-${
-      student.dob.getMonth() + 1
-    }-${student.dob.getDate()}`;
-
+    const dobArray = student.dob.split("-")
+    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    // const dobFormat = `${student.dob.getFullYear()}-${
+    //   student.dob.getMonth() + 1
+    // }-${student.dob.getDate()}`;
+    console.log(dobArray);
+    console.log(dobFormat);
     if (isExist) {
       //update
 
@@ -452,10 +454,12 @@ const Student = class extends User {
       //2. update HOCSINH
       const sqlQuery2 =
         `UPDATE HOCSINH ` +
-        `SET ngaySinh="${dobFormat}", ` +
+        `SET ngaysinh="${dobFormat}", ` +
         `hoten="${student.getFullName()}", ` +
+        `gioitinh="${student.getGender()}", ` +
         `diachi="${student.getAddress()}", ` +
-        `trangthai=${student.getStatus()} ` +
+        `malop="${student.getClassID()}", ` +
+        `trangthai="${student.getStatus()}" ` +
         `WHERE mahs="${student.getID()}"`;
 
       await ExecuteSQL(sqlQuery2);
@@ -467,9 +471,7 @@ const Student = class extends User {
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
-      `VALUES ('${student.getUserName()}', '${student.getPassWord()}', '${student.getIdentityCard()}', ${
-        flagClass.TYPE_USER.STUDENT
-      })`;
+      `VALUES ('${student.getUserName()}', '${student.getPassWord()}', '${student.getIdentityCard()}', ${flagClass.TYPE_USER.STUDENT})`;
 
     await ExecuteSQL(sqlQuery1);
 

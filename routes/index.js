@@ -3,6 +3,7 @@ const router = express.Router();
 
 const checkLogin = require("../Passport/checkLogin");
 const flagClass = require("../ModelClass/Helper/resource/Flag");
+const indexController = require("../Controller/IndexController/register");
 
 /* GET home page. */
 router.get("/", checkLogin, (req, res, next) => {
@@ -30,6 +31,7 @@ router.get("/changePassword", checkLogin, (req, res, next) => {
     user: req.user,
   });
 });
+router.post("/profile", checkLogin, indexController.postProfile);
 
 router.get("/profile", checkLogin, async (req, res, next) => {
   const user = { ...req.user };

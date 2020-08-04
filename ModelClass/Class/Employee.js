@@ -15,7 +15,6 @@ const Employee = class extends User {
     status,
     typeUser,
     phoneNumber,
-    typeEmployee
   ) {
     super(
       id,
@@ -30,7 +29,6 @@ const Employee = class extends User {
       typeUser
     );
     this.phoneNumber = phoneNumber || null;
-    this.typeEmployee = typeEmployee || null;
   }
 
   getPhoneNumber() {
@@ -38,13 +36,6 @@ const Employee = class extends User {
   }
   setPhoneNumber(newPhoneNumber) {
     this.phoneNumber = newPhoneNumber;
-  }
-
-  getTypeEmployee() {
-    return this.typeEmployee;
-  }
-  setTypeEmployee(newTypeEmployee) {
-    this.typeEmployee = newTypeEmployee;
   }
 };
 
