@@ -44,6 +44,7 @@ const getRoomExam = async (req, res, next) => {
     examRoom[i]["dataTarget"] = `Room${roomID}`;
     examRoom[i]["year"] = year;
     examRoom[i]["semesterID"] = semesterID;
+    examRoom[i]["year"] = `${yearStart}-${yearEnd}`;
   }
 
   res.render("staff/examRoom", {

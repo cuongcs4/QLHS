@@ -2,6 +2,7 @@
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const checkExist = require("../Helper/services/checkExist");
+const removeAccents = require("../Helper/services/removeAccents");
 
 const flagClass = require("../Helper/resource/Flag");
 
@@ -13,6 +14,8 @@ const ExamRoom = require("./RoomExam");
 const ResultSurvey = require("./ResultSurvey");
 const Score = require("./Score");
 const Employee = require("./Employee");
+const Room = require("./Room");
+const { reset } = require("nodemon");
 
 const EmployeeTrainingDepartment = class extends Employee {
   constructor(
@@ -26,7 +29,7 @@ const EmployeeTrainingDepartment = class extends Employee {
     address,
     status,
     typeUser,
-    phoneNumber,
+    phoneNumber
   ) {
     super(
       id,
@@ -39,7 +42,7 @@ const EmployeeTrainingDepartment = class extends Employee {
       address,
       status,
       typeUser,
-      phoneNumber,
+      phoneNumber
     );
   }
 
@@ -190,18 +193,163 @@ const EmployeeTrainingDepartment = class extends Employee {
   }
 
   //Tạo phòng thi
-  createExamRoom(minStudent, maxStudent) {
+  async createExamRoom(maxStudent) {
     //1. Lấy tất cả các học sinh
-    //2. Phân loại
-    //3.
-    //4.
+    const { listClass10, listClass11, listClass12 } = await this.getClass();
+
+    //Khối 10 - lấy toàn bộ học sinh
+    const listStudent10 = [];
+    for (let i = 0; i < listClass10.length; i++) {
+      const class10 = await Class.Find(listClass10[i].classID);
+      const listStudentInClass = await class10.getStudentInClass();
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        listStudent10.push(listStudentInClass[j]);
+      }
+    }
+    //Sắp xếp
+    listStudent10.sort((a, b) => {
+      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
+      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      return 0;
+    });
+
+    //Khối 11 - lấy toàn bộ học sinh
+    const listStudent11 = [];
+    for (let i = 0; i < listClass11.length; i++) {
+      const class11 = await Class.Find(listClass11[i].classID);
+      const listStudentInClass = await class11.getStudentInClass();
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        listStudent11.push(listStudentInClass[j]);
+      }
+    }
+    //Sắp xếp
+    listStudent11.sort((a, b) => {
+      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
+      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      return 0;
+    });
+
+    //Khối 12 - lấy toàn bộ học sinh
+    const listStudent12 = [];
+    for (let i = 0; i < listClass12.length; i++) {
+      const class12 = await Class.Find(listClass12[i].classID);
+      const listStudentInClass = await class12.getStudentInClass();
+
+      for (let j = 0; j < listStudentInClass.length; j++) {
+        listStudent12.push(listStudentInClass[j]);
+      }
+    }
+    //Sắp xếp
+    listStudent12.sort((a, b) => {
+      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
+      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      return 0;
+    });
+
+    //2. Chia phòng thi
+    //2.1 Lấy toàn bộ phòng học
+    const listRoom = await Room.Find();
+
+    //2.2 Chia theo từng khối.
+    const {
+      semesterID,
+      yearStart,
+      yearEnd,
+    } = await Semester.getLatestSemester();
+    //Khối 10
+
+    let countStudent = 0;
+    let countRoomID = 0;
+
+    let sqlQueryInsert = `INSERT INTO PHONGTHI(maphongthi, phonghoc, mahs, mahk, nambd, namkt) VALUES `;
+    for (let i = 0; i < listStudent10.length; i++) {
+      if (countStudent < maxStudent) {
+        if (i !== 0) {
+          sqlQueryInsert += `, `;
+        }
+
+        const { roomID } = listRoom[countRoomID];
+        const { studentID } = listStudent10[i];
+
+        let examRoomID = ~~(i / maxStudent) + 1;
+        if (examRoomID < 10) {
+          examRoomID = `0${examRoomID}`;
+        }
+
+        sqlQueryInsert += `('10${examRoomID}','${roomID}','${studentID}',${semesterID},${yearStart},${yearEnd})`;
+
+        countStudent++;
+      } else {
+        countStudent = 0;
+        countRoomID++;
+        if (countRoomID >= listRoom.length) {
+          countRoomID = 0;
+        }
+        i--;
+      }
+    }
+
+    countStudent = 0;
+    countRoomID = 0;
+
+    for (let i = 0; i < listStudent11.length; i++) {
+      if (countStudent < maxStudent) {
+        const { roomID } = listRoom[countRoomID];
+        const { studentID } = listStudent11[i];
+
+        let examRoomID = ~~(i / maxStudent) + 1;
+        if (examRoomID < 10) {
+          examRoomID = `0${examRoomID}`;
+        }
+
+        sqlQueryInsert += `, ('11${examRoomID}','${roomID}','${studentID}',${semesterID},${yearStart},${yearEnd})`;
+
+        countStudent++;
+      } else {
+        countStudent = 0;
+        countRoomID++;
+        if (countRoomID >= listRoom.length) {
+          countRoomID = 0;
+        }
+        i--;
+      }
+    }
+
+    countStudent = 0;
+    countRoomID = 0;
+
+    for (let i = 0; i < listStudent12.length; i++) {
+      if (countStudent < maxStudent) {
+        const { roomID } = listRoom[countRoomID];
+        const { studentID } = listStudent12[i];
+
+        let examRoomID = ~~(i / maxStudent) + 1;
+        if (examRoomID < 10) {
+          examRoomID = `0${examRoomID}`;
+        }
+
+        sqlQueryInsert += `, ('12${examRoomID}','${roomID}','${studentID}',${semesterID},${yearStart},${yearEnd})`;
+
+        countStudent++;
+      } else {
+        countStudent = 0;
+        countRoomID++;
+        if (countRoomID >= listRoom.length) {
+          countRoomID = 0;
+        }
+        i--;
+      }
+    }
+
+    await ExecuteSQL(sqlQueryInsert);
   }
 
   //Lấy điểm số của tất cả các học sinh
   //1. Lấy tất cả các lớp học, chia khối
   //2. Lấy tất cả các học sinh trong lớp, phân loại, tính loại
   static async getScore(semesterID, yearStart, yearEnd) {
-    console.log("getScore");
     //1. Lấy tất cả các lớp học, phân loại
     const class10 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
     const class11 = { type1: 0, type2: 0, type3: 0, type4: 0, type5: 0 };
@@ -497,11 +645,11 @@ const EmployeeTrainingDepartment = class extends Employee {
               address,
               status,
               typeUser,
-              phoneNumber,
+              phoneNumber
             )
           );
         }
-        
+
         return listEmployees;
       }
       return null;
@@ -528,7 +676,7 @@ const EmployeeTrainingDepartment = class extends Employee {
       const status = employeeOnDB.trangthai;
       const phoneNumber = employeeOnDB.std;
       const typeUser = employeeOnDB.loai;
-      
+
       return new EmployeeTrainingDepartment(
         id,
         username,
@@ -540,7 +688,7 @@ const EmployeeTrainingDepartment = class extends Employee {
         address,
         status,
         typeUser,
-        phoneNumber,
+        phoneNumber
       );
     }
   }
@@ -551,8 +699,8 @@ const EmployeeTrainingDepartment = class extends Employee {
       "tenDangNhap",
       employee.username
     );
-    const dobArray = employee.dob.split("-")
-      const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    const dobArray = employee.dob.split("-");
+    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
     if (isExist) {
       //update
       //1. update NGUOIDUNG

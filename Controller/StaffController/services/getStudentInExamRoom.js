@@ -1,6 +1,8 @@
 const flagClass = require("../../../ModelClass/Helper/resource/Flag");
 const Class = require("../../../ModelClass/Class/Class");
 
+const removeAccents = require("../../../ModelClass/Helper/services/removeAccents");
+
 const getStudentInExamRoom = async (req, res, next) => {
   const { roomID, semesterID, year } = req.query;
 
@@ -24,6 +26,14 @@ const getStudentInExamRoom = async (req, res, next) => {
       yearStart,
       yearEnd
     )) || [];
+
+  listStudent.sort((a, b) => {
+    if (removeAccents(a.studentFullName) > removeAccents(b.studentFullName))
+      return 1;
+    if (removeAccents(a.studentFullName) < removeAccents(b.studentFullName))
+      return -1;
+    return 0;
+  });
 
   for (let i = 0; i < listStudent.length; i++) {
     const { gender, dob, classID } = listStudent[i];

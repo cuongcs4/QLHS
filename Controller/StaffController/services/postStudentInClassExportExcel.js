@@ -2,6 +2,7 @@ const Class = require("../../../ModelClass/Class/Class");
 
 const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
 const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
+const removeAccents = require("../../../ModelClass/Helper/services/removeAccents");
 
 const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
 const flagClass = require("../../../ModelClass/Helper/resource/Flag");
@@ -48,7 +49,13 @@ const postStudentInClassExportExcel = async (req, res, next) => {
     });
   }
 
-  console.log(listStudentExport);
+  listStudentExport.sort((a, b) => {
+    if (removeAccents(a.studentFullName) > removeAccents(b.studentFullName))
+      return 1;
+    if (removeAccents(a.studentFullName) < removeAccents(b.studentFullName))
+      return -1;
+    return 0;
+  });
 
   const path = await exportFileExcel(
     listStudentExport,
