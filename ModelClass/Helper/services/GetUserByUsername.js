@@ -9,6 +9,10 @@ const flagClass = require("../resource/Flag");
 const getUserByUsername = async (userName) => {
   userName = userName.toUpperCase();
 
+  if (userName === "ADMIN") {
+    userName = userName.toLowerCase();
+  }
+
   const sql = `SELECT * FROM NGUOIDUNG WHERE tenDangNhap='${userName}'`;
   const result = await ExecuteSQL(sql);
 

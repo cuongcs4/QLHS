@@ -1,4 +1,5 @@
 //Sơ đồ lớp của ExamRoom kế thừa từ Room
+const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const Room = require("./Room");
 
@@ -15,9 +16,9 @@ const ExamRoom = class extends Room {
 
   static async GetStudents(examRoomID, semesterID, yearStart, yearEnd) {
     const sqlQuery =
-      `SELECT HS.mahs AS studentID, HS.hoten AS studentFullName, HS.ngaysinh AS dob` +
+      `SELECT HS.mahs AS studentID, HS.hoten AS studentFullName, HS.ngaysinh AS dob, HS.malop AS classID, HS.gioitinh AS gender ` +
       `FROM PHONGTHI AS PT INNER JOIN HOCSINH AS HS ON PT.mahs=HS.mahs ` +
-      `WHERE PT.maphongthi='${examRoomID} AND PT.mahk=${semesterID} AND PT.nambd=${yearStart} AND PT.namkt=${yearEnd}'`;
+      `WHERE PT.maphongthi='${examRoomID}' AND PT.mahk=${semesterID} AND PT.nambd=${yearStart} AND PT.namkt=${yearEnd}`;
 
     const result = await ExecuteSQL(sqlQuery);
 

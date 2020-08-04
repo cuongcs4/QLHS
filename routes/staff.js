@@ -38,6 +38,24 @@ router.post("/exam", checkLogin, checkStaff, staffController.postExam);
 router.post("/edit-exam", checkLogin, checkStaff, staffController.postEditExam);
 
 router.get("/room-exam", checkLogin, checkStaff, staffController.getRoomExam);
+router.get(
+  "/room-exam/student",
+  checkLogin,
+  checkStaff,
+  staffController.getStudentInExamRoom
+);
+router.post(
+  "/room-exam/create",
+  checkLogin,
+  checkStaff,
+  staffController.postExamRoomCreate
+);
+router.post(
+  "/room-exam/export",
+  checkLogin,
+  checkStaff,
+  staffController.postStudentInClassExportExcel
+);
 
 router.get("/report", checkLogin, checkStaff, staffController.getReport);
 

@@ -11,6 +11,9 @@ const getSchedule = require("./services/getSchedule");
 const postSchedule = require("./services/postSchedule");
 const postExam = require("./services/postExam");
 const postEditExam = require("./services/postEditExam");
+const getStudentInExamRoom = require("./services/getStudentInExamRoom");
+const postExamRoomCreate = require("./services/postExamRoomCreate");
+const postStudentInClassExportExcel = require("./services/postStudentInClassExportExcel");
 
 module.exports = {
   getClass,
@@ -26,4 +29,7 @@ module.exports = {
   postSchedule,
   postExam,
   postEditExam,
+  getStudentInExamRoom,
+  postExamRoomCreate,
+  postStudentInClassExportExcel,
 };

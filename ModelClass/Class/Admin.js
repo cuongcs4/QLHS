@@ -28,7 +28,7 @@ const Admin = class extends Employee {
     address,
     status,
     typeUser,
-    phoneNumber,
+    phoneNumber
   ) {
     super(
       id,
@@ -41,7 +41,7 @@ const Admin = class extends Employee {
       address,
       status,
       typeUser,
-      phoneNumber,
+      phoneNumber
     );
   }
 
@@ -151,7 +151,7 @@ const Admin = class extends Employee {
       address,
       status,
       typeUser,
-      phoneNumber,
+      phoneNumber
     );
   }
 };

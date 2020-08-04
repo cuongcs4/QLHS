@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 03, 2020 lúc 03:18 PM
+-- Thời gian đã tạo: Th8 04, 2020 lúc 04:50 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.7
 
@@ -97,7 +97,7 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 ('HS20180101', 'LH201801', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180101', 'LH201801', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180101', 'LH201801', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10),
-('HS20180101', 'LH201801', 'Toan', 2, 2019, 2020, 10, 10, 10, 10),
+('HS20180101', 'LH201801', 'Toan', 2, 2019, 2020, 9, 9, 9, 10),
 ('HS20180101', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180102', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180102', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10),
@@ -110,7 +110,7 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 ('HS20180102', 'LH201801', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180102', 'LH201801', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180102', 'LH201801', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10),
-('HS20180102', 'LH201801', 'Toan', 2, 2019, 2020, 10, 10, 10, 10),
+('HS20180102', 'LH201801', 'Toan', 2, 2019, 2020, 9, 9, 9, 9),
 ('HS20180102', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180103', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180103', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10),
@@ -123,7 +123,7 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 ('HS20180103', 'LH201801', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180103', 'LH201801', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180103', 'LH201801', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10),
-('HS20180103', 'LH201801', 'Toan', 2, 2019, 2020, 10, 10, 10, 10),
+('HS20180103', 'LH201801', 'Toan', 2, 2019, 2020, 9, 9, 9, 9),
 ('HS20180103', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180104', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180104', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10),
@@ -136,7 +136,7 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 ('HS20180104', 'LH201801', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180104', 'LH201801', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180104', 'LH201801', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10),
-('HS20180104', 'LH201801', 'Toan', 2, 2019, 2020, 10, 10, 10, 10),
+('HS20180104', 'LH201801', 'Toan', 2, 2019, 2020, 9, 9, 9, 9),
 ('HS20180104', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180105', 'LH201801', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180105', 'LH201801', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10),
@@ -149,7 +149,7 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 ('HS20180105', 'LH201801', 'SinhHoc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180105', 'LH201801', 'TheDuc', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180105', 'LH201801', 'TinHoc', 2, 2019, 2020, 10, 10, 10, 10),
-('HS20180105', 'LH201801', 'Toan', 2, 2019, 2020, 10, 10, 10, 10),
+('HS20180105', 'LH201801', 'Toan', 2, 2019, 2020, 9, 9, 9, 10),
 ('HS20180105', 'LH201801', 'VatLy', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180201', 'LH201802', 'AnhVan', 2, 2019, 2020, 10, 10, 10, 10),
 ('HS20180201', 'LH201802', 'CongNghe', 2, 2019, 2020, 10, 10, 10, 10),
@@ -246,6 +246,21 @@ INSERT INTO `diem` (`mahs`, `malop`, `mabm`, `mahk`, `nambd`, `namkt`, `cot1`, `
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `dotks`
+--
+
+CREATE TABLE `dotks` (
+  `stt` int(11) NOT NULL,
+  `mahk` int(11) NOT NULL,
+  `nambd` int(11) NOT NULL,
+  `namkt` int(11) NOT NULL,
+  `ngaybd` date NOT NULL,
+  `ngaykt` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `giaovien`
 --
 
@@ -302,7 +317,7 @@ CREATE TABLE `hanhkiem` (
 --
 
 INSERT INTO `hanhkiem` (`mahs`, `malop`, `magv`, `mahk`, `nambd`, `namkt`, `xeploai`) VALUES
-('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 1),
+('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 2),
 ('HS20180102', 'LH201801', 'GV01', 2, 2019, 2020, 1),
 ('HS20180103', 'LH201801', 'GV01', 2, 2019, 2020, 1),
 ('HS20180104', 'LH201801', 'GV01', 2, 2019, 2020, 1),
@@ -485,6 +500,19 @@ CREATE TABLE `lichthi` (
   `giamthi2` varchar(15) COLLATE latin1_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Đang đổ dữ liệu cho bảng `lichthi`
+--
+
+INSERT INTO `lichthi` (`malt`, `mahk`, `nambd`, `namkt`, `maphong`, `mabm`, `ngaythi`, `tietBD`, `khoi`, `giamthi1`, `giamthi2`) VALUES
+('640b879f-6cb9-4c65-b372-69208b63eba2', 2, 2019, 2020, '01', 'Toan', '2020-03-09', 1, 11, 'GV01', 'GV02'),
+('a78abe8e-9426-459b-b92a-79e66ca2f761', 2, 2019, 2020, '01', 'Toan', '2020-03-09', 1, 10, 'GV01', 'GV02'),
+('aajafafjkafafn', 1, 2019, 2020, '10', 'LichSu', '2020-08-02', 2, 10, 'GV09', 'GV14'),
+('abcdefgh', 2, 2019, 2020, '01', 'NguVan', '2021-09-03', 3, 10, 'GV01', 'GV02'),
+('akakakaka', 2, 2019, 2020, '09', 'Toan', '2020-08-04', 10, 12, 'GV11', 'GV06'),
+('d6ad249f-3b79-42ac-9757-0718189305fd', 2, 2019, 2020, '02', 'Toan', '2020-03-09', 1, 11, 'GV04', 'GV05'),
+('oiuytr', 2, 2019, 2020, '08', 'GDCD', '2020-08-03', 2, 11, 'GV08', 'GV13');
+
 -- --------------------------------------------------------
 
 --
@@ -569,6 +597,7 @@ INSERT INTO `nguoidung` (`tenDangNhap`, `matKhau`, `cmnd`, `loai`) VALUES
 ('GV13', 'GV13', '215487789', 2),
 ('GV14', 'GV14', '215487789', 2),
 ('GV15', 'GV15', '215487789', 2),
+('GV16', '1234', '12345', 2),
 ('HS20180101', 'HS20180101', '215487789', 1),
 ('HS20180102', 'HS20180102', '215487789', 1),
 ('HS20180103', 'HS20180103', '215487789', 1),
@@ -718,6 +747,13 @@ CREATE TABLE `phongthi` (
   `namkt` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Đang đổ dữ liệu cho bảng `phongthi`
+--
+
+INSERT INTO `phongthi` (`maphongthi`, `phonghoc`, `mahs`, `mahk`, `nambd`, `namkt`) VALUES
+('2', '02', 'HS20180103', 1, 2019, 2020);
+
 -- --------------------------------------------------------
 
 --
@@ -796,6 +832,13 @@ ALTER TABLE `diem`
   ADD KEY `FK_DIEM_LOPHOC` (`malop`),
   ADD KEY `FK_DIEM_BOMON` (`mabm`),
   ADD KEY `FK_DIEM_HOCKY` (`mahk`,`nambd`,`namkt`);
+
+--
+-- Chỉ mục cho bảng `dotks`
+--
+ALTER TABLE `dotks`
+  ADD PRIMARY KEY (`stt`),
+  ADD KEY `FK_DOTKS_HOCKY` (`mahk`,`nambd`,`namkt`);
 
 --
 -- Chỉ mục cho bảng `giaovien`
@@ -919,6 +962,12 @@ ALTER TABLE `thoikhoabieu`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `dotks`
+--
+ALTER TABLE `dotks`
+  MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `nguoithan`
 --
 ALTER TABLE `nguoithan`
@@ -936,6 +985,12 @@ ALTER TABLE `diem`
   ADD CONSTRAINT `FK_DIEM_HOCKY` FOREIGN KEY (`mahk`,`nambd`,`namkt`) REFERENCES `hocky` (`mahk`, `nambd`, `namkt`),
   ADD CONSTRAINT `FK_DIEM_HOCSINH` FOREIGN KEY (`mahs`) REFERENCES `hocsinh` (`mahs`),
   ADD CONSTRAINT `FK_DIEM_LOPHOC` FOREIGN KEY (`malop`) REFERENCES `lophoc` (`malop`);
+
+--
+-- Các ràng buộc cho bảng `dotks`
+--
+ALTER TABLE `dotks`
+  ADD CONSTRAINT `FK_DOTKS_HOCKY` FOREIGN KEY (`mahk`,`nambd`,`namkt`) REFERENCES `hocky` (`mahk`, `nambd`, `namkt`);
 
 --
 -- Các ràng buộc cho bảng `giaovien`
