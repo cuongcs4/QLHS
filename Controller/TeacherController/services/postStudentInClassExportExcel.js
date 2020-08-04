@@ -68,7 +68,6 @@ const postStudentInClassExportExcel = async (req, res, next) => {
     `Bảng điểm tổng kết môn ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}.xlsx`
   );
   deleteFile(path);
-
   return;
 };
 

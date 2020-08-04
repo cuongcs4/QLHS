@@ -131,7 +131,7 @@ const exportFileExcel = async (data, format) => {
   workbook.write(`./public/${fileName}.xlsx`);
 
   //Chờ trong 100ms để đảm bảo file đã được ghi xong
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return `./public/${fileName}.xlsx`;
 };
