@@ -205,7 +205,7 @@ const Teacher = class extends Employee {
     const gender = teacherOnDB.gioitinh;
     const address = teacherOnDB.diachi;
     const status = teacherOnDB.trangthai;
-    const phoneNumber = teacherOnDB.std;
+    const phoneNumber = teacherOnDB.sdt;
     const subjectID = teacherOnDB.mabm;
     const typeUser = flagClass.TYPE_USER.TEACHER;
 
@@ -231,11 +231,13 @@ const Teacher = class extends Employee {
       "tenDangNhap",
       teacher.username
     );
-    const dobArray = teacher.dob.split("-")
-    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
     if (isExist) {
       //update
       //1. update NGUOIDUNG
+      
+    const dobFormat = `${teacher.dob.getFullYear()}-${
+      teacher.dob.getMonth() + 1
+    }-${teacher.dob.getDate()}`;
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${teacher.getPassWord()}", cmnd='${teacher.getIdentityCard()}' ` +
@@ -249,18 +251,18 @@ const Teacher = class extends Employee {
         `hoten="${teacher.getFullName()}", ` +
         `diachi="${teacher.getAddress()}", ` +
         `sdt="${teacher.getPhoneNumber()}", ` +
-        `gioitinh=${teacher.getGender()}, ` +
+        `gioitinh="${teacher.getGender()}", ` +
         `mabm="${teacher.getSubjectID()}", ` +
-        `trangthai=${teacher.getStatus()} ` +
+        `sdt="${teacher.getPhoneNumber()}", ` +
+        `trangthai="${teacher.getStatus()}" ` +
         `WHERE magv="${teacher.getUserName()}"`;
       await ExecuteSQL(sqlQuery2);
 
       return flagClass.DB.UPDATE;
     }
     //insert
-    // dobFormat = `${teacher.dob.getFullYear()}-${
-    //   teacher.dob.getMonth() + 1
-    // }-${teacher.dob.getDate()}`;
+    const dobArray = teacher.dob.split('-');
+    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +

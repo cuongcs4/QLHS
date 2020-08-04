@@ -26,9 +26,9 @@ const getExamSchedule = async (req, res, next) => {
   if (scheduleExam !== null) {
     for (let i = 0; i < scheduleExam.length; i++) {
       const dayExam = scheduleExam[i].dayExam;
-      scheduleExam[i].dayExam = `${dayExam.getDate()}/${
+      scheduleExam[i].dayExam = `${dayExam.getDate()}-${
         dayExam.getMonth() + 1
-      }/${dayExam.getFullYear()}`;
+      }-${dayExam.getFullYear()}`;
     }
   }
 

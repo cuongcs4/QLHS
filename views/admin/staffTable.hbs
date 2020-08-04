@@ -25,6 +25,7 @@
                                 <th>ĐỊA CHỈ</th>
                                 <th>SĐT</th>
                                 <th>MÃ BM</th>
+                                <th>TRẠNG THÁI</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -45,6 +46,11 @@
                                 <td>{{address}}</td>
                                 <td>{{phoneNumber}}</td>
                                 <td>{{subjectID}}</td>
+                                {{#ifCond status 1}}
+                                <td>Hoạt động</td>
+                                {{else}}
+                                <td>Không hoạt động</td>
+                                {{/ifCond}}
                                 <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#{{dataTarget}}"
                                         aria-hidden="true"></i></td>
                             </tr>
@@ -70,67 +76,6 @@
                                             Giáo Viên</label>
                                         <input name="username" type="text" id="defaultForm-teacherID"
                                             class="form-control validate" value="{{username}}" readonly>
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right" for="defaultForm-teacherName">Họ
-                                            Tên</label>
-                                        <input name="fullName" type="text" id="defaultForm-teacherName"
-                                            class="form-control validate" value="{{fullName}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right" for="defaultForm-teacherDoB">Ngày
-                                            sinh</label>
-                                        <input name="dob" type="text" id="defaultForm-teacherDoB"
-                                            class="form-control validate" value="{{dob}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherIdentityCard">CMND</label>
-                                        <input name="identityCard" type="text" id="defaultForm-teacherIdentityCard"
-                                            class="form-control validate" value="{{identityCard}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherIdentityCard">SĐT</label>
-                                        <input name="phoneNumber" type="text" id="defaultForm-teacherIdentityCard"
-                                            class="form-control validate" value="{{phoneNumber}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherAddress">Địa
-                                            chỉ</label>
-                                        <input name="address" type="text" id="defaultForm-teacherAddress"
-                                            class="form-control validate" value="{{address}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherGender">Giới
-                                            tính</label>
-                                        <select name="gender" class="form-control validate"
-                                            id="defaultForm-teacherGender">
-                                            {{#ifCond gender 1}}
-                                            <option value="1" selected>Nam</option>
-                                            <option value="0">Nữ</option>
-                                            {{else}}
-                                            <option value="1">Nam</option>
-                                            <option value="0" selected>Nữ</option>
-                                            {{/ifCond}}
-                                        </select>
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-teacherSubject">Bộ
-                                            môn</label>
-                                        <select name="subjectID" class="form-control validate"
-                                            id="defaultForm-teacherSubject">
-                                            {{#each ../listSubjectView}}
-                                            {{#ifCond subject ../subjectID}}
-                                            <option value="{{subject}}" selected>{{subjectName}}</option>
-                                            {{else}}
-                                            <option value="{{subject}}">{{subjectName}}</option>
-                                            {{/ifCond}}
-                                            {{/each}}
-                                        </select>
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right"
@@ -169,6 +114,7 @@
                                 <th>NGÀY SINH</th>
                                 <th>GIỚI TÍNH</th>
                                 <th>ĐỊA CHỈ</th>
+                                <th>TRẠNG THÁI</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -190,6 +136,11 @@
                                 <td>{{address}}</td>
                                 {{else}}
                                 <td></td>
+                                {{/ifCond}}
+                                {{#ifCond status 1}}
+                                <td>Hoạt động</td>
+                                {{else}}
+                                <td>Không hoạt động</td>
                                 {{/ifCond}}
                                 <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#{{dataTarget}}"
                                         aria-hidden="true"></i></td>
@@ -215,47 +166,6 @@
                                             giáo vụ</label>
                                         <input type="text" name="username" id="defaultForm-employeeID"
                                             class="form-control validate" value="{{username}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right" for="defaultForm-employeeName">Họ
-                                            Tên</label>
-                                        <input type="text" name="fullName" id="defaultForm-employeeName"
-                                            class="form-control validate" value="{{fullName}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-employeeDateOfBirth">Ngày
-                                            sinh</label>
-                                        <input type="text" name="dob" id="defaultForm-employeeDateOfBirth"
-                                            class="form-control validate" value="{{dob}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-employeeIdentityCard">CMND</label>
-                                        <input type="text" name="identityCard" id="defaultForm-employeeIdentityCard"
-                                            class="form-control validate" value="{{identityCard}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-employeeAddress">Địa
-                                            chỉ</label>
-                                        <input type="text" name="address" id="defaultForm-employeeAddress"
-                                            class="form-control validate" value="{{address}}">
-                                    </div>
-                                    <div class="md-form mb-2 form-inline">
-                                        <label data-error="wrong" data-success="right"
-                                            for="defaultForm-employeeGender">Giới
-                                            tính</label>
-                                        <select name="gender" class="form-control validate"
-                                            id="defaultForm-employeeGender">
-                                            {{#ifCond gender 1}}
-                                            <option value="1" selected>Nam</option>
-                                            <option value="0">Nữ</option>
-                                            {{else}}
-                                            <option value="1">Nam</option>
-                                            <option value="0" selected>Nữ</option>
-                                            {{/ifCond}}
-                                        </select>
                                     </div>
                                     <div class="md-form mb-2 form-inline">
                                         <label data-error="wrong" data-success="right"

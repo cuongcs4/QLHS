@@ -699,11 +699,13 @@ const EmployeeTrainingDepartment = class extends Employee {
       "tenDangNhap",
       employee.username
     );
-    const dobArray = employee.dob.split("-");
-    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    
     if (isExist) {
       //update
       //1. update NGUOIDUNG
+      const dobFormat = `${employee.dob.getFullYear()}-${
+        employee.dob.getMonth() + 1
+      }-${employee.dob.getDate()}`;
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${employee.getPassWord()}", cmnd='${employee.getIdentityCard()}' ` +
@@ -724,23 +726,21 @@ const EmployeeTrainingDepartment = class extends Employee {
 
       return flagClass.DB.UPDATE;
     }
+    const dobArray = employee.dob.split('-');
+    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    console.log(dobFormat);
     //insert
-    // dobFormat = `${employee.dob.getFullYear()}-${
-    //   employee.dob.getMonth() + 1
-    // }-${employee.dob.getDate()}`;
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
-      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', ${
-        flagClass.TYPE_USER.employee
-      })`;
+      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', '${flagClass.TYPE_USER.employee}')`;
 
     await ExecuteSQL(sqlQuery1);
 
     //2. Insert GIAOVIEN
     const sqlQuery2 =
-      `INSERT INTO NHANVIEN (manv, ngaysinh, hoten, diachi, std, trangthai) ` +
-      `VALUES ('${employee.getUserName()}', '${dobFormat}', '${employee.getFullName()}', '${employee.getAddress()}', '${employee.getPhoneNumber()}', ${employee.getStatus()})`;
+      `INSERT INTO NHANVIEN (manv, ngaysinh, gioitinh, hoten, diachi, sdt, trangthai, maloainv) ` +
+      `VALUES ('${employee.getUserName()}', '${dobFormat}', '${employee.getGender()}', '${employee.getFullName()}', '${employee.getAddress()}', '${employee.getPhoneNumber()}', ${employee.getStatus()}, 'GiaoVu')`;
 
     await ExecuteSQL(sqlQuery2);
 
