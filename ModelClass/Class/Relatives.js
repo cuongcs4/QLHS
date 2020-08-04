@@ -1,6 +1,7 @@
 //Sơ đồ lớp của Relatives
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
+const flagClass = require("../Helper/resource/Flag");
 
 const Relatives = class {
   constructor(studentID, relative, fullName, phoneNumber) {
@@ -37,7 +38,7 @@ const Relatives = class {
 
   static async Find(studentID) {
     const sqlQuery =
-      `SELECT NT.quanhe AS relative, NT.sdt AS phoneNumber ` +
+      `SELECT NT.quanhe AS relative, NT.hoten AS fullName, NT.sdt AS phoneNumber ` +
       `FROM NGUOITHAN AS NT ` +
       `WHERE NT.mahs='${studentID}'`;
 
@@ -46,7 +47,14 @@ const Relatives = class {
     return result;
   }
 
-  static save() {}
+  static async Save(relatives) {
+    const sqlQuery =
+      `INSERT INTO NGUOITHAN(mahs, quanhe, hoten, sdt) ` +
+      `VALUES ('${relatives.getStudentID()}','${relatives.getRelative()}',N'${relatives.getFullName()}','${relatives.getPhoneNumber()}')`;
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.NEW;
+  }
 };
 
 module.exports = Relatives;

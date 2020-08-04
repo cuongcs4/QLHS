@@ -25,18 +25,39 @@ const Room = class {
   }
 
   static async Find(roomID) {
-    const sqlQuery = `SELECT * FROM PHONGHOC WHERE maphong='${roomID}'`;
-    const result = await ExecuteSQL(sqlQuery);
+    if (typeof roomID !== "undefined") {
+      const sqlQuery = `SELECT * FROM PHONGHOC WHERE maphong='${roomID}'`;
+      const result = await ExecuteSQL(sqlQuery);
 
-    if (result.length !== 0) {
-      const roomID = result[0].maphong;
-      const roomName = result[0].tenphong;
-      const roomType = result[0].loaiphong;
+      if (result.length !== 0) {
+        const roomID = result[0].maphong;
+        const roomName = result[0].tenphong;
+        const roomType = result[0].loaiphong;
 
-      return new Room(roomID, roomName, roomType);
+        return new Room(roomID, roomName, roomType);
+      }
+
+      return null;
+    } else {
+      const sqlQuery = `SELECT * FROM PHONGHOC`;
+      const result = await ExecuteSQL(sqlQuery);
+
+      if (result.length !== 0) {
+        const listRoom = [];
+
+        for (let i = 0; i < result.length; i++) {
+          const roomID = result[i].maphong;
+          const roomName = result[i].tenphong;
+          const roomType = result[i].loaiphong;
+
+          listRoom.push(new Room(roomID, roomName, roomType));
+        }
+
+        return listRoom;
+      }
+
+      return null;
     }
-
-    return null;
   }
 
   static async Save(room) {

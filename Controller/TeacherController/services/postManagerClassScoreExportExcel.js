@@ -128,7 +128,7 @@ const postManagerClassScoreExportExcel = async (req, res, next) => {
 
     res.download(
       path,
-      `Bảng điểm tổng kết ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}`
+      `Bảng điểm tổng kết ${className} học kỳ ${semesterID} năm học ${yearStart}-${yearEnd}.xlsx`
     );
     deleteFile(path);
 

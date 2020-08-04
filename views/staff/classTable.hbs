@@ -1,102 +1,167 @@
-<div class="card shadow mb-4">
-    <div class="card-body">
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <a style="cursor: pointer; color: white" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
+                data-target="#modalAddClass">Thêm
+                lớp
+                học</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <form class="form-inline d-flex justify-content-end">
+            <input name="classID" class="form-control mr-sm-2" type="search" placeholder="Mã lớp" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm</button>
+        </form>
+    </div>
+
+</div>
+
+<div class="card shadow mb-4 row">
+    <div style="text-align: center; font-size: 2em; color: black">LỚP 10</div>
+    <div class="card-body col">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>MÃ LỚP</th>
-                        <th>MÃ GVCN</th>
-                        <th>TÊN GVCN</th>
-                        <th>PHÒNG HỌC</th>
-                        <th>NGÀY LẬP</th>
-                        <th></th>
+                        <th style="text-align: center;">MÃ LỚP</th>
+                        <th style="text-align: center;">LỚP</th>
+                        <th style="text-align: center;">MÃ GVCN</th>
+                        <th style="text-align: center;">TÊN GVCN</th>
+                        <th style="text-align: center;">PHÒNG</th>
+                        <th style="text-align: center;">KHÓA</th>
+                        <th style="text-align: center;">TKB</th>
+                        <th style="text-align: center;">QUẢN LÝ</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each listClass10}}
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td><i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditClass"
-                                aria-hidden="true"></i></td>
+                        <td style="text-align: center;">{{classID}}</td>
+                        <td style="text-align: center;">{{className}}</td>
+                        <td style="text-align: center;">{{managerClass}}</td>
+                        <td style="text-align: center;">{{managerName}}</td>
+                        <td style="text-align: center;">{{roomID}}</td>
+                        <td style="text-align: center;">{{course}}</td>
+                        <td style="text-align: center;"><a href="{{schedule}}">Xem</a></td>
+                        <td style="text-align: center;"><a href="{{link}}">Quản lý</a></td>
                     </tr>
+                    {{/each}}
 
                 </tbody>
             </table>
-            <div class="text-center">
-                <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
-                    data-target="#modalAddClass">Thêm lớp học</a>
-            </div>
+
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalEditClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Điều chỉnh thông tin lớp học</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-3">
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-classID">Mã lớp</label>
-                    <input type="text" id="defaultForm-classID" class="form-control validate">
-                </div>
 
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã GVCN</label>
-                    <input type="text" id="defaultForm-teacherID" class="form-control validate">
-                </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Mã phòng</label>
-                    <input type="text" id="defaultForm-roomID" class="form-control validate">
-                </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Ngày bắt đầu</label>
-                    <input type="text" id="defaultForm-startDate" class="form-control validate">
-                </div>
+<div class="card shadow mb-4 row">
+    <div style="text-align: center; font-size: 2em; color: black">LỚP 11</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">MÃ LỚP</th>
+                        <th style="text-align: center;">LỚP</th>
+                        <th style="text-align: center;">MÃ GVCN</th>
+                        <th style="text-align: center;">TÊN GVCN</th>
+                        <th style="text-align: center;">PHÒNG</th>
+                        <th style="text-align: center;">KHÓA</th>
+                        <th style="text-align: center;">TKB</th>
+                        <th style="text-align: center;">QUẢN LÝ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listClass11}}
+                    <tr>
+                        <td style="text-align: center;">{{classID}}</td>
+                        <td style="text-align: center;">{{className}}</td>
+                        <td style="text-align: center;">{{managerClass}}</td>
+                        <td style="text-align: center;">{{managerName}}</td>
+                        <td style="text-align: center;">{{roomID}}</td>
+                        <td style="text-align: center;">{{course}}</td>
+                        <td style="text-align: center;"><a href="{{schedule}}">Xem</a></td>
+                        <td style="text-align: center;"><a href="{{link}}">Quản lý</a></td>
+                    </tr>
+                    {{/each}}
 
-
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-danger">Xác nhận</button>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+<div class="card shadow mb-4 row">
+    <div style="text-align: center; font-size: 2em; color: black">LỚP 12</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">MÃ LỚP</th>
+                        <th style="text-align: center;">LỚP</th>
+                        <th style="text-align: center;">MÃ GVCN</th>
+                        <th style="text-align: center;">TÊN GVCN</th>
+                        <th style="text-align: center;">PHÒNG</th>
+                        <th style="text-align: center;">KHÓA</th>
+                        <th style="text-align: center;">TKB</th>
+                        <th style="text-align: center;">QUẢN LÝ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listClass12}}
+                    <tr>
+                        <td style="text-align: center;">{{classID}}</td>
+                        <td style="text-align: center;">{{className}}</td>
+                        <td style="text-align: center;">{{managerClass}}</td>
+                        <td style="text-align: center;">{{managerName}}</td>
+                        <td style="text-align: center;">{{roomID}}</td>
+                        <td style="text-align: center;">{{course}}</td>
+                        <td style="text-align: center;"><a href="{{schedule}}">Xem</a></td>
+                        <td style="text-align: center;"><a href="{{link}}">Quản lý</a></td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modalAddClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" action="/staff/class" method="POST" enctype="multipart/form-data">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Điều chỉnh thông tin lớp học</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Thêm lớp học</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-classID">Mã lớp</label>
-                    <input type="text" id="defaultForm-classID" class="form-control validate">
-                </div>
-
-                <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-teacherID">Mã GVCN</label>
-                    <input type="text" id="defaultForm-teacherID" class="form-control validate">
+                    <input name="teacherID" type="text" id="defaultForm-teacherID" class="form-control validate"
+                        required>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Mã phòng</label>
-                    <input type="text" id="defaultForm-roomID" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-roomID">Mã phòng học</label>
+                    <input name="roomID" type="text" id="defaultForm-roomID" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Ngày bắt đầu</label>
-                    <input type="text" id="defaultForm-startDate" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Khóa</label>
+                    <input name="course" type="number" id="defaultForm-startDate" class="form-control validate"
+                        required>
+                </div>
+                <div class="md-form mb-2" style="text-align: center;">
+                    <label data-error="wrong" data-success="right" for="defaultForm-startDate">Danh sách hs</label>
+
+                    <input style="border-radius: 5px; padding: 5px; background-color:orange" name="fileExcel"
+                        id="upload-file-excel" type="file" required />
+                </div>
+                <div class="md-form mb-2" style="text-align: center;">
+                    (Tải file excel lên)
                 </div>
 
 
@@ -104,6 +169,6 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-danger">Xác nhận</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

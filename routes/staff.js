@@ -1,55 +1,65 @@
 const express = require("express");
 const router = express.Router();
+
 const checkLogin = require("../Passport/checkLogin");
 const checkStaff = require("../Passport/checkStaff");
 
-router.get("/class", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/classTable", {
-    title: "Class Table",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+const staffController = require("../Controller/StaffController/register");
 
-router.get("/student", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/studentTable", {
-    title: "Danh sách học sinh",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+//Router
+router.get("/class", checkLogin, checkStaff, staffController.getClass);
+router.post("/class", checkLogin, checkStaff, staffController.postClass);
 
-router.get("/exam", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/examTable", {
-    title: "Lịch thi học kì",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get(
+  "/student/:classID",
+  checkLogin,
+  checkStaff,
+  staffController.getStudent
+);
 
-router.get("/room-exam", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/examRoom_studentListTable", {
-    title: "Danh sách thí sinh",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.post("/student", checkLogin, checkStaff, staffController.postStudent);
+router.post(
+  "/new-student",
+  checkLogin,
+  checkStaff,
+  staffController.postNewStudent
+);
 
-router.get("/report", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/report", {
-    title: "Báo cáo",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get(
+  "/schedule/:classID",
+  checkLogin,
+  checkStaff,
+  staffController.getSchedule
+);
+router.post("/schedule/", checkLogin, checkStaff, staffController.postSchedule);
 
-router.get("/survey", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/examRoomTable", {
-    title: "Khảo sát",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
+router.get("/exam", checkLogin, checkStaff, staffController.getExam);
+router.post("/exam", checkLogin, checkStaff, staffController.postExam);
+router.post("/edit-exam", checkLogin, checkStaff, staffController.postEditExam);
+
+router.get("/room-exam", checkLogin, checkStaff, staffController.getRoomExam);
+router.get(
+  "/room-exam/student",
+  checkLogin,
+  checkStaff,
+  staffController.getStudentInExamRoom
+);
+router.post(
+  "/room-exam/create",
+  checkLogin,
+  checkStaff,
+  staffController.postExamRoomCreate
+);
+router.post(
+  "/room-exam/export",
+  checkLogin,
+  checkStaff,
+  staffController.postStudentInClassExportExcel
+);
+
+router.get("/report", checkLogin, checkStaff, staffController.getReport);
+
+router.get("/survey", checkLogin, checkStaff, staffController.getSurvey);
 
 router.get("/examroom", checkLogin, checkStaff, (req, res, next) => {
   res.render("staff/examRoomTable", {

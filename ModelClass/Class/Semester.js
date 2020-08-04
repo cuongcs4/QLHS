@@ -7,10 +7,10 @@ const flagClass = require("../Helper/resource/Flag");
 
 const Semester = class {
   constructor(semesterID, yearStart, yearEnd, status) {
-    this.semesterID = semesterID || null;
-    this.yearStart = yearStart || null;
-    this.yearEnd = yearEnd || null;
-    this.status = status || null;
+    this.semesterID = semesterID;
+    this.yearStart = yearStart;
+    this.yearEnd = yearEnd;
+    this.status = status;
   }
 
   getSemesterID() {
