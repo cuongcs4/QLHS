@@ -434,13 +434,9 @@ const Student = class extends User {
       "tenDangNhap",
       student.getUserName()
     );
-    const dobArray = student.dob.split("-")
-    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
-    // const dobFormat = `${student.dob.getFullYear()}-${
-    //   student.dob.getMonth() + 1
-    // }-${student.dob.getDate()}`;
-    console.log(dobArray);
-    console.log(dobFormat);
+    const dobFormat = `${student.dob.getFullYear()}-${
+      student.dob.getMonth() + 1
+    }-${student.dob.getDate()}`;
     if (isExist) {
       //update
 

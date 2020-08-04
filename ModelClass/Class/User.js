@@ -64,6 +64,9 @@ const User = class {
   setAddress(newAddress) {
     this.address = newAddress;
   }
+  setIdentityCard(newIdentityCard) {
+    this.identityCard = newIdentityCard;
+  }
   getStatus() {
     return this.status;
   }
