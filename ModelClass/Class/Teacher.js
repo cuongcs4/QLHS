@@ -249,7 +249,7 @@ const Teacher = class extends Employee {
         `hoten="${teacher.getFullName()}", ` +
         `diachi="${teacher.getAddress()}", ` +
         `sdt="${teacher.getPhoneNumber()}", ` +
-        `gioitinh="${teacher.getGender()}", ` +
+        `gioitinh=${teacher.getGender()}, ` +
         `mabm="${teacher.getSubjectID()}", ` +
         `trangthai=${teacher.getStatus()} ` +
         `WHERE magv="${teacher.getUserName()}"`;
@@ -274,7 +274,7 @@ const Teacher = class extends Employee {
     const sqlQuery2 =
       `INSERT INTO GIAOVIEN (magv, ngaysinh, hoten, diachi, gioitinh, sdt, mabm, trangthai) ` +
       `VALUES ('${teacher.getUserName()}', '${dobFormat}', '${teacher.getFullName()}', ` + 
-      `'${teacher.getAddress()}', '${teacher.getGender()}', '${teacher.getPhoneNumber()}', '${teacher.getSubjectID()}', ${teacher.getStatus()})`;
+      `'${teacher.getAddress()}', ${teacher.getGender()}, '${teacher.getPhoneNumber()}', '${teacher.getSubjectID()}', ${teacher.getStatus()})`;
 
     await ExecuteSQL(sqlQuery2);
 
