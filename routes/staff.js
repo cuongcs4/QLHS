@@ -58,15 +58,8 @@ router.post(
 );
 
 router.get("/report", checkLogin, checkStaff, staffController.getReport);
+router.post("/report", checkLogin, checkStaff, staffController.postReport);
 
 router.get("/survey", checkLogin, checkStaff, staffController.getSurvey);
-
-router.get("/examroom", checkLogin, checkStaff, (req, res, next) => {
-  res.render("staff/examRoomTable", {
-    title: "Danh sách phòng thi",
-    style: ["styleTable.css"],
-    user: req.user,
-  });
-});
 
 module.exports = router;

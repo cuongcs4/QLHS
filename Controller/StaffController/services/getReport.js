@@ -19,12 +19,28 @@ const getReport = async (req, res, next) => {
   } else {
     const yearArray = year.split("-");
     semesterID = parseInt(semester);
-    yearStart = parseInt(year[0]);
-    yearEnd = parseInt(year[1]);
+    yearStart = parseInt(yearArray[0]);
+    yearEnd = parseInt(yearArray[1]);
   }
 
-  const listScore = await req.user.getScore(semesterID, yearStart, yearEnd);
+  //Đếm số lớp học
+  const listClass = await req.user.getClass();
+  const countClass = {
+    total: 0,
+    listClass10: 0,
+    listClass11: 0,
+    listClass12: 0,
+  };
 
+  for (let i in listClass) {
+    for (let j in listClass[i]) {
+      countClass.total += 1;
+      countClass[i] += 1;
+    }
+  }
+
+  //Lấy điểm
+  const listScore = await req.user.getScore(semesterID, yearStart, yearEnd);
   let countStudent = { total: 0, class10: 0, class11: 0, class12: 0 };
   const totalScore = {
     type1: { quantity: 0, percent: 0 },
@@ -62,6 +78,7 @@ const getReport = async (req, res, next) => {
   listScore.class11.id = `pieChartScoreClass11`;
   listScore.class12.id = `pieChartScoreClass12`;
 
+  //Lấy hạnh kiểm
   const listConduct = await req.user.getConduct(semesterID, yearStart, yearEnd);
 
   const totalConduct = {
@@ -69,7 +86,6 @@ const getReport = async (req, res, next) => {
     type2: { quantity: 0, percent: 0 },
     type3: { quantity: 0, percent: 0 },
     type4: { quantity: 0, percent: 0 },
-    type5: { quantity: 0, percent: 0 },
   };
 
   for (let i in listConduct) {
@@ -78,8 +94,6 @@ const getReport = async (req, res, next) => {
       listConduct[i][j] = { quantity: count, percent: 0 };
 
       totalConduct[j].quantity += count;
-      countStudent.total += count;
-      countStudent[i] += count;
     }
   }
 
@@ -100,8 +114,6 @@ const getReport = async (req, res, next) => {
   listConduct.class11.id = `pieChartConductClass11`;
   listConduct.class12.id = `pieChartConductClass12`;
 
-  //res.send(listScore);
-
   res.render("staff/report", {
     title: "Báo cáo",
     style: ["styleTable.css"],
@@ -113,6 +125,9 @@ const getReport = async (req, res, next) => {
     totalConduct,
     listScore,
     listConduct,
+    countClass,
+    year: `${yearStart}-${yearEnd}`,
+    semesterID,
   });
 };
 

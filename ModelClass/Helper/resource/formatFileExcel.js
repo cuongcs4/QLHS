@@ -56,6 +56,7 @@ const scoreFormat = {
     G1: 10,
     H1: 10,
   },
+  nameSheet: "Điểm",
 };
 
 const scoreFormatExport = {
@@ -80,6 +81,7 @@ const scoreFormatExport = {
     G1: 10,
     H1: 10,
   },
+  nameSheet: "Điểm",
 };
 
 const conductFormat = {
@@ -98,6 +100,7 @@ const conductFormat = {
     D1: 10,
     E1: 10,
   },
+  nameSheet: "Hạnh kiểm",
 };
 
 const compositeTranscriptFormat = {
@@ -148,6 +151,7 @@ const compositeTranscriptFormat = {
     T1: 10,
     U1: 10,
   },
+  nameSheet: "Điểm tổng kết",
 };
 
 const examFormat = {
@@ -191,6 +195,50 @@ const studentInExamRoomFormat = {
     F1: 15,
     G1: 10,
   },
+
+  nameSheet: "DSHS",
+};
+
+const reportScoreFormat = {
+  filed: {
+    A1: "Khối",
+    B1: "Giỏi",
+    C1: "Khá",
+    D1: "TB",
+    E1: "Yếu",
+    F1: "Kém",
+  },
+  propName: [],
+  width: {
+    A1: 20,
+    B1: 20,
+    C1: 20,
+    D1: 20,
+    E1: 20,
+    F1: 20,
+  },
+
+  nameSheet: "Học lực",
+};
+
+const reportConductFormat = {
+  filed: {
+    A1: "Khối",
+    B1: "Tốt",
+    C1: "Khá",
+    D1: "TB",
+    E1: "Yếu",
+  },
+  propName: [],
+  width: {
+    A1: 20,
+    B1: 20,
+    C1: 20,
+    D1: 20,
+    E1: 20,
+  },
+
+  nameSheet: "Hạnh kiểm",
 };
 
 module.exports = {
@@ -201,4 +249,6 @@ module.exports = {
   scoreFormatExport,
   examFormat,
   studentInExamRoomFormat,
+  reportScoreFormat,
+  reportConductFormat,
 };

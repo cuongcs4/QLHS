@@ -14,6 +14,7 @@ const postEditExam = require("./services/postEditExam");
 const getStudentInExamRoom = require("./services/getStudentInExamRoom");
 const postExamRoomCreate = require("./services/postExamRoomCreate");
 const postStudentInClassExportExcel = require("./services/postStudentInClassExportExcel");
+const postReport = require("./services/postReport");
 
 module.exports = {
   getClass,
@@ -32,4 +33,5 @@ module.exports = {
   getStudentInExamRoom,
   postExamRoomCreate,
   postStudentInClassExportExcel,
+  postReport,
 };
