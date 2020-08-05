@@ -5,11 +5,7 @@ const postSemester = async (req, res, next) => {
   const latestSemester = await Semester.getLatestSemester();
 
   if (latestSemester.getStatus() === flagClass.STATUS.ENABLE) {
-    //close
-    latestSemester.setStatus(flagClass.STATUS.DISABLE);
-
-    console.log(latestSemester);
-    await Semester.Save(latestSemester);
+    await req.user.closeSemester();
   } else {
     //open
     await req.user.createNewSemester();

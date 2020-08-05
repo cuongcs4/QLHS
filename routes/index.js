@@ -14,9 +14,13 @@ router.get("/", checkLogin, (req, res, next) => {
     case flagClass.TYPE_USER.HOMEROOM_TEACHER:
       res.redirect("/teacher/class");
       break;
+
     case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:
       res.redirect("/staff/class");
       break;
+
+    case flagClass.TYPE_USER.ADMIN:
+      res.redirect("/admin/semester");
       break;
 
     default:

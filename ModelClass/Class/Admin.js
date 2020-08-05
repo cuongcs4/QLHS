@@ -16,6 +16,7 @@ const Subject = require("./Subject");
 const Score = require("./Score");
 const Semester = require("./Semester");
 const Conduct = require("./Conduct");
+const Class = require("./Class");
 
 const Admin = class extends Employee {
   constructor(
@@ -214,7 +215,25 @@ const Admin = class extends Employee {
     }
   }
 
-  closeSemester() {}
+  async closeSemester() {
+    const latestSemester = await Semester.getLatestSemester();
+
+    latestSemester.setStatus(flagClass.STATUS.DISABLE);
+
+    if (latestSemester.getSemesterID() == 2) {
+      const { listClass12 } = await this.getClass();
+
+      for (let i = 0; i < listClass12.length; i++) {
+        const claSs = await Class.Find(listClass12[i].classID);
+
+        claSs.setStatus(flagClass.STATUS.DISABLE);
+
+        Class.Save(claSs);
+      }
+    }
+
+    Semester.Save(latestSemester);
+  }
 
   static async Find(userName) {
     const sqlQuery =
