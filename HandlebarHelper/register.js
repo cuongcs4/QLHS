@@ -180,7 +180,8 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `</div>` +
             `</div>` +
-            `</div>``<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
+            `</div>` +
+            `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
             `<div class="modal-dialog" role="document">` +
             `<form class="modal-content" action="/profile" method="POST">` +
             `<div class="modal-header text-center">` +
@@ -191,19 +192,19 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="modal-body mx-3">` +
             `<div class="md-form mb-2 form-inline">` +
-            `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
-            `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã học sinh</label>` +
+            `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
-            `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
+            `<label data-error="wrong" data-success="right" for="defaultForm-Name">Tên học
                         sinh</label>` +
-            `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+            `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
             `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
             `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
               user.dob.getMonth() + 1
-            }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+            }-${user.dob.getFullYear()}">` +
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
             `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
@@ -215,22 +216,22 @@ const registerProfile = (handlebars) => {
             `<input name="address" type="text" id="defaultForm-studentAddress"
                         class="form-control validate" value="${user.address}">` +
             `</div>` +
-            // `<input type="hidden" id="typeUser" name="typeUser" value="1">` +
+            `<input type="hidden" id="typeUser" name="typeUser" value="5">` +
             `</div>` +
-            `<div class="modal-footer d-flex justify-content-center">` +
-            `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
-            `</div>` +
-            `</form>` +
-            `</div>` +
-            `</div>`
-        );
-        break;
+              `<div class="modal-footer d-flex justify-content-center">` +
+              `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
+              `</div>` +
+              `</form>` +
+              `</div>` +
+              `</div>`
+          );
+          break;
 
-      case flagClass.TYPE_USER.STUDENT:
-        {
-          return new handlebars.SafeString(
-            `<div class="row">` +
-              `<div class="col-md-4">` +
+        case flagClass.TYPE_USER.STUDENT:
+          {
+            return new handlebars.SafeString(
+              `<div class="row">` +
+                `<div class="col-md-4">` +
               `<div class="profile-img">` +
               `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
               `<div class="file btn btn-lg btn-primary">` +
@@ -352,28 +353,27 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal-body mx-3">` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã user</label>` +
               `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
-                        sinh</label>` +
-              `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Họ Tên</label>` +
+              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+              `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
+              `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+              }-${user.dob.getFullYear()}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-studentIdCard"
+              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+              `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-studentAddress"
+              `<label data-error="wrong" data-success="right" for="defaultForm-address">Địa Chỉ</label>` +
+              `<input name="address" type="text" id="defaultForm-address"
                         class="form-control validate" value="${user.address}">` +
               `</div>` +
               `<input type="hidden" id="typeUser" name="typeUser" value="1">` +
@@ -486,31 +486,30 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal-body mx-3">` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
-              `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã giáo viên</label>` +
+              `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
-                        sinh</label>` +
-              `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Họ tên</label>` +
+              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+              `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
+              `<input name="dob" type="date" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
               }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-studentIdCard"
+              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+              `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-studentAddress"
+              `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
+              `<input name="address" type="text" id="defaultForm-Address"
                         class="form-control validate" value="${user.address}">` +
               `</div>` +
-              // `<input type="hidden" id="typeUser" name="typeUser" value="1">` +
+              `<input type="hidden" id="typeUser" name="typeUser" value="2">` +
               `</div>` +
               `<div class="modal-footer d-flex justify-content-center">` +
               `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
@@ -618,28 +617,28 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal-body mx-3">` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
-              `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã học sinh</label>` +
+              `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
+              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Tên học
                         sinh</label>` +
-              `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+              `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
+              `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+              }-${user.dob.getFullYear()}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-studentIdCard"
+              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+              `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-studentAddress"
+              `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
+              `<input name="address" type="text" id="defaultForm-Address"
                         class="form-control validate" value="${user.address}">` +
               `</div>` +
               `<input type="hidden" id="typeUser" name="typeUser" value="3">` +
@@ -744,28 +743,27 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal-body mx-3">` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentID">Mã học sinh</label>` +
-              `<input name="username" type="text" id="defaultForm-studentID" class="form-control validate" value="${user.id}" readonly>` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã giáo vụ</label>` +
+              `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentName">Tên học
-                        sinh</label>` +
-              `<input name="fullName" type="text" id="defaultForm-studentName" class="form-control validate" value="${user.fullName}">` +
+              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Họ Tên</label>` +
+              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+              `<label data-error="wrong" data-success="right" for="defaultForm-Dob">Ngày sinh</label>` +
+              `<input name="dob" type="text" id="defaultForm-Dob" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+              }-${user.dob.getFullYear()}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentIdCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-studentIdCard"
+              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+              `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-studentAddress">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-studentAddress"
+              `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
+              `<input name="address" type="text" id="defaultForm-Address"
                         class="form-control validate" value="${user.address}">` +
               `</div>` +
               `<input type="hidden" id="typeUser" name="typeUser" value="4">` +

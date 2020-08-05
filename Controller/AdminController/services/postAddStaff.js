@@ -3,6 +3,7 @@ const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment")
 const flag = require("../../../ModelClass/Helper/resource/Flag");
 
 const postAddStaff = async (req, res, next) => {
+  console.log(req.body);
   const {
     username,
     password,
@@ -14,49 +15,45 @@ const postAddStaff = async (req, res, next) => {
     gender,
     typeUser,
   } = req.body;
-  const checkTeacher = await Teacher.Find(username);
-  const checkEmployee = await Employee.Find(username);
-  if (checkEmployee === null && checkTeacher === null) {
-    const typeUserInt = parseInt(typeUser, 10);
-    const genderInt = parseInt(gender, 10);
-    if (typeUserInt === flag.TYPE_USER.TEACHER) {
-      const subjectID = req.body.subjectID;
-      const newTeacher = new Teacher(
-        username,
-        username,
-        password,
-        identityCard,
-        fullName,
-        dob,
-        genderInt,
-        address,
-        flag.STATUS_USER.ENABLE,
-        typeUserInt,
-        phoneNumber,
-        subjectID
-      );
-      await Teacher.Save(newTeacher);
-    }
-    if (typeUserInt === flag.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT) {
-      const newEmployee = new Employee(
-        username,
-        username,
-        password,
-        identityCard,
-        fullName,
-        dob,
-        genderInt,
-        address,
-        flag.STATUS_USER.ENABLE,
-        typeUserInt,
-        phoneNumber
-      );
-      await Employee.Save(newEmployee);
-    }
-    req.flash("success_msg", "Thành công.");
-    res.redirect(`/admin/employee`);
+  const typeUserInt = parseInt(typeUser, 10);
+  const genderInt = parseInt(gender, 10);
+  const newDate = new Date(dob);
+
+  if (typeUserInt === flag.TYPE_USER.TEACHER) {
+    const subjectID = req.body.subjectID;
+    const newTeacher = new Teacher(
+      username,
+      username,
+      password,
+      identityCard,
+      fullName,
+      newDate,
+      genderInt,
+      address,
+      flag.STATUS_USER.ENABLE,
+      flag.TYPE_USER.TEACHER,
+      phoneNumber,
+      subjectID
+    );
+    await Teacher.Save(newTeacher);
   }
-  req.flash("error", "Tên người dùng đã tồn tại");
+  if (typeUserInt === flag.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT) {
+    const newEmployee = new Employee(
+      username,
+      username,
+      password,
+      identityCard,
+      fullName,
+      newDate,
+      genderInt,
+      address,
+      flag.STATUS_USER.ENABLE,
+      flag.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT,
+      phoneNumber
+    );
+    await Employee.Save(newEmployee);
+  }
+  req.flash("success_msg", "Thành công.");
   res.redirect(`/admin/employee`);
 };
 

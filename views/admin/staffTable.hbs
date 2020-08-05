@@ -1,19 +1,24 @@
 <div class="card shadow mb-4">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#teacher" role="tab" aria-controls="home"
-                aria-selected="true">GIÁO VIÊN</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#staff" role="tab" aria-controls="profile"
-                aria-selected="false">GIÁO VỤ</a>
-        </li>
-    </ul>
+
     <div class="card-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#teacher" role="tab"
+                    aria-controls="home" aria-selected="true">GIÁO VIÊN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#staff" role="tab" aria-controls="profile"
+                    aria-selected="false">GIÁO VỤ</a>
+            </li>
+            <li>
+                <a class="nav-link btn-primary" id="add-tab" aria-controls="add"
+                    aria-selected="false" data-toggle="modal" data-target="#modalAdd">Thêm</a>
+            </li>
+        </ul>
         <div class="tab-content profile-tab" id="myTabContent">
             <div class="tab-pane fade show active" id="teacher" role="tabpanel" aria-labelledby="home-tab">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="teacherTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <td>STT</td>
@@ -104,7 +109,7 @@
             </div>
             <div class="tab-pane fade" id="staff" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="staffTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <td>STT</td>
@@ -192,14 +197,31 @@
                     {{/each}}
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-<div class="text-center">
-    <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalAddUser">Thêm
-        CB-CNV</a>
+<div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Vui lòng chọn</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="text-center">
+                    <a href="" class="btn btn-primary btn-rounded mb-4" data-dismiss="modal" data-toggle="modal"
+                        data-target="#modalAddTeacher">Giáo viên</a>
+                        <a href="" class="btn btn-primary btn-rounded mb-4" data-dismiss="modal" data-toggle="modal"
+                        data-target="#modalAddEmployee">Giáo vụ</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddTeacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form class="modal-content" action="/admin/employee/add" method="POST">
             <div class="modal-header text-center">
@@ -210,53 +232,50 @@
             </div>
             <div class="modal-body mx-3">
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Mã cán bộ</label>
-                    <input name="username" type="text" id="defaultForm-userName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Mã cán
+                        bộ</label>
+                    <input name="username" type="text" id="defaultForm-userName" class="form-control validate" value="{{newTeacherID}}"required readonly>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-password">Mật khẩu</label>
-                    <input name="password" type="text" id="defaultForm-password" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-password">Mật
+                        khẩu</label>
+                    <input name="password" type="text" id="defaultForm-password" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-identityCard">CMND</label>
-                    <input name="identityCard" type="text" id="defaultForm-identityCard" class="form-control validate">
+                    <input name="identityCard" type="text" id="defaultForm-identityCard" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-userFullame">Họ Tên</label>
-                    <input name="fullName" type="text" id="defaultForm-userFullname" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userFullame">Họ
+                        Tên</label>
+                    <input name="fullName" type="text" id="defaultForm-userFullname" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-userDoB">Ngày
                         sinh</label>
-                    <input name="dob" type="text" id="defaultForm-userDoB" class="form-control validate"
-                        placeholder="DD-MM-YYYY">
+                    <input name="dob" type="date" id="defaultForm-userDoB" class="form-control validate"
+                        placeholder="DD-MM-YYYY" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-userAddress">Địa
                         chỉ</label>
-                    <input name="address" type="text" id="defaultForm-userAddress" class="form-control validate">
+                    <input name="address" type="text" id="defaultForm-userAddress" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-phoneNumber">SĐT</label>
-                    <input name="phoneNumber" type="text" id="defaultForm-phoneNumber" class="form-control validate">
+                    <input name="phoneNumber" type="text" id="defaultForm-phoneNumber" class="form-control validate" required>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-userGender">Giới tính</label>
+                    <label data-error="wrong" data-success="right" for="defaultForm-userGender">Giới
+                        tính</label>
                     <select name="gender" class="form-control validate" id="defaultForm-userGender">
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
                     </select>
                 </div>
                 <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-userType">Loại
-                        CB-CNV</label>
-                    <select name="typeUser" class="form-control validate" id="defaultForm-userType">
-                        <option value="2">Giáo Viên</option>
-                        <option value="4">Giáo Vụ</option>
-                    </select>
-                </div>
-                <div class="md-form mb-2 form-inline">
-                    <label data-error="wrong" data-success="right" for="defaultForm-subjectID">Bộ môn</label>
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectID">Bộ
+                        môn</label>
                     <select name="subjectID" class="form-control validate" id="defaultForm-subjectID">
                         <option value="">KHÔNG</option>
                         {{#each listSubjectView}}
@@ -264,6 +283,67 @@
                         {{/each}}
                     </select>
                 </div>
+                <input class="form-control validate" type="hidden" id="typeUser" name="typeUser" value="2">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger" type="submit">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="modalAddEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/admin/employee/add" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Thêm Giáo Vụ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userName">Mã cán
+                        bộ</label>
+                    <input name="username" type="text" id="defaultForm-userName" class="form-control validate" value="{{newEmployeeID}}"required readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-password">Mật
+                        khẩu</label>
+                    <input name="password" type="text" id="defaultForm-password" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-identityCard">CMND</label>
+                    <input name="identityCard" type="text" id="defaultForm-identityCard" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userFullame">Họ
+                        Tên</label>
+                    <input name="fullName" type="text" id="defaultForm-userFullname" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userDoB">Ngày
+                        sinh</label>
+                    <input name="dob" type="date" id="defaultForm-userDoB" class="form-control validate"
+                        placeholder="DD-MM-YYYY" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userAddress">Địa
+                        chỉ</label>
+                    <input name="address" type="text" id="defaultForm-userAddress" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-phoneNumber">SĐT</label>
+                    <input name="phoneNumber" type="text" id="defaultForm-phoneNumber" class="form-control validate" required>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-userGender">Giới
+                        tính</label>
+                    <select name="gender" class="form-control validate" id="defaultForm-userGender">
+                        <option value="1">Nam</option>
+                        <option value="0">Nữ</option>
+                    </select>
+                </div>
+                 <input class="form-control validate" type="hidden" id="typeUser" name="typeUser" value="4">
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-danger" type="submit">Xác nhận</button>

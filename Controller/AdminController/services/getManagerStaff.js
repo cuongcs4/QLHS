@@ -6,6 +6,8 @@ const getManagerStaff = async (req, res, next) => {
   const listEmployee = await Employee.Find();
   const listTeacherView = [];
   const listEmployeeView = [];
+  const newTeacherID = await Teacher.GetNewTeacherID();
+  const newEmployeeID = await Employee.GetNewEmployeeID();
   if (listTeacher !== null) {
     for (let i = 0; i < listTeacher.length; i++) {
       const {
@@ -72,7 +74,9 @@ const getManagerStaff = async (req, res, next) => {
     user: req.user,
     listTeacherView,
     listEmployeeView,
-    listSubjectView
+    listSubjectView,
+    newTeacherID,
+    newEmployeeID
   });
 };
 module.exports = getManagerStaff;

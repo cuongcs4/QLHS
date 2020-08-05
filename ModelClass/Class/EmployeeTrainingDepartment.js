@@ -609,11 +609,22 @@ const EmployeeTrainingDepartment = class extends Employee {
   //Chỉnh sửa câu hỏi phiếu khảo sát
   editQuestionSurvey() {}
 
+  static async GetNewEmployeeID() {
+    const sqlQuery =
+      `SELECT COUNT(manv) AS total ` +
+      `FROM NHANVIEN`;
+    const { total } = (await ExecuteSQL(sqlQuery))[0];
+    if (total < 10) return `NV0${total}`;
+
+    return `NV${total}`;
+  }
+
   static async Find(userName) {
     if (typeof userName === "undefined") {
       const sqlQuery =
         `SELECT * ` +
-        `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv=ND.tenDangNhap`;
+        `FROM NHANVIEN AS NV INNER JOIN NGUOIDUNG AS ND ON NV.manv=ND.tenDangNhap ` +
+        `WHERE ND.loai = 4`;
 
       const result = await ExecuteSQL(sqlQuery);
       if (result.length !== 0) {
@@ -700,12 +711,13 @@ const EmployeeTrainingDepartment = class extends Employee {
       employee.username
     );
     
+    const dobFormat = `${employee.dob.getFullYear()}-${
+      employee.dob.getMonth() + 1
+    }-${employee.dob.getDate()}`;
+    
     if (isExist) {
       //update
       //1. update NGUOIDUNG
-      const dobFormat = `${employee.dob.getFullYear()}-${
-        employee.dob.getMonth() + 1
-      }-${employee.dob.getDate()}`;
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${employee.getPassWord()}", cmnd='${employee.getIdentityCard()}' ` +
@@ -726,14 +738,11 @@ const EmployeeTrainingDepartment = class extends Employee {
 
       return flagClass.DB.UPDATE;
     }
-    const dobArray = employee.dob.split('-');
-    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
-    console.log(dobFormat);
     //insert
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
-      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', '${flagClass.TYPE_USER.employee}')`;
+      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', ${flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT})`;
 
     await ExecuteSQL(sqlQuery1);
 

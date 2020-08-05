@@ -46,5 +46,20 @@ $(document).ready(function () {
   });
 });
 
-
+$(document).ready(function () {
+  $('#teacherTable').DataTable({
+    "searching": false,
+    "ordering": true,
+    "paging": false,
+    "info":     false
+  })
+})
+$(document).ready(function () {
+  $('#staffTable').DataTable({
+    "searching": false,
+    "ordering": true,
+    "paging": false,
+    "info":     false
+  })
+})
 
