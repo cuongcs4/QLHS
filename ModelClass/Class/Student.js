@@ -287,6 +287,13 @@ const Student = class extends User {
     return `HS${newClassID}${total + 1}`;
   }
 
+  static async CountStudent() {
+    const sqlQuery = `SELECT COUNT(mahs) AS total FROM HOCSINH WHERE trangthai=1`;
+    const result = await ExecuteSQL(sqlQuery);
+
+    return result[0].total;
+  }
+
   static async Find({ id, classID }) {
     // tìm tất cả học sinh
     if (id === null && classID === null) {
@@ -467,7 +474,9 @@ const Student = class extends User {
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
-      `VALUES ('${student.getUserName()}', '${student.getPassWord()}', '${student.getIdentityCard()}', ${flagClass.TYPE_USER.STUDENT})`;
+      `VALUES ('${student.getUserName()}', '${student.getPassWord()}', '${student.getIdentityCard()}', ${
+        flagClass.TYPE_USER.STUDENT
+      })`;
 
     await ExecuteSQL(sqlQuery1);
 

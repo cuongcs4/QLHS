@@ -14,6 +14,10 @@ router.get("/", checkLogin, (req, res, next) => {
     case flagClass.TYPE_USER.HOMEROOM_TEACHER:
       res.redirect("/teacher/class");
       break;
+    case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:
+      res.redirect("/staff/class");
+      break;
+      break;
 
     default:
       res.render("index", {
@@ -44,7 +48,7 @@ router.get("/profile", checkLogin, async (req, res, next) => {
       break;
   }
 
-  console.log(user);
+  // console.log(user);
 
   // const user = {
   //   fullName: req.user.getFullName(),

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 04, 2020 lúc 04:50 AM
+-- Thời gian đã tạo: Th8 05, 2020 lúc 10:33 AM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.7
 
@@ -58,7 +58,7 @@ INSERT INTO `bomon` (`mabm`, `tenbm`) VALUES
 --
 
 CREATE TABLE `cauhoiks` (
-  `macauhoi` varchar(15) COLLATE latin1_bin NOT NULL,
+  `macauhoi` INT NOT NULL,
   `noidung` varchar(5000) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -258,6 +258,13 @@ CREATE TABLE `dotks` (
   `ngaykt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Đang đổ dữ liệu cho bảng `dotks`
+--
+
+INSERT INTO `dotks` (`stt`, `mahk`, `nambd`, `namkt`, `ngaybd`, `ngaykt`) VALUES
+(3, 2, 2019, 2020, '2020-08-06', '2020-08-06');
+
 -- --------------------------------------------------------
 
 --
@@ -280,7 +287,7 @@ CREATE TABLE `giaovien` (
 --
 
 INSERT INTO `giaovien` (`magv`, `ngaysinh`, `hoten`, `gioitinh`, `diachi`, `sdt`, `mabm`, `trangthai`) VALUES
-('GV01', '1980-06-15', 'Nguyễn Văn Toán', 1, '01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'Toan', 1),
+('GV01', '1980-06-15', 'Nguyễn Văn Toán', 1, '01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'Toan', 0),
 ('GV02', '1980-06-15', 'Nguyễn Văn Ngữ Văn', 1, '01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'NguVan', 1),
 ('GV03', '1980-06-15', 'Nguyễn Văn Tiếng Anh', 1, '01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'AnhVan', 1),
 ('GV04', '1980-06-15', 'Nguyễn Văn Vật Lý', 1, '01 Trần Hưng Đạo, Quận 1, TP.HCM', '0987654321', 'VatLy', 1),
@@ -317,8 +324,8 @@ CREATE TABLE `hanhkiem` (
 --
 
 INSERT INTO `hanhkiem` (`mahs`, `malop`, `magv`, `mahk`, `nambd`, `namkt`, `xeploai`) VALUES
-('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 2),
-('HS20180102', 'LH201801', 'GV01', 2, 2019, 2020, 1),
+('HS20180101', 'LH201801', 'GV01', 2, 2019, 2020, 4),
+('HS20180102', 'LH201801', 'GV01', 2, 2019, 2020, 2),
 ('HS20180103', 'LH201801', 'GV01', 2, 2019, 2020, 1),
 ('HS20180104', 'LH201801', 'GV01', 2, 2019, 2020, 1),
 ('HS20180105', 'LH201801', 'GV01', 2, 2019, 2020, 1),
@@ -402,16 +409,16 @@ CREATE TABLE `hocsinh` (
 --
 
 INSERT INTO `hocsinh` (`mahs`, `ngaysinh`, `hoten`, `gioitinh`, `diachi`, `malop`, `trangthai`) VALUES
-('HS20180101', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
-('HS20180102', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
-('HS20180103', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
-('HS20180104', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
-('HS20180105', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
-('HS20180201', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
-('HS20180202', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
-('HS20180203', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
-('HS20180204', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
-('HS20180205', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
+('HS20180101', '2001-10-10', 'Nguyễn Văn An', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
+('HS20180102', '2001-10-10', 'Nguyễn Văn Bảo', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
+('HS20180103', '2001-10-10', 'Nguyễn Văn Bách', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
+('HS20180104', '2001-10-10', 'Nguyễn Văn Dũng', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
+('HS20180105', '2001-10-10', 'Nguyễn Văn Hưng', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201801', 1),
+('HS20180201', '2001-10-10', 'Nguyễn Văn Anh', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
+('HS20180202', '2001-10-10', 'Nguyễn Văn Chính', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
+('HS20180203', '2001-10-10', 'Nguyễn Văn Châu', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
+('HS20180204', '2001-10-10', 'Nguyễn Văn Minh', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
+('HS20180205', '2001-10-10', 'Nguyễn Văn Yên', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201802', 1),
 ('HS20180301', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201803', 1),
 ('HS20180302', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201803', 1),
 ('HS20180303', '2001-10-10', 'Nguyễn Văn A', 1, '01 Trần Hưng Đạo, Q1, TP.HCM', 'LH201803', 1),
@@ -470,10 +477,8 @@ INSERT INTO `hocsinh` (`mahs`, `ngaysinh`, `hoten`, `gioitinh`, `diachi`, `malop
 --
 
 CREATE TABLE `kqkhaosat` (
-  `macauhoi` varchar(15) COLLATE latin1_bin NOT NULL,
+  `macauhoi` INT NOT NULL,
   `mahs` varchar(15) COLLATE latin1_bin NOT NULL,
-  `magv` varchar(15) COLLATE latin1_bin NOT NULL,
-  `mabm` varchar(15) COLLATE latin1_bin NOT NULL,
   `mahk` int(11) NOT NULL,
   `nambd` int(11) NOT NULL,
   `namkt` int(11) NOT NULL,
@@ -698,7 +703,7 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manv`, `hoten`, `ngaysinh`, `gioitinh`, `diachi`, `sdt`, `trangthai`, `maloainv`) VALUES
-('NV01', 'Nguyễn Văn V', '1960-01-01', 1, '2 Bà Trưng, Hà Nội', '123456789', 1, 'GiaoVu'),
+('NV01', 'Nguyễn Văn V', '1960-01-01', 1, '2 Bà Trưng, Hà Nội', 'null', 1, 'GiaoVu'),
 ('NV02', 'Nguyễn Văn V1', '1960-01-01', 1, 'Cầu Giấy, Hà Nội', '123456789', 1, 'GiaoVu'),
 ('admin', 'Admin', '2020-01-01', 1, 'admin', '0', 1, 'admin');
 
@@ -752,7 +757,46 @@ CREATE TABLE `phongthi` (
 --
 
 INSERT INTO `phongthi` (`maphongthi`, `phonghoc`, `mahs`, `mahk`, `nambd`, `namkt`) VALUES
-('2', '02', 'HS20180103', 1, 2019, 2020);
+('1001', '01', 'HS20190101', 2, 2019, 2020),
+('1001', '01', 'HS20190102', 2, 2019, 2020),
+('1001', '01', 'HS20190103', 2, 2019, 2020),
+('1001', '01', 'HS20190104', 2, 2019, 2020),
+('1001', '01', 'HS20190105', 2, 2019, 2020),
+('1001', '01', 'HS20190201', 2, 2019, 2020),
+('1001', '01', 'HS20190202', 2, 2019, 2020),
+('1001', '01', 'HS20190203', 2, 2019, 2020),
+('1001', '01', 'HS20190204', 2, 2019, 2020),
+('1001', '01', 'HS20190205', 2, 2019, 2020),
+('1002', '02', 'HS20190301', 2, 2019, 2020),
+('1002', '02', 'HS20190302', 2, 2019, 2020),
+('1002', '02', 'HS20190303', 2, 2019, 2020),
+('1002', '02', 'HS20190304', 2, 2019, 2020),
+('1002', '02', 'HS20190305', 2, 2019, 2020),
+('1002', '02', 'HS20190401', 2, 2019, 2020),
+('1002', '02', 'HS20190402', 2, 2019, 2020),
+('1002', '02', 'HS20190403', 2, 2019, 2020),
+('1002', '02', 'HS20190404', 2, 2019, 2020),
+('1002', '02', 'HS20190405', 2, 2019, 2020),
+('1101', '01', 'HS20180301', 2, 2019, 2020),
+('1101', '01', 'HS20180302', 2, 2019, 2020),
+('1101', '01', 'HS20180303', 2, 2019, 2020),
+('1101', '01', 'HS20180304', 2, 2019, 2020),
+('1101', '01', 'HS20180305', 2, 2019, 2020),
+('1101', '01', 'HS20180401', 2, 2019, 2020),
+('1101', '01', 'HS20180402', 2, 2019, 2020),
+('1101', '01', 'HS20180403', 2, 2019, 2020),
+('1101', '01', 'HS20180404', 2, 2019, 2020),
+('1101', '01', 'HS20180405', 2, 2019, 2020),
+('1102', '02', 'HS20180101', 2, 2019, 2020),
+('1102', '02', 'HS20180102', 2, 2019, 2020),
+('1102', '02', 'HS20180103', 2, 2019, 2020),
+('1102', '02', 'HS20180104', 2, 2019, 2020),
+('1102', '02', 'HS20180105', 2, 2019, 2020),
+('1102', '02', 'HS20180201', 2, 2019, 2020),
+('1102', '02', 'HS20180202', 2, 2019, 2020),
+('1102', '02', 'HS20180203', 2, 2019, 2020),
+('1102', '02', 'HS20180204', 2, 2019, 2020),
+('1102', '02', 'HS20180205', 2, 2019, 2020);
 
 -- --------------------------------------------------------
 
@@ -873,9 +917,7 @@ ALTER TABLE `hocsinh`
 -- Chỉ mục cho bảng `kqkhaosat`
 --
 ALTER TABLE `kqkhaosat`
-  ADD PRIMARY KEY (`macauhoi`,`mahs`,`magv`,`mabm`,`mahk`,`nambd`,`namkt`),
-  ADD KEY `FK_KQKHAOSAT_GIAOVIEN` (`magv`),
-  ADD KEY `FK_KQKHAOSAT_BOMON` (`mabm`),
+  ADD PRIMARY KEY (`macauhoi`,`mahs`,`mahk`,`nambd`,`namkt`),
   ADD KEY `FK_KQKHAOSAT_HOCKY` (`mahk`,`nambd`,`namkt`);
 
 --
@@ -965,7 +1007,7 @@ ALTER TABLE `thoikhoabieu`
 -- AUTO_INCREMENT cho bảng `dotks`
 --
 ALTER TABLE `dotks`
-  MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoithan`
@@ -1019,9 +1061,7 @@ ALTER TABLE `hocsinh`
 -- Các ràng buộc cho bảng `kqkhaosat`
 --
 ALTER TABLE `kqkhaosat`
-  ADD CONSTRAINT `FK_KQKHAOSAT_BOMON` FOREIGN KEY (`mabm`) REFERENCES `bomon` (`mabm`),
   ADD CONSTRAINT `FK_KQKHAOSAT_CAUHOIKS` FOREIGN KEY (`macauhoi`) REFERENCES `cauhoiks` (`macauhoi`),
-  ADD CONSTRAINT `FK_KQKHAOSAT_GIAOVIEN` FOREIGN KEY (`magv`) REFERENCES `giaovien` (`magv`),
   ADD CONSTRAINT `FK_KQKHAOSAT_HOCKY` FOREIGN KEY (`mahk`,`nambd`,`namkt`) REFERENCES `hocky` (`mahk`, `nambd`, `namkt`);
 
 --

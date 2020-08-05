@@ -1,5 +1,7 @@
 //Sơ đồ lớp của QuestionSurvey
 
+const ExecuteSQL = require("../Database/ExecuteSQL");
+
 const QuestionSurvey = class {
   constructor(questionID, content) {
     this.questionID = questionID || null;
@@ -15,7 +17,21 @@ const QuestionSurvey = class {
     this.content = newContent;
   }
 
-  static find() {}
+  static async Find(idQuestion) {
+    if (typeof idQuestion === "undefined") {
+      const sqlQuery = `SELECT macauhoi AS idQuestion, noidung AS content FROM CAUHOIKS `;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      return result;
+    } else {
+      const sqlQuery = `SELECT macauhoi AS idQuestion, noidung AS content FROM CAUHOIKS WHERE macauhoi='${idQuestion}'`;
+
+      const result = await ExecuteSQL(sqlQuery);
+
+      return result.length === 0 ? null : result[0];
+    }
+  }
 
   static save() {}
 };

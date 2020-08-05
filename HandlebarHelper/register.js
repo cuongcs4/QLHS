@@ -219,20 +219,20 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<input type="hidden" id="typeUser" name="typeUser" value="5">` +
             `</div>` +
-              `<div class="modal-footer d-flex justify-content-center">` +
-              `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
-              `</div>` +
-              `</form>` +
-              `</div>` +
-              `</div>`
-          );
-          break;
+            `<div class="modal-footer d-flex justify-content-center">` +
+            `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
+            `</div>` +
+            `</form>` +
+            `</div>` +
+            `</div>`
+        );
+        break;
 
-        case flagClass.TYPE_USER.STUDENT:
-          {
-            return new handlebars.SafeString(
-              `<div class="row">` +
-                `<div class="col-md-4">` +
+      case flagClass.TYPE_USER.STUDENT:
+        {
+          return new handlebars.SafeString(
+            `<div class="row">` +
+              `<div class="col-md-4">` +
               `<div class="profile-img">` +
               `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />` +
               `<div class="file btn btn-lg btn-primary">` +
@@ -609,48 +609,47 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
-              `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile/change" method="POST">` +
-              `<div class="modal-header text-center">` +
-              `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
-              `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
-              `<span aria-hidden="true">&times;</span>` +
-              `</button>` +
-              `</div>` +
-              `<div class="modal-body mx-3">` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã học sinh</label>` +
-              `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Tên học
+            `<div class="modal-dialog" role="document">` +
+            `<form class="modal-content" action="/profile" method="POST">` +
+            `<div class="modal-header text-center">` +
+            `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
+            `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
+            `<span aria-hidden="true">&times;</span>` +
+            `</button>` +
+            `</div>` +
+            `<div class="modal-body mx-3">` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã học sinh</label>` +
+            `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-Name">Tên học
                         sinh</label>` +
-              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
-                user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-IDCard"
+            `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
+            `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
+              user.dob.getMonth() + 1
+            }-${user.dob.getFullYear()}">` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+            `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-Address"
-                        class="form-control validate" value="${user.address}">` +
-              `</div>` +
-              `<input type="hidden" id="typeUser" name="typeUser" value="3">` +
-              `</div>` +
-              `<div class="modal-footer d-flex justify-content-center">` +
-              `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
-              `</div>` +
-              `</form>` +
-              `</div>` +
-              `</div>`
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
+            `<input name="address" type="text" id="defaultForm-Address" class="form-control validate" value="${user.address}">` +
+            `</div>` +
+            `<input type="hidden" id="typeUser" name="typeUser" value="3">` +
+            `</div>` +
+            `<div class="modal-footer d-flex justify-content-center">` +
+            `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
+            `</div>` +
+            `</form>` +
+            `</div>` +
+            `</div>`
         );
         break;
 
@@ -735,47 +734,46 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
-              `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile/change" method="POST">` +
-              `<div class="modal-header text-center">` +
-              `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
-              `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
-              `<span aria-hidden="true">&times;</span>` +
-              `</button>` +
-              `</div>` +
-              `<div class="modal-body mx-3">` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã giáo vụ</label>` +
-              `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-Name">Họ Tên</label>` +
-              `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-Dob">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-Dob" class="form-control validate" value="${user.dob.getDate()}-${
-                user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
-              `<input name="identityCard" max="10" id="defaultForm-IDCard"
+            `<div class="modal-dialog" role="document">` +
+            `<form class="modal-content" action="/profile" method="POST">` +
+            `<div class="modal-header text-center">` +
+            `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
+            `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
+            `<span aria-hidden="true">&times;</span>` +
+            `</button>` +
+            `</div>` +
+            `<div class="modal-body mx-3">` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-ID">Mã giáo vụ</label>` +
+            `<input name="username" type="text" id="defaultForm-ID" class="form-control validate" value="${user.id}" readonly>` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-Name">Họ Tên</label>` +
+            `<input name="fullName" type="text" id="defaultForm-Name" class="form-control validate" value="${user.fullName}">` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-Dob">Ngày sinh</label>` +
+            `<input name="dob" type="text" id="defaultForm-Dob" class="form-control validate" value="${user.dob.getDate()}-${
+              user.dob.getMonth() + 1
+            }-${user.dob.getFullYear()}">` +
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
+            `<input name="identityCard" max="10" id="defaultForm-IDCard"
                         class="form-control validate" value="${user.identityCard}">` +
-              `</div>` +
-              `<div class="md-form mb-2 form-inline">` +
-              `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
-              `<input name="address" type="text" id="defaultForm-Address"
-                        class="form-control validate" value="${user.address}">` +
-              `</div>` +
-              `<input type="hidden" id="typeUser" name="typeUser" value="4">` +
-              `</div>` +
-              `<div class="modal-footer d-flex justify-content-center">` +
-              `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
-              `</div>` +
-              `</form>` +
-              `</div>` +
-              `</div>`
+            `</div>` +
+            `<div class="md-form mb-2 form-inline">` +
+            `<label data-error="wrong" data-success="right" for="defaultForm-Address">Địa Chỉ</label>` +
+            `<input name="address" type="text" id="defaultForm-Address" class="form-control validate" value="${user.address}">` +
+            `</div>` +
+            `<input type="hidden" id="typeUser" name="typeUser" value="4">` +
+            `</div>` +
+            `<div class="modal-footer d-flex justify-content-center">` +
+            `<button class="btn btn-danger" type="submit">Xác nhận</button>` +
+            `</div>` +
+            `</form>` +
+            `</div>` +
+            `</div>`
         );
         break;
     }
@@ -908,12 +906,72 @@ const registerChartConduct = (handlebars) => {
   });
 };
 
+const registerChartSurvey = (handlebars) => {
+  handlebars.registerHelper("chartSurvey", (listData, block) => {
+    if (!listData) return new handlebars.SafeString("");
+
+    const string = `<script>// Set new default font family and font color to mimic Bootstrap's default styling
+    (Chart.defaults.global.defaultFontFamily = "Nunito"),
+      '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = "#858796";
+
+    // Pie Chart Example
+    var ctx = document.getElementById("${listData.id}");
+    var myPieChart = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["0-25%", "25-50%", "50-75%", "75-100%"],
+        datasets: [
+          {
+            data: [${listData.quantity.type1}, ${listData.quantity.type2}, ${listData.quantity.type3}, ${listData.quantity.type4}],
+            backgroundColor: [
+              "#4e73df",
+              "#1cc88a",
+              "#36b9cc",
+              "#f6c23e",
+              "#e74a3b",
+            ],
+            hoverBackgroundColor: [
+              "#2e59d9",
+              "#17a673",
+              "#2c9faf",
+              "#be8b09",
+              "#d12a1a",
+            ],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+          },
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: "#dddfeb",
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+        },
+        legend: {
+          display: false,
+        },
+        cutoutPercentage: 80,
+      },
+    });</script>`;
+
+    return new handlebars.SafeString(string);
+  });
+};
+
 const registerAll = (handlebars) => {
   registerSideBar(handlebars);
   registerProfile(handlebars);
   registerIfHelp(handlebars);
   registerChartScore(handlebars);
   registerChartConduct(handlebars);
+  registerChartSurvey(handlebars);
 };
 
 module.exports = registerAll;
