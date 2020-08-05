@@ -61,5 +61,12 @@ router.get("/report", checkLogin, checkStaff, staffController.getReport);
 router.post("/report", checkLogin, checkStaff, staffController.postReport);
 
 router.get("/survey", checkLogin, checkStaff, staffController.getSurvey);
+router.post("/survey", checkLogin, checkStaff, staffController.postSurvey);
+router.post(
+  "/survey/export",
+  checkLogin,
+  checkStaff,
+  staffController.postSurveyExport
+);
 
 module.exports = router;

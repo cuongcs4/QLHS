@@ -1,72 +1,18 @@
-const Semester = require("../../../ModelClass/Class/Semester");
 const ResultSurvey = require("../../../ModelClass/Class/ResultSurvey");
-const Student = require("../../../ModelClass/Class/Student");
 const QuestionSurvey = require("../../../ModelClass/Class/QuestionSurvey");
 
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
+const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
 
-const getSurvey = async (req, res, next) => {
-  const { year, semester } = req.query;
+const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
 
-  let statusSemester, semesterID, yearStart, yearEnd;
+const postSurveyExport = async (req, res, next) => {
+  const { year, semesterID } = req.body;
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
-    year,
-    semester
-  );
+  const yearArray = year.split("-");
+  const yearStart = yearArray[0];
+  const yearEnd = yearArray[1];
 
-  if (typeof year === "undefined" || typeof semester === "undefined") {
-    const latestSemester = await Semester.getLatestSemester();
-    semesterID = latestSemester.getSemesterID();
-    yearStart = latestSemester.getYearStart();
-    yearEnd = latestSemester.getYearEnd();
-    statusSemester = latestSemester.getStatus();
-  } else {
-    const yearArray = year.split("-");
-    semesterID = parseInt(semester);
-    yearStart = parseInt(yearArray[0]);
-    yearEnd = parseInt(yearArray[1]);
-    statusSemester = (
-      await Semester.Find(semesterID, yearStart, yearEnd)
-    ).getStatus();
-  }
-
-  let timeSurvey = await ResultSurvey.GetTimeSurvey(
-    semesterID,
-    yearStart,
-    yearEnd
-  );
-
-  const isExistSurvey = timeSurvey === null ? false : true;
-
-  let isDuringSurvey = { condition: isExistSurvey && true, msg: "" };
-  if (isExistSurvey) {
-    const day = new Date();
-    const date = new Date(
-      `${day.getMonth() + 1}/${day.getDate()}/${day.getFullYear()}`
-    );
-
-    const { dayStart, dayEnd } = timeSurvey;
-
-    if (dayStart > date) {
-      isDuringSurvey.condition = false;
-      isDuringSurvey.msg = "Chưa bắt đầu";
-    }
-
-    if (dayEnd < date) {
-      isDuringSurvey.condition = false;
-      isDuringSurvey.msg = "Đã kết thúc";
-    }
-
-    timeSurvey = `${dayStart.getDate()}/${
-      dayStart.getMonth() + 1
-    }/${dayStart.getFullYear()} - ${dayEnd.getDate()}/${
-      dayEnd.getMonth() + 1
-    }/${dayEnd.getFullYear()}`;
-  }
-
-  //Lấy tổng số học sinh
-  const sumStudent = await Student.CountStudent();
   //Lấy số phiếu đã làm
   const sumSurvey = await ResultSurvey.CountStudentDoSurvey(
     semesterID,
@@ -182,23 +128,37 @@ const getSurvey = async (req, res, next) => {
 
   const questionArray = Object.keys(question).map((key) => question[key]);
 
-  //res.send(questionArray);
+  const data = [];
 
-  res.render("staff/survey", {
-    title: "Khảo sát",
-    style: ["styleTable.css"],
-    user: req.user,
-    allYearSemester,
-    isLastSemester,
-    statusSemester,
-    timeSurvey,
-    isDuringSurvey,
-    semesterID,
-    year: `${yearStart}-${yearEnd}`,
-    sumStudent,
-    sumSurvey,
-    questionArray,
-  });
+  for (let i = 0; i < questionArray.length; i++) {
+    const line = [];
+    line.push(i + 1);
+
+    line.push(questionArray[i].content);
+    line.push(
+      `${questionArray[i].quantity.type1} (${questionArray[i].percent.type1}%)`
+    );
+    line.push(
+      `${questionArray[i].quantity.type2} (${questionArray[i].percent.type2}%)`
+    );
+    line.push(
+      `${questionArray[i].quantity.type3} (${questionArray[i].percent.type3}%)`
+    );
+    line.push(
+      `${questionArray[i].quantity.type4} (${questionArray[i].percent.type4}%)`
+    );
+
+    data.push(line);
+  }
+
+  const path = await exportFileExcel(data, formatFileExcel.surveyFormat);
+
+  res.download(
+    path,
+    `Kết quả khảo sát học kỳ ${semesterID} năm học ${year}.xlsx`
+  );
+
+  deleteFile(path);
 };
 
-module.exports = getSurvey;
+module.exports = postSurveyExport;

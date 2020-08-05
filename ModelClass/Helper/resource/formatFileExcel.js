@@ -241,6 +241,28 @@ const reportConductFormat = {
   nameSheet: "Hạnh kiểm",
 };
 
+const surveyFormat = {
+  filed: {
+    A1: "STT",
+    B1: "Câu hỏi",
+    C1: "0-25%",
+    D1: "25-50%",
+    E1: "50-75%",
+    F1: "75-100%",
+  },
+  propName: [],
+  width: {
+    A1: 10,
+    B1: 50,
+    C1: 20,
+    D1: 20,
+    E1: 20,
+    F1: 20,
+  },
+
+  nameSheet: "Khảo sát",
+};
+
 module.exports = {
   studentFormat,
   scoreFormat,
@@ -251,4 +273,5 @@ module.exports = {
   studentInExamRoomFormat,
   reportScoreFormat,
   reportConductFormat,
+  surveyFormat,
 };

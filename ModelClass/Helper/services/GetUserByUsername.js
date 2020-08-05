@@ -42,6 +42,7 @@ const getUserByUsername = async (userName) => {
         break;
     }
 
+    console.log(usr);
     return usr;
   }
 
