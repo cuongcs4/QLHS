@@ -127,6 +127,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="col-md-2">` +
             `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
+            `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a>` +
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -183,7 +184,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
             `<div class="modal-dialog" role="document">` +
-            `<form class="modal-content" action="/profile" method="POST">` +
+            `<form class="modal-content" action="/profile/change" method="POST">` +
             `<div class="modal-header text-center">` +
             `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
             `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -263,6 +264,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="col-md-2">` +
               `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
+              `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a>` +
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -344,7 +346,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile" method="POST">` +
+              `<form class="modal-content" action="/profile/change" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -477,7 +479,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile" method="POST">` +
+              `<form class="modal-content" action="/profile/change" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -608,7 +610,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile" method="POST">` +
+              `<form class="modal-content" action="/profile/change" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -734,7 +736,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile" method="POST">` +
+              `<form class="modal-content" action="/profile/change" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +

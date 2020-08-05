@@ -23,15 +23,8 @@ router.get("/", checkLogin, (req, res, next) => {
       });
   }
 });
-
-router.get("/changePassword", checkLogin, (req, res, next) => {
-  res.render("index", {
-    title: "Đổi mật khẩu",
-    pagename: "Đổi mật khẩu",
-    user: req.user,
-  });
-});
-router.post("/profile", checkLogin, indexController.postProfile);
+router.post("/profile/change", checkLogin, indexController.postProfile);
+router.post("/profile/changePassword", checkLogin);
 
 router.get("/profile", checkLogin, async (req, res, next) => {
   const user = { ...req.user };
