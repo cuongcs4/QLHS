@@ -137,6 +137,15 @@ const Teacher = class extends Employee {
 
     return result;
   }
+  static async GetNewTeacherID() {
+    const sqlQuery =
+      `SELECT COUNT(magv) AS total ` +
+      `FROM GIAOVIEN`;
+    const { total } = (await ExecuteSQL(sqlQuery))[0];
+    if (total + 1 < 10) return `GV0${total + 1}`;
+
+    return `GV${total + 1}`;
+  }
 
   static async Find(userName) {
     if (typeof userName === "undefined") {
@@ -231,13 +240,14 @@ const Teacher = class extends Employee {
       "tenDangNhap",
       teacher.username
     );
+    
+    const dobFormat = `${teacher.dob.getFullYear()}-${
+      teacher.dob.getMonth() + 1
+    }-${teacher.dob.getDate()}`;
     if (isExist) {
       //update
       //1. update NGUOIDUNG
       
-    const dobFormat = `${teacher.dob.getFullYear()}-${
-      teacher.dob.getMonth() + 1
-    }-${teacher.dob.getDate()}`;
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${teacher.getPassWord()}", cmnd='${teacher.getIdentityCard()}' ` +
@@ -261,8 +271,7 @@ const Teacher = class extends Employee {
       return flagClass.DB.UPDATE;
     }
     //insert
-    const dobArray = teacher.dob.split('-');
-    const dobFormat = `${dobArray[2]}-${dobArray[1]}-${dobArray[0]}`;
+    
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
