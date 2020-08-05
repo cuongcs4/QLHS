@@ -11,7 +11,6 @@ const Score = class {
   constructor(
     semester,
     studentID,
-    teacherID,
     classID,
     subjectID,
     score1,
@@ -19,15 +18,14 @@ const Score = class {
     score3,
     score4
   ) {
-    this.semester = semester || null;
-    this.studentID = studentID || null;
-    this.teacherID = teacherID || null;
-    this.classID = classID || null;
-    this.subjectID = subjectID || null;
-    this.score1 = score1 || null;
-    this.score2 = score2 || null;
-    this.score3 = score3 || null;
-    this.score4 = score4 || null;
+    this.semester = semester;
+    this.studentID = studentID;
+    this.classID = classID;
+    this.subjectID = subjectID;
+    this.score1 = score1;
+    this.score2 = score2;
+    this.score3 = score3;
+    this.score4 = score4;
   }
 
   getSemester() {
@@ -38,9 +36,6 @@ const Score = class {
     return this.studentID;
   }
 
-  getTeacherID() {
-    return this.teacherID;
-  }
   getClassID() {
     return this.classID;
   }
@@ -138,38 +133,32 @@ const Score = class {
       return result.length === 0 ? null : result;
     }
   }
-  static async NewRecord(score, semester) {
-    if (typeof semester === "undefined") {
-      semester = await Semester.getLatestSemester();
-    }
-    //1. Insert bảng điểm mới
-    const isExist =
-      (await Score.Find(
-        {
-          studentID: score.getStudentID(),
-          classID: score.getClassID(),
-          subjectID: score.getSubjectID(),
-        },
-        score.getSemester().getSemesterID(),
-        score.getSemester().getYearStart(),
-        score.getSemester().getYearEnd()
-      )) !== null
-        ? true
-        : false;
-    console.log(isExist);
-    if (isExist === false) {
-      const sqlQuery =
-        `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
-        `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}, ` +
-        `'${semester.getSemesterID()}', '${semester.getYearStart()}', '${semester.getYearEnd()}', '${score.getScore1()}', ` +
-        `'${score.getScore2()}', '${score.getScore3()}', '${score.getScore4()}')`;
+  static async Insert(score) {
+    const {
+      semester,
+      studentID,
+      classID,
+      subjectID,
+      score1,
+      score2,
+      score3,
+      score4,
+    } = score;
 
-      await ExecuteSQL(sqlQuery);
+    const { semesterID, yearStart, yearEnd } = semester;
 
-      return flagClass.DB.NEW;
-    }
-    return null;
+    const sqlQuery =
+      `INSERT INTO DIEM(mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
+      `VALUES ('${studentID}', '${classID}', '${subjectID}', ` +
+      `${semesterID}, ${yearStart}, ${yearEnd}, ${score1}, ` +
+      `${score2}, ${score3}, ${score4})`;
+
+    console.log(sqlQuery);
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.NEW;
   }
+
   static async Save(score) {
     const { semesterID, yearStart, yearEnd } = score.getSemester();
     const { studentID, subjectID, score1, score2, score3, score4 } = score;
@@ -180,6 +169,7 @@ const Score = class {
       `WHERE mahs='${studentID}' AND mabm='${subjectID}' ` +
       `AND mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd}`;
 
+    console.log(sqlQuery);
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.UPDATE;

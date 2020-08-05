@@ -10,12 +10,10 @@ const postStudentInClass = async (req, res, next) => {
   const { semesterID, yearStart, yearEnd } = latestSemester;
 
   const subjectID = req.user.getSubjectID();
-  const teacherID = req.user.getID();
 
   const score = new Score(
     latestSemester,
     studentID,
-    teacherID,
     classID,
     subjectID,
     score1,

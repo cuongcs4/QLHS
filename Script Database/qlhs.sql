@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 05, 2020 lúc 10:33 AM
+-- Thời gian đã tạo: Th8 05, 2020 lúc 05:37 PM
 -- Phiên bản máy phục vụ: 10.4.13-MariaDB
 -- Phiên bản PHP: 7.4.7
 
@@ -58,7 +58,7 @@ INSERT INTO `bomon` (`mabm`, `tenbm`) VALUES
 --
 
 CREATE TABLE `cauhoiks` (
-  `macauhoi` INT NOT NULL,
+  `macauhoi` int(11) NOT NULL,
   `noidung` varchar(5000) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -477,7 +477,7 @@ INSERT INTO `hocsinh` (`mahs`, `ngaysinh`, `hoten`, `gioitinh`, `diachi`, `malop
 --
 
 CREATE TABLE `kqkhaosat` (
-  `macauhoi` INT NOT NULL,
+  `macauhoi` int(11) NOT NULL,
   `mahs` varchar(15) COLLATE latin1_bin NOT NULL,
   `mahk` int(11) NOT NULL,
   `nambd` int(11) NOT NULL,
@@ -824,11 +824,12 @@ CREATE TABLE `phuckhao` (
 --
 
 CREATE TABLE `thoikhoabieu` (
+  `stt` int(11) NOT NULL,
   `mahk` int(11) NOT NULL,
   `nambd` int(11) NOT NULL,
   `namkt` int(11) NOT NULL,
-  `magv` varchar(15) COLLATE latin1_bin NOT NULL,
-  `mabm` varchar(15) COLLATE latin1_bin NOT NULL,
+  `magv` varchar(15) COLLATE latin1_bin DEFAULT NULL,
+  `mabm` varchar(15) COLLATE latin1_bin DEFAULT NULL,
   `malop` varchar(15) COLLATE latin1_bin NOT NULL,
   `ngaytrongtuan` int(11) NOT NULL,
   `tiet` int(11) NOT NULL
@@ -838,19 +839,19 @@ CREATE TABLE `thoikhoabieu` (
 -- Đang đổ dữ liệu cho bảng `thoikhoabieu`
 --
 
-INSERT INTO `thoikhoabieu` (`mahk`, `nambd`, `namkt`, `magv`, `mabm`, `malop`, `ngaytrongtuan`, `tiet`) VALUES
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 2),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 2),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 2),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 2),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 2),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 1),
-(2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 2);
+INSERT INTO `thoikhoabieu` (`stt`, `mahk`, `nambd`, `namkt`, `magv`, `mabm`, `malop`, `ngaytrongtuan`, `tiet`) VALUES
+(1, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 1),
+(2, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 1, 2),
+(3, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 1),
+(4, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 2, 2),
+(5, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 1),
+(6, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 3, 2),
+(7, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 1),
+(8, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 4, 2),
+(9, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 1),
+(10, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 5, 2),
+(11, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 1),
+(12, 2, 2019, 2020, 'GV01', 'Toan', 'LH201801', 6, 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -994,10 +995,11 @@ ALTER TABLE `phuckhao`
 -- Chỉ mục cho bảng `thoikhoabieu`
 --
 ALTER TABLE `thoikhoabieu`
-  ADD PRIMARY KEY (`mahk`,`nambd`,`namkt`,`magv`,`mabm`,`malop`,`ngaytrongtuan`,`tiet`),
+  ADD PRIMARY KEY (`stt`),
   ADD KEY `FK_THOIKHOABIEU_GIAOVIEN` (`magv`),
   ADD KEY `FK_THOIKHOABIEU_BOMON` (`mabm`),
-  ADD KEY `FK_THOIKHOABIEU_LOPHOC` (`malop`);
+  ADD KEY `FK_THOIKHOABIEU_LOPHOC` (`malop`),
+  ADD KEY `FK_THOIKHOABIEU_HOCKY` (`mahk`,`nambd`,`namkt`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -1014,6 +1016,12 @@ ALTER TABLE `dotks`
 --
 ALTER TABLE `nguoithan`
   MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `thoikhoabieu`
+--
+ALTER TABLE `thoikhoabieu`
+  MODIFY `stt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
