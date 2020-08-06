@@ -64,7 +64,7 @@ const TeachingPlan = class {
   }
 
   //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
-  static async Find({ classID, teacherID }, semesterID, yearStart, yearEnd) {
+  static async Find({ classID, teacherID}, semesterID, yearStart, yearEnd) {
     if (typeof semesterID === "undefined") {
       const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
@@ -80,6 +80,7 @@ const TeachingPlan = class {
       const result = await ExecuteSQL(sqlQuery);
       return result;
     }
+
 
     if (teacherID !== null) {
       // Lấy TKB của giáo viên

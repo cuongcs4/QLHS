@@ -1,4 +1,5 @@
 const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const Subject = require("../../../ModelClass/Class/Subject");
 const getResultTable = async (req, res, next) => {
   let { year, semester } = req.query;
   //Lấy tất cả các học kỳ đã có
@@ -33,7 +34,17 @@ const getResultTable = async (req, res, next) => {
       Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
     listScoreView.push(score);
   }
-  console.log(listScoreView);
+  const listSubject = await Subject.Find();
+  const listSubjectView = [];
+  if (listSubject !== null) {
+    for (let i = 0; i < listSubject.length; i++) {
+        const {subjectID, subjectName} = listSubject[i];
+      listSubjectView.push({
+        subject: subjectID,
+        subjectName
+      });
+    }
+  }
   // render kết quảs
   res.render("student/resultTable", {
     title: "Kết quả học tập",
@@ -42,6 +53,7 @@ const getResultTable = async (req, res, next) => {
     listScoreView,
     allYearSemester,
     isLastSemester,
+    listSubjectView
   });
 };
 

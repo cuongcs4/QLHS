@@ -1,3 +1,3 @@
 const postProfile = require("./services/postProfile");
-
-module.exports = {postProfile};   
+const postChangePassword = require("./services/postChangePassword");
+module.exports = {postProfile, postChangePassword};   

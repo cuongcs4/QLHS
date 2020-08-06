@@ -25,6 +25,10 @@ router.get(
   studentController.getSchedule
 );
 
+router.post("/reExamination", checkLogin, checkStudent, studentController.postReExamination);
+
+router.get("/reExamination", checkLogin, checkStudent, studentController.getReExamination);
+
 router.post("/submit", checkLogin, checkStudent, (req, res, next) => {});
 
 module.exports = router;

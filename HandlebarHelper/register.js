@@ -31,6 +31,7 @@ const registerSideBar = (handlebars) => {
             `<a class="collapse-item" href="/student/schedule">Thời khoá biểu</a>` +
             `<a class="collapse-item" href="/student/examtable">Lịch thi</a>` +
             `<a class="collapse-item" href="/student/resulttable">Kết quả học tập</a>` +
+            `<a class="collapse-item" href="/student/reExamination">Phúc khảo</a>` +
             `</div>` +
             `</div>` +
             `</li>"`
@@ -127,7 +128,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="col-md-2">` +
             `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
-            `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a>` +
+            
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -264,7 +265,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="col-md-2">` +
               `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
-              `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalChangePassword">Đổi mật khẩu</a>` +
+              
               `</div>` +
               `</div>` +
               `<div class="row">` +

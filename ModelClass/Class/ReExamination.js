@@ -4,7 +4,7 @@ const Semester = require("./Semester");
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
 const generateGUID = require("../Helper/services/generateGUID");
-
+const checkExist = require("../Helper/services/checkExist");
 const flagClass = require("../Helper/resource/Flag");
 
 const ReExamine = class {
@@ -76,7 +76,7 @@ const ReExamine = class {
 
     if (studentID) {
       const sqlQuery =
-        `SELECT PK.mahs AS studentID, PK.noidung AS content, PK.trangthai AS status, BM.tenbm AS subjectName, BM.mabm AS subjectID ` +
+        `SELECT PK.noidung AS content, PK.trangthai AS status, BM.tenbm AS subjectName, BM.mabm AS subjectID ` +
         `FROM PHUCKHAO AS PK INNER JOIN BOMON AS BM ON BM.mabm=PK.mabm ` +
         `WHERE PK.mahs='${studentID}' AND PK.mahk=${semesterID} AND PK.nambd=${yearStart} AND PK.namkt=${yearEnd}`;
 
@@ -98,14 +98,24 @@ const ReExamine = class {
   }
 
   static async Save(reExamine) {
-    const sqlQuery =
-      `UPDATE PHUCKHAO ` +
-      `SET phanhoi='${reExamine.getResponse()}', trangthai=${reExamine.getStatus()} ` +
-      `WHERE mapk='${reExamine.getID()}' `;
+    const isExist = await checkExist("PHUCKHAO", "mapk", reExamine.id);
+    if (isExist) {
+      const sqlQuery =
+        `UPDATE PHUCKHAO ` +
+        `SET phanhoi='${reExamine.getResponse()}', trangthai=${reExamine.getStatus()} ` +
+        `WHERE mapk='${reExamine.getID()}' `;
 
+      await ExecuteSQL(sqlQuery);
+
+      return flagClass.DB.UPDATE;
+    }
+    const semester = reExamine.getSemester() ;
+    const sqlQuery = 
+      `INSERT INTO PHUCKHAO (mapk, mahs, magv, mabm, mahk, nambd, namkt, noidung, trangthai) ` +
+      `VALUES ('${reExamine.getID()}', '${reExamine.getStudentID()}', '${reExamine.getTeacherID()}', '${reExamine.getSubjectID()}', ` +
+      `'${semester.getSemesterID()}', '${semester.getYearStart()}', '${semester.getYearEnd()}', '${reExamine.getContent()}', '${reExamine.getStatus()}')`
     await ExecuteSQL(sqlQuery);
-
-    return flagClass.DB.UPDATE;
+    return flagClass.DB.NEW;
   }
 };
 

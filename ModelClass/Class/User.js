@@ -1,3 +1,5 @@
+
+const ExecuteSQL = require("../Database/ExecuteSQL");
 // Sơ đò lớp của User
 
 const User = class {
@@ -76,6 +78,35 @@ const User = class {
 
   getTypeUser() {
     return this.typeUser;
+  }
+  static async Changepassword(user) {
+    const sqlQuery1 =
+        `UPDATE NGUOIDUNG ` +
+        `SET matKhau="${user.getPassWord()}" ` +
+        `WHERE tenDangNhap='${user.getUserName()}'`;
+    await ExecuteSQL(sqlQuery1);
+  }
+  
+  static async Find(username){
+    const sqlQuery =
+      `SELECT * ` +
+      `FROM NGUOIDUNG AS ND ` +
+      `WHERE ND.tenDangNhap='${username}'`;
+
+    const result = await ExecuteSQL(sqlQuery);
+
+    if (result.length === 0) return null;
+
+    const user = result[0];
+    const id = user.tenDangNhap;
+    const userName = user.tenDangNhap;
+    const password = user.matKhau;
+
+    return new User(
+      id,
+      userName,
+      password
+    );
   }
 };
 
