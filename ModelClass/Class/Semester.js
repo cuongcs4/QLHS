@@ -34,23 +34,34 @@ const Semester = class {
   }
 
   static async getLatestSemester() {
-    const sqlQuery = `SELECT * FROM HOCKY`;
+    const sqlQuery = `SELECT mahk AS semesterID, nambd AS yearStart, namkt AS yearEnd, trangthai AS status FROM HOCKY`;
     const result = await ExecuteSQL(sqlQuery);
 
-    const latestSemester = result[result.length - 1];
+    result.sort((a, b) => {
+      if (a.yearStart < b.yearStart) return 1;
+      if (a.yearStart > b.yearStart) return -1;
+      if (a.semesterID < b.semesterID) return 1;
+      if (a.semesterID > b.semesterID) return -1;
+
+      return 0;
+    });
+
+    console.log(result);
+
+    const latestSemester = result[0];
 
     return new Semester(
-      latestSemester.mahk,
-      latestSemester.nambd,
-      latestSemester.namkt,
-      latestSemester.trangthai
+      latestSemester.semesterID,
+      latestSemester.yearStart,
+      latestSemester.yearEnd,
+      latestSemester.status
     );
   }
 
   static async Find(semesterID, yearStart, yearEnd) {
     if (typeof semesterID == "undefined") {
       const sqlQuery =
-        `SELECT HK.nambd AS yearStart, HK.namkt AS yearEnd, HK.mahk AS semesterID ` +
+        `SELECT HK.nambd AS yearStart, HK.namkt AS yearEnd, HK.mahk AS semesterID, HK.trangthai AS status ` +
         `FROM HOCKY AS HK `;
 
       const result = await ExecuteSQL(sqlQuery);
@@ -92,7 +103,7 @@ const Semester = class {
       const sqlQuery =
         `UPDATE HOCKY ` +
         `SET trangthai=${semester.getStatus()} ` +
-        `WHERE HK.mahk=${semester.getSemesterID()} AND HK.nambd=${semester.getYearStart()} AND HK.namkt=${semester.getYearEnd()} `;
+        `WHERE mahk=${semester.getSemesterID()} AND nambd=${semester.getYearStart()} AND namkt=${semester.getYearEnd()} `;
       await ExecuteSQL(sqlQuery);
 
       return flagClass.DB.UPDATE;

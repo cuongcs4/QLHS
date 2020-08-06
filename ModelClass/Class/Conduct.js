@@ -1,16 +1,20 @@
 //Sơ đồ lớp của Conduct
 
 const Semester = require("./Semester");
+const Student = require("./Student");
+const Class = require("./Class");
 
 const ExecuteSQL = require("../Database/ExecuteSQL");
 
 const flagClass = require("../Helper/resource/Flag");
 
 const Conduct = class {
-  constructor(semester, studentID, grade) {
-    this.semester = semester || null;
-    this.studentID = studentID || null;
-    this.grade = grade || null;
+  constructor(semester, studentID, classID, teacherID, grade) {
+    this.semester = semester;
+    this.studentID = studentID;
+    this.classID = classID;
+    this.teacherID = teacherID;
+    this.grade = grade;
   }
 
   getSemester() {
@@ -70,6 +74,27 @@ const Conduct = class {
 
     return flagClass.DB.UPDATE;
   }
+
+  static async Insert(conduct) {
+    const { studentID, grade, teacherID, classID } = conduct;
+    const { semesterID, yearStart, yearEnd } = conduct.getSemester();
+
+    const sqlQuery =
+      `INSERT HANHKIEM(mahs, malop, magv, mahk, nambd, namkt, xeploai) ` +
+      `VALUES ('${studentID}','${classID}','${teacherID}',${semesterID},${yearStart},${yearEnd},${grade})`;
+
+    await ExecuteSQL(sqlQuery);
+
+    return flagClass.DB.UPDATE;
+  }
 };
 
 module.exports = Conduct;
+
+// async function exec() {
+//   const student = new Student(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+//   console.log(Student);
+// }
+
+// exec();

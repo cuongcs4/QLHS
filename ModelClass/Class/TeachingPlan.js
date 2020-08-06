@@ -117,7 +117,7 @@ const TeachingPlan = class {
     return flagClass.DB.UPDATE;
   }
 
-  static async InsertDB(teachingPlan) {
+  static async Insert(teachingPlan) {
     const semesterID = teachingPlan.getSemester().getSemesterID();
     const yearStart = teachingPlan.getSemester().getYearStart();
     const yearEnd = teachingPlan.getSemester().getYearEnd();
@@ -127,11 +127,20 @@ const TeachingPlan = class {
     const dayInWeek = teachingPlan.getDayInWeek();
     const startSection = teachingPlan.getStartSection();
 
-    const sqlQuery =
-      `INSERT INTO THOIKHOABIEU(mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet) ` +
-      `VALUES (${semesterID}, ${yearStart}, ${yearEnd}, '${teacherID}', '${subjectID}', '${classID}', ${dayInWeek}, ${startSection});`;
+    if (teacherID === null) {
+      const sqlQuery =
+        `INSERT INTO THOIKHOABIEU(mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet) ` +
+        `VALUES (${semesterID}, ${yearStart}, ${yearEnd}, null, null, '${classID}', ${dayInWeek}, ${startSection})`;
 
-    await ExecuteSQL(sqlQuery);
+      console.log(sqlQuery);
+      await ExecuteSQL(sqlQuery);
+    } else {
+      const sqlQuery =
+        `INSERT INTO THOIKHOABIEU(mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet) ` +
+        `VALUES (${semesterID}, ${yearStart}, ${yearEnd}, '${teacherID}', '${subjectID}', '${classID}', ${dayInWeek}, ${startSection});`;
+
+      await ExecuteSQL(sqlQuery);
+    }
 
     return flagClass.DB.NEW;
   }
