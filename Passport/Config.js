@@ -27,7 +27,7 @@ const configPassport = (passport) => {
 
     console.log("error deserializeUser");
     return done(null, false, {
-      message: "Incorrect username and password",
+      message: "Không tồn tại tài khoản",
     });
   });
 
@@ -46,27 +46,60 @@ const configPassport = (passport) => {
         return done(null, false, {
           message: "Tài khoản đã bị khóa",
         });
+      } else {
+        //return done(null, user);
+
+        bcrypt.compare(password, user.password, function (err, result) {
+          if (err) {
+            return done(err);
+          }
+          if (!result) {
+            return done(null, false, {
+              message: "Mật khẩu không chính xác!",
+            });
+          }
+
+          return done(null, user);
+        });
       }
-
-      console.log("USER");
-      console.log(user);
-
-      return done(null, user);
-
-      // bcrypt.compare(password, user.password, function (err, result) {
-      //   if (err) {
-      //     return done(err);
-      //   }
-      //   if (!result) {
-      //     return done(null, false, {
-      //       message: "Incorrect username and password",
-      //     });
-      //   }
-
-      //   return done(null, user);
-      // });
     })
   );
 };
 
 module.exports = configPassport;
+
+const ExecuteSQL = require("../ModelClass/Database/ExecuteSQL");
+
+// async function exec() {
+//   const sqlQuery = `SELECT * FROM NGUOIDUNG `;
+
+//   const user = await ExecuteSQL(sqlQuery);
+
+//   const salt = 10;
+
+//   //console.log(user);
+
+//   for (let i = 0; i < user.length; i++) {
+//     let password = "";
+
+//     switch (user[i].loai) {
+//       case flagClass.TYPE_USER.STUDENT:
+//         password = user[i].cmnd;
+//         break;
+
+//       case flagClass.TYPE_USER.TEACHER:
+//       case flagClass.TYPE_USER.ADMIN:
+//       case flagClass.TYPE_USER.ADMIN:
+//       case flagClass.TYPE_USER.HOMEROOM_TEACHER:
+//         password = user[i].tenDangNhap;
+//         break;
+//     }
+//     const hash = bcrypt.hashSync(password, salt);
+
+//     //save
+
+//     const sql = `UPDATE NGUOIDUNG SET matKhau='${hash}' WHERE tenDangNhap='${user[i].tenDangNhap}'`;
+
+//     ExecuteSQL(sql);
+//   }
+// }

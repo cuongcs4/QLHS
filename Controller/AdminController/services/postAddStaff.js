@@ -1,5 +1,8 @@
+const bcrypt = require("bcrypt");
+
 const Teacher = require("../../../ModelClass/Class/Teacher");
 const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
+
 const flag = require("../../../ModelClass/Helper/resource/Flag");
 
 const postAddStaff = async (req, res, next) => {
@@ -15,16 +18,19 @@ const postAddStaff = async (req, res, next) => {
     gender,
     typeUser,
   } = req.body;
+
   const typeUserInt = parseInt(typeUser, 10);
   const genderInt = parseInt(gender, 10);
   const newDate = new Date(dob);
+
+  const hashPassword = bcrypt.hash(password, 10);
 
   if (typeUserInt === flag.TYPE_USER.TEACHER) {
     const subjectID = req.body.subjectID;
     const newTeacher = new Teacher(
       username,
       username,
-      password,
+      hashPassword,
       identityCard,
       fullName,
       newDate,
@@ -41,7 +47,7 @@ const postAddStaff = async (req, res, next) => {
     const newEmployee = new Employee(
       username,
       username,
-      password,
+      hashPassword,
       identityCard,
       fullName,
       newDate,

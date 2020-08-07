@@ -30,7 +30,7 @@ const getSemester = async (req, res, next) => {
   }
 
   res.render("admin/semesterManager", {
-    title: `Danh sách nhân viên`,
+    title: `Danh sách học kỳ`,
     style: ["styleTable.css", "styleProfile.css"],
     user: req.user,
     listSemester,

@@ -1,15 +1,16 @@
+const bcrypt = require("bcrypt");
+
 const HomeroomTeacher = require("../../../ModelClass/Class/HomeroomTeacher");
 const Teacher = require("../../../ModelClass/Class/Teacher");
 const Student = require("../../../ModelClass/Class/Student");
 const Relatives = require("../../../ModelClass/Class/Relatives");
 const Room = require("../../../ModelClass/Class/Room");
+const Class = require("../../../ModelClass/Class/Class");
 
 const parseForm = require("../../../ModelClass/Helper/services/parseFormFormidable");
 const parseFileExcel = require("../../../ModelClass/Helper/services/parseFileExcel");
 
 const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const { format } = require("morgan");
-const Class = require("../../../ModelClass/Class/Class");
 const flagClass = require("../../../ModelClass/Helper/resource/Flag");
 
 const postClass = async (req, res, next) => {
@@ -99,7 +100,7 @@ const postClass = async (req, res, next) => {
       momPhoneNumber,
     } = data[i];
 
-    console.log(gender);
+    const password = bcrypt.hash(identityCard, 10);
 
     let newID = `0${i + 1}`;
     newID = newID.slice(newID.length - 2, newID.length);
@@ -107,7 +108,7 @@ const postClass = async (req, res, next) => {
     const newStudent = new Student(
       studentID,
       studentID,
-      identityCard,
+      password,
       identityCard,
       fullName,
       dob,

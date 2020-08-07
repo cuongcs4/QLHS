@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 const Student = require("../../../ModelClass/Class/Student");
 const Relatives = require("../../../ModelClass/Class/Relatives");
 
@@ -20,10 +22,12 @@ const postNewStudent = async (req, res, next) => {
   const studentID = await Student.GetNewStudentID(classID);
   const newDoB = new Date(dob);
 
+  const password = bcrypt.hash(identityCard, 10);
+
   const newStudent = new Student(
     studentID,
     studentID,
-    identityCard,
+    password,
     identityCard,
     fullName,
     newDoB,

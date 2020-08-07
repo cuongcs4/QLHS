@@ -6,7 +6,8 @@ const postChangePassword = async (req, res, next) => {
   var boolean = true;
   const user = await User.Find(username);
   const saltRounds = 10;
-  if (!bcrypt.compareSync(currentPassword,user.password)) {
+
+  if (!bcrypt.compareSync(currentPassword, user.password)) {
     req.flash("error_msg", "Mật khẩu cũ không trùng khớp");
     boolean = false;
   }
@@ -19,7 +20,7 @@ const postChangePassword = async (req, res, next) => {
     boolean = false;
   }
   if (boolean == true) {
-    hash = bcrypt.hashSync(newPassword1, saltRounds)
+    hash = bcrypt.hashSync(newPassword1, saltRounds);
     user.setPassWord(hash);
     console.log(hash);
     await User.Changepassword(user);
