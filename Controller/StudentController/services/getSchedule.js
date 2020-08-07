@@ -21,12 +21,13 @@ const getSchedule = async (req, res, next) => {
   const listScheduleView = [];
 
   for (let j = 1; j <= 10; j++) {
-    const sectionSchedule = [];
+    const sectionSchedule = []; 
     for (let k = 0; k < 5; k++) {
       for (let i = 0; i < schedule.length; i++) {
         if (schedule[i].startSection === j && schedule[i].dayInWeek === k + 2) {
           const subject = await Subject.Find(schedule[i].subjectID);
-          sectionSchedule[k] = subject.subjectName;
+          if (subject !== null)
+            sectionSchedule[k] = subject.subjectName;
         }
       }
     }

@@ -32,9 +32,10 @@ const registerSideBar = (handlebars) => {
             `<a class="collapse-item" href="/student/examtable">Lịch thi</a>` +
             `<a class="collapse-item" href="/student/resulttable">Kết quả học tập</a>` +
             `<a class="collapse-item" href="/student/reExamination">Phúc khảo</a>` +
+            `<a class="collapse-item" href="/student/survey">Khảo sát</a>` +
             `</div>` +
             `</div>` +
-            `</li>"`
+            `</li>`
         );
         break;
 
@@ -204,7 +205,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
             `<label data-error="wrong" data-success="right" for="defaultForm-studentDoB">Ngày sinh</label>` +
-            `<input name="dob" type="text" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
+            `<input name="dob" type="date" id="defaultForm-studentDoB" class="form-control validate" value="${user.dob.getDate()}-${
               user.dob.getMonth() + 1
             }-${user.dob.getFullYear()}">` +
             `</div>` +
@@ -365,7 +366,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
               `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
-              `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
+              `<input name="dob" type="date" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
               }-${user.dob.getFullYear()}">` +
               `</div>` +
@@ -500,7 +501,7 @@ const registerProfile = (handlebars) => {
               `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
               `<input name="dob" type="date" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
                 user.dob.getMonth() + 1
-              }-${user.dob.getFullYear()}" placeholder="DD-MM-YYYY">` +
+              }-${user.dob.getFullYear()}">` +
               `</div>` +
               `<div class="md-form mb-2 form-inline">` +
               `<label data-error="wrong" data-success="right" for="defaultForm-IDCard">CMND</label>` +
@@ -630,7 +631,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
             `<label data-error="wrong" data-success="right" for="defaultForm-DoB">Ngày sinh</label>` +
-            `<input name="dob" type="text" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
+            `<input name="dob" type="date" id="defaultForm-DoB" class="form-control validate" value="${user.dob.getDate()}-${
               user.dob.getMonth() + 1
             }-${user.dob.getFullYear()}">` +
             `</div>` +
@@ -754,7 +755,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="md-form mb-2 form-inline">` +
             `<label data-error="wrong" data-success="right" for="defaultForm-Dob">Ngày sinh</label>` +
-            `<input name="dob" type="text" id="defaultForm-Dob" class="form-control validate" value="${user.dob.getDate()}-${
+            `<input name="dob" type="date" id="defaultForm-Dob" class="form-control validate" value="${user.dob.getDate()}-${
               user.dob.getMonth() + 1
             }-${user.dob.getFullYear()}">` +
             `</div>` +

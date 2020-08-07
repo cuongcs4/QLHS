@@ -1,0 +1,31 @@
+{{#if error}}
+{{else}}
+<div id="page-wrap">
+    <form action="/student/survey" method="POST" id="survey">
+        <ol>
+            {{#each listQuestionsView}}
+            <li required>
+                <h3>{{content}}</h3>
+                <div>
+                    <input type="radio" name="answer{{id}}" id="{{id}}-A" value="0" required/>
+                    <label for="{{id}}-A">A) 0-25% </label>
+                </div>
+                <div>
+                    <input type="radio" name="answer{{id}}" id="{{id}}-B" value="1" required/>
+                    <label for="{{id}}-B">B) 25-50%</label>
+                </div>
+                <div>
+                    <input type="radio" name="answer{{id}}" id="{{id}}-C" value="2" required/>
+                    <label for="{{id}}-C">C) 50-75%</label>
+                </div>
+                <div>
+                    <input type="radio" name="answer{{id}}" id="{{id}}-D" value="3" required/>
+                    <label for="{{id}}-D">D) 75-100%</label>
+                </div>
+            </li>
+            {{/each}}
+        </ol>
+        <input type="submit" value="Hoàn thành" />
+    </form>
+</div>
+{{/if}}

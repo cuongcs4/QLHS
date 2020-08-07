@@ -19,6 +19,7 @@ const getResultTable = async (req, res, next) => {
     listScores = await req.user.getScore(semesterID, yearStart, yearEnd);
   }
   const listScoreView = [];
+  if (listScores.length !== null) {
   for (let i = 0; i < listScores.length; i++) {
     const { subjectName, score1, score2, score3, score4 } = listScores[i];
 
@@ -34,6 +35,7 @@ const getResultTable = async (req, res, next) => {
       Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
     listScoreView.push(score);
   }
+}
   const listSubject = await Subject.Find();
   const listSubjectView = [];
   if (listSubject !== null) {

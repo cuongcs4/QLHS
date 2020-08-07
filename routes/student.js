@@ -25,9 +25,29 @@ router.get(
   studentController.getSchedule
 );
 
-router.post("/reExamination", checkLogin, checkStudent, studentController.postReExamination);
+router.get("/survey", checkLogin, checkStudent, studentController.getSurvey);
+router.post("/survey", checkLogin, checkStudent, studentController.postSurvey);
 
-router.get("/reExamination", checkLogin, checkStudent, studentController.getReExamination);
+router.post(
+  "/reExamination",
+  checkLogin,
+  checkStudent,
+  studentController.postReExamination
+);
+
+router.post(
+  "/reExamination/edit",
+  checkLogin,
+  checkStudent,
+  studentController.postEditReExamination
+);
+
+router.get(
+  "/reExamination",
+  checkLogin,
+  checkStudent,
+  studentController.getReExamination
+);
 
 router.post("/submit", checkLogin, checkStudent, (req, res, next) => {});
 
