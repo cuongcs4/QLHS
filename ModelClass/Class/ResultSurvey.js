@@ -57,7 +57,17 @@ const ResultSurvey = class {
     return result.length === 0 ? null : result;
   }
 
-  static async Save(resultSurvey) {}
+  static async Save(resultSurvey) {
+    const semester = resultSurvey.semester;
+    const sqlQuery =
+      `INSERT INTO KQKHAOSAT(macauhoi,mahs,mahk,nambd,namkt,cautl) ` +
+      `VALUES ('${resultSurvey.getQuestionID()}','${resultSurvey.getStudentID()}' ,'${
+        semester.getSemesterID()
+      }','${semester.getYearStart()}','${
+        semester.getYearEnd()
+      }','${resultSurvey.getAnswer()}')`;
+    await ExecuteSQL(sqlQuery);
+  }
 
   static async CountStudentDoSurvey(semesterID, yearStart, yearEnd) {
     const sqlQuery =

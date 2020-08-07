@@ -49,7 +49,7 @@
                         <td>Giáo viên chưa phản hồi</td>
                         {{/if}}
                         <td style="width:100px"><i class="fa fa-pencil-square-o" data-toggle="modal"
-                                data-target="#{{dataTarget}}" aria-hidden="true"></i></td>
+                                data-target="#modalEditReExamination{{dataTarget}}" aria-hidden="true"></i></td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -59,11 +59,12 @@
         <div class="text-center">
             <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
                 data-target="#modalReExaminationForm">TẠO
-                ĐƠN PHUC KHẢO</a>
+                ĐƠN PHÚC KHẢO</a>
         </div>
         <hr>
     </div>
 </div>
+
 <div class="modal fade" id="modalReExaminationForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -85,7 +86,7 @@
                 </div>
                 <div class="md-form mb-2 form-inline">
                     <label data-error="wrong" data-success="right" for="defaultForm-note">Nội dung phúc khảo</label>
-                    <textarea name="content" class="form-control"></textarea>
+                    <textarea name="content" class="form-control" value=""></textarea>
                 </div>
                 <input type="hidden" name="studentID" id="studentID" value="{{user.username}}">
                 <input type="hidden" name="classID" id="classID" value="{{user.classID}}">
@@ -96,3 +97,32 @@
         </form>
     </div>
 </div>
+{{#each listReExaminationView}}
+<div class="modal fade" id="modalEditReExamination{{dataTarget}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="/student/reExamination/edit" method="POST">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Chỉnh sửa</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-subjectName">Môn học</label>
+                    <input type="text" class="form-control validate" name="subjectID" id="subjectID" value="{{subjectID}}" readonly>
+                </div>
+                <div class="md-form mb-2 form-inline">
+                    <label data-error="wrong" data-success="right" for="defaultForm-note">Nội dung phúc khảo</label>
+                    <textarea name="content" class="form-control">{{content}}</textarea>
+                </div>
+                <input type="hidden" name="id" id="id" value="{{id}}">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-danger">Xác nhận</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{/each}}

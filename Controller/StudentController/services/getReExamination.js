@@ -24,7 +24,7 @@ const getReExamination = async (req, res, next) => {
   }
   const studentID = req.user.getID();
   const listReExamination = await ReExamine.Find(
-    { studentID: studentID, teacherID: null },
+    { studentID: studentID, teacherID: null, ID: null },
     semesterID,
     yearStart,
     yearEnd
@@ -48,7 +48,7 @@ const getReExamination = async (req, res, next) => {
         teacherID,
         content,
         response,
-        dataTarget: `${id}`,
+        dataTarget: `${i}`,
       });
     }
   }

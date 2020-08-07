@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font: 14px Georgia, serif;
+}
+
+#page-wrap {
+  width: 500px;
+  margin: 0 20px;
+}
+
+#survey input {
+  vertical-align: middle;
+}
+
+#survey ol {
+  margin: 0 0 10px 20px;
+}
+
+#survey ol li {
+  margin: 0 0 20px 0;
+}
+
+#survey ol li div {
+  padding: 4px 0;
+}
+
+#survey h3 {
+  font-size: 17px;
+  margin: 0 0 1px 0;
+  color: #666;
+}
+
+#results {
+  font: 44px Georgia, Serif;
+}
