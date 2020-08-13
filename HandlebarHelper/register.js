@@ -1,5 +1,23 @@
 const flagClass = require("../ModelClass/Helper/resource/Flag");
-
+const registerHello = (handlebars) => {
+  handlebars.registerHelper("hello", function (user, block) {
+    switch (user.typeUser) {
+      case flagClass.TYPE_USER.ADMIN:
+        return new handlebars.SafeString(`Admin`);
+        break;
+      case flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT:
+        return new handlebars.SafeString(`Giáo vụ`);
+        break;
+      case flagClass.TYPE_USER.HOMEROOM_TEACHER:
+      case flagClass.TYPE_USER.TEACHER:
+        return new handlebars.SafeString(`Giáo viên`);
+        break;
+      case flagClass.TYPE_USER.STUDENT:
+        return new handlebars.SafeString(`Học sinh`);
+        break;
+    }
+  });
+};
 const registerSideBar = (handlebars) => {
   handlebars.registerHelper("sideBar", function (user, block) {
     switch (user.typeUser) {
@@ -125,7 +143,6 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="col-md-2">` +
             `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
-            
             `</div>` +
             `</div>` +
             `<div class="row">` +
@@ -182,7 +199,7 @@ const registerProfile = (handlebars) => {
             `</div>` +
             `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
             `<div class="modal-dialog" role="document">` +
-            `<form class="modal-content" action="/profile/change" method="POST">` +
+            `<form class="modal-content" action="/profile" method="POST">` +
             `<div class="modal-header text-center">` +
             `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
             `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -258,7 +275,6 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="col-md-2">` +
               `<a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalEditInfo">Thay đổi thông tin</a>` +
-              
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -340,7 +356,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile/change" method="POST">` +
+              `<form class="modal-content" action="/profile" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -469,7 +485,7 @@ const registerProfile = (handlebars) => {
               `</div>` +
               `<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">` +
               `<div class="modal-dialog" role="document">` +
-              `<form class="modal-content" action="/profile/change" method="POST">` +
+              `<form class="modal-content" action="/profile" method="POST">` +
               `<div class="modal-header text-center">` +
               `<h4 class="modal-title w-100 font-weight-bold">Cập nhật Thông tin</h4>` +
               `<button type="button" class="close" data-dismiss="modal" aria-label="Close">` +
@@ -948,6 +964,7 @@ const registerChartSurvey = (handlebars) => {
 };
 
 const registerAll = (handlebars) => {
+  registerHello(handlebars);
   registerSideBar(handlebars);
   registerProfile(handlebars);
   registerIfHelp(handlebars);
