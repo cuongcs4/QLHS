@@ -50,7 +50,7 @@ const Admin = class extends Employee {
   static async getEmployee() {
     const listTeachers = await Teacher.Find();
     const listEmployees = await EmployeeTrainingDepartment.Find();
-    console.log(listTeachers);
+    //console.log(listTeachers);
     return { listTeachers, listEmployees };
   }
 
@@ -168,7 +168,7 @@ const Admin = class extends Employee {
               h
             );
 
-            console.log(newTeachingPlan);
+            //console.log(newTeachingPlan);
 
             TeachingPlan.Insert(newTeachingPlan);
           }
@@ -179,7 +179,7 @@ const Admin = class extends Employee {
           classID: classID,
         });
 
-        console.log(listStudent);
+        //console.log(listStudent);
 
         for (let k = 0; k < listStudent.length; k++) {
           const studentID = listStudent[k].getID();

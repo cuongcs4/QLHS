@@ -63,7 +63,7 @@ const postManagerClassScoreExcel = async (req, res, next) => {
     }
   }
 
-  console.log(data);
+  //console.log(data);
 
   //Tiến hành cập nhật
   const latestSemester = await Semester.getLatestSemester();

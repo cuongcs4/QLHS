@@ -79,7 +79,7 @@ const TeachingPlan = class {
         `WHERE TKB.malop='${classID}' AND TKB.mahk=${semesterID} AND TKB.nambd=${yearStart} AND TKB.namkt=${yearEnd}`;
       const result = await ExecuteSQL(sqlQuery);
 
-      console.log(result);
+      //console.log(result);
 
       return result;
     }
@@ -112,7 +112,7 @@ const TeachingPlan = class {
       `WHERE mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd} ` +
       `AND ngaytrongtuan=${dayInWeek} AND tiet=${startSection} AND malop='${classID}'`;
 
-    console.log(sqlQuery);
+    //console.log(sqlQuery);
 
     await ExecuteSQL(sqlQuery);
 
@@ -134,7 +134,7 @@ const TeachingPlan = class {
         `INSERT INTO THOIKHOABIEU(mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet) ` +
         `VALUES (${semesterID}, ${yearStart}, ${yearEnd}, null, null, '${classID}', ${dayInWeek}, ${startSection})`;
 
-      console.log(sqlQuery);
+      //console.log(sqlQuery);
       await ExecuteSQL(sqlQuery);
     } else {
       const sqlQuery =

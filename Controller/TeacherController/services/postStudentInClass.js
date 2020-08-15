@@ -3,7 +3,7 @@ const Score = require("../../../Model/Class/Score");
 
 const postStudentInClass = async (req, res, next) => {
   const classID = req.params.classID;
-  console.log("Hello");
+  //console.log("Hello");
   const { studentID, score1, score2, score3, score4 } = req.body;
 
   const latestSemester = await Semester.getLatestSemester();

@@ -86,7 +86,7 @@ const exportFileExcel = async (data, format, data2, format2) => {
   for (let i = 0; i < formatArray.length; i++) {
     worksheet.column(i + 1).setWidth(formatArray[i]["width"]);
 
-    //console.log(formatArray[i]);
+    ////console.log(formatArray[i]);
     worksheet
       .cell(1, i + 1)
       .string(formatArray[i]["name"])
@@ -137,7 +137,7 @@ const exportFileExcel = async (data, format, data2, format2) => {
     for (let i = 0; i < formatArray2.length; i++) {
       worksheet2.column(i + 1).setWidth(formatArray2[i]["width"]);
 
-      //console.log(formatArray2[i]);
+      ////console.log(formatArray2[i]);
       worksheet2
         .cell(1, i + 1)
         .string(formatArray2[i]["name"])
@@ -192,12 +192,12 @@ module.exports = exportFileExcel;
 
 // const fileName = "D:/2019_2020/HK2/TKPM/PROJECT/WEB/dshocsinh.xlsx";
 // const data = parseFileExcel(fileName, formatFileExcel.studentFormat);
-// console.log(data);
+// //console.log(data);
 
 // exportFileExcel("data1", data.data, formatFileExcel.studentFormat);
 
 // const date = new Date();
 
-// console.log(typeof date);
+// //console.log(typeof date);
 
 //const date = new Date();

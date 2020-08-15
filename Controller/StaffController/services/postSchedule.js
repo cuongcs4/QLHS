@@ -13,8 +13,8 @@ const postSchedule = async (req, res, next) => {
     year,
   } = req.body;
 
-  console.log("SemesterID");
-  console.log(semesterID);
+  //console.log("SemesterID");
+  //console.log(semesterID);
 
   const yearString = year.split("-");
   const yearStart = parseInt(yearString[0]);
@@ -41,7 +41,7 @@ const postSchedule = async (req, res, next) => {
   } else {
     const semester = new Semester(semesterID, yearStart, yearEnd, null);
 
-    console.log(semester);
+    //console.log(semester);
 
     const dayInWeekNumber = parseInt(dayInWeek) - 1;
 
@@ -54,7 +54,7 @@ const postSchedule = async (req, res, next) => {
       section
     );
 
-    console.log(teachingPlan);
+    //console.log(teachingPlan);
 
     await TeachingPlan.Save(teachingPlan);
 

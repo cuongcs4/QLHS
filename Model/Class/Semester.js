@@ -46,7 +46,7 @@ const Semester = class {
       return 0;
     });
 
-    console.log(result);
+    //console.log(result);
 
     const latestSemester = result[0];
 

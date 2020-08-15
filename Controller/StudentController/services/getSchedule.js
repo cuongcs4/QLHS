@@ -46,7 +46,7 @@ const getSchedule = async (req, res, next) => {
     });
   }
 
-  console.log(listScheduleView);
+  //console.log(listScheduleView);
 
   res.render("student/schedule", {
     title: "Thời khoá biểu",

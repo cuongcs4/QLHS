@@ -119,7 +119,7 @@ const postManagerClassScoreExportExcel = async (req, res, next) => {
       listScore.push(student);
     }
 
-    console.log(listScore);
+    //console.log(listScore);
 
     const path = await exportFileExcel(
       listScore,

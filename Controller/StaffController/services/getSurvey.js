@@ -75,7 +75,7 @@ const getSurvey = async (req, res, next) => {
   );
 
   //Lấy toàn bộ câu hỏi:
-  const allQuestion = await QuestionSurvey.Find();
+  const allQuestion = (await QuestionSurvey.Find()) || [];
 
   //Lấy kết quả khảo sát.
   const resultSurvey =

@@ -53,7 +53,7 @@ const Subject = class {
 
 // const exec = async () => {
 //   const result = await Subject.Find();
-//   console.log(result);
+//   //console.log(result);
 // };
 // exec();
 

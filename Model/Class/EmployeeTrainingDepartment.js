@@ -723,7 +723,7 @@ const EmployeeTrainingDepartment = class extends Employee {
 //   //const studentID = "HS20190101";
 //   const result = await EmployeeTrainingDepartment.getClass();
 
-//   console.log(result);
+//   //console.log(result);
 // };
 
 // exec();

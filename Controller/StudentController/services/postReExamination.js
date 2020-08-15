@@ -31,7 +31,7 @@ const postReExamination = async (req, res, next) => {
     null,
     "0"
   );
-  console.log(reExamination);
+  //console.log(reExamination);
 
   ReExamination.Save(reExamination);
 

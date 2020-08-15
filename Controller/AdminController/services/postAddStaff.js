@@ -6,7 +6,7 @@ const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
 const flag = require("../../../Model/Helper/resource/Flag");
 
 const postAddStaff = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const {
     username,
     password,

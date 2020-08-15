@@ -89,11 +89,11 @@ module.exports = parseFileExcel;
 
 // const result = parseFileExcel(fileScore, scoreFormat);
 
-// console.log(result);
+// //console.log(result);
 
 // if (result.err.length !== 0) {
-//   console.log(result.err);
-// } else console.log(result.data);
+//   //console.log(result.err);
+// } else //console.log(result.data);
 
 // const str = "Abc";
-// console.log(str.toLowerCase());
+// //console.log(str.toLowerCase());

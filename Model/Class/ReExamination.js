@@ -110,7 +110,7 @@ const ReExamine = class {
 
     if (studentID) {
       const sqlQuery =
-        `SELECT PK.mapk as id, PK.noidung AS content, PK.trangthai AS status, BM.tenbm AS subjectName, BM.mabm AS subjectID ` +
+        `SELECT PK.mapk as id, PK.noidung AS content, PK.trangthai AS status, BM.tenbm AS subjectName, BM.mabm AS subjectID, PK.phanhoi AS response ` +
         `FROM PHUCKHAO AS PK INNER JOIN BOMON AS BM ON BM.mabm=PK.mabm ` +
         `WHERE PK.mahs='${studentID}' AND PK.mahk=${semesterID} AND PK.nambd=${yearStart} AND PK.namkt=${yearEnd}`;
 

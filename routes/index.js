@@ -65,7 +65,7 @@ router.get("/profile", checkLogin, async (req, res, next) => {
       break;
   }
 
-  // console.log(user);
+  // //console.log(user);
 
   // const user = {
   //   fullName: req.user.getFullName(),

@@ -31,7 +31,7 @@ const getManagerClass = async (req, res, next) => {
       listRelativeView,
     });
   }
-  console.log(listStudentView);
+  //console.log(listStudentView);
 
   res.render("teacher/managerClass", {
     title: `Quản lý lớp chủ nhiệm ${className}`,

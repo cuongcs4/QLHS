@@ -51,7 +51,7 @@ const ResultSurvey = class {
     const semester = resultSurvey.semester;
     const sqlQuery =
       `INSERT INTO KQKHAOSAT(macauhoi,mahs,mahk,nambd,namkt,cautl) ` +
-      `VALUES ('${resultSurvey.getQuestionID()}','${resultSurvey.getStudentID()}' ,'${semester.getSemesterID()}','${semester.getYearStart()}','${semester.getYearEnd()}','${resultSurvey.getAnswer()}')`;
+      `VALUES (${resultSurvey.getQuestionID()},'${resultSurvey.getStudentID()}' ,${semester.getSemesterID()},${semester.getYearStart()},${semester.getYearEnd()},${resultSurvey.getAnswer()})`;
     await ExecuteSQL(sqlQuery);
   }
 

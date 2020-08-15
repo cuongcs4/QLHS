@@ -41,7 +41,7 @@ const Teacher = class extends Employee {
       address,
       status,
       typeUser,
-      phoneNumber,
+      phoneNumber
     );
     this.subjectID = subjectID || "Unknown";
   }
@@ -61,7 +61,7 @@ const Teacher = class extends Employee {
   }
 
   async getClass(semesterID, yearStart, yearEnd) {
-    console.log("TEACHER GET CLASS TEACHER.JS");
+    //console.log("TEACHER GET CLASS TEACHER.JS");
 
     //Mặc định lấy những lớp học ở học kỳ hiện tại nếu có.
     if (typeof semesterID == "undefined") {
@@ -138,9 +138,7 @@ const Teacher = class extends Employee {
     return result;
   }
   static async GetNewTeacherID() {
-    const sqlQuery =
-      `SELECT COUNT(magv) AS total ` +
-      `FROM GIAOVIEN`;
+    const sqlQuery = `SELECT COUNT(magv) AS total ` + `FROM GIAOVIEN`;
     const { total } = (await ExecuteSQL(sqlQuery))[0];
     if (total + 1 < 10) return `GV0${total + 1}`;
 
@@ -240,14 +238,14 @@ const Teacher = class extends Employee {
       "tenDangNhap",
       teacher.username
     );
-    
+
     const dobFormat = `${teacher.dob.getFullYear()}-${
       teacher.dob.getMonth() + 1
     }-${teacher.dob.getDate()}`;
     if (isExist) {
       //update
       //1. update NGUOIDUNG
-      
+
       const sqlQuery1 =
         `UPDATE NGUOIDUNG ` +
         `SET matKhau="${teacher.getPassWord()}", cmnd='${teacher.getIdentityCard()}' ` +
@@ -271,7 +269,7 @@ const Teacher = class extends Employee {
       return flagClass.DB.UPDATE;
     }
     //insert
-    
+
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
@@ -284,7 +282,7 @@ const Teacher = class extends Employee {
     //2. Insert GIAOVIEN
     const sqlQuery2 =
       `INSERT INTO GIAOVIEN (magv, ngaysinh, hoten, diachi, gioitinh, sdt, mabm, trangthai) ` +
-      `VALUES ('${teacher.getUserName()}', '${dobFormat}', '${teacher.getFullName()}', ` + 
+      `VALUES ('${teacher.getUserName()}', '${dobFormat}', '${teacher.getFullName()}', ` +
       `'${teacher.getAddress()}', ${teacher.getGender()}, '${teacher.getPhoneNumber()}', '${teacher.getSubjectID()}', ${teacher.getStatus()})`;
 
     await ExecuteSQL(sqlQuery2);
@@ -294,11 +292,11 @@ const Teacher = class extends Employee {
 };
 
 // const exec = async () => {
-//   console.log("Teacher");
+//   //console.log("Teacher");
 
 //   const result = await Teacher.Find("GV01");
 
-//   console.log(result);
+//   //console.log(result);
 // };
 
 // exec();

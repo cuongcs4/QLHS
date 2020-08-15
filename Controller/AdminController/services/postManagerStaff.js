@@ -3,7 +3,7 @@ const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
 const Flag = require("../../../Model/Helper/resource/Flag");
 
 const postManagerStaff = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { username, status } = req.body;
   const statusInt = parseInt(status, 10);
   const teacher = await Teacher.Find(username);

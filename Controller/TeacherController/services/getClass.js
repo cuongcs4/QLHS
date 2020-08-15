@@ -46,7 +46,7 @@ const getClass = async (req, res, next) => {
     });
   }
 
-  console.log(listClassView);
+  //console.log(listClassView);
   //Render kết quả
   res.render("teacher/class", {
     title: "Quản lý lớp học",

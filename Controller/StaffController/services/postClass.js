@@ -81,7 +81,7 @@ const postClass = async (req, res, next) => {
     flagClass.STATUS.ENABLE
   );
 
-  console.log(newClassIDString);
+  //console.log(newClassIDString);
 
   await Class.Save(newClass);
 

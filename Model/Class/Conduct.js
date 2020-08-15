@@ -94,7 +94,7 @@ module.exports = Conduct;
 // async function exec() {
 //   const student = new Student(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-//   console.log(Student);
+//   //console.log(Student);
 // }
 
 // exec();

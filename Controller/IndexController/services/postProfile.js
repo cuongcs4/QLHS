@@ -4,7 +4,7 @@ const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
 const flag = require("../../../Model/Helper/resource/Flag");
 
 const postProfile = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { username, fullName, dob, identityCard, address, typeUser } = req.body;
   let user, dobArray, newDate;
   dobArray = dob.split("-");
@@ -30,7 +30,7 @@ const postProfile = async (req, res, next) => {
     case 4:
     case 5:
       user = await Employee.Find(username);
-      console.log(user);
+      //console.log(user);
       await user.setFullName(fullName);
       await user.setDob(newDate);
       await user.setIdentityCard(identityCard);

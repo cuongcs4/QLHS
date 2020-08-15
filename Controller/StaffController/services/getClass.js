@@ -16,7 +16,7 @@ const getAllClass = async (req, res, next) => {
 
   const { listClass10, listClass11, listClass12 } = listClass;
 
-  console.log(listClass);
+  //console.log(listClass);
 
   res.render("staff/classTable", {
     title: "Danh sách lớp học",
@@ -70,10 +70,10 @@ const getClass = async (req, res, next) => {
   const classID = req.query.classID;
 
   if (typeof classID === "undefined" || classID.length === 0) {
-    console.log("getAllClass");
+    //console.log("getAllClass");
     await getAllClass(req, res, next);
   } else {
-    console.log("getClassByClassID");
+    //console.log("getClassByClassID");
     await getClassByClassID(req, res, next);
   }
 };

@@ -5,14 +5,14 @@ const getUserByUsername = require("../Model/Helper/services/GetUserByUsername");
 const flagClass = require("../Model/Helper/resource/Flag");
 
 const configPassport = (passport) => {
-  console.log("Config Passport");
+  //console.log("Config Passport");
 
   passport.serializeUser(function (user, done) {
     done(null, user.getID());
   });
 
   passport.deserializeUser(async (id, done) => {
-    console.log(id);
+    //console.log(id);
     const user = await getUserByUsername(id);
 
     if (user !== null) {
@@ -25,7 +25,7 @@ const configPassport = (passport) => {
       }
     }
 
-    console.log("error deserializeUser");
+    //console.log("error deserializeUser");
     return done(null, false, {
       message: "Không tồn tại tài khoản",
     });
@@ -36,7 +36,7 @@ const configPassport = (passport) => {
       const user = await getUserByUsername(username);
 
       if (user === null) {
-        console.log("error user null");
+        //console.log("error user null");
         return done(null, false, {
           message: "Tài khoản không tồn tại",
         });
@@ -77,7 +77,7 @@ const ExecuteSQL = require("../Model/Database/ExecuteSQL");
 
 //   const salt = 10;
 
-//   //console.log(user);
+//   ////console.log(user);
 
 //   for (let i = 0; i < user.length; i++) {
 //     let password = "";

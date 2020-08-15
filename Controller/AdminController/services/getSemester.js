@@ -16,7 +16,7 @@ const getSemester = async (req, res, next) => {
     listSemester[i].id = i + 1;
   }
 
-  //console.log(listSemester);
+  ////console.log(listSemester);
 
   const latestSemester = listSemester[0];
 

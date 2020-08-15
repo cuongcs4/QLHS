@@ -76,7 +76,7 @@ const postExam = async (req, res, next) => {
     }
   }
 
-  //console.log(data);
+  ////console.log(data);
 
   const yearArray = year.split("-");
   const yearStart = parseInt(yearArray[0]);
@@ -113,11 +113,11 @@ const postExam = async (req, res, next) => {
       supervisorID2
     );
 
-    //console.log(newExamPlan);
+    ////console.log(newExamPlan);
 
     await ExamPlan.Save(newExamPlan);
 
-    //console.log(newExamPlan);
+    ////console.log(newExamPlan);
   }
 
   req.flash("success_msg", `Đã lưu thành công ${data.length} dòng.`);

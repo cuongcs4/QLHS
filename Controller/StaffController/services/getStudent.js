@@ -22,14 +22,14 @@ const getAllStudent = async (req, res, next) => {
       i
     ];
 
-    console.log(gender);
+    //console.log(gender);
 
     const relatives = await Relatives.Find(id);
 
     const dad = {};
     const mom = {};
 
-    console.log(relatives);
+    //console.log(relatives);
     relatives.map((item) => {
       if (item.relative == "Ba") {
         dad.fullName = item.fullName;
@@ -92,7 +92,7 @@ const getStudentByStudentID = async (req, res, next) => {
 
     const listStudentView = [];
 
-    console.log(relatives);
+    //console.log(relatives);
     relatives.map((item) => {
       if (item.relative == "Ba") {
         dad.fullName = item.fullName;

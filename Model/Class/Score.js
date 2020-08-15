@@ -153,7 +153,7 @@ const Score = class {
       `${semesterID}, ${yearStart}, ${yearEnd}, ${score1}, ` +
       `${score2}, ${score3}, ${score4})`;
 
-    console.log(sqlQuery);
+    //console.log(sqlQuery);
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.NEW;
@@ -169,7 +169,7 @@ const Score = class {
       `WHERE mahs='${studentID}' AND mabm='${subjectID}' ` +
       `AND mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd}`;
 
-    console.log(sqlQuery);
+    //console.log(sqlQuery);
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.UPDATE;
@@ -186,7 +186,7 @@ const Score = class {
 //       lastSemester.yearStart += 1;
 //       lastSemester.yearEnd += 1;
 //     }
-//     console.log(lastSemester)
+//     //console.log(lastSemester)
 //     const newSemester = new Semester(
 //       lastSemester.semesterID,
 //       lastSemester.yearStart,
@@ -205,14 +205,14 @@ const Score = class {
 //   )) !== null
 //     ? true
 //     : false;
-//     console.log(isExist);
+//     //console.log(isExist);
 //   if (isExist === false) {
 //   const sqlQuery =
 //       `INSERT INTO DIEM (mahs, malop, mabm, mahk, nambd, namkt, cot1, cot2, cot3, cot4) ` +
 //       `VALUES ('${score.getStudentID()}', '${score.getClassID()}', '${score.getSubjectID()}', ` +
 //       `'${newSemester.getSemesterID()}', '${newSemester.getYearStart()}', '${newSemester.getYearEnd()}', ` +
 //       `'${score.getScore1()}', '${score.getScore2()}', '${score.getScore3()}', '${score.getScore4()}')`;
-//     console.log(sqlQuery);
+//     //console.log(sqlQuery);
 //     await ExecuteSQL(sqlQuery);
 
 //     return flagClass.DB.NEW;

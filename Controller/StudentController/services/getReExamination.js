@@ -29,6 +29,7 @@ const getReExamination = async (req, res, next) => {
     yearStart,
     yearEnd
   );
+
   const listReExaminationView = [];
   if (listReExamination !== null) {
     for (let i = 0; i < listReExamination.length; i++) {
@@ -63,6 +64,7 @@ const getReExamination = async (req, res, next) => {
       });
     }
   }
+
   res.render("student/reExamination", {
     title: "Phúc khảo",
     style: ["styleTable.css"],

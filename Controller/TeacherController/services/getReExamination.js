@@ -36,10 +36,6 @@ const getReExamination = async (req, res, next) => {
     yearEnd
   );
 
-  console.log("GET RE_EXAMINATION");
-
-  console.log(listReExamination);
-
   //Tạo danh sách hiển thị
   const listReExaminationView = [];
 
@@ -65,7 +61,7 @@ const getReExamination = async (req, res, next) => {
       content,
       response,
       status,
-      dataTarget: `${id}`,
+      dataTarget: `Re${i}`,
       semesterID,
       yearStart,
       yearEnd,

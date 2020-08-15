@@ -13,13 +13,13 @@ const deleteFile = async (path, time) => {
 
   try {
     fs.unlinkSync(path);
-    console.log("remove success");
+    //console.log("remove success");
     //file removed
   } catch (err) {
     console.error(err);
   }
 
-  console.log("deleted file");
+  //console.log("deleted file");
 };
 
 module.exports = deleteFile;

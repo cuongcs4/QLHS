@@ -138,7 +138,7 @@ const Class = class {
 // const exec = async () => {
 //   const total = await Class.GetNewIDClass(2019);
 
-//   console.log(total);
+//   //console.log(total);
 // };
 
 // exec();

@@ -29,7 +29,7 @@ const getUserByUsername = async (userName) => {
         break;
 
       case flagClass.TYPE_USER.HOMEROOM_TEACHER:
-        console.log("HomeroomTeacher");
+        //console.log("HomeroomTeacher");
         usr = await HomeroomTeacher.Find(userName);
         break;
 
@@ -42,7 +42,7 @@ const getUserByUsername = async (userName) => {
         break;
     }
 
-    console.log(usr);
+    //console.log(usr);
     return usr;
   }
 

@@ -1,7 +1,7 @@
 const User = require("../../../Model/Class/User");
 const bcrypt = require("bcrypt");
 const postChangePassword = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { username, currentPassword, newPassword1, newPassword2 } = req.body;
   var boolean = true;
   const user = await User.Find(username);
@@ -22,7 +22,7 @@ const postChangePassword = async (req, res, next) => {
   if (boolean == true) {
     hash = bcrypt.hashSync(newPassword1, saltRounds);
     user.setPassWord(hash);
-    console.log(hash);
+    //console.log(hash);
     await User.Changepassword(user);
     req.flash("success_msg", "Đổi mật khẩu thành công");
   }

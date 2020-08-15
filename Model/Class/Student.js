@@ -393,7 +393,7 @@ const Student = class extends User {
         `SELECT * ` +
         `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
         `WHERE HS.malop='${classID}'`;
-      console.log(sqlQuery);
+      //console.log(sqlQuery);
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
@@ -495,7 +495,7 @@ const Student = class extends User {
 
 // const exec = async () => {
 //   const result = await Student.GetNewStudentID("LH201904");
-//   console.log(result);
+//   //console.log(result);
 // };
 // exec();
 
