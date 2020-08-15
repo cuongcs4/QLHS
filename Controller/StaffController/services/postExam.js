@@ -47,6 +47,7 @@ const postExam = async (req, res, next) => {
       roomStringID.length - 2,
       roomStringID.length
     );
+
     const room = await Room.Find(roomExamID);
     if (room === null) {
       req.flash("error_msg", `Không có phòng mã "${roomID}" (dòng ${i + 2})`);
@@ -75,6 +76,8 @@ const postExam = async (req, res, next) => {
     }
   }
 
+  //console.log(data);
+
   const yearArray = year.split("-");
   const yearStart = parseInt(yearArray[0]);
   const yearEnd = parseInt(yearArray[1]);
@@ -97,6 +100,7 @@ const postExam = async (req, res, next) => {
       roomStringID.length - 2,
       roomStringID.length
     );
+
     const newExamPlan = new ExamPlan(
       null,
       semester,
@@ -109,9 +113,11 @@ const postExam = async (req, res, next) => {
       supervisorID2
     );
 
+    //console.log(newExamPlan);
+
     await ExamPlan.Save(newExamPlan);
 
-    console.log(newExamPlan);
+    //console.log(newExamPlan);
   }
 
   req.flash("success_msg", `Đã lưu thành công ${data.length} dòng.`);

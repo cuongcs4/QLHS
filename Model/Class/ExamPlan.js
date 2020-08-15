@@ -16,6 +16,7 @@ const ExamPlan = class {
     subjectID,
     dayExam,
     startSection,
+    claSs,
     supervisorID1,
     supervisorID2
   ) {
@@ -25,6 +26,7 @@ const ExamPlan = class {
     this.subjectID = subjectID;
     this.dayExam = dayExam;
     this.startSection = startSection;
+    this.claSs = claSs;
     this.supervisorID1 = supervisorID1;
     this.supervisorID2 = supervisorID2;
   }
@@ -94,12 +96,15 @@ const ExamPlan = class {
     }
 
     if (studentID !== null) {
-      // Lấy lịch thi của học sinh theo mã hs
+      // Lấy lịch thi của học sinh theo mã hs HS20180101
+      const claSs = yearStart - studentID.slice(2, 6) + 10;
+
       const sqlQuery =
         `SELECT BM.tenbm AS subjectName, LT.ngaythi AS dayExam, PH.tenphong AS roomName, LT.tietbd AS startSection ` +
         `FROM LICHTHI AS LT, BOMON AS BM, PHONGTHI AS PT, PHONGHOC AS PH ` +
-        `WHERE PH.maphong = PT.phonghoc AND LT.maphong = PT.maphongthi AND LT.mabm = BM.mabm AND PT.mahs = '${studentID}' AND BM.mabm = LT.mabm AND PT.mahk = '${semesterID}' AND PT.nambd = '${yearStart}' AND PT.namkt = '${yearEnd}'`;
+        `WHERE PH.maphong=PT.phonghoc AND LT.maphong=PT.phonghoc AND LT.mabm=BM.mabm AND PT.mahs='${studentID}' AND LT.khoi=${claSs} AND LT.mahk = ${semesterID} AND LT.nambd = ${yearStart} AND LT.namkt = ${yearEnd}`;
       const result = await ExecuteSQL(sqlQuery);
+
       return result.length === 0 ? null : result;
     }
 

@@ -64,7 +64,7 @@ const TeachingPlan = class {
   }
 
   //Tìm kiếm thời khóa biểu theo lớp học, học kỳ
-  static async Find({ classID, teacherID}, semesterID, yearStart, yearEnd) {
+  static async Find({ classID, teacherID }, semesterID, yearStart, yearEnd) {
     if (typeof semesterID === "undefined") {
       const latestSemester = await Semester.getLatestSemester();
       semesterID = latestSemester.getSemesterID();
@@ -76,11 +76,13 @@ const TeachingPlan = class {
       const sqlQuery =
         `SELECT TKB.magv AS teacherID, TKB.mabm AS subjectID, TKB.ngaytrongtuan AS dayInWeek, TKB.tiet AS startSection ` +
         `FROM THOIKHOABIEU AS TKB ` +
-        `WHERE TKB.malop ='${classID}' AND TKB.mahk = '${semesterID}' AND TKB.nambd = '${yearStart}' AND TKB.namkt = '${yearEnd}'`;
+        `WHERE TKB.malop='${classID}' AND TKB.mahk=${semesterID} AND TKB.nambd=${yearStart} AND TKB.namkt=${yearEnd}`;
       const result = await ExecuteSQL(sqlQuery);
+
+      console.log(result);
+
       return result;
     }
-
 
     if (teacherID !== null) {
       // Lấy TKB của giáo viên

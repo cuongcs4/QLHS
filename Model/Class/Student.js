@@ -77,8 +77,10 @@ const Student = class extends User {
       yearStart,
       yearEnd
     );
+
     return schedule;
   }
+
   async getExamSchedule(semesterID, yearStart, yearEnd) {
     const schedule = await ExamPlan.Find(
       { studentID: this.id, teacherID: null, id: null },

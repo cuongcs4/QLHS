@@ -8,6 +8,8 @@ const getSchedule = async (req, res, next) => {
     semester
   );
 
+  let schedule;
+
   if (typeof year == "undefined" && typeof semester == "undefined") {
     schedule = await req.user.getSchedule();
   } else {
@@ -18,18 +20,21 @@ const getSchedule = async (req, res, next) => {
 
     schedule = await req.user.getSchedule(semesterID, yearStart, yearEnd);
   }
+
   const listScheduleView = [];
 
   for (let j = 1; j <= 10; j++) {
     const sectionSchedule = [];
-    for (let k = 0; k < 5; k++) {
+
+    for (let k = 1; k <= 6; k++) {
       for (let i = 0; i < schedule.length; i++) {
-        if (schedule[i].startSection === j && schedule[i].dayInWeek === k + 2) {
+        if (schedule[i].startSection === j && schedule[i].dayInWeek === k) {
           const subject = await Subject.Find(schedule[i].subjectID);
-          if (subject !== null) sectionSchedule[k] = subject.subjectName;
+          if (subject !== null) sectionSchedule[k - 1] = subject.subjectName;
         }
       }
     }
+
     listScheduleView.push({
       id: j,
       subject1: sectionSchedule[0],
@@ -37,8 +42,12 @@ const getSchedule = async (req, res, next) => {
       subject3: sectionSchedule[2],
       subject4: sectionSchedule[3],
       subject5: sectionSchedule[4],
+      subject6: sectionSchedule[5],
     });
   }
+
+  console.log(listScheduleView);
+
   res.render("student/schedule", {
     title: "Thời khoá biểu",
     style: ["styleTable.css"],
