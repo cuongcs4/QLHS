@@ -1,5 +1,5 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const Conduct = require("../../../ModelClass/Class/Conduct");
+const Semester = require("../../../Model/Class/Semester");
+const Conduct = require("../../../Model/Class/Conduct");
 
 const postManagerClassScore = async (req, res, next) => {
   const { studentID, conduct } = req.body;

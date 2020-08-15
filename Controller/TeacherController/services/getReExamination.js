@@ -1,8 +1,8 @@
-const ReExamination = require("../../../ModelClass/Class/ReExamination");
-const Class = require("../../../ModelClass/Class/Class");
-const Semester = require("../../../ModelClass/Class/Semester");
+const ReExamination = require("../../../Model/Class/ReExamination");
+const Class = require("../../../Model/Class/Class");
+const Semester = require("../../../Model/Class/Semester");
 
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getReExamination = async (req, res, next) => {
   let { year, semester } = req.query;

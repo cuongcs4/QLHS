@@ -1,11 +1,11 @@
-const Class = require("../../../ModelClass/Class/Class");
+const Class = require("../../../Model/Class/Class");
 
-const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
-const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
-const removeAccents = require("../../../ModelClass/Helper/services/removeAccents");
+const exportFileExcel = require("../../../Model/Helper/services/exportFileExcel");
+const deleteFile = require("../../../Model/Helper/services/deleteFile");
+const removeAccents = require("../../../Model/Helper/services/removeAccents");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postStudentInClassExportExcel = async (req, res, next) => {
   const { roomID, semesterID, year } = req.body;

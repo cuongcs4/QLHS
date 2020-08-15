@@ -1,4 +1,4 @@
-const ReExamine = require("../../../ModelClass/Class/ReExamination");
+const ReExamine = require("../../../Model/Class/ReExamination");
 
 const getEditReExamination = async (req, res, next) => {
   const { id, content } = req.body;

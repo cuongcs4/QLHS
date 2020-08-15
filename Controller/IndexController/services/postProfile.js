@@ -1,15 +1,15 @@
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Student = require("../../../ModelClass/Class/Student");
-const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
-const flag = require("../../../ModelClass/Helper/resource/Flag");
+const Teacher = require("../../../Model/Class/Teacher");
+const Student = require("../../../Model/Class/Student");
+const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
+const flag = require("../../../Model/Helper/resource/Flag");
 
 const postProfile = async (req, res, next) => {
   console.log(req.body);
   const { username, fullName, dob, identityCard, address, typeUser } = req.body;
   let user, dobArray, newDate;
-  dobArray = dob.split('-')
-  newDate = new Date(dobArray[2], dobArray[1]-1, dobArray[0]);
-  switch (parseInt(typeUser,10)) {
+  dobArray = dob.split("-");
+  newDate = new Date(dobArray[2], dobArray[1] - 1, dobArray[0]);
+  switch (parseInt(typeUser, 10)) {
     case 1:
       user = await Student.Find({ id: username, classID: null });
       await user.setFullName(fullName);

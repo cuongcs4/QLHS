@@ -1,11 +1,11 @@
-const Conduct = require("../../../ModelClass/Class/Conduct");
-const Semester = require("../../../ModelClass/Class/Semester");
+const Conduct = require("../../../Model/Class/Conduct");
+const Semester = require("../../../Model/Class/Semester");
 
-const parseFileExcel = require("../../../ModelClass/Helper/services/parseFileExcel");
-const parseForm = require("../../../ModelClass/Helper/services/parseFormFormidable");
+const parseFileExcel = require("../../../Model/Helper/services/parseFileExcel");
+const parseForm = require("../../../Model/Helper/services/parseFormFormidable");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postManagerClassScoreExcel = async (req, res, next) => {
   const { path, fields } = await parseForm(req);

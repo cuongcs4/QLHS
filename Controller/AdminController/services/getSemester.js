@@ -1,4 +1,4 @@
-const Semester = require("../../../ModelClass/Class/Semester");
+const Semester = require("../../../Model/Class/Semester");
 
 const getSemester = async (req, res, next) => {
   const listSemester = await Semester.Find();

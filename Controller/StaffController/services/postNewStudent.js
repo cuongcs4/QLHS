@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
-const Student = require("../../../ModelClass/Class/Student");
-const Relatives = require("../../../ModelClass/Class/Relatives");
+const Student = require("../../../Model/Class/Student");
+const Relatives = require("../../../Model/Class/Relatives");
 
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postNewStudent = async (req, res, next) => {
   const {

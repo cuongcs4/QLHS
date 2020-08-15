@@ -1,6 +1,6 @@
-const QuestionSurvey = require("../../../ModelClass/Class/QuestionSurvey");
-const ResultSurvey = require("../../../ModelClass/Class/ResultSurvey");
-const Semester = require("../../../ModelClass/Class/Semester");
+const QuestionSurvey = require("../../../Model/Class/QuestionSurvey");
+const ResultSurvey = require("../../../Model/Class/ResultSurvey");
+const Semester = require("../../../Model/Class/Semester");
 
 const getSurvey = async (req, res, next) => {
   const latestSemester = await Semester.getLatestSemester();

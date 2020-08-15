@@ -1,5 +1,5 @@
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
-const Subject = require("../../../ModelClass/Class/Subject");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
+const Subject = require("../../../Model/Class/Subject");
 const getResultTable = async (req, res, next) => {
   let { year, semester } = req.query;
   //Lấy tất cả các học kỳ đã có
@@ -20,30 +20,30 @@ const getResultTable = async (req, res, next) => {
   }
   const listScoreView = [];
   if (listScores !== null) {
-  for (let i = 0; i < listScores.length; i++) {
-    const { subjectName, score1, score2, score3, score4 } = listScores[i];
+    for (let i = 0; i < listScores.length; i++) {
+      const { subjectName, score1, score2, score3, score4 } = listScores[i];
 
-    const score = {
-      id: i + 1,
-      subjectName,
-      score1,
-      score2,
-      score3,
-      score4,
-    };
-    score.gpa =
-      Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
-    listScoreView.push(score);
+      const score = {
+        id: i + 1,
+        subjectName,
+        score1,
+        score2,
+        score3,
+        score4,
+      };
+      score.gpa =
+        Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
+      listScoreView.push(score);
+    }
   }
-}
   const listSubject = await Subject.Find();
   const listSubjectView = [];
   if (listSubject !== null) {
     for (let i = 0; i < listSubject.length; i++) {
-        const {subjectID, subjectName} = listSubject[i];
+      const { subjectID, subjectName } = listSubject[i];
       listSubjectView.push({
         subject: subjectID,
-        subjectName
+        subjectName,
       });
     }
   }
@@ -55,7 +55,7 @@ const getResultTable = async (req, res, next) => {
     listScoreView,
     allYearSemester,
     isLastSemester,
-    listSubjectView
+    listSubjectView,
   });
 };
 

@@ -1,9 +1,9 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Class = require("../../../ModelClass/Class/Class");
-const Room = require("../../../ModelClass/Class/Room");
+const Semester = require("../../../Model/Class/Semester");
+const Teacher = require("../../../Model/Class/Teacher");
+const Class = require("../../../Model/Class/Class");
+const Room = require("../../../Model/Class/Room");
 
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getClass = async (req, res, next) => {
   let { year, semester } = req.query;

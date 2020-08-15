@@ -1,7 +1,7 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const Class = require("../../../ModelClass/Class/Class");
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Student = require("../../../ModelClass/Class/Student");
+const Semester = require("../../../Model/Class/Semester");
+const Class = require("../../../Model/Class/Class");
+const Teacher = require("../../../Model/Class/Teacher");
+const Student = require("../../../Model/Class/Student");
 
 const getStudentInClass = async (req, res, next) => {
   const classID = req.params.classID;

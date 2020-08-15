@@ -1,4 +1,4 @@
-const flagClass = require("../ModelClass/Helper/resource/Flag");
+const flagClass = require("../Model/Helper/resource/Flag");
 const registerHello = (handlebars) => {
   handlebars.registerHelper("hello", function (user, block) {
     switch (user.typeUser) {

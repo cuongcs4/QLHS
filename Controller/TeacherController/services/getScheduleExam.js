@@ -1,4 +1,4 @@
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getScheduleExam = async (req, res, next) => {
   let { year, semester } = req.query;

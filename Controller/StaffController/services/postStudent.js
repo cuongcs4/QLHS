@@ -1,6 +1,6 @@
-const Student = require("../../../ModelClass/Class/Student");
+const Student = require("../../../Model/Class/Student");
 
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postStudent = async (req, res, next) => {
   const { studentID, status, classID } = req.body;

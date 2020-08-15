@@ -1,5 +1,5 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const Semester = require("../../../Model/Class/Semester");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postSemester = async (req, res, next) => {
   const latestSemester = await Semester.getLatestSemester();

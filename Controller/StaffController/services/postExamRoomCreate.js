@@ -1,4 +1,4 @@
-const removeAccents = require("../../../ModelClass/Helper/services/removeAccents");
+const removeAccents = require("../../../Model/Helper/services/removeAccents");
 
 const postExamRoomCreate = async (req, res, next) => {
   const maxStudent = req.body.maxStudent;

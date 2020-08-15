@@ -1,5 +1,5 @@
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
-const Subject = require("../../../ModelClass/Class/Subject");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
+const Subject = require("../../../Model/Class/Subject");
 const getSchedule = async (req, res, next) => {
   let { year, semester } = req.query;
   //Lấy tất cả các học kỳ đã có
@@ -21,13 +21,12 @@ const getSchedule = async (req, res, next) => {
   const listScheduleView = [];
 
   for (let j = 1; j <= 10; j++) {
-    const sectionSchedule = []; 
+    const sectionSchedule = [];
     for (let k = 0; k < 5; k++) {
       for (let i = 0; i < schedule.length; i++) {
         if (schedule[i].startSection === j && schedule[i].dayInWeek === k + 2) {
           const subject = await Subject.Find(schedule[i].subjectID);
-          if (subject !== null)
-            sectionSchedule[k] = subject.subjectName;
+          if (subject !== null) sectionSchedule[k] = subject.subjectName;
         }
       }
     }

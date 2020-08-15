@@ -1,6 +1,6 @@
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const TeachingPlan = require("../../../ModelClass/Class/TeachingPlan");
-const Semester = require("../../../ModelClass/Class/Semester");
+const Teacher = require("../../../Model/Class/Teacher");
+const TeachingPlan = require("../../../Model/Class/TeachingPlan");
+const Semester = require("../../../Model/Class/Semester");
 
 const postSchedule = async (req, res, next) => {
   const {

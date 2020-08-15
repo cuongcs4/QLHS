@@ -1,8 +1,8 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
-const getUserByUsername = require("../ModelClass/Helper/services/GetUserByUsername");
-const flagClass = require("../ModelClass/Helper/resource/Flag");
+const getUserByUsername = require("../Model/Helper/services/GetUserByUsername");
+const flagClass = require("../Model/Helper/resource/Flag");
 
 const configPassport = (passport) => {
   console.log("Config Passport");
@@ -68,7 +68,7 @@ const configPassport = (passport) => {
 
 module.exports = configPassport;
 
-const ExecuteSQL = require("../ModelClass/Database/ExecuteSQL");
+const ExecuteSQL = require("../Model/Database/ExecuteSQL");
 
 // async function exec() {
 //   const sqlQuery = `SELECT * FROM NGUOIDUNG `;

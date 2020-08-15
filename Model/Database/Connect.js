@@ -9,11 +9,7 @@ require("dotenv").config();
 // const password = process.env.PASSWORD_DATABASE;
 // const database = process.env.NAME_DATABASE;
 
-const host = "localhost";
-const port = 3306;
-const user = "adminDB";
-const password = "adminDB";
-const database = "qlhs";
+const { host, port, user, password, database } = require("./config");
 
 // Kết nối với cơ sở dữ liệu
 const createConnection = () => {

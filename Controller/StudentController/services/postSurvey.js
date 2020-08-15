@@ -1,7 +1,7 @@
-const ResultSurvey = require("../../../ModelClass/Class/ResultSurvey");
-const Semester = require("../../../ModelClass/Class/Semester");
+const ResultSurvey = require("../../../Model/Class/ResultSurvey");
+const Semester = require("../../../Model/Class/Semester");
 const postSurvey = async (req, res, next) => {
-    const semester = await Semester.getLatestSemester();
+  const semester = await Semester.getLatestSemester();
   const listAnswers = req.body;
   const studentID = req.user.id;
   const answer = [
@@ -18,17 +18,17 @@ const postSurvey = async (req, res, next) => {
   ];
   for (let i = 1; i <= 10; i++) {
     const resultSurvey = new ResultSurvey(
-        semester,
-        studentID,
-        null,
-        null,
-        i,
-        answer[i-1]
+      semester,
+      studentID,
+      null,
+      null,
+      i,
+      answer[i - 1]
     );
     await ResultSurvey.Save(resultSurvey);
   }
   req.flash("success_msg", "Đã hoàn thành khảo sát");
-  res.redirect("/student/survey")
+  res.redirect("/student/survey");
 };
 
 module.exports = postSurvey;

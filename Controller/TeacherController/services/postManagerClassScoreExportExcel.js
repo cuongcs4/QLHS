@@ -1,13 +1,13 @@
 const fs = require("fs");
 
-const Class = require("../../../ModelClass/Class/Class");
-const Student = require("../../../ModelClass/Class/Student");
+const Class = require("../../../Model/Class/Class");
+const Student = require("../../../Model/Class/Student");
 
-const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
-const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
+const exportFileExcel = require("../../../Model/Helper/services/exportFileExcel");
+const deleteFile = require("../../../Model/Helper/services/deleteFile");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postManagerClassScoreExportExcel = async (req, res, next) => {
   {

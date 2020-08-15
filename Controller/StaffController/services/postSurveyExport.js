@@ -1,10 +1,10 @@
-const ResultSurvey = require("../../../ModelClass/Class/ResultSurvey");
-const QuestionSurvey = require("../../../ModelClass/Class/QuestionSurvey");
+const ResultSurvey = require("../../../Model/Class/ResultSurvey");
+const QuestionSurvey = require("../../../Model/Class/QuestionSurvey");
 
-const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
-const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
+const exportFileExcel = require("../../../Model/Helper/services/exportFileExcel");
+const deleteFile = require("../../../Model/Helper/services/deleteFile");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
 
 const postSurveyExport = async (req, res, next) => {
   const { year, semesterID } = req.body;

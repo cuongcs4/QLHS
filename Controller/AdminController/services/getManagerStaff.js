@@ -1,6 +1,6 @@
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
-const Subject = require("../../../ModelClass/Class/Subject");
+const Teacher = require("../../../Model/Class/Teacher");
+const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
+const Subject = require("../../../Model/Class/Subject");
 const getManagerStaff = async (req, res, next) => {
   const listTeacher = await Teacher.Find();
   const listEmployee = await Employee.Find();
@@ -20,7 +20,7 @@ const getManagerStaff = async (req, res, next) => {
         phoneNumber,
         subjectID,
         typeUser,
-        status 
+        status,
       } = listTeacher[i];
       listTeacherView.push({
         id: i + 1,
@@ -34,13 +34,22 @@ const getManagerStaff = async (req, res, next) => {
         subjectID,
         dataTarget: `modalEditTeacher${i + 1}`,
         typeUser,
-        status
+        status,
       });
     }
   }
   if (listEmployee !== null) {
     for (let i = 0; i < listEmployee.length; i++) {
-      const { id, identityCard, fullName, dob, gender, address, status, typeUser } = listEmployee[i];
+      const {
+        id,
+        identityCard,
+        fullName,
+        dob,
+        gender,
+        address,
+        status,
+        typeUser,
+      } = listEmployee[i];
 
       listEmployeeView.push({
         id: i + 1,
@@ -52,7 +61,7 @@ const getManagerStaff = async (req, res, next) => {
         address,
         status,
         dataTarget: `modalEditEmployee${i + 1}`,
-        typeUser
+        typeUser,
       });
     }
   }
@@ -61,10 +70,10 @@ const getManagerStaff = async (req, res, next) => {
   const listSubjectView = [];
   if (listSubject !== null) {
     for (let i = 0; i < listSubject.length; i++) {
-        const {subjectID, subjectName} = listSubject[i];
+      const { subjectID, subjectName } = listSubject[i];
       listSubjectView.push({
         subject: subjectID,
-        subjectName
+        subjectName,
       });
     }
   }
@@ -76,7 +85,7 @@ const getManagerStaff = async (req, res, next) => {
     listEmployeeView,
     listSubjectView,
     newTeacherID,
-    newEmployeeID
+    newEmployeeID,
   });
 };
 module.exports = getManagerStaff;

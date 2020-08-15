@@ -1,17 +1,17 @@
 const bcrypt = require("bcrypt");
 
-const HomeroomTeacher = require("../../../ModelClass/Class/HomeroomTeacher");
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Student = require("../../../ModelClass/Class/Student");
-const Relatives = require("../../../ModelClass/Class/Relatives");
-const Room = require("../../../ModelClass/Class/Room");
-const Class = require("../../../ModelClass/Class/Class");
+const HomeroomTeacher = require("../../../Model/Class/HomeroomTeacher");
+const Teacher = require("../../../Model/Class/Teacher");
+const Student = require("../../../Model/Class/Student");
+const Relatives = require("../../../Model/Class/Relatives");
+const Room = require("../../../Model/Class/Room");
+const Class = require("../../../Model/Class/Class");
 
-const parseForm = require("../../../ModelClass/Helper/services/parseFormFormidable");
-const parseFileExcel = require("../../../ModelClass/Helper/services/parseFileExcel");
+const parseForm = require("../../../Model/Helper/services/parseFormFormidable");
+const parseFileExcel = require("../../../Model/Helper/services/parseFileExcel");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const postClass = async (req, res, next) => {
   const result = await parseForm(req);

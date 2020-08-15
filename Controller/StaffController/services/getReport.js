@@ -1,5 +1,5 @@
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
-const Semester = require("../../../ModelClass/Class/Semester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
+const Semester = require("../../../Model/Class/Semester");
 
 const getReport = async (req, res, next) => {
   const { year, semester } = req.query;

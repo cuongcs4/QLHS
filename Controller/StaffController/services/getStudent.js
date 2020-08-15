@@ -1,9 +1,9 @@
-const Student = require("../../../ModelClass/Class/Student");
-const Class = require("../../../ModelClass/Class/Class");
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Relatives = require("../../../ModelClass/Class/Relatives");
+const Student = require("../../../Model/Class/Student");
+const Class = require("../../../Model/Class/Class");
+const Teacher = require("../../../Model/Class/Teacher");
+const Relatives = require("../../../Model/Class/Relatives");
 
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const getAllStudent = async (req, res, next) => {
   const classID = req.params.classID;

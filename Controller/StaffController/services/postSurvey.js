@@ -1,4 +1,4 @@
-const ResultSurvey = require("../../../ModelClass/Class/ResultSurvey");
+const ResultSurvey = require("../../../Model/Class/ResultSurvey");
 
 const postSurvey = async (req, res, next) => {
   const { semesterID, year, dayStart, dayEnd } = req.body;

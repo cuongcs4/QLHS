@@ -1,10 +1,10 @@
-const Score = require("../../../ModelClass/Class/Score");
-const Semester = require("../../../ModelClass/Class/Semester");
+const Score = require("../../../Model/Class/Score");
+const Semester = require("../../../Model/Class/Semester");
 
-const parseFileExcel = require("../../../ModelClass/Helper/services/parseFileExcel");
-const parseForm = require("../../../ModelClass/Helper/services/parseFormFormidable");
+const parseFileExcel = require("../../../Model/Helper/services/parseFileExcel");
+const parseForm = require("../../../Model/Helper/services/parseFormFormidable");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
 
 const postStudentInClassExcel = async (req, res, next) => {
   const form = await parseForm(req);

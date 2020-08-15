@@ -1,10 +1,10 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const Class = require("../../../ModelClass/Class/Class");
-const Student = require("../../../ModelClass/Class/Student");
+const Semester = require("../../../Model/Class/Semester");
+const Class = require("../../../Model/Class/Class");
+const Student = require("../../../Model/Class/Student");
 
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
+const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const getManagerClassScore = async (req, res, next) => {
   let { year, semester } = req.query;

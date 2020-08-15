@@ -1,6 +1,6 @@
-const Class = require("../../../ModelClass/Class/Class");
-const Student = require("../../../ModelClass/Class/Student");
-const Relatives = require("../../../ModelClass/Class/Relatives");
+const Class = require("../../../Model/Class/Class");
+const Student = require("../../../Model/Class/Student");
+const Relatives = require("../../../Model/Class/Relatives");
 
 const getManagerClass = async (req, res, next) => {
   const classID = req.user.getClassID();

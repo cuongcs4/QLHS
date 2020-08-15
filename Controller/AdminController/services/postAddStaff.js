@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Employee = require("../../../ModelClass/Class/EmployeeTrainingDepartment");
+const Teacher = require("../../../Model/Class/Teacher");
+const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
 
-const flag = require("../../../ModelClass/Helper/resource/Flag");
+const flag = require("../../../Model/Helper/resource/Flag");
 
 const postAddStaff = async (req, res, next) => {
   console.log(req.body);

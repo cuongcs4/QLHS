@@ -1,13 +1,13 @@
-const ExamPlan = require("../../../ModelClass/Class/ExamPlan");
-const Subject = require("../../../ModelClass/Class/Subject");
-const Room = require("../../../ModelClass/Class/Room");
-const Teacher = require("../../../ModelClass/Class/Teacher");
+const ExamPlan = require("../../../Model/Class/ExamPlan");
+const Subject = require("../../../Model/Class/Subject");
+const Room = require("../../../Model/Class/Room");
+const Teacher = require("../../../Model/Class/Teacher");
 
-const parseForm = require("../../../ModelClass/Helper/services/parseFormFormidable");
-const parseFileExcel = require("../../../ModelClass/Helper/services/parseFileExcel");
+const parseForm = require("../../../Model/Helper/services/parseFormFormidable");
+const parseFileExcel = require("../../../Model/Helper/services/parseFileExcel");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
-const Semester = require("../../../ModelClass/Class/Semester");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
+const Semester = require("../../../Model/Class/Semester");
 
 const postExam = async (req, res, next) => {
   const { path, fields } = await parseForm(req);

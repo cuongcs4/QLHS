@@ -1,7 +1,7 @@
-const ReExamine = require("../../../ModelClass/Class/ReExamination");
-const Subject = require("../../../ModelClass/Class/Subject");
-const Semester = require("../../../ModelClass/Class/Semester");
-const handleSemester = require("../../../ModelClass/Helper/services/handleSemester");
+const ReExamine = require("../../../Model/Class/ReExamination");
+const Subject = require("../../../Model/Class/Subject");
+const Semester = require("../../../Model/Class/Semester");
+const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getReExamination = async (req, res, next) => {
   let { year, semester } = req.query;
@@ -56,10 +56,10 @@ const getReExamination = async (req, res, next) => {
   const listSubjectView = [];
   if (listSubject !== null) {
     for (let i = 0; i < listSubject.length; i++) {
-        const {subjectID, subjectName} = listSubject[i];
+      const { subjectID, subjectName } = listSubject[i];
       listSubjectView.push({
         subjectID,
-        subjectName
+        subjectName,
       });
     }
   }
@@ -70,7 +70,7 @@ const getReExamination = async (req, res, next) => {
     allYearSemester,
     isLastSemester,
     listReExaminationView,
-    listSubjectView
+    listSubjectView,
   });
 };
 

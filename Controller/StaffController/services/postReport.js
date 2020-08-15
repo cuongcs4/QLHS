@@ -1,6 +1,6 @@
-const exportExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
-const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
+const exportExcel = require("../../../Model/Helper/services/exportFileExcel");
+const deleteFile = require("../../../Model/Helper/services/deleteFile");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
 
 const postReport = async (req, res, next) => {
   const { year, semester } = req.body;

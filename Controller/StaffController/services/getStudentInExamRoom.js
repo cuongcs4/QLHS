@@ -1,7 +1,7 @@
-const flagClass = require("../../../ModelClass/Helper/resource/Flag");
-const Class = require("../../../ModelClass/Class/Class");
+const flagClass = require("../../../Model/Helper/resource/Flag");
+const Class = require("../../../Model/Class/Class");
 
-const removeAccents = require("../../../ModelClass/Helper/services/removeAccents");
+const removeAccents = require("../../../Model/Helper/services/removeAccents");
 
 const getStudentInExamRoom = async (req, res, next) => {
   const { roomID, semesterID, year } = req.query;

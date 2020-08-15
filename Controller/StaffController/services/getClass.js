@@ -1,5 +1,5 @@
-const Class = require("../../../ModelClass/Class/Class");
-const Teacher = require("../../../ModelClass/Class/Teacher");
+const Class = require("../../../Model/Class/Class");
+const Teacher = require("../../../Model/Class/Teacher");
 
 const getAllClass = async (req, res, next) => {
   const listClass = await req.user.getClass();

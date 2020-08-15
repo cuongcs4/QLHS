@@ -1,12 +1,12 @@
-const Semester = require("../../../ModelClass/Class/Semester");
-const Class = require("../../../ModelClass/Class/Class");
-const Teacher = require("../../../ModelClass/Class/Teacher");
-const Student = require("../../../ModelClass/Class/Student");
+const Semester = require("../../../Model/Class/Semester");
+const Class = require("../../../Model/Class/Class");
+const Teacher = require("../../../Model/Class/Teacher");
+const Student = require("../../../Model/Class/Student");
 
-const exportFileExcel = require("../../../ModelClass/Helper/services/exportFileExcel");
-const deleteFile = require("../../../ModelClass/Helper/services/deleteFile");
+const exportFileExcel = require("../../../Model/Helper/services/exportFileExcel");
+const deleteFile = require("../../../Model/Helper/services/deleteFile");
 
-const formatFileExcel = require("../../../ModelClass/Helper/resource/formatFileExcel");
+const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
 
 const postStudentInClassExportExcel = async (req, res, next) => {
   //Lấy các tham số từ query string url, nếu không có thì chuyển hướng về và thông báo lỗi.

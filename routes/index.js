@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const checkLogin = require("../Passport/checkLogin");
-const flagClass = require("../ModelClass/Helper/resource/Flag");
+const flagClass = require("../Model/Helper/resource/Flag");
 const indexController = require("../Controller/IndexController/register");
 const { check } = require("express-validator");
 
@@ -36,14 +36,14 @@ router.get("/", checkLogin, (req, res, next) => {
   }
 });
 router.post("/profile", checkLogin, indexController.postProfile);
-router.get("/changePassword", checkLogin, (req,res,next) => {
+router.get("/changePassword", checkLogin, (req, res, next) => {
   res.render("changePassword", {
     title: "Đổi mật khẩu",
     pagename: "Đổi mật khẩu",
     user: req.user,
-    style: ["styleProfile.css"]
-  })
-})
+    style: ["styleProfile.css"],
+  });
+});
 
 router.post("/changePassword", checkLogin, indexController.postChangePassword);
 

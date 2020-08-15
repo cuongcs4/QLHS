@@ -1,4 +1,4 @@
-const flagClass = require("../ModelClass/Helper/resource/Flag");
+const flagClass = require("../Model/Helper/resource/Flag");
 
 const checkStudent = (req, res, next) => {
   if (req.user.typeUser !== flagClass.TYPE_USER.STUDENT) {

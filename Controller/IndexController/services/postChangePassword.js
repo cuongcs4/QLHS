@@ -1,4 +1,4 @@
-const User = require("../../../ModelClass/Class/User");
+const User = require("../../../Model/Class/User");
 const bcrypt = require("bcrypt");
 const postChangePassword = async (req, res, next) => {
   console.log(req.body);

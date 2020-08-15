@@ -1,5 +1,5 @@
-const ReExamination = require("../../../ModelClass/Class/ReExamination");
-const Semester = require("../../../ModelClass/Class/Semester");
+const ReExamination = require("../../../Model/Class/ReExamination");
+const Semester = require("../../../Model/Class/Semester");
 
 const postReExamination = async (req, res, next) => {
   const {
