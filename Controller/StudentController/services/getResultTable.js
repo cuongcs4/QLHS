@@ -19,7 +19,7 @@ const getResultTable = async (req, res, next) => {
     listScores = await req.user.getScore(semesterID, yearStart, yearEnd);
   }
   const listScoreView = [];
-  if (listScores.length !== null) {
+  if (listScores !== null) {
   for (let i = 0; i < listScores.length; i++) {
     const { subjectName, score1, score2, score3, score4 } = listScores[i];
 

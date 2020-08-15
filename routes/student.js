@@ -4,6 +4,7 @@ const checkLogin = require("../Passport/checkLogin");
 const checkStudent = require("../Passport/checkStudent");
 const studentController = require("../Controller/StudentController/register");
 
+
 router.get(
   "/examtable",
   checkLogin,

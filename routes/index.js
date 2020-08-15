@@ -11,6 +11,9 @@ router.get("/", checkLogin, (req, res, next) => {
   const typeUser = req.user.getTypeUser();
 
   switch (typeUser) {
+    case flagClass.TYPE_USER.STUDENT:
+      res.redirect("/student/schedule");
+      break;
     case flagClass.TYPE_USER.TEACHER:
     case flagClass.TYPE_USER.HOMEROOM_TEACHER:
       res.redirect("/teacher/class");

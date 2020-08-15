@@ -23,7 +23,7 @@ const QuestionSurvey = class {
 
       const result = await ExecuteSQL(sqlQuery);
 
-      return result;
+      return result.length === 0 ? null : result;
     } else {
       const sqlQuery = `SELECT macauhoi AS idQuestion, noidung AS content FROM CAUHOIKS WHERE macauhoi='${idQuestion}'`;
 
