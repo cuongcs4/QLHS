@@ -59,26 +59,6 @@ const Room = class {
       return null;
     }
   }
-
-  static async Save(room) {
-    const isExist = await checkExist("PHONGHOC", "maphong", subject.subjectID);
-
-    if (isExist) {
-      //update
-      const sqlQuery = `UPDATE PHONGHOC SET tenphong="${room.getRoomName()}", loaiphong="${room.getRoomType()}" WHERE maphong='${room.getRoomID()}'`;
-      await ExecuteSQL(sqlQuery);
-
-      return flagClass.DB.UPDATE;
-    }
-
-    //insert
-    const sqlQuery =
-      `INSERT INTO PHONGHOC (maphong, tenphong, loaiphong) ` +
-      `VALUES ('${room.getRoomID()}', '${room.getRoomName()}', '${room.getRoomType()}'`;
-    await ExecuteSQL(sqlQuery);
-
-    return flagClass.DB.NEW;
-  }
 };
 
 module.exports = Room;

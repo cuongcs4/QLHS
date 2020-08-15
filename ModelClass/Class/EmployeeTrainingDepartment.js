@@ -99,35 +99,6 @@ const EmployeeTrainingDepartment = class extends Employee {
     return result;
   }
 
-  //Tạo mới và lưu học sinh vào cơ sở dữ liệu
-  createNewStudent(
-    id,
-    username,
-    password,
-    identityCard,
-    fullName,
-    dob,
-    address,
-    status,
-    typeUser,
-    classID
-  ) {
-    Student.Save(
-      new Student(
-        id,
-        username,
-        password,
-        identityCard,
-        fullName,
-        dob,
-        address,
-        status,
-        typeUser,
-        classID
-      )
-    );
-  }
-
   //Lấy thời khóa biểu của lớp học
   async getSchedule(classID, semesterID, yearStart, yearEnd) {
     const sqlQuery =
@@ -600,19 +571,8 @@ const EmployeeTrainingDepartment = class extends Employee {
     return { class10, class11, class12 };
   }
 
-  //Lấy kết quả khảo sát
-  getResultSurvey() {}
-
-  //Mở đợt khảo sát
-  openSurvey(dateStart, dateEnd) {}
-
-  //Chỉnh sửa câu hỏi phiếu khảo sát
-  editQuestionSurvey() {}
-
   static async GetNewEmployeeID() {
-    const sqlQuery =
-      `SELECT COUNT(manv) AS total ` +
-      `FROM NHANVIEN`;
+    const sqlQuery = `SELECT COUNT(manv) AS total ` + `FROM NHANVIEN`;
     const { total } = (await ExecuteSQL(sqlQuery))[0];
     if (total < 10) return `NV0${total}`;
 
@@ -710,11 +670,11 @@ const EmployeeTrainingDepartment = class extends Employee {
       "tenDangNhap",
       employee.username
     );
-    
+
     const dobFormat = `${employee.dob.getFullYear()}-${
       employee.dob.getMonth() + 1
     }-${employee.dob.getDate()}`;
-    
+
     if (isExist) {
       //update
       //1. update NGUOIDUNG
@@ -742,7 +702,9 @@ const EmployeeTrainingDepartment = class extends Employee {
     //1. Insert NGUOIDUNG
     const sqlQuery1 =
       `INSERT INTO NGUOIDUNG (tenDangNhap, matKhau, cmnd, loai) ` +
-      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', ${flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT})`;
+      `VALUES ('${employee.getUserName()}', '${employee.getPassWord()}', '${employee.getIdentityCard()}', ${
+        flagClass.TYPE_USER.EMPLOYEE_TRAINING_DEPARTMENT
+      })`;
 
     await ExecuteSQL(sqlQuery1);
 

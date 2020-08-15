@@ -12,8 +12,6 @@ const Conduct = class {
   constructor(semester, studentID, classID, teacherID, grade) {
     this.semester = semester;
     this.studentID = studentID;
-    this.classID = classID;
-    this.teacherID = teacherID;
     this.grade = grade;
   }
 

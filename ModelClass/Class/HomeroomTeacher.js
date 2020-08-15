@@ -62,8 +62,6 @@ const HomeroomTeacher = class extends Teacher {
     return studentInClass;
   }
 
-  getConduct(semesterID, yearStart, yearEnd) {}
-
   static async Find(teacherID) {
     const teacher = await Teacher.Find(teacherID);
 
@@ -110,8 +108,6 @@ const HomeroomTeacher = class extends Teacher {
       classID
     );
   }
-
-  static save() {}
 };
 
 module.exports = HomeroomTeacher;

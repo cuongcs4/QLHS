@@ -16,7 +16,6 @@ const ExamPlan = class {
     subjectID,
     dayExam,
     startSection,
-    claSs,
     supervisorID1,
     supervisorID2
   ) {
@@ -26,7 +25,6 @@ const ExamPlan = class {
     this.subjectID = subjectID;
     this.dayExam = dayExam;
     this.startSection = startSection;
-    this.claSs = claSs;
     this.supervisorID1 = supervisorID1;
     this.supervisorID2 = supervisorID2;
   }
@@ -205,13 +203,5 @@ const ExamPlan = class {
     }
   }
 };
-
-// const exec = async () => {
-//   const result = await ExamPlan.Find({ studentID: null, teacherID: "GV01" });
-
-//   console.log(result);
-// };
-
-// exec();
 
 module.exports = ExamPlan;

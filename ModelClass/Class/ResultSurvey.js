@@ -6,11 +6,9 @@ const ExecuteSQL = require("../Database/ExecuteSQL");
 const flagClass = require("../Helper/resource/Flag");
 
 const ResultSurvey = class {
-  constructor(semester, studentID, teacherID, subjectID, questionID, answer) {
+  constructor(semester, studentID, questionID, answer) {
     this.semester = semester || null;
     this.studentID = studentID || null;
-    this.teacherID = teacherID || null;
-    this.subjectID = subjectID || null;
     this.questionID = questionID || null;
     this.answer = answer || null;
   }
@@ -21,14 +19,6 @@ const ResultSurvey = class {
 
   getStudentID() {
     return this.studentID;
-  }
-
-  getTeacherID() {
-    return this.teacherID;
-  }
-
-  getSubjectID() {
-    return this.subjectID;
   }
 
   getQuestionID() {
@@ -61,11 +51,7 @@ const ResultSurvey = class {
     const semester = resultSurvey.semester;
     const sqlQuery =
       `INSERT INTO KQKHAOSAT(macauhoi,mahs,mahk,nambd,namkt,cautl) ` +
-      `VALUES ('${resultSurvey.getQuestionID()}','${resultSurvey.getStudentID()}' ,'${
-        semester.getSemesterID()
-      }','${semester.getYearStart()}','${
-        semester.getYearEnd()
-      }','${resultSurvey.getAnswer()}')`;
+      `VALUES ('${resultSurvey.getQuestionID()}','${resultSurvey.getStudentID()}' ,'${semester.getSemesterID()}','${semester.getYearStart()}','${semester.getYearEnd()}','${resultSurvey.getAnswer()}')`;
     await ExecuteSQL(sqlQuery);
   }
 

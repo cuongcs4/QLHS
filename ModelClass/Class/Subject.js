@@ -49,29 +49,6 @@ const Subject = class {
       return null;
     }
   }
-
-  static async Save(subject) {
-    const isExist = await checkExist("BOMON", "mabm", subject.subjectID);
-
-    if (isExist) {
-      //update
-      const sqlQuery =
-        `UPDATE BOMON ` +
-        `SET tenbm="${subject.getSubjectName()}" ` +
-        `WHERE mabm='${subject.getSubjectID()}'`;
-      await ExecuteSQL(sqlQuery);
-
-      return flagClass.DB.UPDATE;
-    }
-
-    //insert
-    const sqlQuery =
-      `INSERT INTO BOMON (mabm, tenbm) ` +
-      `VALUES ('${subject.getSubjectID()}', N'${subject.getSubjectName()}'`;
-    await ExecuteSQL(sqlQuery);
-
-    return flagClass.DB.NEW;
-  }
 };
 
 // const exec = async () => {

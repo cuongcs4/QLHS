@@ -43,8 +43,6 @@ const ExamRoom = class extends Room {
 
     return result.length === 0 ? null : result;
   }
-
-  static save() {}
 };
 
 module.exports = ExamRoom;

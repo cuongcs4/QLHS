@@ -32,8 +32,6 @@ const QuestionSurvey = class {
       return result.length === 0 ? null : result[0];
     }
   }
-
-  static save() {}
 };
 
 module.exports = QuestionSurvey;
