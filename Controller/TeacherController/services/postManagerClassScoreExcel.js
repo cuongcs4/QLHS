@@ -70,7 +70,14 @@ const postManagerClassScoreExcel = async (req, res, next) => {
 
   for (let i = 0; i < data.length; i++) {
     const { studentId, grade } = data[i];
-    const newConduct = new Conduct(latestSemester, studentId, grade);
+    const { classID, id } = req.user;
+    const newConduct = new Conduct(
+      latestSemester,
+      studentId,
+      classID,
+      id,
+      grade
+    );
 
     Conduct.Save(newConduct);
   }

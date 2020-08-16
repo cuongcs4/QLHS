@@ -6,9 +6,8 @@ const flag = require("../../../Model/Helper/resource/Flag");
 const postProfile = async (req, res, next) => {
   //console.log(req.body);
   const { username, fullName, dob, identityCard, address, typeUser } = req.body;
-  let user, dobArray, newDate;
-  dobArray = dob.split("-");
-  newDate = new Date(dobArray[2], dobArray[1] - 1, dobArray[0]);
+  let user, newDate;
+  newDate = new Date(dob);
   switch (parseInt(typeUser, 10)) {
     case 1:
       user = await Student.Find({ id: username, classID: null });

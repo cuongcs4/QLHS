@@ -3,8 +3,9 @@ const Semester = require("../../../Model/Class/Semester");
 
 const getReport = async (req, res, next) => {
   const { year, semester } = req.query;
+  const error_msg = [];
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -21,6 +22,20 @@ const getReport = async (req, res, next) => {
     semesterID = parseInt(semester);
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
+
+    const isExistSemester = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!isExistSemester) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+
+      isLastSemester = false;
+    }
   }
 
   //Đếm số lớp học
@@ -128,6 +143,7 @@ const getReport = async (req, res, next) => {
     countClass,
     year: `${yearStart}-${yearEnd}`,
     semesterID,
+    error_msg,
   });
 };
 

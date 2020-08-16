@@ -8,6 +8,14 @@ const flagClass = require("../../../Model/Helper/resource/Flag");
 
 const getManagerClassScore = async (req, res, next) => {
   let { year, semester } = req.query;
+  const error_msg = [];
+
+  //Lấy tất cả các học kỳ đã có
+  let { allYearSemester, isLastSemester } = await handleSemester(
+    year,
+    semester
+  );
+
   let semesterID, yearStart, yearEnd, statusSemester;
 
   if (typeof year != "undefined") {
@@ -16,13 +24,17 @@ const getManagerClassScore = async (req, res, next) => {
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
 
-    try {
-      statusSemester = (
-        await Semester.Find(semesterID, yearStart, yearEnd)
-      ).getStatus();
-    } catch {
-      statusSemester = 0;
+    let semesterTemp = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!semesterTemp) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+      semesterTemp = await Semester.getLatestSemester();
+      semesterID = semesterTemp.getSemesterID();
+      isLastSemester = false;
     }
+
+    statusSemester = semesterTemp.getStatus();
   } else {
     const latestSemester = await Semester.getLatestSemester();
     semesterID = latestSemester.getSemesterID();
@@ -30,12 +42,6 @@ const getManagerClassScore = async (req, res, next) => {
     yearEnd = latestSemester.getYearEnd();
     statusSemester = latestSemester.getStatus();
   }
-
-  //Lấy tất cả các học kỳ đã có
-  const { allYearSemester, isLastSemester } = await handleSemester(
-    year,
-    semester
-  );
 
   //Lấy mã lớp và tên lớp.
   const classID = req.user.getClassID();
@@ -145,6 +151,7 @@ const getManagerClassScore = async (req, res, next) => {
     semesterID,
     yearStart,
     yearEnd,
+    error_msg,
   });
 };
 

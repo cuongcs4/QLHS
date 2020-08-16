@@ -8,8 +8,10 @@ const handleSemester = require("../../../Model/Helper/services/handleSemester");
 const getClass = async (req, res, next) => {
   let { year, semester } = req.query;
 
+  const error_msg = [];
+
   //Lấy tất cả các học kỳ đã có
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -22,6 +24,20 @@ const getClass = async (req, res, next) => {
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
+
+    const isExistSemester = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!isExistSemester) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+
+      isLastSemester = false;
+    }
   }
 
   const listClass = await req.user.getClass(semesterID, yearStart, yearEnd);
@@ -55,6 +71,7 @@ const getClass = async (req, res, next) => {
     listClassView,
     allYearSemester,
     isLastSemester,
+    error_msg,
   });
 };
 

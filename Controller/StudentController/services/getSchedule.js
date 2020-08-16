@@ -1,9 +1,12 @@
 const handleSemester = require("../../../Model/Helper/services/handleSemester");
 const Subject = require("../../../Model/Class/Subject");
+const Semester = require("../../../Model/Class/Semester");
 const getSchedule = async (req, res, next) => {
   let { year, semester } = req.query;
+  const error_msg = [];
+
   //Lấy tất cả các học kỳ đã có
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -13,10 +16,24 @@ const getSchedule = async (req, res, next) => {
   if (typeof year == "undefined" && typeof semester == "undefined") {
     schedule = await req.user.getSchedule();
   } else {
-    const yearArray = year.split("-");
-    const yearStart = parseInt(yearArray[0]);
-    const yearEnd = parseInt(yearArray[1]);
-    const semesterID = parseInt(semester);
+    let yearArray = year.split("-");
+    let yearStart = parseInt(yearArray[0]);
+    let yearEnd = parseInt(yearArray[1]);
+    let semesterID = parseInt(semester);
+
+    const isExistSemester = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!isExistSemester) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+
+      isLastSemester = false;
+    }
 
     schedule = await req.user.getSchedule(semesterID, yearStart, yearEnd);
   }
@@ -55,6 +72,7 @@ const getSchedule = async (req, res, next) => {
     listScheduleView,
     allYearSemester,
     isLastSemester,
+    error_msg,
   });
 };
 

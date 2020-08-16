@@ -18,7 +18,7 @@ const getStudentInClass = async (req, res, next) => {
   const yearArray = year.split("-");
   const yearStart = parseInt(yearArray[0]);
   const yearEnd = parseInt(yearArray[1]);
-  const semesterID = parseInt(semester);
+  let semesterID = parseInt(semester);
 
   //Lấy danh sách các lớp học mà giáo viên dạy trong học kỳ
   const listClass = await req.user.getClass(semesterID, yearStart, yearEnd);
@@ -48,9 +48,14 @@ const getStudentInClass = async (req, res, next) => {
     // => Mục đích: có hiển thị nút chỉnh sửa điểm hay không
     //Nếu trạng thái của học kỳ là 0 (~disable: học kỳ đã đóng) thì không hiển thị nút chỉnh sửa điểm
     //Nếu trạng thái của học kỳ là 1 (~enable: học kỳ còn đang mở) thì cho phép sửa điểm.
-    const statusSemester = (
-      await Semester.Find(semesterID, yearStart, yearEnd)
-    ).getStatus();
+    let semesterTemp = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!semesterTemp) {
+      semesterTemp = await Semester.getLatestSemester();
+      semesterID = semesterTemp.getSemesterID();
+      isLastSemester = false;
+    }
+
+    const statusSemester = semesterTemp.getStatus();
 
     //Tạo action cho các form
     const actionForm = `/teacher/class/${classID}`;

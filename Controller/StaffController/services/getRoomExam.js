@@ -5,8 +5,9 @@ const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getRoomExam = async (req, res, next) => {
   const { year, semester } = req.query;
+  const error_msg = [];
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -23,6 +24,20 @@ const getRoomExam = async (req, res, next) => {
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
+
+    const isExistSemester = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!isExistSemester) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+
+      isLastSemester = false;
+    }
   }
 
   const examRoom =
@@ -56,6 +71,7 @@ const getRoomExam = async (req, res, next) => {
     examRoom,
     semesterID,
     year: `${yearStart}-${yearEnd}`,
+    error_msg,
   });
 };
 

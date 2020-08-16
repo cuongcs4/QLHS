@@ -7,10 +7,11 @@ const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getSurvey = async (req, res, next) => {
   const { year, semester } = req.query;
+  const error_msg = [];
 
   let statusSemester, semesterID, yearStart, yearEnd;
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -26,9 +27,19 @@ const getSurvey = async (req, res, next) => {
     semesterID = parseInt(semester);
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
-    statusSemester = (
-      await Semester.Find(semesterID, yearStart, yearEnd)
-    ).getStatus();
+
+    let semesterTemp = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!semesterTemp) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      semesterTemp = await Semester.getLatestSemester();
+      semesterID = semesterTemp.getSemesterID();
+      isLastSemester = false;
+    }
+
+    statusSemester = semesterTemp.getStatus();
   }
 
   let timeSurvey = await ResultSurvey.GetTimeSurvey(
@@ -198,6 +209,7 @@ const getSurvey = async (req, res, next) => {
     sumStudent,
     sumSurvey,
     questionArray,
+    error_msg,
   });
 };
 

@@ -7,10 +7,11 @@ const getSchedule = async (req, res, next) => {
   const classID = req.params.classID;
   const className = await Class.GetClassName(classID);
   let statusSemester;
+  const error_msg = [];
 
   let { year, semester } = req.query;
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -28,9 +29,18 @@ const getSchedule = async (req, res, next) => {
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
-    statusSemester = (
-      await Semester.Find(semesterID, yearStart, yearEnd)
-    ).getStatus();
+
+    let semesterTemp = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!semesterTemp) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+      semesterTemp = await Semester.getLatestSemester();
+      semesterID = semesterTemp.getSemesterID();
+      isLastSemester = false;
+    }
+
+    statusSemester = semesterTemp.getStatus();
   }
 
   const listSchedule = await req.user.getSchedule(
@@ -85,6 +95,7 @@ const getSchedule = async (req, res, next) => {
     className,
     year: `${yearStart}-${yearEnd}`,
     semesterID,
+    error_msg,
   });
 };
 

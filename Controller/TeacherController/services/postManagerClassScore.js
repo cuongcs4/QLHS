@@ -5,7 +5,15 @@ const postManagerClassScore = async (req, res, next) => {
   const { studentID, conduct } = req.body;
   const latestSemester = await Semester.getLatestSemester();
 
-  const newConduct = new Conduct(latestSemester, studentID, conduct);
+  const { classID, id } = req.user;
+
+  const newConduct = new Conduct(
+    latestSemester,
+    studentID,
+    classID,
+    id,
+    conduct
+  );
 
   Conduct.Save(newConduct);
 

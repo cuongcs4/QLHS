@@ -7,8 +7,9 @@ const handleSemester = require("../../../Model/Helper/services/handleSemester");
 
 const getExam = async (req, res, next) => {
   let { year, semester, claSs } = req.query;
+  const error_msg = [];
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -55,9 +56,18 @@ const getExam = async (req, res, next) => {
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
-    statusSemester = (
-      await Semester.Find(semesterID, yearStart, yearEnd)
-    ).getStatus();
+
+    let semesterTemp = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!semesterTemp) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+      semesterTemp = await Semester.getLatestSemester();
+      semesterID = semesterTemp.getSemesterID();
+      isLastSemester = false;
+    }
+
+    statusSemester = semesterTemp.getStatus();
   }
 
   //Lấy lịch thi
@@ -130,6 +140,7 @@ const getExam = async (req, res, next) => {
     listScheduleExam,
     listClaSs,
     claSs,
+    error_msg,
   });
 };
 

@@ -169,7 +169,7 @@ const Score = class {
       `WHERE mahs='${studentID}' AND mabm='${subjectID}' ` +
       `AND mahk=${semesterID} AND nambd=${yearStart} AND namkt=${yearEnd}`;
 
-    //console.log(sqlQuery);
+    console.log(sqlQuery);
     await ExecuteSQL(sqlQuery);
 
     return flagClass.DB.UPDATE;

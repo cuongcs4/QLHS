@@ -77,7 +77,6 @@ const postStudentInClassExcel = async (req, res, next) => {
       const score = new Score(
         latestSemester,
         studentId,
-        teacherID,
         classID,
         subjectID,
         score1,

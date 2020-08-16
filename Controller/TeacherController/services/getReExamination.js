@@ -7,7 +7,9 @@ const handleSemester = require("../../../Model/Helper/services/handleSemester");
 const getReExamination = async (req, res, next) => {
   let { year, semester } = req.query;
 
-  const { allYearSemester, isLastSemester } = await handleSemester(
+  const error_msg = [];
+
+  let { allYearSemester, isLastSemester } = await handleSemester(
     year,
     semester
   );
@@ -19,6 +21,20 @@ const getReExamination = async (req, res, next) => {
     yearStart = parseInt(yearArray[0]);
     yearEnd = parseInt(yearArray[1]);
     semesterID = parseInt(semester);
+
+    const isExistSemester = await Semester.Find(semesterID, yearStart, yearEnd);
+    if (!isExistSemester) {
+      error_msg.push(
+        `Học kỳ ${semesterID} năm học ${yearStart}-${yearEnd} chưa có dữ liệu.`
+      );
+
+      const latestSemester = await Semester.getLatestSemester();
+      semesterID = latestSemester.getSemesterID();
+      yearStart = latestSemester.getYearStart();
+      yearEnd = latestSemester.getYearEnd();
+
+      isLastSemester = false;
+    }
   } else {
     const latestSemester = await Semester.getLatestSemester();
     semesterID = latestSemester.getSemesterID();
@@ -79,6 +95,7 @@ const getReExamination = async (req, res, next) => {
     allYearSemester,
     isLastSemester,
     listReExaminationView,
+    error_msg,
   });
 };
 
