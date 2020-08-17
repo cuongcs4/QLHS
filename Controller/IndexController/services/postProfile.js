@@ -1,7 +1,6 @@
 const Teacher = require("../../../Model/Class/Teacher");
 const Student = require("../../../Model/Class/Student");
 const Employee = require("../../../Model/Class/EmployeeTrainingDepartment");
-const flag = require("../../../Model/Helper/resource/Flag");
 
 const postProfile = async (req, res, next) => {
   //console.log(req.body);

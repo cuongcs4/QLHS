@@ -47,39 +47,6 @@ router.get("/changePassword", checkLogin, (req, res, next) => {
 
 router.post("/changePassword", checkLogin, indexController.postChangePassword);
 
-router.get("/profile", checkLogin, async (req, res, next) => {
-  const user = { ...req.user };
-
-  switch (user.typeUser) {
-    case flagClass.TYPE_USER.STUDENT:
-      user.className = await req.user.getClassName();
-      break;
-
-    case flagClass.TYPE_USER.TEACHER:
-      user.subjectName = await req.user.getSubjectName();
-      break;
-
-    case flagClass.TYPE_USER.HOMEROOM_TEACHER:
-      user.subjectName = await req.user.getSubjectName();
-      user.className = await req.user.getClassName();
-      break;
-  }
-
-  // //console.log(user);
-
-  // const user = {
-  //   fullName: req.user.getFullName(),
-  //   className: await req.user.getClassName(),
-  //   id: req.user.id,
-  //   typeUser: req.user.typeUser,
-  // };
-
-  res.render("profile", {
-    title: "Profile",
-    style: ["styleProfile.css", "styleTable.css"],
-    pagename: "Thông tin cá nhân",
-    user,
-  });
-});
+router.get("/profile", checkLogin, indexController.getProfile);
 
 module.exports = router;

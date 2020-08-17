@@ -4,7 +4,7 @@ const TeachingPlan = require("../../../Model/Class/TeachingPlan");
 const Flag = require("../../../Model/Helper/resource/Flag");
 const generateGUID = require("../../../Model/Helper/services/generateGUID");
 
-const postReExamination = async (req, res, next) => {
+const postReExamination = async (req, res, next) => { 
   const { studentID, content, subjectID, classID } = req.body;
   const classSchedule = await TeachingPlan.Find({
     classID: classID,

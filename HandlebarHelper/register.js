@@ -1,4 +1,7 @@
 const flagClass = require("../Model/Helper/resource/Flag");
+const registerdateFormat = (handlebars) => {
+  handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
+}
 const registerHello = (handlebars) => {
   handlebars.registerHelper("hello", function (user, block) {
     switch (user.typeUser) {
@@ -331,7 +334,7 @@ const registerProfile = (handlebars) => {
               `<label>Họ tên</label>` +
               `</div>` +
               `<div class="col-md-6">` +
-              `<p>Trần Văn B</p>` +
+              `<p>{{fullName}}</p>` +
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -339,7 +342,7 @@ const registerProfile = (handlebars) => {
               `<label>Quan hệ</label>` +
               `</div>` +
               `<div class="col-md-6">` +
-              `<p>Bố</p>` +
+              `<p>{{relative}}</p>` +
               `</div>` +
               `</div>` +
               `<div class="row">` +
@@ -347,9 +350,9 @@ const registerProfile = (handlebars) => {
               `<label>SĐT</label>` +
               `</div>` +
               `<div class="col-md-6">` +
-              `<p>0909090808</p>` +
+              `<p>{{sdt}}</p>` +
               `</div>` +
-              `   </div>` +
+              `</div>` +
               `</div>` +
               `</div>` +
               `</div>` +
@@ -971,6 +974,7 @@ const registerAll = (handlebars) => {
   registerChartScore(handlebars);
   registerChartConduct(handlebars);
   registerChartSurvey(handlebars);
+  registerdateFormat(handlebars);
 };
 
 module.exports = registerAll;

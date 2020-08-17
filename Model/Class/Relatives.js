@@ -43,8 +43,7 @@ const Relatives = class {
       `WHERE NT.mahs='${studentID}'`;
 
     const result = await ExecuteSQL(sqlQuery);
-
-    return result;
+    return result.length === 0 ? null : result;
   }
 
   static async Save(relatives) {
