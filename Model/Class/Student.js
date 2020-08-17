@@ -393,7 +393,7 @@ const Student = class extends User {
         `SELECT * ` +
         `FROM HOCSINH AS HS INNER JOIN NGUOIDUNG AS ND ON HS.mahs = ND.tenDangNhap ` +
         `WHERE HS.malop='${classID}'`;
-      //console.log(sqlQuery);
+
       const result = await ExecuteSQL(sqlQuery);
 
       if (result.length !== 0) {
