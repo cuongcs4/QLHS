@@ -56,15 +56,18 @@
             </table>
         </div>
 
+        {{#if statusSemester}}
         <div class="text-center">
             <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal"
                 data-target="#modalReExaminationForm">TẠO
                 ĐƠN PHÚC KHẢO</a>
         </div>
         <hr>
+        {{/if}}
     </div>
 </div>
 
+{{#if statusSemester}}
 <div class="modal fade" id="modalReExaminationForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -97,6 +100,8 @@
         </form>
     </div>
 </div>
+{{/if}}
+
 {{#each listReExaminationView}}
 <div class="modal fade" id="modalEditReExamination{{dataTarget}}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">

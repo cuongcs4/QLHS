@@ -7,6 +7,8 @@ const getReExamination = async (req, res, next) => {
   let { year, semester } = req.query;
   const error_msg = [];
 
+  let statusSemester = false;
+
   //Lấy tất cả các học kỳ đã có
   let { allYearSemester, isLastSemester } = await handleSemester(
     year,
@@ -18,6 +20,7 @@ const getReExamination = async (req, res, next) => {
     semesterID = latestSemester.getSemesterID();
     yearStart = latestSemester.getYearStart();
     yearEnd = latestSemester.getYearEnd();
+    statusSemester = latestSemester.getStatus();
   } else {
     const yearArray = year.split("-");
     yearStart = parseInt(yearArray[0]);
@@ -35,8 +38,12 @@ const getReExamination = async (req, res, next) => {
       yearStart = latestSemester.getYearStart();
       yearEnd = latestSemester.getYearEnd();
 
+      statusSemester = latestSemester.getStatus();
+
       isLastSemester = false;
     }
+
+    statusSemester = isExistSemester.getStatus();
   }
 
   const studentID = req.user.getID();
@@ -91,6 +98,7 @@ const getReExamination = async (req, res, next) => {
     listReExaminationView,
     listSubjectView,
     error_msg,
+    statusSemester,
   });
 };
 
