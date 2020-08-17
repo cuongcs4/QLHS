@@ -24,7 +24,7 @@ const getAllStudent = async (req, res, next) => {
 
     //console.log(gender);
 
-    const relatives = await Relatives.Find(id);
+    const relatives = (await Relatives.Find(id)) || [];
 
     const dad = {};
     const mom = {};

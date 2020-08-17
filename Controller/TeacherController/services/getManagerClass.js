@@ -14,7 +14,7 @@ const getManagerClass = async (req, res, next) => {
   for (let i = 0; i < listStudent.length; i++) {
     const { id, identityCard, fullName, dob, address } = listStudent[i];
 
-    const listRelatives = await Relatives.Find(id);
+    const listRelatives = (await Relatives.Find(id)) || [];
 
     const listRelativeView = listRelatives.map((item) => {
       const { relative, phoneNumber } = item;
