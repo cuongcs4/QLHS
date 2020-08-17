@@ -25,36 +25,39 @@ const getAllStudent = async (req, res, next) => {
     //console.log(gender);
 
     const relatives = await Relatives.Find(id);
+    if (relatives !== null) {
+      const dad = {};
+      const mom = {};
 
-    const dad = {};
-    const mom = {};
+      //console.log(relatives);
+      relatives.map((item) => {
+        if (item.relative == "Ba") {
+          dad.fullName = item.fullName;
+          dad.phoneNumber = item.phoneNumber;
+        } else {
+          mom.fullName = item.fullName;
+          mom.phoneNumber = item.phoneNumber;
+        }
+      });
 
-    //console.log(relatives);
-    relatives.map((item) => {
-      if (item.relative == "Ba") {
-        dad.fullName = item.fullName;
-        dad.phoneNumber = item.phoneNumber;
-      } else {
-        mom.fullName = item.fullName;
-        mom.phoneNumber = item.phoneNumber;
-      }
-    });
-
-    listStudentView.push({
-      id: i + 1,
-      studentID: id,
-      fullName,
-      dob: `${dob.getDate()}/${dob.getMonth() + 1}/${dob.getFullYear()}`,
-      classID,
-      gender: gender == flagClass.GENDER.MALE ? "Nam" : "Nữ",
-      address,
-      status: status == flagClass.STATUS.ENABLE ? "Đang mở" : "Đang khóa",
-      isLock: status == flagClass.STATUS.DISABLE ? true : false,
-      dataTarget:
-        status === flagClass.STATUS.DISABLE ? `lock${i + 1}` : `unlock${i + 1}`,
-      dad,
-      mom,
-    });
+      listStudentView.push({
+        id: i + 1,
+        studentID: id,
+        fullName,
+        dob: `${dob.getDate()}/${dob.getMonth() + 1}/${dob.getFullYear()}`,
+        classID,
+        gender: gender == flagClass.GENDER.MALE ? "Nam" : "Nữ",
+        address,
+        status: status == flagClass.STATUS.ENABLE ? "Đang mở" : "Đang khóa",
+        isLock: status == flagClass.STATUS.DISABLE ? true : false,
+        dataTarget:
+          status === flagClass.STATUS.DISABLE
+            ? `lock${i + 1}`
+            : `unlock${i + 1}`,
+        dad,
+        mom,
+      });
+    }
   }
 
   res.render("staff/studentTable", {
