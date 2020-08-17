@@ -47,11 +47,11 @@ const Relatives = class {
   }
 
   static async Save(relatives) {
-    // const sqlQuery =
-    //   `INSERT INTO NGUOITHAN(mahs, quanhe, hoten, sdt) ` +
-    //   `VALUES ('${relatives.getStudentID()}','${relatives.getRelative()}',N'${relatives.getFullName()}','${relatives.getPhoneNumber()}')`;
-    // await ExecuteSQL(sqlQuery);
-    // return flagClass.DB.NEW;
+    const sqlQuery =
+      `INSERT INTO NGUOITHAN(mahs, quanhe, hoten, sdt) ` +
+      `VALUES ('${relatives.getStudentID()}','${relatives.getRelative()}',N'${relatives.getFullName()}','${relatives.getPhoneNumber()}')`;
+    await ExecuteSQL(sqlQuery);
+    return flagClass.DB.NEW;
   }
 };
 

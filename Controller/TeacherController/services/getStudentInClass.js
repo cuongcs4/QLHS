@@ -66,12 +66,8 @@ const getStudentInClass = async (req, res, next) => {
     const className = await Class.GetClassName(classID);
 
     //Lấy danh sách điểm của học sinh
-    const listScores = await req.user.getScore(
-      classID,
-      semesterID,
-      yearStart,
-      yearEnd
-    );
+    const listScores =
+      (await req.user.getScore(classID, semesterID, yearStart, yearEnd)) || [];
 
     //Xử lý điểm đã lấy để hiển thị
     const listScoreView = [];

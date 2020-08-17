@@ -12,6 +12,11 @@ const parseFileExcel = require("../../../Model/Helper/services/parseFileExcel");
 
 const formatFileExcel = require("../../../Model/Helper/resource/formatFileExcel");
 const flagClass = require("../../../Model/Helper/resource/Flag");
+const Semester = require("../../../Model/Class/Semester");
+const TeachingPlan = require("../../../Model/Class/TeachingPlan");
+const Subject = require("../../../Model/Class/Subject");
+const Score = require("../../../Model/Class/Score");
+const Conduct = require("../../../Model/Class/Conduct");
 
 const postClass = async (req, res, next) => {
   const result = await parseForm(req);
@@ -85,6 +90,29 @@ const postClass = async (req, res, next) => {
 
   await Class.Save(newClass);
 
+  const latestSemester = await Semester.getLatestSemester();
+
+  if (latestSemester.getStatus() === flagClass.STATUS.ENABLE) {
+    //Nếu học kỳ có mở thì tiến hành tạo thời khóa biểu cho lớp học.
+    for (let i = 1; i <= 6; i++) {
+      for (let j = 1; j <= 10; j++) {
+        //Tạo học thời khóa biểu mới.
+        const newTeachingPlan = new TeachingPlan(
+          latestSemester,
+          null,
+          null,
+          newClassID,
+          i,
+          j
+        );
+
+        //insert
+        TeachingPlan.Insert(newTeachingPlan);
+      }
+    }
+  }
+
+  console.log(data);
   //6. Tiến hành tạo mới tài khoản và lưu thông tin học sinh.
   for (let i = 0; i < data.length; i++) {
     const {
@@ -100,7 +128,7 @@ const postClass = async (req, res, next) => {
       momPhoneNumber,
     } = data[i];
 
-    const password = bcrypt.hash(identityCard, 10);
+    const password = bcrypt.hashSync(`${identityCard}`, 10);
 
     let newID = `0${i + 1}`;
     newID = newID.slice(newID.length - 2, newID.length);
@@ -122,9 +150,43 @@ const postClass = async (req, res, next) => {
     await Student.Save(newStudent);
 
     const newDad = new Relatives(studentID, "Ba", dad, dadPhoneNumber);
-    await Relatives.Save(newDad);
+    Relatives.Save(newDad);
     const newMom = new Relatives(studentID, "Me", mom, momPhoneNumber);
-    await Relatives.Save(newMom);
+    Relatives.Save(newMom);
+
+    //Nếu học kỳ có mở thì tiến hành tạo điểm vào tạo hạnh kiểm
+    if (latestSemester.getStatus() === flagClass.STATUS.ENABLE) {
+      const listSubject = await Subject.Find();
+
+      for (let j = 0; j < listSubject.length; j++) {
+        const newScore = new Score(
+          latestSemester,
+          studentID,
+          newClassID,
+          listSubject[j].subjectID,
+          0,
+          0,
+          0,
+          0
+        );
+
+        //console.log(newScore);
+
+        Score.Insert(newScore);
+      }
+
+      //insert conduct
+      const newConduct = new Conduct(
+        latestSemester,
+        studentID,
+        newClassID,
+        teacherID,
+        flagClass.CONDUCT.TYPE_1
+      );
+      //console.log(newConduct);
+
+      Conduct.Insert(newConduct);
+    }
   }
 
   req.flash("success_msg", "Thêm lớp học mới thành công.");
@@ -132,3 +194,9 @@ const postClass = async (req, res, next) => {
 };
 
 module.exports = postClass;
+
+// const identityCard = 987654321;
+
+// const password = bcrypt.hashSync(`${identityCard}`, 10);
+
+// console.log(password);

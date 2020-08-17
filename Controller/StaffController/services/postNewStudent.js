@@ -4,6 +4,10 @@ const Student = require("../../../Model/Class/Student");
 const Relatives = require("../../../Model/Class/Relatives");
 
 const flagClass = require("../../../Model/Helper/resource/Flag");
+const Semester = require("../../../Model/Class/Semester");
+const Class = require("../../../Model/Class/Class");
+const Conduct = require("../../../Model/Class/Conduct");
+const Score = require("../../../Model/Class/Score");
 
 const postNewStudent = async (req, res, next) => {
   const {
@@ -22,7 +26,7 @@ const postNewStudent = async (req, res, next) => {
   const studentID = await Student.GetNewStudentID(classID);
   const newDoB = new Date(dob);
 
-  const password = bcrypt.hash(identityCard, 10);
+  const password = bcrypt.hashSync(`${identityCard}`, 10);
 
   const newStudent = new Student(
     studentID,
@@ -38,6 +42,8 @@ const postNewStudent = async (req, res, next) => {
     classID
   );
 
+  console.log(newStudent);
+
   await Student.Save(newStudent);
 
   const dad = new Relatives(studentID, "Ba", dadFullName, dadPhoneNumber);
@@ -46,6 +52,39 @@ const postNewStudent = async (req, res, next) => {
   await Relatives.Save(dad);
   await Relatives.Save(mom);
 
+  const latestSemester = await Semester.getLatestSemester();
+
+  //Nếu học kỳ có mở thì tiến hành tạo điểm vào tạo hạnh kiểm
+  if (latestSemester.getStatus() === flagClass.STATUS.ENABLE) {
+    const listSubject = await Subject.Find();
+
+    for (let j = 0; j <= listSubject.length; j++) {
+      const newScore = new Score(
+        latestSemester,
+        studentID,
+        classID,
+        listSubject[j].subjectID,
+        0,
+        0,
+        0,
+        0
+      );
+      Score.Insert(newScore);
+    }
+
+    //insert conduct
+    const teacherID = (await Class.Find(classID)).getManagerClass();
+
+    const newConduct = new Conduct(
+      latestSemester,
+      studentID,
+      classID,
+      teacherID,
+      flagClass.CONDUCT.TYPE_1
+    );
+
+    Conduct.Insert(newConduct);
+  }
   req.flash(
     "success_msg",
     `Thêm học sinh thành công, mã học sinh mới "${studentID}".`

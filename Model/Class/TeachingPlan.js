@@ -129,7 +129,7 @@ const TeachingPlan = class {
     const dayInWeek = teachingPlan.getDayInWeek();
     const startSection = teachingPlan.getStartSection();
 
-    if (teacherID === null) {
+    if (teacherID === null || classID === null) {
       const sqlQuery =
         `INSERT INTO THOIKHOABIEU(mahk, nambd, namkt, magv, mabm, malop, ngaytrongtuan, tiet) ` +
         `VALUES (${semesterID}, ${yearStart}, ${yearEnd}, null, null, '${classID}', ${dayInWeek}, ${startSection})`;

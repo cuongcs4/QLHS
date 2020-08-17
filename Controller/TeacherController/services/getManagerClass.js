@@ -14,23 +14,22 @@ const getManagerClass = async (req, res, next) => {
   for (let i = 0; i < listStudent.length; i++) {
     const { id, identityCard, fullName, dob, address } = listStudent[i];
 
-    const listRelatives = await Relatives.Find(id);
-    if (listRelatives !== null) {
-      const listRelativeView = listRelatives.map((item) => {
-        const { relative, phoneNumber } = item;
-        return `${phoneNumber}-${relative}`;
-      });
+    const listRelatives = (await Relatives.Find(id)) || [];
 
-      listStudentView.push({
-        id: i + 1,
-        username: id,
-        identityCard,
-        fullName,
-        dob: `${dob.getDate()}-${dob.getMonth() + 1}-${dob.getFullYear()}`,
-        address,
-        listRelativeView,
-      });
-    }
+    const listRelativeView = listRelatives.map((item) => {
+      const { relative, phoneNumber } = item;
+      return `${phoneNumber}-${relative}`;
+    });
+
+    listStudentView.push({
+      id: i + 1,
+      username: id,
+      identityCard,
+      fullName,
+      dob: `${dob.getDate()}-${dob.getMonth() + 1}-${dob.getFullYear()}`,
+      address,
+      listRelativeView,
+    });
   }
   //console.log(listStudentView);
 
