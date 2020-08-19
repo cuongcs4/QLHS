@@ -71,32 +71,33 @@ const getStudentInClass = async (req, res, next) => {
 
     //Xử lý điểm đã lấy để hiển thị
     const listScoreView = [];
+    if (listScores !== null) {
+      for (let i = 0; i < listScores.length; i++) {
+        const result = await Student.Find({
+          id: listScores[i].studentID,
+          classID: null,
+        });
 
-    for (let i = 0; i < listScores.length; i++) {
-      const result = await Student.Find({
-        id: listScores[i].studentID,
-        classID: null,
-      });
+        const { studentID, score1, score2, score3, score4 } = listScores[i];
 
-      const { studentID, score1, score2, score3, score4 } = listScores[i];
+        const student = {
+          id: i + 1,
+          studentID,
+          fullName: result.fullName,
+          score1,
+          score2,
+          score3,
+          score4,
+          dataTarget: `modalScoreEditHS${i + 1}`,
+          statusSemester,
+        };
 
-      const student = {
-        id: i + 1,
-        studentID,
-        fullName: result.fullName,
-        score1,
-        score2,
-        score3,
-        score4,
-        dataTarget: `modalScoreEditHS${i + 1}`,
-        statusSemester,
-      };
-
-      student.gpa =
-        Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) / 10;
-      listScoreView.push(student);
+        student.gpa =
+          Math.round((10 * (score1 + score2 + 2 * score3 + 3 * score4)) / 7) /
+          10;
+        listScoreView.push(student);
+      }
     }
-
     //Render kết quả
     res.render("teacher/score", {
       title: `Lớp học ${className} (${classID})`,

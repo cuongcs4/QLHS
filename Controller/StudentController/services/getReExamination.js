@@ -42,8 +42,9 @@ const getReExamination = async (req, res, next) => {
 
       isLastSemester = false;
     }
-
+    else {
     statusSemester = isExistSemester.getStatus();
+    }
   }
 
   const studentID = req.user.getID();
