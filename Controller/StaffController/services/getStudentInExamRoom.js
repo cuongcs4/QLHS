@@ -28,10 +28,17 @@ const getStudentInExamRoom = async (req, res, next) => {
     )) || [];
 
   listStudent.sort((a, b) => {
-    if (removeAccents(a.studentFullName) > removeAccents(b.studentFullName))
-      return 1;
-    if (removeAccents(a.studentFullName) < removeAccents(b.studentFullName))
-      return -1;
+    const aFullName = removeAccents(a.studentFullName);
+    const bFullName = removeAccents(b.studentFullName);
+
+    const aNameArr = aFullName.split(" ");
+    const bNameArr = bFullName.split(" ");
+
+    const aName = aNameArr[aNameArr.length - 1];
+    const bName = bNameArr[bNameArr.length - 1];
+
+    if (aName > bName) return 1;
+    if (aName < bName) return -1;
     return 0;
   });
 

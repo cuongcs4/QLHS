@@ -180,8 +180,17 @@ const EmployeeTrainingDepartment = class extends Employee {
     }
     //Sắp xếp
     listStudent10.sort((a, b) => {
-      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
-      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      const aFullName = removeAccents(a.fullName);
+      const bFullName = removeAccents(b.fullName);
+
+      const aNameArr = aFullName.split(" ");
+      const bNameArr = bFullName.split(" ");
+
+      const aName = aNameArr[aNameArr.length - 1];
+      const bName = bNameArr[bNameArr.length - 1];
+
+      if (aName > bName) return 1;
+      if (aName < bName) return -1;
       return 0;
     });
 
@@ -197,10 +206,21 @@ const EmployeeTrainingDepartment = class extends Employee {
     }
     //Sắp xếp
     listStudent11.sort((a, b) => {
-      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
-      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      const aFullName = removeAccents(a.fullName);
+      const bFullName = removeAccents(b.fullName);
+
+      const aNameArr = aFullName.split(" ");
+      const bNameArr = bFullName.split(" ");
+
+      const aName = aNameArr[aNameArr.length - 1];
+      const bName = bNameArr[bNameArr.length - 1];
+
+      if (aName > bName) return 1;
+      if (aName < bName) return -1;
       return 0;
     });
+
+    console.log(listStudent11);
 
     //Khối 12 - lấy toàn bộ học sinh
     const listStudent12 = [];
@@ -214,8 +234,17 @@ const EmployeeTrainingDepartment = class extends Employee {
     }
     //Sắp xếp
     listStudent12.sort((a, b) => {
-      if (removeAccents(a.fullName) > removeAccents(b.fullName)) return 1;
-      if (removeAccents(a.fullName) < removeAccents(b.fullName)) return -1;
+      const aFullName = removeAccents(a.fullName);
+      const bFullName = removeAccents(b.fullName);
+
+      const aNameArr = aFullName.split(" ");
+      const bNameArr = bFullName.split(" ");
+
+      const aName = aNameArr[aNameArr.length - 1];
+      const bName = bNameArr[bNameArr.length - 1];
+
+      if (aName > bName) return 1;
+      if (aName < bName) return -1;
       return 0;
     });
 
