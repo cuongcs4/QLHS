@@ -20,7 +20,7 @@
     "express-validator": "^6.6.0",
     "formidable": "^1.2.2",
     "fs": "0.0.1-security",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "handlebars-dateformat": "^1.1.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
